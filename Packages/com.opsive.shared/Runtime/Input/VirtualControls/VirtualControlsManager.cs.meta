@@ -12,8 +12,8 @@ MonoImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 233710
-  packageName: Ultimate Character Controller
-  packageVersion: 3.2
+  productId: 166053
+  packageName: Ultimate Inventory System
+  packageVersion: 1.3
   assetPath: Packages/com.opsive.shared/Runtime/Input/VirtualControls/VirtualControlsManager.cs
-  uploadId: 725350
+  uploadId: 725378

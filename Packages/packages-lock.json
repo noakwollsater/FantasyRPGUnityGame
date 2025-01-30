@@ -19,6 +19,12 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.opsive.ultimateinventorysystem": {
+      "version": "file:com.opsive.ultimateinventorysystem",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.5",
       "depth": 0,

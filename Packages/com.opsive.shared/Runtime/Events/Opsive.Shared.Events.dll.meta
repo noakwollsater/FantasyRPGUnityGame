@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c10515c802d510441b6070e3da2ef8cd
+guid: 6a77f8e99b8fa7541a8a6c824b5145d8
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -33,8 +33,8 @@ PluginImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 233710
-  packageName: Ultimate Character Controller
-  packageVersion: 3.2
+  productId: 166053
+  packageName: Ultimate Inventory System
+  packageVersion: 1.3
   assetPath: Packages/com.opsive.shared/Runtime/Events/Opsive.Shared.Events.dll
-  uploadId: 725350
+  uploadId: 725378
