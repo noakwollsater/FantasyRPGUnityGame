@@ -41,6 +41,7 @@ MonoBehaviour:
     - Opsive.Shared.Runtime
     - Opsive.UltimateCharacterController
     - Opsive.UltimateCharacterController.Integrations.UltimateInventorySystem
+    - Opsive.UltimateInventorySystem
     - Polyperfect.LowPolyAnimatedFantasyCreatures
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
