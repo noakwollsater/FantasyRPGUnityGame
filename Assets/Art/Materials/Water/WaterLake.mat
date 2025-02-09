@@ -27,12 +27,12 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 345659f527548fd418480503937b93f8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
+  m_ValidKeywords:
   - _DISABLE_DECALS
   - _DISABLE_SSR_TRANSPARENT
   - _ENABLE_FOG_ON_TRANSPARENT
   - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -117,7 +117,7 @@ Material:
     - _CullModeForward: 2
     - _DepthBlendDistance: 90
     - _DepthOffsetEnable: 0
-    - _Depth_Fresnel_Power: 0.01
+    - _Depth_Fresnel_Power: -0.64
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
@@ -130,10 +130,10 @@ Material:
     - _MaterialID: 1
     - _MaterialTypeMask: 2
     - _NormalDIstance: 380
-    - _NormalDistance: 1800
-    - _NormalFadeMaskHardness: 1
+    - _NormalDistance: 1778
+    - _NormalFadeMaskHardness: 0
     - _OpaqueCullMode: 2
-    - _OpaqueDepth: 12.47
+    - _OpaqueDepth: 9.18
     - _PerPixelSorting: 0
     - _QueueControl: 0
     - _QueueOffset: -50
@@ -141,7 +141,7 @@ Material:
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
-    - _RefractionStrength: 0.06
+    - _RefractionStrength: 79
     - _RenderQueueType: 4
     - _RequireSplitLighting: 0
     - _SrcBlend: 1
@@ -172,7 +172,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.0738252, g: 0.17309925, b: 0.1981132, a: 0}
-    - _DepthColor: {r: 0.070487715, g: 0.10932842, b: 0.1509434, a: 0}
+    - _DepthColor: {r: 0.10702208, g: 0.22803934, b: 0.3490566, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _RippleScale: {r: 0.45, g: 0.35, b: 0.17, a: 0.4}

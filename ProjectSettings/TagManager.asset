@@ -42,8 +42,8 @@ TagManager:
   - SmallVFX
   - MedVFX
   - LargeVFX
-  - 
-  - 
+  - Overlay
+  - SubCharacter
   - Temp
   m_SortingLayers:
   - name: Default
