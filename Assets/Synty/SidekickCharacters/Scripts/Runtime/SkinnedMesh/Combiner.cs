@@ -156,21 +156,25 @@ namespace Synty.SidekickCharacters.SkinnedMesh
         /// </summary>
         /// <param name="boneNameMap">The bone name map that has all the bones of the rig.</param>
         /// <param name="movementDictionary">The dictionary of bones to process the movement from.</param>
-        public static void ProcessBoneMovement(Hashtable boneNameMap, Dictionary<string, Vector3> movementDictionary)
+        /// <param name="rotationDictionary">The dictionary of bone rotations to process.</param>
+        public static void ProcessBoneMovement(Hashtable boneNameMap, Dictionary<string, Vector3> movementDictionary, Dictionary<string, Quaternion> rotationDictionary)
         {
             Dictionary<string, Vector3> bonePositionDictionary = new Dictionary<string, Vector3>();
+            Dictionary<string, Quaternion> boneRotationDictionary = new Dictionary<string, Quaternion>();
             Dictionary<string, Vector3> boneMovementDictionary = new Dictionary<string, Vector3>();
             foreach (Transform currentBone in boneNameMap.Values)
             {
                 // Store bone positions from rig before processing joints.
-                bonePositionDictionary.TryAdd(currentBone.name, currentBone.transform.position);
+                bonePositionDictionary.TryAdd(currentBone.name, currentBone.transform.localPosition);
+                boneRotationDictionary.TryAdd(currentBone.name, currentBone.transform.localRotation);
 
                 if (movementDictionary.ContainsKey(currentBone.name))
                 {
                     float jointDistance = Vector3.Distance(bonePositionDictionary[currentBone.name], movementDictionary[currentBone.name]);
+                    float rotationDistance = Quaternion.Angle(boneRotationDictionary[currentBone.name], rotationDictionary[currentBone.name]);
 
                     // If the bone in the new part is at a different location, move the actual bone to the same position.
-                    if (jointDistance > 0.01)
+                    if (jointDistance > 0.0001)
                     {
                         Vector3 rigMovement = movementDictionary[currentBone.name];
                         // If an existing joint movement exists, and is further from the standard joint position, use that instead.
@@ -180,8 +184,21 @@ namespace Synty.SidekickCharacters.SkinnedMesh
                             rigMovement = existingMovement;
                         }
 
-                        currentBone.transform.position = rigMovement;
+                        currentBone.transform.localPosition = rigMovement;
                         boneMovementDictionary[currentBone.name] = rigMovement;
+                    }
+
+                    if (rotationDistance > 0.01)
+                    {
+                        Quaternion rigRotation = rotationDictionary[currentBone.name];
+                        if (boneRotationDictionary.TryGetValue(currentBone.name, out Quaternion existingRotation)
+                            && Math.Abs(Quaternion.Angle(boneRotationDictionary[currentBone.name], existingRotation)) > Math.Abs(rotationDistance))
+                        {
+                            rigRotation = existingRotation;
+                        }
+
+                        currentBone.transform.localRotation = rigRotation;
+                        boneRotationDictionary[currentBone.name] = rigRotation;
                     }
                 }
             }

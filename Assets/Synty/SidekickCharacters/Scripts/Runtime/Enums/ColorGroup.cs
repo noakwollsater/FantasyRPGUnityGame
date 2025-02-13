@@ -13,6 +13,6 @@ namespace Synty.SidekickCharacters.Enums
         Outfits,
         Attachments,
         Materials,
-        //Elements
+        Elements
     }
 }

@@ -43,9 +43,6 @@ MonoBehaviour:
     - Opsive.UltimateCharacterController.Integrations.UltimateInventorySystem
     - Opsive.UltimateInventorySystem
     - Polyperfect.LowPolyAnimatedFantasyCreatures
-    - SidekickCharacters
-    - SidekickCharacters.Editor
-    - SqlCipher4Unity3D
     - UnityUIExtensions
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0

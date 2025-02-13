@@ -145,5 +145,30 @@ namespace Synty.SidekickCharacters.Database.DTO
                 partPreset.Species = SidekickSpecies.GetByID(dbManager, partPreset.PtrSpecies);
             }
         }
+
+        /// <summary>
+        ///     Updates or Inserts this item in the Database.
+        /// </summary>
+        /// <param name="dbManager">The database manager to use.</param>
+        public int Save(DatabaseManager dbManager)
+        {
+            if (ID < 0)
+            {
+                dbManager.GetCurrentDbConnection().Insert(this);
+                // in theory this could return a different ID, but in practice it's highly unlikely
+                ID = (int) SQLite3.LastInsertRowid(dbManager.GetCurrentDbConnection().Handle);
+            }
+            dbManager.GetCurrentDbConnection().Update(this);
+            return ID;
+        }
+
+        /// <summary>
+        ///     Deletes this item from the database
+        /// </summary>
+        /// <param name="dbManager">The database manager to use.</param>
+        public void Delete(DatabaseManager dbManager)
+        {
+            dbManager.GetCurrentDbConnection().Delete<SidekickPartPreset>(ID);
+        }
     }
 }

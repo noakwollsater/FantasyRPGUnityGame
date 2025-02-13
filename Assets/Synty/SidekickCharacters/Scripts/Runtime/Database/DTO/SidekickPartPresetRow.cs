@@ -5,6 +5,7 @@
 //
 // For additional details, see the LICENSE.MD file bundled with this software.
 
+using SqlCipher4Unity3D;
 using SQLite.Attributes;
 using System.Collections.Generic;
 using UnityEngine;
@@ -97,6 +98,31 @@ namespace Synty.SidekickCharacters.Database.DTO
         private static void Decorate(DatabaseManager dbManager, SidekickPartPresetRow partPreset)
         {
             partPreset.PartPreset ??= SidekickPartPreset.GetByID(dbManager, partPreset.PtrPreset);
+        }
+
+        /// <summary>
+        ///     Updates or Inserts this item in the Database.
+        /// </summary>
+        /// <param name="dbManager">The database manager to use.</param>
+        public int Save(DatabaseManager dbManager)
+        {
+            if (ID < 0)
+            {
+                dbManager.GetCurrentDbConnection().Insert(this);
+                // in theory this could return a different ID, but in practice it's highly unlikely
+                ID = (int) SQLite3.LastInsertRowid(dbManager.GetCurrentDbConnection().Handle);
+            }
+            dbManager.GetCurrentDbConnection().Update(this);
+            return ID;
+        }
+
+        /// <summary>
+        ///     Deletes this item from the database
+        /// </summary>
+        /// <param name="dbManager">The database manager to use.</param>
+        public void Delete(DatabaseManager dbManager)
+        {
+            dbManager.GetCurrentDbConnection().Delete<SidekickPartPresetRow>(ID);
         }
     }
 }

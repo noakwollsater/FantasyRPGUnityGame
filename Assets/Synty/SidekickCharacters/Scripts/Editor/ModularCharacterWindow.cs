@@ -5,21 +5,21 @@
 //
 // For additional details, see the LICENSE.MD file bundled with this software.
 
+using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Database.DTO;
 using Synty.SidekickCharacters.Enums;
 using Synty.SidekickCharacters.Serialization;
 using Synty.SidekickCharacters.SkinnedMesh;
-using Synty.SidekickCharacters.UI;
 using Synty.SidekickCharacters.Utils;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using Unity.VisualScripting.YamlDotNet.Serialization;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -60,10 +60,13 @@ namespace Synty.SidekickCharacters
 
         private List<SidekickColorRow> _allColorRows = new List<SidekickColorRow>();
         private List<SidekickSpecies> _allSpecies;
+        private ObjectField _animationField;
         private bool _applyingPreset = false;
         private List<string> _availablePartList;
+        private bool _bakeBlends = true;
         private ObjectField _baseModelField;
         private Dictionary<string, Vector3> _blendShapeRigMovement = new Dictionary<string, Vector3>();
+        private Dictionary<string, Quaternion> _blendShapeRigRotation = new Dictionary<string, Quaternion>();
         private ToolbarToggle _bodyPartsTab;
         private ToolbarToggle _bodyPresetTab;
         private ToolbarToggle _bodyShapeTab;
@@ -76,8 +79,8 @@ namespace Synty.SidekickCharacters
         private ToolbarToggle _colorSelectionTab;
         private ScrollView _colorSelectionView;
         private DropdownField _colorSetsDropdown;
-        // Currently turned off due to early access
-        // private bool _combineMeshes = false;
+        private bool _combineMeshes = true;
+        private AnimatorController _currentAnimationController;
         private Dictionary<string, SidekickBodyShapePreset> _currentBodyPresetDictionary = new Dictionary<string, SidekickBodyShapePreset>();
         private Dictionary<string, SidekickColorPreset> _currentColorSpeciesPresetDictionary = new Dictionary<string, SidekickColorPreset>();
         private Dictionary<string, SidekickColorPreset> _currentColorOutfitsPresetDictionary = new Dictionary<string, SidekickColorPreset>();
@@ -96,7 +99,6 @@ namespace Synty.SidekickCharacters
         private TabView _currentTab;
         private Dictionary<ColorPartType, List<Vector2>> _currentUVDictionary = new Dictionary<ColorPartType, List<Vector2>>();
         private List<Vector2> _currentUVList = new List<Vector2>();
-        private DatabaseUpdateController _dbController;
         private DatabaseManager _dbManager;
         private string _dbPath;
         private ToolbarToggle _decalSelectionTab;
@@ -123,9 +125,9 @@ namespace Synty.SidekickCharacters
         private ScrollView _presetView;
         private Toggle _previewToggle;
         private bool _processingSpeciesChange = false;
+        private SidekickRuntime _sidekickRuntime;
         private DropdownField _speciesField;
         private DropdownField _speciesPresetField;
-        private Label _statusLabel;
         private List<SidekickColorSet> _visibleColorSets = new List<SidekickColorSet>();
 
         /// <inheritdoc cref="Awake" />
@@ -141,25 +143,25 @@ namespace Synty.SidekickCharacters
             _dbManager.CloseConnection();
         }
 
-#if UNITY_EDITOR
-        /// <inheritdoc cref="OnEnable" />
-        private void OnEnable()
-        {
-            EditorApplication.playModeStateChanged += StateChange;
-        }
-
-        /// <summary>
-        ///     Processes the callback from the play mode state change.
-        /// </summary>
-        /// <param name="stateChange">The current PlayModeStateChange</param>
-        private void StateChange(PlayModeStateChange stateChange)
-        {
-            if (stateChange == PlayModeStateChange.EnteredEditMode)
-            {
-                AddBodyShapeTabContent(_bodyShapeView);
-            }
-        }
-#endif
+// #if UNITY_EDITOR
+//         /// <inheritdoc cref="OnEnable" />
+//         private void OnEnable()
+//         {
+//             EditorApplication.playModeStateChanged += StateChange;
+//         }
+//
+//         /// <summary>
+//         ///     Processes the callback from the play mode state change.
+//         /// </summary>
+//         /// <param name="stateChange">The current PlayModeStateChange</param>
+//         private void StateChange(PlayModeStateChange stateChange)
+//         {
+//             if (stateChange == PlayModeStateChange.EnteredEditMode)
+//             {
+//                 AddBodyShapeTabContent(_bodyShapeView);
+//             }
+//         }
+// #endif
 
         /// <inheritdoc cref="CreateGUI" />
         public void CreateGUI()
@@ -170,26 +172,12 @@ namespace Synty.SidekickCharacters
                 root.styleSheets.Add(_editorStyle);
             }
 
-            _statusLabel = new Label("Initializing...")
-            {
-                style =
-                {
-                    fontSize = 20,
-                    marginTop = 15,
-                    unityTextAlign = TextAnchor.MiddleCenter
-                }
-            };
-            root.Add(_statusLabel);
-
             InitializeDatabase();
             // if we still can't connect, something's gone wrong, don't keep building the GUI
             if (_dbManager?.GetCurrentDbConnection() == null)
             {
                 return;
             }
-
-            // TODO : here's the part where https://redmine.tools.syntystudios.com/issues/1237 can have issues
-            // Debug.Log(_dbManager.GetCurrentDbConnection().State);
 
             // Maintains a linking to the model if the editor window is closed and re-opened.
             _newModel = GameObject.Find(_OUTPUT_MODEL_NAME);
@@ -421,7 +409,15 @@ namespace Synty.SidekickCharacters
             AddOptionsTabContent(_optionSelectionView);
 
             _partDictionary = new Dictionary<CharacterPartType, SkinnedMeshRenderer>();
-            PopulatePartLibrary();
+
+            _sidekickRuntime = new SidekickRuntime((GameObject) _baseModelField.value, (Material) _materialField.value, _currentAnimationController, _dbManager);
+
+            _partLibrary = _sidekickRuntime.PopulatePartLibrary();
+            _partOutfitMap = _sidekickRuntime.PartOutfitMap;
+            _partOutfitToggleMap = _sidekickRuntime.PartOutfitToggleMap;
+            UpdatePartUVData();
+
+            PopulatePartUI();
             PopulatePresetUI();
 
             _bodyPresetTab.value = true;
@@ -486,13 +482,13 @@ namespace Synty.SidekickCharacters
         private void InitializeDatabase()
         {
             // TODO: always reinstantiate instead?
-            if (_dbController != null)
+            if (_dbManager != null)
             {
                 return;
             }
 
-            _dbController = new DatabaseUpdateController(_statusLabel);
-            _dbManager = _dbController.DatabaseManager;
+            _dbManager = new DatabaseManager();
+            _dbManager.GetDbConnection(true);
         }
 
         /// <summary>
@@ -511,12 +507,12 @@ namespace Synty.SidekickCharacters
         private void AddBodyShapeTabContent(ScrollView view)
         {
             view.Clear();
-            if (Application.isEditor && Application.isPlaying)
-            {
-                Label warningNotice = new Label("Blend shapes not able to be changed at runtime.");
-                _bodyShapeView.Add(warningNotice);
-                return;
-            }
+            // if (Application.isEditor && Application.isPlaying)
+            // {
+            //     Label warningNotice = new Label("Blend shapes not able to be changed at runtime.");
+            //     _bodyShapeView.Add(warningNotice);
+            //     return;
+            // }
 
             _bodyTypeSlider = new Slider("Body Type", -100, 100)
             {
@@ -655,12 +651,23 @@ namespace Synty.SidekickCharacters
                 evt =>
                 {
                     _bodyTypeBlendValue = evt.newValue;
+                    _sidekickRuntime.BodyTypeBlendValue = evt.newValue;
 
-                    if (_newModel == null) _newModel = CreateCharacter(false, true);
+                    if (_newModel == null)
+                    {
+                        List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
+                        foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
+                        {
+                            parts.Add(entry.Value);
+                        }
 
-                    UpdateBlendShapes(_newModel);
-                    ProcessRigMovementOnBlendShapeChange();
-                    ProcessBoneMovement(_newModel);
+                        _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, false, true);
+                        UpdatePartUVData();
+                    }
+
+                    _sidekickRuntime.UpdateBlendShapes(_newModel);
+                    _sidekickRuntime.ProcessRigMovementOnBlendShapeChange(SidekickBlendShapeRigMovement.GetAllForProcessing(_dbManager));
+                    _sidekickRuntime.ProcessBoneMovement(_newModel);
                 }
             );
 
@@ -672,26 +679,39 @@ namespace Synty.SidekickCharacters
                     {
                         _bodySizeHeavyBlendValue = newValue;
                         _bodySizeSkinnyBlendValue = 0;
+                        _sidekickRuntime.BodySizeHeavyBlendValue = newValue;
+                        _sidekickRuntime.BodySizeSkinnyBlendValue = 0;
                     }
                     else if (newValue < 0)
                     {
                         _bodySizeHeavyBlendValue = 0;
                         _bodySizeSkinnyBlendValue = -newValue;
+                        _sidekickRuntime.BodySizeHeavyBlendValue = 0;
+                        _sidekickRuntime.BodySizeSkinnyBlendValue = -newValue;
                     }
                     else
                     {
                         _bodySizeHeavyBlendValue = 0;
                         _bodySizeSkinnyBlendValue = 0;
+                        _sidekickRuntime.BodySizeHeavyBlendValue = 0;
+                        _sidekickRuntime.BodySizeSkinnyBlendValue = 0;
                     }
 
                     if (_newModel == null)
                     {
-                        _newModel = CreateCharacter(false, true);
+                        List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
+                        foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
+                        {
+                            parts.Add(entry.Value);
+                        }
+
+                        _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, false, true);
+                        UpdatePartUVData();
                     }
 
-                    UpdateBlendShapes(_newModel);
-                    ProcessRigMovementOnBlendShapeChange();
-                    ProcessBoneMovement(_newModel);
+                    _sidekickRuntime.UpdateBlendShapes(_newModel);
+                    _sidekickRuntime.ProcessRigMovementOnBlendShapeChange(SidekickBlendShapeRigMovement.GetAllForProcessing(_dbManager));
+                    _sidekickRuntime.ProcessBoneMovement(_newModel);
                 }
             );
 
@@ -699,61 +719,25 @@ namespace Synty.SidekickCharacters
                 evt =>
                 {
                     _musclesBlendValue = evt.newValue;
+                    _sidekickRuntime.MusclesBlendValue = evt.newValue;
 
                     if (_newModel == null)
                     {
-                        _newModel = CreateCharacter(false, true);
+                        List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
+                        foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
+                        {
+                            parts.Add(entry.Value);
+                        }
+
+                        _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, false, true);
+                        UpdatePartUVData();
                     }
 
-                    UpdateBlendShapes(_newModel);
-                    ProcessRigMovementOnBlendShapeChange();
-                    ProcessBoneMovement(_newModel);
+                    _sidekickRuntime.UpdateBlendShapes(_newModel);
+                    _sidekickRuntime.ProcessRigMovementOnBlendShapeChange(SidekickBlendShapeRigMovement.GetAllForProcessing(_dbManager));
+                    _sidekickRuntime.ProcessBoneMovement(_newModel);
                 }
             );
-        }
-
-        /// <summary>
-        ///     Processes the movement of rig joints based on blend shape changes.
-        /// </summary>
-        private void ProcessRigMovementOnBlendShapeChange()
-        {
-            GameObject donorModel = (GameObject) _baseModelField.value;
-            Transform modelRootBone = donorModel.transform.Find("root");
-            Hashtable boneNameMap = Combiner.CreateBoneNameMap(modelRootBone.gameObject);
-
-            foreach (KeyValuePair<CharacterPartType, string> entry in BlendshapeJointAdjustment.PART_TYPE_JOINT_MAP)
-            {
-                Transform bone = (Transform) boneNameMap[entry.Value];
-                Vector3 bonePosition = bone.position;
-                float shapeBlendValue = 0f;
-                if (_bodySizeHeavyBlendValue > 0)
-                {
-                    shapeBlendValue = _bodySizeHeavyBlendValue / 100;
-                }
-                else
-                {
-                    shapeBlendValue = -(_bodySizeSkinnyBlendValue / 100);
-                }
-
-                float feminineBlendValue = _bodyTypeBlendValue > 0 ? _bodyTypeBlendValue / 100 : 0;
-
-                Vector3 allMovement = BlendshapeJointAdjustment.GetCombinedOffsetValue(
-                    feminineBlendValue,
-                    shapeBlendValue,
-                    (_musclesBlendValue + 100) / 2 / 100,
-                    bonePosition,
-                    entry.Key
-                );
-
-                _blendShapeRigMovement[entry.Value] = allMovement;
-            }
-        }
-
-        private void ProcessBoneMovement(GameObject model)
-        {
-            Transform modelRootBone = model.transform.Find("root");
-            Hashtable boneNameMap = Combiner.CreateBoneNameMap(modelRootBone.gameObject);
-            Combiner.ProcessBoneMovement(boneNameMap, _blendShapeRigMovement);
         }
 
         /// <summary>
@@ -1150,6 +1134,28 @@ namespace Synty.SidekickCharacters
 
             _materialField.value = Resources.Load<Material>(_BASE_MATERIAL_NAME);
 
+            _animationField = new ObjectField
+            {
+                tooltip = "The animation controller applied when constructing a character",
+                objectType = typeof(AnimatorController),
+                label = "Animation Controller",
+                value = _currentAnimationController,
+                style =
+                {
+                    marginLeft = 15,
+                    marginRight = 15
+                }
+            };
+
+            view.Add(_animationField);
+
+            _animationField.RegisterValueChangedCallback(
+                evt =>
+                {
+                    _currentAnimationController = (AnimatorController) evt.newValue;
+                }
+            );
+
             VisualElement updateLibraryLayout = new VisualElement
             {
                 style =
@@ -1164,35 +1170,86 @@ namespace Synty.SidekickCharacters
                 }
             };
 
-            Button uploadLibraryButton = new Button(PopulatePartLibrary)
+            Button uploadLibraryButton = new Button()
             {
                 text = "Update Part Library",
                 tooltip = "Re-scans the project folders to update the parts list"
+            };
+
+            uploadLibraryButton.clickable.clicked += delegate
+            {
+                _partLibrary = _sidekickRuntime.PopulatePartLibrary();
             };
 
             updateLibraryLayout.Add(uploadLibraryButton);
             updateLibraryLayout.Add(_partCountLabel);
             view.Add(updateLibraryLayout);
 
-            // TODO: Hidden due to early access, enable when feature complete
-            // Toggle combineToggle = new Toggle("Combine Character Meshes")
-            // {
-            //     value = _combineMeshes,
-            //     style =
-            //     {
-            //         marginTop = 10,
-            //         marginLeft = 15
-            //     }
-            // };
-            //
-            // combineToggle.RegisterValueChangedCallback(
-            //     evt =>
-            //     {
-            //         _combineMeshes = evt.newValue;
-            //     }
-            // );
-            //
-            // view.Add(combineToggle);
+            Label prefabOptions = new Label
+            {
+                style =
+                {
+                    marginTop = 5,
+                    marginLeft = 12,
+                    unityFontStyleAndWeight = new StyleEnum<FontStyle>(FontStyle.Bold)
+                },
+                text = "Prefab Options",
+                tooltip = "Options for how prefabs are created"
+            };
+
+            view.Add(prefabOptions);
+
+            Toggle combineToggle = new Toggle("Combine Character Meshes")
+            {
+                value = _combineMeshes,
+                style =
+                {
+                    marginTop = 10,
+                    marginLeft = 15
+                }
+            };
+
+            combineToggle.RegisterValueChangedCallback(
+                evt =>
+                {
+                    _combineMeshes = evt.newValue;
+                }
+            );
+
+            view.Add(combineToggle);
+
+            Toggle bakeBlendsToggle = new Toggle("Combine Body Blend Shapes")
+            {
+                value = _bakeBlends,
+                style =
+                {
+                    marginTop = 10,
+                    marginLeft = 15
+                }
+            };
+
+            bakeBlendsToggle.RegisterValueChangedCallback(
+                evt =>
+                {
+                    _bakeBlends = evt.newValue;
+                }
+            );
+
+            view.Add(bakeBlendsToggle);
+
+            Label toolOptions = new Label
+            {
+                style =
+                {
+                    marginTop = 5,
+                    marginLeft = 12,
+                    unityFontStyleAndWeight = new StyleEnum<FontStyle>(FontStyle.Bold)
+                },
+                text = "Tool Options",
+                tooltip = "Options for how the tool behaves"
+            };
+
+            view.Add(toolOptions);
 
             _previewToggle = new Toggle("Auto Build Model")
             {
@@ -1221,6 +1278,8 @@ namespace Synty.SidekickCharacters
                 evt =>
                 {
                     _showAllColourProperties = evt.newValue;
+                    UpdateVisibleColorSets();
+                    UpdateColorTabContent();
                 }
             );
 
@@ -1246,18 +1305,6 @@ namespace Synty.SidekickCharacters
             );
 
             view.Add(autoOpenToggle);
-
-            Label dbVersion = new Label($"Current database: v{_dbManager.GetDatabaseVersion()}")
-            {
-                style =
-                {
-                    marginTop = 10,
-                    marginLeft = 15
-                },
-                tooltip = "The current iteration of the database, the database holds information about parts, presets and colors"
-            };
-
-            view.Add(dbVersion);
 
             VisualElement row = new VisualElement
             {
@@ -1498,85 +1545,8 @@ namespace Synty.SidekickCharacters
         {
             foreach (ColorType colorType in Enum.GetValues(typeof(ColorType)))
             {
-                UpdateColor(colorType, colorRow);
+                _sidekickRuntime.UpdateColor(colorType, colorRow);
             }
-        }
-
-        /// <summary>
-        ///     Updates the texture on the given color row for the specified color type.
-        /// </summary>
-        /// <param name="colorType">The color type to update.</param>
-        /// <param name="colorRow">The color row to get the updated color from.</param>
-        private void UpdateColor(ColorType colorType, SidekickColorRow colorRow)
-        {
-            if (colorRow == null)
-            {
-                return;
-            }
-
-            if (_materialField.value == null)
-            {
-                return;
-            }
-
-            // if no parts are selected, don't try and update a non-existent material, instead create one to sync up later
-            if (_currentMaterial == null)
-            {
-                _currentMaterial = (Material) _materialField.value;
-            }
-
-            switch (colorType)
-            {
-                case ColorType.Metallic:
-                    Texture2D metallic = (Texture2D) _currentMaterial.GetTexture(_METALLIC_MAP);
-                    UpdateTexture(metallic, colorRow.NiceMetallic, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
-                    _currentMaterial.SetTexture(_METALLIC_MAP, metallic);
-                    break;
-                case ColorType.Smoothness:
-                    Texture2D smoothness = (Texture2D) _currentMaterial.GetTexture(_SMOOTHNESS_MAP);
-                    UpdateTexture(smoothness, colorRow.NiceSmoothness, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
-                    _currentMaterial.SetTexture(_SMOOTHNESS_MAP, smoothness);
-                    break;
-                case ColorType.Reflection:
-                    Texture2D reflection = (Texture2D) _currentMaterial.GetTexture(_REFLECTION_MAP);
-                    UpdateTexture(reflection, colorRow.NiceReflection, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
-                    _currentMaterial.SetTexture(_REFLECTION_MAP, reflection);
-                    break;
-                case ColorType.Emission:
-                    Texture2D emission = (Texture2D) _currentMaterial.GetTexture(_EMISSION_MAP);
-                    UpdateTexture(emission, colorRow.NiceEmission, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
-                    _currentMaterial.SetTexture(_EMISSION_MAP, emission);
-                    break;
-                case ColorType.Opacity:
-                    Texture2D opacity = (Texture2D) _currentMaterial.GetTexture(_OPACITY_MAP);
-                    UpdateTexture(opacity, colorRow.NiceOpacity, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
-                    _currentMaterial.SetTexture(_OPACITY_MAP, opacity);
-                    break;
-                case ColorType.MainColor:
-                default:
-                    Texture2D color = (Texture2D) _currentMaterial.GetTexture(_COLOR_MAP);
-                    UpdateTexture(color, colorRow.NiceColor, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
-                    _currentMaterial.SetTexture(_COLOR_MAP, color);
-                    break;
-            }
-        }
-
-        /// <summary>
-        ///     Updates the color on the texture with the given new color.
-        /// </summary>
-        /// <param name="texture">The texture to update.</param>
-        /// <param name="newColor">The color to assign to the texture.</param>
-        /// <param name="u">The u positioning on the texture to update.</param>
-        /// <param name="v">The v positioning on the texture to update.</param>
-        private void UpdateTexture(Texture2D texture, Color newColor, int u, int v)
-        {
-            int scaledU = u * 2;
-            int scaledV = v * 2;
-            texture.SetPixel(scaledU, scaledV, newColor);
-            texture.SetPixel(scaledU + 1, scaledV, newColor);
-            texture.SetPixel(scaledU, scaledV + 1, newColor);
-            texture.SetPixel(scaledU + 1, scaledV + 1, newColor);
-            texture.Apply();
         }
 
         /// <summary>
@@ -1740,7 +1710,7 @@ namespace Synty.SidekickCharacters
                     break;
                 case ColorPartType.AllParts:
                 default:
-                    propertiesToShow = _showAllColourProperties
+                    propertiesToShow = _showAllColourProperties || _currentUVList == null
                         ? SidekickColorProperty.GetAll(_dbManager)
                         : SidekickColorProperty.GetByUVs(_dbManager, _currentUVList);
                     break;
@@ -1982,7 +1952,7 @@ namespace Synty.SidekickCharacters
                 evt =>
                 {
                     colorRow.NiceColor = evt.newValue;
-                    UpdateColor(ColorType.MainColor, colorRow);
+                    _sidekickRuntime.UpdateColor(ColorType.MainColor, colorRow);
                 }
             );
 
@@ -2382,6 +2352,12 @@ namespace Synty.SidekickCharacters
             _currentColorElementsPresetDictionary = new Dictionary<string, SidekickColorPreset>();
             foreach (ColorGroup colorGroup in Enum.GetValues(typeof(ColorGroup)))
             {
+                // TODO: remove when Element colors are re-added
+                if (colorGroup == ColorGroup.Elements)
+                {
+                    continue;
+                }
+
                 List<SidekickColorPreset> colorPresets = colorGroup is ColorGroup.Species
                     ? SidekickColorPreset.GetAllByColorGroupAndSpecies(_dbManager, colorGroup, _currentSpecies)
                     : SidekickColorPreset.GetAllByColorGroup(_dbManager, colorGroup);
@@ -2406,10 +2382,10 @@ namespace Synty.SidekickCharacters
                         case ColorGroup.Materials:
                             _currentColorMaterialsPresetDictionary.Add(colorPresetNames[i], colorPresets[i]);
                             tooltipText = "Select a materials color preset for your character - a materials color preset is made up of the colors that make up general materials of the outfit and attachments. (for example - metal, wood, leather, plastic, bone etc)";
-                            break;/*
+                            break;
                         case ColorGroup.Elements:
                             _currentColorElementsPresetDictionary.Add(colorPresetNames[i], colorPresets[i]);
-                            break;*/
+                            break;
                     }
                 }
 
@@ -2449,6 +2425,7 @@ namespace Synty.SidekickCharacters
 
             generateButton.clickable.clicked += delegate
             {
+                _applyingPreset = true;
                 foreach (PopupField<string> dropdown in dropdowns)
                 {
                     List<string> values = dropdown.choices;
@@ -2456,6 +2433,21 @@ namespace Synty.SidekickCharacters
                     string newValue = values[Random.Range(0, values.Count - 1)];
                     dropdown.value = newValue;
                 }
+
+                _applyingPreset = false;
+                if (_newModel != null)
+                {
+                    DestroyImmediate(_newModel);
+                }
+
+                List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
+                foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
+                {
+                    parts.Add(entry.Value);
+                }
+
+                _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, false, true);
+                UpdatePartUVData();
             };
 
             if (_processingSpeciesChange)
@@ -2640,14 +2632,21 @@ namespace Synty.SidekickCharacters
 
                             foreach (SidekickPartPresetRow presetPart in presetParts)
                             {
-                                CharacterPartType partType = (CharacterPartType) int.Parse(presetPart.PartType.Substring(0, 2));
-                                if (_partSelectionDictionary.TryGetValue(partType, out PopupField<string> currentField))
+                                if (Enum.TryParse(CharacterPartTypeUtils.GetTypeNameFromShortcode(presetPart.PartType), out CharacterPartType partType))
                                 {
-                                    UpdateResult result = UpdatePartDropdown(currentField, presetPart.PartName ?? "None", errorMessage, hasErrors);
+                                    if (_partSelectionDictionary.TryGetValue(partType, out PopupField<string> currentField))
+                                    {
+                                        UpdateResult result = UpdatePartDropdown(
+                                            currentField,
+                                            presetPart.PartName ?? "None",
+                                            errorMessage,
+                                            hasErrors
+                                        );
 
-                                    hasErrors = result.HasErrors;
-                                    errorMessage = result.ErrorMessage;
-                                    partTypesToRemove.Remove(partType);
+                                        hasErrors = result.HasErrors;
+                                        errorMessage = result.ErrorMessage;
+                                        partTypesToRemove.Remove(partType);
+                                    }
                                 }
                             }
 
@@ -2672,19 +2671,24 @@ namespace Synty.SidekickCharacters
                             }
 
                             _applyingPreset = false;
+
+                            _newModel = GameObject.Find(_OUTPUT_MODEL_NAME);
+
                             if (_newModel != null)
                             {
                                 DestroyImmediate(_newModel);
                             }
 
-                            _newModel = CreateCharacter(false, true);
-                            break;
-                        case PresetDropdownType.Body:
-                            if (Application.isEditor && Application.isPlaying)
+                            List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
+                            foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
                             {
-                                return;
+                                parts.Add(entry.Value);
                             }
 
+                            _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, false, true);
+                            UpdatePartUVData();
+                            break;
+                        case PresetDropdownType.Body:
                             SidekickBodyShapePreset bodyShapePreset = _currentBodyPresetDictionary[evt.newValue];
                             _bodyTypeSlider.value = bodyShapePreset.BodyType;
                             _bodySizeSlider.value = bodyShapePreset.BodySize;
@@ -3063,7 +3067,7 @@ namespace Synty.SidekickCharacters
             foreach (string key in partsList.Keys.ToList())
             {
                 if ((!(type.IsSpeciesSpecificPartType() || PartUtils.IsBaseSpeciesPart(key))
-                        || _currentSpecies == SidekickPart.GetSpeciesForPart(_allSpecies, key))
+                        || _currentSpecies.ID == SidekickPart.GetSpeciesForPart(_allSpecies, key).ID)
                     && _availablePartList.Contains(key))
                 {
                     popupValues.Add(key);
@@ -3082,8 +3086,6 @@ namespace Synty.SidekickCharacters
                     currentSelection = "None";
                 }
             }
-
-
 
             PopupField<string> partSelection = new PopupField<string>(popupValues, 0)
             {
@@ -3107,7 +3109,13 @@ namespace Synty.SidekickCharacters
                     if (!_applyingPreset && _previewToggle.value)
                     {
                         if (_newModel != null) DestroyImmediate(_newModel);
-                        _newModel = CreateCharacter(false, true);
+                        List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
+                        foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
+                        {
+                            parts.Add(entry.Value);
+                        }
+                        _newModel = _sidekickRuntime.CreateCharacter( _OUTPUT_MODEL_NAME, parts, false, true);
+                        UpdatePartUVData();
                     }
 
                     previousButton.SetEnabled(partSelection.index > 0);
@@ -3194,123 +3202,6 @@ namespace Synty.SidekickCharacters
         }
 
         /// <summary>
-        ///     Determines the part type from the part name. This will work as long as the naming format is correct.
-        /// </summary>
-        /// <param name="partName">The name of the part.</param>
-        /// <returns>The part type.</returns>
-        private CharacterPartType ExtractPartType(string partName)
-        {
-            string partIndexString = partName.Split('_').Reverse().ElementAt(1).Substring(0, 2);
-            bool valueParsed = int.TryParse(partIndexString, out int index);
-            return valueParsed ? (CharacterPartType) index : 0;
-        }
-
-        /// <summary>
-        ///     Takes all the parts selected in the window, and combines them into a single model in the scene.
-        /// </summary>
-        /// <param name="combineMesh">When true the character mesh will be combined into a single mesh.</param>
-        /// <param name="processBoneMovement">When true the bones will be moved to match the blendshape settings.</param>
-        /// <returns>A new character object.</returns>
-        private GameObject CreateCharacter(bool combineMesh, bool processBoneMovement)
-        {
-            List<SkinnedMeshRenderer> toCombine = _partDictionary.Values.ToList();
-            PopulateUVDictionary(toCombine);
-            GameObject baseModel = (GameObject) _baseModelField.value;
-
-            GameObject newSpawn;
-
-            if (combineMesh)
-            {
-                newSpawn = Combiner.CreateCombinedSkinnedMesh(toCombine, baseModel, (Material) _materialField.value);
-            }
-            else
-            {
-                newSpawn = CreateModelFromParts(baseModel, toCombine);
-            }
-
-            newSpawn.name = _OUTPUT_MODEL_NAME;
-            if (_currentMaterial == null)
-            {
-                _currentMaterial = (Material) _materialField.value;
-            }
-
-            Renderer renderer = newSpawn.GetComponentInChildren<Renderer>();
-            if (renderer != null)
-            {
-                renderer.sharedMaterial = _currentMaterial;
-            }
-
-            Animator newModelAnimator = newSpawn.AddComponent<Animator>();
-            Animator baseModelAnimator = baseModel.GetComponentInChildren<Animator>();
-            newModelAnimator.avatar = baseModelAnimator.avatar;
-            newModelAnimator.Rebind();
-            UpdateBlendShapes(newSpawn);
-
-            if (processBoneMovement)
-            {
-                ProcessRigMovementOnBlendShapeChange();
-                ProcessBoneMovement(newSpawn);
-            }
-
-            return newSpawn;
-        }
-
-        /// <summary>
-        ///     Creates the model but with all parts as separate meshes.
-        /// </summary>
-        /// <param name="baseModel">The base model to get the rig from.</param>
-        /// <param name="parts">The parts to build into the character</param>
-        /// <returns>A new game object with all the part meshes and a single rig.</returns>
-        private GameObject CreateModelFromParts(GameObject baseModel, List<SkinnedMeshRenderer> parts)
-        {
-            GameObject partsModel = new GameObject(_OUTPUT_MODEL_NAME);
-            Material partMaterial = (Material) _materialField.value;
-            Transform modelRootBone = baseModel.GetComponentInChildren<SkinnedMeshRenderer>().rootBone;
-            Transform[] bones = Array.Empty<Transform>();
-            GameObject rootBone = Instantiate(modelRootBone.gameObject, partsModel.transform, true);
-            rootBone.name = modelRootBone.name;
-            Hashtable boneNameMap = Combiner.CreateBoneNameMap(rootBone);
-            Transform[] additionalBones = Combiner.FindAdditionalBones(boneNameMap, new List<SkinnedMeshRenderer>(parts));
-            if (additionalBones.Length > 0)
-            {
-                Combiner.JoinAdditionalBonesToBoneArray(bones, additionalBones, boneNameMap);
-                // Need to redo the name map now that we have updated the bone array.
-                boneNameMap = Combiner.CreateBoneNameMap(rootBone);
-            }
-
-            for (int i = 0; i < parts.Count; i++)
-            {
-                SkinnedMeshRenderer part = parts[i];
-                GameObject newPart = new GameObject(part.name);
-                newPart.transform.parent = partsModel.transform;
-                SkinnedMeshRenderer renderer = newPart.AddComponent<SkinnedMeshRenderer>();
-                Transform[] oldBones = part.bones;
-                Transform[] newBones = new Transform[part.bones.Length];
-                for (int j = 0; j < oldBones.Length; j++)
-                {
-                    newBones[j] = (Transform) boneNameMap[oldBones[j].name];
-                }
-
-                renderer.sharedMesh = MeshUtils.CopyMesh(part.sharedMesh);
-                renderer.rootBone = (Transform) boneNameMap[part.rootBone.name];
-
-                Combiner.MergeAndGetAllBlendShapeDataOfSkinnedMeshRenderers(
-                    new SkinnedMeshRenderer[]
-                    {
-                        part
-                    },
-                    renderer.sharedMesh,
-                    renderer
-                );
-
-                renderer.bones = newBones;
-                renderer.sharedMaterial = partMaterial;
-            }
-
-            return partsModel;
-        }
-
-        /// <summary>
         ///     Saves a character (Parts and Colors) out to a file which can be imported by the tool into any project.
         /// </summary>
         private void SaveCharacter()
@@ -3338,9 +3229,11 @@ namespace Synty.SidekickCharacters
                 return;
             }
 
+            string filename = Path.GetFileNameWithoutExtension(savePath);
             SerializedCharacter savedCharacter = new SerializedCharacter
             {
-                Species = _currentSpecies.ID
+                Species = _currentSpecies.ID,
+                Name = filename
             };
 
             List<SerializedPart> usedParts = new List<SerializedPart>();
@@ -3623,40 +3516,64 @@ namespace Synty.SidekickCharacters
             }
             AssetDatabase.Refresh();
 
-            GameObject clonedModel = CreateCharacter(true, false); // don't process bone movements here. we need to bake the mesh first
+            List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
+            foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
+            {
+                parts.Add(entry.Value);
+            }
 
-            SkinnedMeshRenderer clonedRenderer = clonedModel.GetComponentInChildren<SkinnedMeshRenderer>();
+            // don't process bone movements here. we need to bake the mesh first
+            GameObject clonedModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, _combineMeshes, false);
+            UpdatePartUVData();
 
-            // Copy mesh, bone weights and bindposes before baking so the mesh can be re-skinned after baking.
-            Mesh clonedSkinnedMesh = MeshUtils.CopyMesh(clonedRenderer.sharedMesh);
-            BoneWeight[] boneWeights = clonedSkinnedMesh.boneWeights;
-            Matrix4x4[] bindposes = clonedSkinnedMesh.bindposes;
-            List<BlendShapeData> blendData = BlendShapeUtils.GetBlendShapeData(
-                clonedSkinnedMesh,
-                clonedRenderer,
-                new string[]
+            List<SkinnedMeshRenderer> allRenderers = clonedModel.GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
+            SkinnedMeshRenderer clonedRenderer = allRenderers[0];
+
+            if (_bakeBlends)
+            {
+
+                // Copy mesh, bone weights and bindposes before baking so the mesh can be re-skinned after baking.
+                foreach (SkinnedMeshRenderer renderer in allRenderers)
                 {
-                    "defaultHeavy",
-                    "defaultBuff",
-                    "defaultSkinny",
-                    "masculineFeminine"
-                },
-                0
-            );
-            clonedRenderer.BakeMesh(clonedSkinnedMesh);
-            // Re-skin the new baked mesh.
-            clonedSkinnedMesh.boneWeights = boneWeights;
-            clonedSkinnedMesh.bindposes = bindposes;
-            // assign the new mesh to the renderer
-            clonedRenderer.sharedMesh = clonedSkinnedMesh;
+                    if (clonedRenderer == null)
+                    {
+                        clonedRenderer = renderer;
+                    }
 
-            BlendShapeUtils.RestoreBlendShapeData(blendData, clonedSkinnedMesh, clonedRenderer);
+                    Mesh clonedSkinnedMesh = MeshUtils.CopyMesh(renderer.sharedMesh);
+                    BoneWeight[] boneWeights = clonedSkinnedMesh.boneWeights;
+                    Matrix4x4[] bindposes = clonedSkinnedMesh.bindposes;
+                    List<BlendShapeData> blendData = BlendShapeUtils.GetBlendShapeData(
+                        clonedSkinnedMesh,
+                        renderer,
+                        new string[]
+                        {
+                            "defaultHeavy", "defaultBuff", "defaultSkinny", "masculineFeminine"
+                        },
+                        0
+                    );
+                    renderer.BakeMesh(clonedSkinnedMesh);
+                    // Re-skin the new baked mesh.
+                    clonedSkinnedMesh.boneWeights = boneWeights;
+                    clonedSkinnedMesh.bindposes = bindposes;
+                    // assign the new mesh to the renderer
+                    renderer.sharedMesh = clonedSkinnedMesh;
+
+                    BlendShapeUtils.RestoreBlendShapeData(blendData, clonedSkinnedMesh, renderer);
+                }
+            }
 
             // now do the bone movements!
-            ProcessRigMovementOnBlendShapeChange();
-            ProcessBoneMovement(clonedModel);
+            _sidekickRuntime.ProcessRigMovementOnBlendShapeChange(SidekickBlendShapeRigMovement.GetAllForProcessing(_dbManager));
+            _sidekickRuntime.ProcessBoneMovement(clonedModel);
 
-            clonedRenderer.sharedMaterial = CreateNewMaterialAssetFromSource(clonedRenderer.sharedMaterial, textureDirectory, materialDirectory, baseFilename, baseFilename);
+            Material newMaterial = CreateNewMaterialAssetFromSource(clonedRenderer.sharedMaterial, textureDirectory, materialDirectory, baseFilename, baseFilename);
+
+            foreach (SkinnedMeshRenderer renderer in allRenderers)
+            {
+                renderer.sharedMaterial = newMaterial;
+            }
+
             CreatePrefab(clonedModel, meshDirectory, savePath, baseFilename);
             DestroyImmediate(clonedModel);
         }
@@ -3790,16 +3707,26 @@ namespace Synty.SidekickCharacters
             string baseFilename
         )
         {
-            SkinnedMeshRenderer renderer = rootGameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-            Mesh sharedMesh = renderer.sharedMesh;
-            string meshPath = Path.Combine(meshDirectory, baseFilename + ".asset");
-            // If the user has chosen to overwrite the prefab, delete the existing assets to replace them.
-            if (File.Exists(meshPath))
+            List<SkinnedMeshRenderer> renderers = rootGameObject.GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
+            foreach (SkinnedMeshRenderer renderer in renderers)
             {
-                File.Delete(meshPath);
+                string type = null;
+                if (renderer.name.Contains("_"))
+                {
+                    type = Enum.GetName(typeof(CharacterPartType), _sidekickRuntime.ExtractPartType(renderer.name));
+                }
+                Mesh sharedMesh = renderer.sharedMesh;
+                string meshPath = type == null ? Path.Combine(meshDirectory, baseFilename + ".asset") : Path.Combine(meshDirectory, baseFilename + "-" + type + ".asset");
+                // If the user has chosen to overwrite the prefab, delete the existing assets to replace them.
+                if (File.Exists(meshPath))
+                {
+                    File.Delete(meshPath);
+                }
+
+                AssetDatabase.CreateAsset(sharedMesh, meshPath);
             }
 
-            AssetDatabase.CreateAsset(sharedMesh, meshPath);
+
             Animator animator = rootGameObject.GetComponentInChildren<Animator>();
             Avatar existingAvatar = animator.avatar;
             Avatar newAvatar = Instantiate(existingAvatar);
@@ -3817,149 +3744,6 @@ namespace Synty.SidekickCharacters
         }
 
         /// <summary>
-        ///     Populates the list of current UVs and UV part dictionary.
-        /// </summary>
-        private void PopulateUVDictionary(List<SkinnedMeshRenderer> usedParts)
-        {
-            _currentUVList = new List<Vector2>();
-            _currentUVDictionary = new Dictionary<ColorPartType, List<Vector2>>();
-
-            foreach (ColorPartType type in Enum.GetValues(typeof(ColorPartType)))
-            {
-                _currentUVDictionary.Add(type, new List<Vector2>());
-            }
-
-            foreach (SkinnedMeshRenderer skinnedMesh in usedParts)
-            {
-                ColorPartType type = Enum.Parse<ColorPartType>(ExtractPartType(skinnedMesh.name).ToString());
-                List<Vector2> partUVs = _currentUVDictionary[type];
-                foreach (Vector2 uv in skinnedMesh.sharedMesh.uv)
-                {
-                    int scaledU = (int) Math.Floor(uv.x * 16);
-                    int scaledV = (int) Math.Floor(uv.y * 16);
-
-                    if (scaledU == 16)
-                    {
-                        scaledU = 15;
-                    }
-
-                    if (scaledV == 16)
-                    {
-                        scaledV = 15;
-                    }
-
-                    Vector2 scaledUV = new Vector2(scaledU, scaledV);
-                    // For the global UV list, we don't want any duplicates on a global level
-                    if (!_currentUVList.Contains(scaledUV))
-                    {
-                        _currentUVList.Add(scaledUV);
-                    }
-
-                    // For the part specific UV list we may have UVs that are in the global list already, we don't want to exclude these, so check
-                    // them separately to the global list
-                    if (!partUVs.Contains(scaledUV))
-                    {
-                        partUVs.Add(scaledUV);
-                    }
-                }
-
-                _currentUVDictionary[type] = partUVs;
-            }
-        }
-
-        /// <summary>
-        ///     Updates the blend shape values of the combined model.
-        /// </summary>
-        private void UpdateBlendShapes(GameObject model)
-        {
-            if (model == null)
-            {
-                return;
-            }
-
-            List<SkinnedMeshRenderer> allMeshes = model.GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
-            foreach (SkinnedMeshRenderer skinnedMesh in allMeshes)
-            {
-                Mesh sharedMesh = skinnedMesh.sharedMesh;
-                for (int i = 0; i < sharedMesh.blendShapeCount; i++)
-                {
-                    string blendName = sharedMesh.GetBlendShapeName(i);
-                    if (blendName.Contains(_BLEND_GENDER_NAME))
-                    {
-                        skinnedMesh.SetBlendShapeWeight(i, (_bodyTypeBlendValue + 100) / 2);
-                    }
-                    else if (blendName.Contains(_BLEND_SHAPE_SKINNY_NAME))
-                    {
-                        skinnedMesh.SetBlendShapeWeight(i, _bodySizeSkinnyBlendValue);
-                    }
-                    else if (blendName.Contains(_BLEND_SHAPE_HEAVY_NAME))
-                    {
-                        skinnedMesh.SetBlendShapeWeight(i, _bodySizeHeavyBlendValue);
-                    }
-                    else if (blendName.Contains(_BLEND_MUSCLE_NAME))
-                    {
-                        skinnedMesh.SetBlendShapeWeight(i, (_musclesBlendValue + 100) / 2);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        ///     Populates the internal library of parts based on the files in the project.
-        /// </summary>
-        private void PopulatePartLibrary()
-        {
-            int totalPartCount = 0;
-
-            _partLibrary = new Dictionary<CharacterPartType, Dictionary<string, string>>();
-            _partOutfitMap = new Dictionary<string, List<string>>();
-            _partOutfitToggleMap = new Dictionary<string, bool>();
-
-            List<string> files = Directory.GetFiles("Assets", "SK_*.fbx", SearchOption.AllDirectories).ToList();
-
-            foreach (CharacterPartType partType in Enum.GetValues(typeof(CharacterPartType)))
-            {
-                Dictionary<string, string> partLocationDictionary = new Dictionary<string, string>();
-
-                foreach (string file in files)
-                {
-                    FileInfo fileInfo = new FileInfo(file);
-                    string partName = fileInfo.Name;
-                    partName = partName.Substring(0, partName.IndexOf(".fbx", StringComparison.Ordinal));
-                    CharacterPartType characterPartType = ExtractPartType(partName);
-                    if (characterPartType > 0 && characterPartType == partType && !partLocationDictionary.ContainsKey(partName))
-                    {
-                        partLocationDictionary.Add(partName, file);
-                        totalPartCount++;
-
-                        // TODO: populate with actual outfit data when we have proper information about part outfits
-                        string tempPartOutfit = GetOutfitNameFromPartName(partName);
-                        List<string> partNameList;
-                        if (_partOutfitMap.TryGetValue(tempPartOutfit, out List<string> value))
-                        {
-                            partNameList = value;
-                            partNameList.Add(partName);
-                            _partOutfitMap[tempPartOutfit] = partNameList;
-                        }
-                        else
-                        {
-                            partNameList = new List<string>();
-                            partNameList.Add(partName);
-                            _partOutfitMap.Add(tempPartOutfit, partNameList);
-                            _partOutfitToggleMap.Add(tempPartOutfit, true);
-                        }
-
-                    }
-                }
-
-                _partLibrary.Add(partType, partLocationDictionary);
-            }
-
-            _partCountLabel.text = totalPartCount + _PART_COUNT_BODY;
-            PopulatePartUI();
-        }
-
-        /// <summary>
         ///     Gets the "outfit" name from the part name.
         ///     TODO: This will be replaced once parts and outfits have a proper relationship.
         /// </summary>
@@ -3973,6 +3757,15 @@ namespace Synty.SidekickCharacters
             }
 
             return string.Join('_', partName.Substring(3).Split('_').Take(2));
+        }
+
+        /// <summary>
+        ///     Updates the part UV data.
+        /// </summary>
+        private void UpdatePartUVData()
+        {
+            _currentUVDictionary = _sidekickRuntime.CurrentUVDictionary;
+            _currentUVList = _sidekickRuntime.CurrentUVList;
         }
 
         /// <summary>

@@ -96,6 +96,91 @@ namespace Synty.SidekickCharacters.Utils
             }
         }
 
+        public static string GetTypeNameFromShortcode(string shortCode)
+        {
+            switch (shortCode)
+            {
+                case "01HEAD":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.Head);
+                case "02HAIR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.Hair);
+                case "03EBRL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.EyebrowLeft);
+                case "04EBRR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.EyebrowRight);
+                case "05EYEL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.EyeLeft);
+                case "06EYER":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.EyeRight);
+                case "07EARL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.EarLeft);
+                case "08EARR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.EarRight);
+                case "09FCHR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.FacialHair);
+                case "10TORS":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.Torso);
+                case "11AUPL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.ArmUpperLeft);
+                case "12AUPR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.ArmUpperRight);
+                case "13ALWL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.ArmLowerLeft);
+                case "14ALWR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.ArmLowerRight);
+                case "15HNDL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.HandLeft);
+                case "16HNDR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.HandRight);
+                case "17HIPS":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.Hips);
+                case "18LEGL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.LegLeft);
+                case "19LEGR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.LegRight);
+                case "20FOTL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.FootLeft);
+                case "21FOTR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.FootRight);
+                case "22AHED":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentHead);
+                case "23AFAC":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentFace);
+                case "24ABAC":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentBack);
+                case "25AHPF":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentHipsFront);
+                case "26AHPB":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentHipsBack);
+                case "27AHPL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentHipsLeft);
+                case "28AHPR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentHipsRight);
+                case "29ASHL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentShoulderLeft);
+                case "30ASHR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentShoulderRight);
+                case "31AEBL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentElbowLeft);
+                case "32AEBR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentElbowRight);
+                case "33AKNL":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentKneeLeft);
+                case "34AKNR":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.AttachmentKneeRight);
+                case "35NOSE":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.Nose);
+                case "36TETH":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.Teeth);
+                case "37TONG":
+                    return Enum.GetName(typeof(CharacterPartType), CharacterPartType.Tongue);
+                // case "38WRAP":
+                //     return Enum.GetName(typeof(CharacterPartType), CharacterPartType.Wrap);
+                default:
+                    return shortCode;
+            }
+        }
+
         /// <summary>
         ///     Returns the tool tip text for the given character part type.
         /// </summary>

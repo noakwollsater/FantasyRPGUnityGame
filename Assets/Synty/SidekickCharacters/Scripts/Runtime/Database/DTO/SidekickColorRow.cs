@@ -250,6 +250,27 @@ namespace Synty.SidekickCharacters.Database.DTO
         }
 
         /// <summary>
+        ///     Creates a SidekickColorRow from a SidekickColorPresetRow.
+        /// </summary>
+        /// <param name="row">The SidekickColorPresetRow to convert.</param>
+        /// <returns>A SidekickColorRow created from a SidekickColorPresetRow.</returns>
+        public static SidekickColorRow CreateFromPresetColorRow(SidekickColorPresetRow row)
+        {
+            SidekickColorRow newRow = new SidekickColorRow()
+            {
+                MainColor = row.MainColor,
+                Emission = row.Emission,
+                Metallic = row.Metallic,
+                Opacity = row.Opacity,
+                Reflection = row.Reflection,
+                Smoothness = row.Smoothness,
+                ColorProperty = row.ColorProperty
+            };
+
+            return newRow;
+        }
+
+        /// <summary>
         ///     Ensures that the given row has its nice DTO class properties set
         /// </summary>
         /// <param name="dbManager">The Database Manager to use.</param>

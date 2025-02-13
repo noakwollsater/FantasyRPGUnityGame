@@ -61,17 +61,5 @@ namespace Synty.SidekickCharacters.UI
             _sidekickCharacterWindow = EditorWindow.GetWindow<ModularCharacterWindow>("Sidekick Character Tool");
             _sidekickCharacterWindow.minSize = new Vector2(600, 600);
         }
-
-        /// <summary>
-        ///     Restart the Sidekick Character Creator window. Run as ownerless Editor coroutine.
-        /// </summary>
-        public static IEnumerator RestartSidekickWindow()
-        {
-            yield return null;
-
-            FindSidekickCharacterWindow();
-            _sidekickCharacterWindow.Close();
-            ShowSidekickCharacterWindow();
-        }
     }
 }

@@ -16,6 +16,8 @@ namespace Synty.SidekickCharacters.Database
     /// </summary>
     public class DatabaseManager
     {
+        private static readonly string _DATABASE_PATH = "Assets/Synty/SidekickCharacters/Database/Proto_Side_Kick_Data";
+
         private static SQLiteConnection _connection;
         private static int _connectionHash;
 
@@ -27,27 +29,11 @@ namespace Synty.SidekickCharacters.Database
         /// <param name="connectionKey">The connection key for the DB.</param>
         /// <param name="checkDbOnLoad">Whether or not to valiate the structure of the DB after connecting to it.</param>
         /// <returns>A connection to a DB with the given connection details.</returns>
-        public SQLiteConnection GetDbConnection(string databasePath, string connectionKey, bool checkDbOnLoad = false)
+        public SQLiteConnection GetDbConnection(bool checkDbOnLoad = false)
         {
-            int newConnectionHash = $"{databasePath}|{connectionKey}".GetHashCode();
-
-            // if the connection isn't encrypted, the key must be null to prevent erroring pragma execution
-            if (connectionKey == "")
-            {
-                connectionKey = null;
-            }
-
             if (_connection == null)
             {
-                _connectionHash = newConnectionHash;
-                _connection = new SQLiteConnection(databasePath, connectionKey);
-            }
-            // TODO : maybe change handling here to re-open an existing connection if the connectionString matches? possible disposal problems
-            else if (_connectionHash != newConnectionHash)
-            {
-                CloseConnection();
-                _connectionHash = newConnectionHash;
-                _connection = new SQLiteConnection(databasePath, connectionKey);
+                _connection = new SQLiteConnection(_DATABASE_PATH, true);
             }
             else
             {
