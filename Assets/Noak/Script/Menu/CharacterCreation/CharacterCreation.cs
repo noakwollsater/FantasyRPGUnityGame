@@ -26,8 +26,6 @@ namespace Synty.SidekickCharacters.Demo
 
         private Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
 
-        private GameObject _characterInstance; // Store reference to character
-
         /// <inheritdoc cref="Start"/>
         void Start()
         {
@@ -612,22 +610,6 @@ namespace Synty.SidekickCharacters.Demo
             }
 
             UpdateModel();
-        }
-
-        private void FindAndMove()
-        {
-            GameObject character = GameObject.Find(_OUTPUT_MODEL_NAME);
-
-            if (character != null)
-            {
-                character.transform.position = new Vector3(0, -3.5f, -222.37f);
-                character.transform.rotation = Quaternion.Euler(0, 180, 0);
-                character.transform.localScale = new Vector3(5f, 5f, 5f);
-            }
-            else
-            {
-                Debug.LogError("Character not found");
-            }
         }
 
         private void UpdateModel()
