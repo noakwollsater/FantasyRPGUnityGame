@@ -3,13 +3,11 @@ using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Database.DTO;
 using Synty.SidekickCharacters.Enums;
 using Synty.SidekickCharacters.Utils;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace Synty.SidekickCharacters.Demo
 {
@@ -27,6 +25,8 @@ namespace Synty.SidekickCharacters.Demo
         private SidekickRuntime _sidekickRuntime;
 
         private Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
+
+        private GameObject _characterInstance; // Store reference to character
 
         /// <inheritdoc cref="Start"/>
         void Start()
@@ -48,36 +48,138 @@ namespace Synty.SidekickCharacters.Demo
             List<CharacterPartType> lowerBodyParts = PartGroup.LowerBody.GetPartTypes();
             List<CharacterPartType> headParts = PartGroup.Head.GetPartTypes();
 
+
             foreach (CharacterPartType type in upperBodyParts)
             {
                 _availablePartDictionary.Add(type, _partLibrary[type]);
                 _partIndexDictionary.Add(type, _availablePartDictionary[type].Count - 1);
+
+                if (type == CharacterPartType.AttachmentBack)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.AttachmentElbowLeft)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.AttachmentElbowRight)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.AttachmentShoulderLeft)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.AttachmentShoulderRight)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+
             }
             foreach (CharacterPartType type in lowerBodyParts)
             {
                 _availablePartDictionary.Add(type, _partLibrary[type]);
                 _partIndexDictionary.Add(type, _availablePartDictionary[type].Count - 1);
+
+                if (type == CharacterPartType.AttachmentHipsBack)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.AttachmentHipsFront)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.AttachmentHipsLeft)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.AttachmentHipsRight)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.AttachmentKneeLeft)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.AttachmentKneeRight)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
             }
             foreach (CharacterPartType type in headParts)
             {
                 _availablePartDictionary.Add(type, _partLibrary[type]);
                 _partIndexDictionary.Add(type, _availablePartDictionary[type].Count - 1);
+
+                if (type == CharacterPartType.AttachmentHead)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.Hair)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.EyebrowLeft)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.EyebrowRight)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.AttachmentFace)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+                if (type == CharacterPartType.FacialHair)
+                {
+                    _availablePartDictionary.Remove(type);
+                }
+
             }
-
-            FindAndMove();
-
 
             UpdateModel();
         }
         private void Update()
         {
-            FindAndMove();
+            // Find the instantiated character
+            GameObject character = GameObject.Find(_OUTPUT_MODEL_NAME);
+            if (character != null)
+            {
+                // Ensure the Animator component exists
+                Animator animator = character.GetComponent<Animator>();
+                if (animator == null)
+                {
+                    animator = character.AddComponent<Animator>(); // Add Animator if missing
+                }
 
+                // Load and assign the RuntimeAnimatorController
+                RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>("IdleState");
+
+                if (controller != null)
+                {
+                    animator.runtimeAnimatorController = controller;
+                }
+                else
+                {
+                    Debug.LogError("Animator Controller not found at path: Assets/Noak/Animations/IdleState");
+                }
+            }
+            else
+            {
+                Debug.LogError("Character not found. Ensure the model is loaded correctly.");
+            }
         }
+
 
         //Head Parts
         public void ForwardHair()
         {
+            if (!_availablePartDictionary.ContainsKey(CharacterPartType.Hair))
+            {
+                _availablePartDictionary.Add(CharacterPartType.Hair, _partLibrary[CharacterPartType.Hair]);
+            }
+
             int index = _partIndexDictionary[CharacterPartType.Hair];
             index++;
             if (index >= _availablePartDictionary[CharacterPartType.Hair].Count)
@@ -103,6 +205,12 @@ namespace Synty.SidekickCharacters.Demo
 
         public void ForwardEyebrows()
         {
+            if (!_availablePartDictionary.ContainsKey(CharacterPartType.EyebrowLeft))
+            {
+                _availablePartDictionary.Add(CharacterPartType.EyebrowLeft, _partLibrary[CharacterPartType.EyebrowLeft]);
+                _availablePartDictionary.Add(CharacterPartType.EyebrowRight, _partLibrary[CharacterPartType.EyebrowRight]);
+            }
+
             int index = _partIndexDictionary[CharacterPartType.EyebrowLeft];
             int index2 = _partIndexDictionary[CharacterPartType.EyebrowRight];
             index++;
@@ -210,6 +318,11 @@ namespace Synty.SidekickCharacters.Demo
 
         public void ForwardFacialHair()
         {
+            if (!_availablePartDictionary.ContainsKey(CharacterPartType.FacialHair))
+            {
+                _availablePartDictionary.Add(CharacterPartType.FacialHair, _partLibrary[CharacterPartType.FacialHair]);
+            }
+
             int index = _partIndexDictionary[CharacterPartType.FacialHair];
             index++;
             if (index >= _availablePartDictionary[CharacterPartType.FacialHair].Count)
@@ -319,7 +432,7 @@ namespace Synty.SidekickCharacters.Demo
             _partIndexDictionary[CharacterPartType.ArmLowerRight] = index2;
             UpdateModel();
         }
-        public void BackwardLowerArmLeft()
+        public void BackwardLowerArm()
         {
             int index = _partIndexDictionary[CharacterPartType.ArmLowerLeft];
             int index2 = _partIndexDictionary[CharacterPartType.ArmLowerRight];
@@ -377,32 +490,6 @@ namespace Synty.SidekickCharacters.Demo
             _partIndexDictionary[CharacterPartType.HandRight] = index2;
             UpdateModel();
         }
-
-        //public void ForwardBackAttachment()
-        //{
-        //    int index = _partIndexDictionary[CharacterPartType.AttachmentBack];
-        //    index++;
-        //    if (index >= _availablePartDictionary[CharacterPartType.AttachmentBack].Count)
-        //    {
-        //        index = 0;
-        //    }
-
-        //    _partIndexDictionary[CharacterPartType.AttachmentBack] = index;
-        //    UpdateModel();
-        //}
-
-        //public void BackwardBackAttachment()
-        //{
-        //    int index = _partIndexDictionary[CharacterPartType.AttachmentBack];
-        //    index--;
-        //    if (index < 0)
-        //    {
-        //        index = _availablePartDictionary[CharacterPartType.AttachmentBack].Count - 1;
-        //    }
-
-        //    _partIndexDictionary[CharacterPartType.AttachmentBack] = index;
-        //    UpdateModel();
-        //}
 
         //Lower Body parts
         public void ForwardHips()
