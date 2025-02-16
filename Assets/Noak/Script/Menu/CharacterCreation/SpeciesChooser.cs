@@ -143,9 +143,15 @@ public class SpeciesChooser : CharacterCreation
         UpdateModel();
     }
 
-
-
     public void ChooseHuman() => SelectSpecies("Human");
     public void ChooseGoblin() => SelectSpecies("Goblin");
+    public void ChooseOrc() => SelectSpecies("Orc");
+    public void ChooseElf() => SelectSpecies("Elf");
+    public void ChooseDwarf() => SelectSpecies("Dwarf");
+    public void ChooseDarkelf() => SelectSpecies("Darkelf");
+    public void ChooseDrakonit() => SelectSpecies("Draknoit");
+    public void ChooseLynx() => SelectSpecies("Lynx");
+    public void ChooseHobbit() => SelectSpecies("Hobbit");
+    public void ChooseApe() => SelectSpecies("Ape");
 
 }
