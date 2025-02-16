@@ -15,6 +15,7 @@ public class CharacterCreation : MonoBehaviour
 
     Dictionary<CharacterPartType, int> _partIndexDictionary = new Dictionary<CharacterPartType, int>();
     Dictionary<CharacterPartType, Dictionary<string, string>> _availablePartDictionary = new Dictionary<CharacterPartType, Dictionary<string, string>>();
+    private Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
 
     private DatabaseManager _dbManager;
     private SidekickRuntime _sidekickRuntime;
@@ -28,112 +29,43 @@ public class CharacterCreation : MonoBehaviour
     List<CharacterPartType> lowerBodyParts = PartGroup.LowerBody.GetPartTypes();
     List<CharacterPartType> headParts = PartGroup.Head.GetPartTypes();
 
-    private Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
+    private static readonly HashSet<CharacterPartType> ExcludedParts = new()
+    {
+        CharacterPartType.AttachmentBack, CharacterPartType.AttachmentElbowLeft, CharacterPartType.AttachmentElbowRight,
+        CharacterPartType.AttachmentShoulderLeft, CharacterPartType.AttachmentShoulderRight, CharacterPartType.AttachmentHipsBack,
+        CharacterPartType.AttachmentHipsFront, CharacterPartType.AttachmentHipsLeft, CharacterPartType.AttachmentHipsRight,
+        CharacterPartType.AttachmentKneeLeft, CharacterPartType.AttachmentKneeRight, CharacterPartType.AttachmentHead,
+        CharacterPartType.Hair, CharacterPartType.EyebrowLeft, CharacterPartType.EyebrowRight, CharacterPartType.AttachmentFace,
+        CharacterPartType.FacialHair
+    };
 
-    /// <inheritdoc cref="Start"/>
     void Start()
     {
-        // Create a new instance of the database manager to access database content.
         _dbManager = new DatabaseManager();
-        // Load the base model and material required to create an instance of the Sidekick Runtime API.
+
         GameObject model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
         Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
 
         _sidekickRuntime = new SidekickRuntime(model, material, null, _dbManager);
-
-        // Populate the parts list for easy access.
         _partLibrary = _sidekickRuntime.PartLibrary;
 
-        foreach (CharacterPartType type in upperBodyParts)
-        {
-            _availablePartDictionary.Add(type, _partLibrary[type]);
-            _partIndexDictionary.Add(type, _availablePartDictionary[type].Count - 1);
-
-            if (type == CharacterPartType.AttachmentBack)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.AttachmentElbowLeft)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.AttachmentElbowRight)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.AttachmentShoulderLeft)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.AttachmentShoulderRight)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-
-        }
-        foreach (CharacterPartType type in lowerBodyParts)
-        {
-            _availablePartDictionary.Add(type, _partLibrary[type]);
-            _partIndexDictionary.Add(type, _availablePartDictionary[type].Count - 1);
-
-            if (type == CharacterPartType.AttachmentHipsBack)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.AttachmentHipsFront)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.AttachmentHipsLeft)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.AttachmentHipsRight)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.AttachmentKneeLeft)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.AttachmentKneeRight)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-        }
-        foreach (CharacterPartType type in headParts)
-        {
-            _availablePartDictionary.Add(type, _partLibrary[type]);
-            _partIndexDictionary.Add(type, _availablePartDictionary[type].Count - 1);
-
-            if (type == CharacterPartType.AttachmentHead)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.Hair)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.EyebrowLeft)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.EyebrowRight)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.AttachmentFace)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-            if (type == CharacterPartType.FacialHair)
-            {
-                _availablePartDictionary.Remove(type);
-            }
-
-        }
+        InitializeParts(upperBodyParts);
+        InitializeParts(lowerBodyParts);
+        InitializeParts(headParts);
 
         UpdateModel();
+    }
+
+    private void InitializeParts(List<CharacterPartType> partList)
+    {
+        foreach (CharacterPartType type in partList)
+        {
+            if (ExcludedParts.Contains(type) || !_partLibrary.ContainsKey(type))
+                continue;
+
+            _availablePartDictionary[type] = _partLibrary[type];
+            _partIndexDictionary[type] = _availablePartDictionary[type].Count - 1;
+        }
     }
 
     private void UpdateModel()
@@ -166,27 +98,17 @@ public class CharacterCreation : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Character not found. Ensure the model is loaded correctly.");
+            Debug.LogError("Character creation failed.");
         }
     }
     private void AddScriptAndAnimator(GameObject character)
     {
-        // Ensure the Animator component exists
-        Animator animator = character.GetComponent<Animator>();
-        if (animator == null)
-        {
-            animator = character.AddComponent<Animator>(); // Add Animator if missing
-        }
+        if (character == null) return;
 
-        // Load and assign the RuntimeAnimatorController
+        Animator animator = character.GetComponent<Animator>() ?? character.AddComponent<Animator>();
         RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>("IdleState");
 
-        //Attach rotation script
-        CharacterRotation rotationScript = character.GetComponent<CharacterRotation>();
-        if (rotationScript == null)
-        {
-            rotationScript = character.AddComponent<CharacterRotation>();
-        }
+        CharacterRotation rotationScript = character.GetComponent<CharacterRotation>() ?? character.AddComponent<CharacterRotation>();
         rotationScript.character = character;
 
         if (controller != null)
