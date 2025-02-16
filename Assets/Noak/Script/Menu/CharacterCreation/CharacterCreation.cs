@@ -5,6 +5,7 @@ using Synty.SidekickCharacters.Enums;
 using Synty.SidekickCharacters.Utils;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,17 +19,20 @@ public class CharacterCreation : MonoBehaviour
     private DatabaseManager _dbManager;
     private SidekickRuntime _sidekickRuntime;
 
-    private List<SidekickSpecies> _allSpecies;
-    private SidekickSpecies _currentSpecies;
+    [Range(0f, 100f)] public float BodySizeSkinnyBlendValue;
+    [Range(0f, 100f)] public float BodySizeHeavyBlendValue;
+    [Range(0f, 100f)] public float MusclesBlendValue;
 
-
+    // For this example we are only interested in Upper Body parts, so we filter the list of all parts to only get the ones we want.
+    List<CharacterPartType> upperBodyParts = PartGroup.UpperBody.GetPartTypes();
+    List<CharacterPartType> lowerBodyParts = PartGroup.LowerBody.GetPartTypes();
+    List<CharacterPartType> headParts = PartGroup.Head.GetPartTypes();
 
     private Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
 
     /// <inheritdoc cref="Start"/>
     void Start()
     {
-
         // Create a new instance of the database manager to access database content.
         _dbManager = new DatabaseManager();
         // Load the base model and material required to create an instance of the Sidekick Runtime API.
@@ -39,12 +43,6 @@ public class CharacterCreation : MonoBehaviour
 
         // Populate the parts list for easy access.
         _partLibrary = _sidekickRuntime.PartLibrary;
-
-        // For this example we are only interested in Upper Body parts, so we filter the list of all parts to only get the ones we want.
-        List<CharacterPartType> upperBodyParts = PartGroup.UpperBody.GetPartTypes();
-        List<CharacterPartType> lowerBodyParts = PartGroup.LowerBody.GetPartTypes();
-        List<CharacterPartType> headParts = PartGroup.Head.GetPartTypes();
-
 
         foreach (CharacterPartType type in upperBodyParts)
         {
@@ -137,476 +135,6 @@ public class CharacterCreation : MonoBehaviour
 
         UpdateModel();
     }
-    private void Update()
-    {
-        // Find the instantiated character
-        GameObject character = GameObject.Find(_OUTPUT_MODEL_NAME);
-        if (character != null)
-        {
-            // Ensure the Animator component exists
-            Animator animator = character.GetComponent<Animator>();
-            if (animator == null)
-            {
-                animator = character.AddComponent<Animator>(); // Add Animator if missing
-            }
-
-            // Load and assign the RuntimeAnimatorController
-            RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>("IdleState");
-
-            //Attach rotation script
-            CharacterRotation rotationScript = character.GetComponent<CharacterRotation>();
-            if (rotationScript == null)
-            {
-                rotationScript = character.AddComponent<CharacterRotation>();
-            }
-            rotationScript.character = character;
-
-            if (controller != null)
-            {
-                animator.runtimeAnimatorController = controller;
-            }
-            else
-            {
-                Debug.LogError("Animator Controller not found at path: Assets/Noak/Animations/IdleState");
-            }
-        }
-        else
-        {
-            Debug.LogError("Character not found. Ensure the model is loaded correctly.");
-        }
-    }
-
-
-    //Head Parts
-    public void ForwardHair()
-    {
-        if (!_availablePartDictionary.ContainsKey(CharacterPartType.Hair))
-        {
-            _availablePartDictionary.Add(CharacterPartType.Hair, _partLibrary[CharacterPartType.Hair]);
-        }
-
-        int index = _partIndexDictionary[CharacterPartType.Hair];
-        index++;
-        if (index >= _availablePartDictionary[CharacterPartType.Hair].Count)
-        {
-            index = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.Hair] = index;
-        UpdateModel();
-    }
-    public void BackHair()
-    {
-        int index = _partIndexDictionary[CharacterPartType.Hair];
-        index--;
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.Hair].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.Hair] = index;
-        UpdateModel();
-    }
-
-    public void ForwardEyebrows()
-    {
-        if (!_availablePartDictionary.ContainsKey(CharacterPartType.EyebrowLeft))
-        {
-            _availablePartDictionary.Add(CharacterPartType.EyebrowLeft, _partLibrary[CharacterPartType.EyebrowLeft]);
-            _availablePartDictionary.Add(CharacterPartType.EyebrowRight, _partLibrary[CharacterPartType.EyebrowRight]);
-        }
-
-        int index = _partIndexDictionary[CharacterPartType.EyebrowLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.EyebrowRight];
-        index++;
-        index2++;
-
-        if (index >= _availablePartDictionary[CharacterPartType.EyebrowLeft].Count)
-        {
-            index = 0;
-        }
-        if (index2 >= _availablePartDictionary[CharacterPartType.EyebrowRight].Count)
-        {
-            index2 = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.EyebrowLeft] = index;
-        _partIndexDictionary[CharacterPartType.EyebrowRight] = index2;
-        UpdateModel();
-    }
-    public void BackwardEyebrows()
-    {
-        int index = _partIndexDictionary[CharacterPartType.EyebrowLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.EyebrowRight];
-        index--;
-        index2--;
-
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.EyebrowLeft].Count - 1;
-        }
-        if (index2 < 0)
-        {
-            index2 = _availablePartDictionary[CharacterPartType.EyebrowRight].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.EyebrowLeft] = index;
-        _partIndexDictionary[CharacterPartType.EyebrowRight] = index2;
-        UpdateModel();
-    }
-
-    public void ForwardEars()
-    {
-        int index = _partIndexDictionary[CharacterPartType.EarLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.EarRight];
-        index++;
-        index2++;
-
-        if (index >= _availablePartDictionary[CharacterPartType.EarLeft].Count)
-        {
-            index = 0;
-        }
-        if (index2 >= _availablePartDictionary[CharacterPartType.EarRight].Count)
-        {
-            index2 = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.EarLeft] = index;
-        _partIndexDictionary[CharacterPartType.EarRight] = index2;
-        UpdateModel();
-    }
-    public void BackwardEars()
-    {
-        int index = _partIndexDictionary[CharacterPartType.EarLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.EarRight];
-        index--;
-        index2--;
-
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.EarLeft].Count - 1;
-        }
-        if (index2 < 0)
-        {
-            index2 = _availablePartDictionary[CharacterPartType.EarRight].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.EarLeft] = index;
-        _partIndexDictionary[CharacterPartType.EarRight] = index2;
-        UpdateModel();
-    }
-
-    public void ForwardTeeth()
-    {
-        int index = _partIndexDictionary[CharacterPartType.Teeth];
-        index++;
-        if (index >= _availablePartDictionary[CharacterPartType.Teeth].Count)
-        {
-            index = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.Teeth] = index;
-        UpdateModel();
-    }
-    public void BackwardTeeth()
-    {
-        int index = _partIndexDictionary[CharacterPartType.Teeth];
-        index--;
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.Teeth].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.Teeth] = index;
-        UpdateModel();
-    }
-
-    public void ForwardFacialHair()
-    {
-        if (!_availablePartDictionary.ContainsKey(CharacterPartType.FacialHair))
-        {
-            _availablePartDictionary.Add(CharacterPartType.FacialHair, _partLibrary[CharacterPartType.FacialHair]);
-        }
-
-        int index = _partIndexDictionary[CharacterPartType.FacialHair];
-        index++;
-        if (index >= _availablePartDictionary[CharacterPartType.FacialHair].Count)
-        {
-            index = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.FacialHair] = index;
-        UpdateModel();
-    }
-    public void BackwardFacialHair()
-    {
-        int index = _partIndexDictionary[CharacterPartType.FacialHair];
-        index--;
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.FacialHair].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.FacialHair] = index;
-        UpdateModel();
-    }
-
-    //Upper Body parts
-    public void ForwardTorso()
-    {
-        int index = _partIndexDictionary[CharacterPartType.Torso];
-        index++;
-        if (index >= _availablePartDictionary[CharacterPartType.Torso].Count)
-        {
-            index = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.Torso] = index;
-        UpdateModel();
-    }
-    public void BackwardTorso()
-    {
-        int index = _partIndexDictionary[CharacterPartType.Torso];
-        index--;
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.Torso].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.Torso] = index;
-        UpdateModel();
-    }
-
-    public void ForwardUpperArm()
-    {
-        int index = _partIndexDictionary[CharacterPartType.ArmUpperLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.ArmUpperRight];
-        index++;
-        index2++;
-        if (index >= _availablePartDictionary[CharacterPartType.ArmUpperLeft].Count)
-        {
-            index = 0;
-        }
-        if (index2 >= _availablePartDictionary[CharacterPartType.ArmUpperRight].Count)
-        {
-            index2 = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.ArmUpperLeft] = index;
-        _partIndexDictionary[CharacterPartType.ArmUpperRight] = index2;
-        UpdateModel();
-    }
-    public void BackwardUpperArm()
-    {
-        int index = _partIndexDictionary[CharacterPartType.ArmUpperLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.ArmUpperRight];
-        index--;
-        index2--;
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.ArmUpperLeft].Count - 1;
-        }
-        if (index2 < 0)
-        {
-            index2 = _availablePartDictionary[CharacterPartType.ArmUpperRight].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.ArmUpperLeft] = index;
-        _partIndexDictionary[CharacterPartType.ArmUpperRight] = index2;
-        UpdateModel();
-    }
-
-    public void ForwardLowerArm()
-    {
-        int index = _partIndexDictionary[CharacterPartType.ArmLowerLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.ArmLowerRight];
-        index++;
-        index2++;
-        if (index >= _availablePartDictionary[CharacterPartType.ArmLowerLeft].Count)
-        {
-            index = 0;
-        }
-        if (index2 >= _availablePartDictionary[CharacterPartType.ArmLowerRight].Count)
-        {
-            index2 = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.ArmLowerLeft] = index;
-        _partIndexDictionary[CharacterPartType.ArmLowerRight] = index2;
-        UpdateModel();
-    }
-    public void BackwardLowerArm()
-    {
-        int index = _partIndexDictionary[CharacterPartType.ArmLowerLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.ArmLowerRight];
-        index--;
-        index2--;
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.ArmLowerLeft].Count - 1;
-        }
-        if (index2 < 0)
-        {
-            index2 = _availablePartDictionary[CharacterPartType.ArmLowerRight].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.ArmLowerLeft] = index;
-        _partIndexDictionary[CharacterPartType.ArmLowerRight] = index2;
-        UpdateModel();
-    }
-
-    public void ForwardHand()
-    {
-        int index = _partIndexDictionary[CharacterPartType.HandLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.HandRight];
-        index++;
-        index2++;
-        if (index >= _availablePartDictionary[CharacterPartType.HandLeft].Count)
-        {
-            index = 0;
-        }
-        if (index2 >= _availablePartDictionary[CharacterPartType.HandRight].Count)
-        {
-            index2 = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.HandLeft] = index;
-        _partIndexDictionary[CharacterPartType.HandRight] = index2;
-        UpdateModel();
-    }
-    public void BackwardHand()
-    {
-        int index = _partIndexDictionary[CharacterPartType.HandLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.HandRight];
-        index--;
-        index2--;
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.HandLeft].Count - 1;
-        }
-        if (index2 < 0)
-        {
-            index2 = _availablePartDictionary[CharacterPartType.HandRight].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.HandLeft] = index;
-        _partIndexDictionary[CharacterPartType.HandRight] = index2;
-        UpdateModel();
-    }
-
-    //Lower Body parts
-    public void ForwardHips()
-    {
-        int index = _partIndexDictionary[CharacterPartType.Hips];
-        index++;
-        if (index >= _availablePartDictionary[CharacterPartType.Hips].Count)
-        {
-            index = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.Hips] = index;
-        UpdateModel();
-    }
-    public void BackwardHips()
-    {
-        int index = _partIndexDictionary[CharacterPartType.Hips];
-        index--;
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.Hips].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.Hips] = index;
-        UpdateModel();
-    }
-
-    public void ForwardLeg()
-    {
-        int index = _partIndexDictionary[CharacterPartType.LegLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.LegRight];
-        index++;
-        index2++;
-        if (index >= _availablePartDictionary[CharacterPartType.LegLeft].Count)
-        {
-            index = 0;
-        }
-        if (index2 >= _availablePartDictionary[CharacterPartType.LegRight].Count)
-        {
-            index2 = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.LegLeft] = index;
-        _partIndexDictionary[CharacterPartType.LegRight] = index2;
-        UpdateModel();
-    }
-    public void BackwardLeg()
-    {
-        int index = _partIndexDictionary[CharacterPartType.LegLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.LegRight];
-        index--;
-        index2--;
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.LegLeft].Count - 1;
-        }
-        if (index2 < 0)
-        {
-            index2 = _availablePartDictionary[CharacterPartType.LegRight].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.LegLeft] = index;
-        _partIndexDictionary[CharacterPartType.LegRight] = index2;
-        UpdateModel();
-    }
-
-    public void ForwardFoot()
-    {
-        int index = _partIndexDictionary[CharacterPartType.FootLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.FootRight];
-        index++;
-        index2++;
-        if (index >= _availablePartDictionary[CharacterPartType.FootLeft].Count)
-        {
-            index = 0;
-        }
-        if (index2 >= _availablePartDictionary[CharacterPartType.FootRight].Count)
-        {
-            index2 = 0;
-        }
-
-        _partIndexDictionary[CharacterPartType.FootLeft] = index;
-        _partIndexDictionary[CharacterPartType.FootRight] = index2;
-        UpdateModel();
-    }
-    public void BackwardFoot()
-    {
-        int index = _partIndexDictionary[CharacterPartType.FootLeft];
-        int index2 = _partIndexDictionary[CharacterPartType.FootRight];
-        index--;
-        index2--;
-        if (index < 0)
-        {
-            index = _availablePartDictionary[CharacterPartType.FootLeft].Count - 1;
-        }
-        if (index2 < 0)
-        {
-            index2 = _availablePartDictionary[CharacterPartType.FootRight].Count - 1;
-        }
-
-        _partIndexDictionary[CharacterPartType.FootLeft] = index;
-        _partIndexDictionary[CharacterPartType.FootRight] = index2;
-        UpdateModel();
-    }
-
-    public void Gender()
-    {
-        if (_sidekickRuntime != null)
-        {
-            _sidekickRuntime.BodyTypeBlendValue = _sidekickRuntime.BodyTypeBlendValue == 100 ? 0 : 100;
-
-            UpdateModel();
-        }
-    }
 
     private void UpdateModel()
     {
@@ -631,5 +159,136 @@ public class CharacterCreation : MonoBehaviour
 
         // Create a new character using the selected parts using the Sidekicks API.
         character = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, partsToUse, false, true);
+
+        if (character != null)
+        {
+            AddScriptAndAnimator(character);
+        }
+        else
+        {
+            Debug.LogError("Character not found. Ensure the model is loaded correctly.");
+        }
     }
+    private void AddScriptAndAnimator(GameObject character)
+    {
+        // Ensure the Animator component exists
+        Animator animator = character.GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = character.AddComponent<Animator>(); // Add Animator if missing
+        }
+
+        // Load and assign the RuntimeAnimatorController
+        RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>("IdleState");
+
+        //Attach rotation script
+        CharacterRotation rotationScript = character.GetComponent<CharacterRotation>();
+        if (rotationScript == null)
+        {
+            rotationScript = character.AddComponent<CharacterRotation>();
+        }
+        rotationScript.character = character;
+
+        if (controller != null)
+        {
+            animator.runtimeAnimatorController = controller;
+        }
+        else
+        {
+            Debug.LogError("Animator Controller not found at path: Assets/Noak/Animations/IdleState");
+        }
+    }
+
+    public void Gender()
+    {
+        if (_sidekickRuntime != null)
+        {
+            _sidekickRuntime.BodyTypeBlendValue = _sidekickRuntime.BodyTypeBlendValue == 100 ? 0 : 100;
+
+            UpdateModel();
+        }
+    }
+    public void UpdateBodyComposition()
+    {
+        if (_sidekickRuntime != null)
+        {
+            _sidekickRuntime.BodySizeSkinnyBlendValue = BodySizeSkinnyBlendValue;
+            _sidekickRuntime.BodySizeHeavyBlendValue = BodySizeHeavyBlendValue;
+            _sidekickRuntime.MusclesBlendValue = MusclesBlendValue;
+
+            UpdateModel();
+        }
+    }
+
+    private void ChangePart(CharacterPartType partType, bool forward)
+    {
+        if (!_availablePartDictionary.ContainsKey(partType))
+        {
+            _availablePartDictionary[partType] = _partLibrary[partType];
+            _partIndexDictionary[partType] = 0;
+        }
+
+        int index = _partIndexDictionary[partType];
+        index = forward ? (index + 1) % _availablePartDictionary[partType].Count
+                        : (index - 1 + _availablePartDictionary[partType].Count) % _availablePartDictionary[partType].Count;
+
+        _partIndexDictionary[partType] = index;
+        UpdateModel();
+    }
+    private void ChangePairedParts(CharacterPartType leftPart, CharacterPartType rightPart, bool forward)
+    {
+        if (!_availablePartDictionary.ContainsKey(leftPart))
+        {
+            _availablePartDictionary[leftPart] = _partLibrary[leftPart];
+            _partIndexDictionary[leftPart] = 0;
+        }
+        if (!_availablePartDictionary.ContainsKey(rightPart))
+        {
+            _availablePartDictionary[rightPart] = _partLibrary[rightPart];
+            _partIndexDictionary[rightPart] = 0;
+        }
+
+        int index = _partIndexDictionary[leftPart];
+        int index2 = _partIndexDictionary[rightPart];
+
+        index = forward ? (index + 1) % _availablePartDictionary[leftPart].Count
+                        : (index - 1 + _availablePartDictionary[leftPart].Count) % _availablePartDictionary[leftPart].Count;
+
+        index2 = forward ? (index2 + 1) % _availablePartDictionary[rightPart].Count
+                         : (index2 - 1 + _availablePartDictionary[rightPart].Count) % _availablePartDictionary[rightPart].Count;
+
+        _partIndexDictionary[leftPart] = index;
+        _partIndexDictionary[rightPart] = index2;
+        UpdateModel();
+    }
+
+    //Head Parts
+    public void ForwardHair() => ChangePart(CharacterPartType.Hair, true);
+    public void BackwardHair() => ChangePart(CharacterPartType.Hair, false);
+    public void ForwardEyebrows() => ChangePairedParts(CharacterPartType.EyebrowLeft, CharacterPartType.EyebrowRight, true);
+    public void BackwardEyebrows() => ChangePairedParts(CharacterPartType.EyebrowLeft, CharacterPartType.EyebrowRight, false);
+    public void ForwardEars() => ChangePairedParts(CharacterPartType.EarLeft, CharacterPartType.EarRight, true);
+    public void BackwardEars() => ChangePairedParts(CharacterPartType.EarLeft, CharacterPartType.EarRight, false);
+    public void ForwardTeeth() => ChangePart(CharacterPartType.Teeth, true);
+    public void BackwardTeeth() => ChangePart(CharacterPartType.Teeth, false);
+    public void ForwardFacialHair() => ChangePart(CharacterPartType.FacialHair, true);
+    public void BackwardFacialHair() => ChangePart(CharacterPartType.FacialHair, false);
+
+    //Upper Body parts
+    public void ForwardTorso() => ChangePart(CharacterPartType.Torso, true);
+    public void BackwardTorso() => ChangePart(CharacterPartType.Torso, false);
+    public void ForwardUpperArm() => ChangePairedParts(CharacterPartType.ArmUpperLeft, CharacterPartType.ArmUpperRight, true);
+    public void BackwardUpperArm() => ChangePairedParts(CharacterPartType.ArmUpperLeft, CharacterPartType.ArmUpperRight, false);
+    public void ForwardLowerArm() => ChangePairedParts(CharacterPartType.ArmLowerLeft, CharacterPartType.ArmLowerRight, true);
+    public void BackwardLowerArm() => ChangePairedParts(CharacterPartType.ArmLowerLeft, CharacterPartType.ArmLowerRight, false);
+    public void ForwardHand() => ChangePairedParts(CharacterPartType.HandLeft, CharacterPartType.HandRight, true);
+    public void BackwardHand() => ChangePairedParts(CharacterPartType.HandLeft, CharacterPartType.HandRight, false);
+
+    //Lower Body parts
+    public void ForwardHips() => ChangePart(CharacterPartType.Hips, true);
+    public void BackwardHips() => ChangePart(CharacterPartType.Hips, false);
+    public void ForwardLeg() => ChangePairedParts(CharacterPartType.LegLeft, CharacterPartType.LegRight, true);
+    public void BackwardLeg() => ChangePairedParts(CharacterPartType.LegLeft, CharacterPartType.LegRight, false);
+    public void ForwardFoot() => ChangePairedParts(CharacterPartType.FootLeft, CharacterPartType.FootRight, true);
+    public void BackwardFoot() => ChangePairedParts(CharacterPartType.FootLeft, CharacterPartType.FootRight, false);
 }
