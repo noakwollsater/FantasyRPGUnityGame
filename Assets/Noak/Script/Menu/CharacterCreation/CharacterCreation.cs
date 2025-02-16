@@ -1,4 +1,4 @@
-using Synty.SidekickCharacters.API;
+﻿using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Database.DTO;
 using Synty.SidekickCharacters.Enums;
@@ -13,23 +13,23 @@ public class CharacterCreation : MonoBehaviour
 {
     private readonly string _OUTPUT_MODEL_NAME = "Sidekick Character";
 
-    Dictionary<CharacterPartType, int> _partIndexDictionary = new Dictionary<CharacterPartType, int>();
-    Dictionary<CharacterPartType, Dictionary<string, string>> _availablePartDictionary = new Dictionary<CharacterPartType, Dictionary<string, string>>();
-    private Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
+    public Dictionary<CharacterPartType, int> _partIndexDictionary = new Dictionary<CharacterPartType, int>();
+    public Dictionary<CharacterPartType, Dictionary<string, string>> _availablePartDictionary = new Dictionary<CharacterPartType, Dictionary<string, string>>();
+    public Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
 
-    private DatabaseManager _dbManager;
-    private SidekickRuntime _sidekickRuntime;
+    public DatabaseManager _dbManager;
+    public SidekickRuntime _sidekickRuntime;
 
     [Range(0f, 100f)] public float BodySizeSkinnyBlendValue;
     [Range(0f, 100f)] public float BodySizeHeavyBlendValue;
     [Range(0f, 100f)] public float MusclesBlendValue;
 
     // For this example we are only interested in Upper Body parts, so we filter the list of all parts to only get the ones we want.
-    List<CharacterPartType> upperBodyParts = PartGroup.UpperBody.GetPartTypes();
-    List<CharacterPartType> lowerBodyParts = PartGroup.LowerBody.GetPartTypes();
-    List<CharacterPartType> headParts = PartGroup.Head.GetPartTypes();
+    public List<CharacterPartType> upperBodyParts = PartGroup.UpperBody.GetPartTypes();
+    public List<CharacterPartType> lowerBodyParts = PartGroup.LowerBody.GetPartTypes();
+    public List<CharacterPartType> headParts = PartGroup.Head.GetPartTypes();
 
-    private static readonly HashSet<CharacterPartType> ExcludedParts = new()
+    public static readonly HashSet<CharacterPartType> ExcludedParts = new()
     {
         CharacterPartType.AttachmentBack, CharacterPartType.AttachmentElbowLeft, CharacterPartType.AttachmentElbowRight,
         CharacterPartType.AttachmentShoulderLeft, CharacterPartType.AttachmentShoulderRight, CharacterPartType.AttachmentHipsBack,
@@ -56,7 +56,7 @@ public class CharacterCreation : MonoBehaviour
         UpdateModel();
     }
 
-    private void InitializeParts(List<CharacterPartType> partList)
+    public void InitializeParts(List<CharacterPartType> partList)
     {
         foreach (CharacterPartType type in partList)
         {
@@ -68,7 +68,7 @@ public class CharacterCreation : MonoBehaviour
         }
     }
 
-    private void UpdateModel()
+    public void UpdateModel()
     {
         // Create and populate the list of parts to use from the parts list.
         List<SkinnedMeshRenderer> partsToUse = new List<SkinnedMeshRenderer>();

@@ -63,12 +63,14 @@ namespace Synty.SidekickCharacters.Database.DTO
         /// <returns>The species the part belongs to.</returns>
         public static SidekickSpecies GetSpeciesForPart(List<SidekickSpecies> allSpecies, string partName)
         {
-            // species is currently contained in the last block of the part name
-            if (partName.Split('_').Last().Substring(0, 2) == "GO")
+            string[] segments = partName.Split('_');
+            foreach (string segment in segments)
             {
-                return allSpecies.FirstOrDefault(s => s.Name == "Goblin");
+                if (segment.StartsWith("GO"))
+                {
+                    return allSpecies.FirstOrDefault(s => s.Name == "Goblin");
+                }
             }
-
             return allSpecies.FirstOrDefault(s => s.Name == "Human");
         }
     }
