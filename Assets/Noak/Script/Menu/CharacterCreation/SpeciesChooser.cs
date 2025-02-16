@@ -47,7 +47,7 @@ public class SpeciesChooser : CharacterCreation
             return;
         }
 
-        UpdateModel();
+        UpdateSpecies();
     }
 
 
