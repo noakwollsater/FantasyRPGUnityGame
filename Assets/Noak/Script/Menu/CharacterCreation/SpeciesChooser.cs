@@ -1,6 +1,7 @@
 ﻿using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Database.DTO;
+using Synty.SidekickCharacters.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -136,9 +137,55 @@ public class SpeciesChooser : CharacterCreation
             Debug.LogError($"Species {_selectedSpecies.Name} is missing a '_BASE_' part! Defaulting to first available part.");
         }
 
+        // **Apply Default Skin Color**
+        if (_dictionaryLibrary.speciesSkinColors.TryGetValue(_selectedSpecies.Name, out Color defaultSkinColor))
+        {
+            ApplyDefaultSkinColor(defaultSkinColor);
+        }
+        else
+        {
+            Debug.LogWarning($"No default skin color found for species: {_selectedSpecies.Name}");
+        }
+
+
         // **Step 5: Apply Changes**
         UpdateModel();
     }
+
+    private void ApplyDefaultSkinColor(Color skinColor)
+    {
+        if (_sidekickRuntime == null)
+        {
+            Debug.LogError("ApplyDefaultSkinColor: SidekickRuntime is not initialized.");
+            return;
+        }
+
+        List<SidekickColorProperty> skinProperties = SidekickColorProperty.GetAll(_dbManager)
+            .FindAll(prop => prop.Name.ToLower().Contains("skin"))
+            .FindAll(prop => prop.Name.ToLower().Contains("Nose"))
+            .FindAll(prop => prop.Name.ToLower().Contains("EarLeft"))
+            .FindAll(prop => prop.Name.ToLower().Contains("EarRight"));
+
+        if (skinProperties.Count == 0)
+        {
+            Debug.LogError("No skin color properties found.");
+            return;
+        }
+
+        foreach (SidekickColorProperty property in skinProperties)
+        {
+            SidekickColorRow row = new SidekickColorRow
+            {
+                ColorProperty = property,
+                MainColor = ColorUtility.ToHtmlStringRGB(skinColor),
+            };
+
+            _sidekickRuntime.UpdateColor(ColorType.MainColor, row);
+        }
+
+        Debug.Log($"Applied default skin color: {skinColor}");
+    }
+
 
     public void ChooseHuman() => SelectSpecies("Human");
     public void ChooseGoblin() => SelectSpecies("Goblin");
