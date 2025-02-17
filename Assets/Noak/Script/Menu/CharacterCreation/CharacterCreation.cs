@@ -13,12 +13,9 @@ public class CharacterCreation : MonoBehaviour
 {
     private readonly string _OUTPUT_MODEL_NAME = "Sidekick Character";
 
-    public Dictionary<CharacterPartType, int> _partIndexDictionary = new Dictionary<CharacterPartType, int>();
-    public Dictionary<CharacterPartType, Dictionary<string, string>> _availablePartDictionary = new Dictionary<CharacterPartType, Dictionary<string, string>>();
-    public Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
-
     public DatabaseManager _dbManager;
     public SidekickRuntime _sidekickRuntime;
+    public DictionaryLibrary _dictionaryLibrary;
 
     [Range(0f, 100f)] public float BodySizeSkinnyBlendValue;
     [Range(0f, 100f)] public float BodySizeHeavyBlendValue;
@@ -47,7 +44,7 @@ public class CharacterCreation : MonoBehaviour
         Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
 
         _sidekickRuntime = new SidekickRuntime(model, material, null, _dbManager);
-        _partLibrary = _sidekickRuntime.PartLibrary;
+        _dictionaryLibrary._partLibrary = _sidekickRuntime.PartLibrary;
 
         InitializeParts(upperBodyParts);
         InitializeParts(lowerBodyParts);
@@ -60,11 +57,11 @@ public class CharacterCreation : MonoBehaviour
     {
         foreach (CharacterPartType type in partList)
         {
-            if (ExcludedParts.Contains(type) || !_partLibrary.ContainsKey(type))
+            if (ExcludedParts.Contains(type) || !_dictionaryLibrary._partLibrary.ContainsKey(type))
                 continue;
 
-            _availablePartDictionary[type] = _partLibrary[type];
-            _partIndexDictionary[type] = _availablePartDictionary[type].Count - 1;
+            _dictionaryLibrary._availablePartDictionary[type] = _dictionaryLibrary._partLibrary[type];
+            _dictionaryLibrary._partIndexDictionary[type] = _dictionaryLibrary._availablePartDictionary[type].Count - 1;
         }
     }
 
@@ -73,9 +70,9 @@ public class CharacterCreation : MonoBehaviour
         // Create and populate the list of parts to use from the parts list.
         List<SkinnedMeshRenderer> partsToUse = new List<SkinnedMeshRenderer>();
 
-        foreach (KeyValuePair<CharacterPartType, Dictionary<string, string>> entry in _availablePartDictionary)
+        foreach (KeyValuePair<CharacterPartType, Dictionary<string, string>> entry in _dictionaryLibrary._availablePartDictionary)
         {
-            int index = _partIndexDictionary[entry.Key];
+            int index = _dictionaryLibrary._partIndexDictionary[entry.Key];
             string path = entry.Value.Values.ToArray()[index];
             GameObject partContainer = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             partsToUse.Add(partContainer.GetComponentInChildren<SkinnedMeshRenderer>());
@@ -144,43 +141,43 @@ public class CharacterCreation : MonoBehaviour
 
     private void ChangePart(CharacterPartType partType, bool forward)
     {
-        if (!_availablePartDictionary.ContainsKey(partType))
+        if (!_dictionaryLibrary._availablePartDictionary.ContainsKey(partType))
         {
-            _availablePartDictionary[partType] = _partLibrary[partType];
-            _partIndexDictionary[partType] = 0;
+            _dictionaryLibrary._availablePartDictionary[partType] = _dictionaryLibrary._partLibrary[partType];
+            _dictionaryLibrary._partIndexDictionary[partType] = 0;
         }
 
-        int index = _partIndexDictionary[partType];
-        index = forward ? (index + 1) % _availablePartDictionary[partType].Count
-                        : (index - 1 + _availablePartDictionary[partType].Count) % _availablePartDictionary[partType].Count;
+        int index = _dictionaryLibrary._partIndexDictionary[partType];
+        index = forward ? (index + 1) % _dictionaryLibrary._availablePartDictionary[partType].Count
+                        : (index - 1 + _dictionaryLibrary._availablePartDictionary[partType].Count) % _dictionaryLibrary._availablePartDictionary[partType].Count;
 
-        _partIndexDictionary[partType] = index;
+        _dictionaryLibrary._partIndexDictionary[partType] = index;
         UpdateModel();
     }
     private void ChangePairedParts(CharacterPartType leftPart, CharacterPartType rightPart, bool forward)
     {
-        if (!_availablePartDictionary.ContainsKey(leftPart))
+        if (!_dictionaryLibrary._availablePartDictionary.ContainsKey(leftPart))
         {
-            _availablePartDictionary[leftPart] = _partLibrary[leftPart];
-            _partIndexDictionary[leftPart] = 0;
+            _dictionaryLibrary._availablePartDictionary[leftPart] = _dictionaryLibrary._partLibrary[leftPart];
+            _dictionaryLibrary._partIndexDictionary[leftPart] = 0;
         }
-        if (!_availablePartDictionary.ContainsKey(rightPart))
+        if (!_dictionaryLibrary._availablePartDictionary.ContainsKey(rightPart))
         {
-            _availablePartDictionary[rightPart] = _partLibrary[rightPart];
-            _partIndexDictionary[rightPart] = 0;
+            _dictionaryLibrary._availablePartDictionary[rightPart] = _dictionaryLibrary._partLibrary[rightPart];
+            _dictionaryLibrary._partIndexDictionary[rightPart] = 0;
         }
 
-        int index = _partIndexDictionary[leftPart];
-        int index2 = _partIndexDictionary[rightPart];
+        int index = _dictionaryLibrary._partIndexDictionary[leftPart];
+        int index2 = _dictionaryLibrary._partIndexDictionary[rightPart];
 
-        index = forward ? (index + 1) % _availablePartDictionary[leftPart].Count
-                        : (index - 1 + _availablePartDictionary[leftPart].Count) % _availablePartDictionary[leftPart].Count;
+        index = forward ? (index + 1) % _dictionaryLibrary._availablePartDictionary[leftPart].Count
+                        : (index - 1 + _dictionaryLibrary._availablePartDictionary[leftPart].Count) % _dictionaryLibrary._availablePartDictionary[leftPart].Count;
 
-        index2 = forward ? (index2 + 1) % _availablePartDictionary[rightPart].Count
-                         : (index2 - 1 + _availablePartDictionary[rightPart].Count) % _availablePartDictionary[rightPart].Count;
+        index2 = forward ? (index2 + 1) % _dictionaryLibrary._availablePartDictionary[rightPart].Count
+                         : (index2 - 1 + _dictionaryLibrary._availablePartDictionary[rightPart].Count) % _dictionaryLibrary._availablePartDictionary[rightPart].Count;
 
-        _partIndexDictionary[leftPart] = index;
-        _partIndexDictionary[rightPart] = index2;
+        _dictionaryLibrary._partIndexDictionary[leftPart] = index;
+        _dictionaryLibrary._partIndexDictionary[rightPart] = index2;
         UpdateModel();
     }
 

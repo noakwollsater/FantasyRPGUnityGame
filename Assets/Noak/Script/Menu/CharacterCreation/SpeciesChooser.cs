@@ -1,11 +1,9 @@
 ﻿using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Database.DTO;
-using Synty.SidekickCharacters.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SpeciesChooser : CharacterCreation
 {
@@ -39,9 +37,9 @@ public class SpeciesChooser : CharacterCreation
         Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
 
         _sidekickRuntime = new SidekickRuntime(model, material, null, _dbManager);
-        _partLibrary = _sidekickRuntime?.PartLibrary;
+        _dictionaryLibrary._partLibrary = _sidekickRuntime?.PartLibrary;
 
-        if (_partLibrary == null)
+        if (_dictionaryLibrary._partLibrary == null)
         {
             Debug.LogError("SidekickRuntime failed to initialize part library.");
             return;
@@ -49,7 +47,6 @@ public class SpeciesChooser : CharacterCreation
 
         UpdateSpecies();
     }
-
 
     public void SelectSpecies(string speciesName)
     {
@@ -80,7 +77,7 @@ public class SpeciesChooser : CharacterCreation
             return;
         }
 
-        if (_partLibrary == null)
+        if (_dictionaryLibrary._partLibrary == null)
         {
             Debug.LogError("UpdateSpecies() failed: _partLibrary is null. Ensure SidekickRuntime is initialized.");
             return;
@@ -100,33 +97,33 @@ public class SpeciesChooser : CharacterCreation
             return;
         }
 
-        _partLibrary = _sidekickRuntime.PartLibrary;
+        _dictionaryLibrary._partLibrary = _sidekickRuntime.PartLibrary;
 
         // **Step 2: Ensure dictionaries are reset**
-        _availablePartDictionary.Clear();
-        _partIndexDictionary.Clear();
+        _dictionaryLibrary._availablePartDictionary.Clear();
+        _dictionaryLibrary._partIndexDictionary.Clear();
 
         // **Step 3: Explicitly Add `_BASE_` First**
         bool hasBasePart = false;
 
-        foreach (var partType in _partLibrary.Keys)
+        foreach (var partType in _dictionaryLibrary._partLibrary.Keys)
         {
             if (ExcludedParts.Contains(partType)) continue;
 
-            var partsForSpecies = _partLibrary[partType]
+            var partsForSpecies = _dictionaryLibrary._partLibrary[partType]
                 .Where(part => SidekickPart.GetSpeciesForPart(_availableSpecies, part.Key) == _selectedSpecies)
                 .ToDictionary(p => p.Key, p => p.Value);
 
             if (partsForSpecies.Count > 0)
             {
-                _availablePartDictionary[partType] = partsForSpecies;
-                _partIndexDictionary[partType] = 0;
+                _dictionaryLibrary._availablePartDictionary[partType] = partsForSpecies;
+                _dictionaryLibrary._partIndexDictionary[partType] = 0;
 
                 // **Explicitly Check & Apply `_BASE_`**
                 string basePartKey = partsForSpecies.Keys.FirstOrDefault(k => k.Contains("_BASE_"));
                 if (basePartKey != null)
                 {
-                    _partIndexDictionary[partType] = partsForSpecies.Keys.ToList().IndexOf(basePartKey);
+                    _dictionaryLibrary._partIndexDictionary[partType] = partsForSpecies.Keys.ToList().IndexOf(basePartKey);
                     hasBasePart = true;
                     Debug.Log($"_BASE_ found and set for {partType} in species {_selectedSpecies.Name}");
                 }
