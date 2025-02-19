@@ -159,12 +159,9 @@ public class SpeciesChooser : CharacterCreation
             Debug.LogError("ApplyDefaultSkinColor: SidekickRuntime is not initialized.");
             return;
         }
+        List<SidekickColorProperty> skinProperties = SidekickColorProperty.GetAll(_dbManager);
+        List<SidekickColorProperty> selectedProperties = skinProperties.FindAll(scp => scp.Name.ToLower().Contains("skin"));
 
-        List<SidekickColorProperty> skinProperties = SidekickColorProperty.GetAll(_dbManager)
-            .FindAll(prop => prop.Name.ToLower().Contains("skin"))
-            .FindAll(prop => prop.Name.ToLower().Contains("Nose"))
-            .FindAll(prop => prop.Name.ToLower().Contains("EarLeft"))
-            .FindAll(prop => prop.Name.ToLower().Contains("EarRight"));
 
         if (skinProperties.Count == 0)
         {
@@ -172,7 +169,7 @@ public class SpeciesChooser : CharacterCreation
             return;
         }
 
-        foreach (SidekickColorProperty property in skinProperties)
+        foreach (SidekickColorProperty property in selectedProperties)
         {
             SidekickColorRow row = new SidekickColorRow
             {

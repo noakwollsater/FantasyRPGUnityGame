@@ -17,9 +17,6 @@ namespace Unity.FantasyKingdom
             LazyInit();  // Ensure everything is initialized before running
         }
 
-        /// <summary>
-        /// Ensures all necessary components are initialized before executing functions.
-        /// </summary>
         private void LazyInit()
         {
             if (_dbManager == null)
@@ -62,9 +59,6 @@ namespace Unity.FantasyKingdom
             }
         }
 
-        /// <summary>
-        /// Changes the character's skin color based on the selected color.
-        /// </summary>
         public void ChangeSkinColor(Image image)
         {
             if (image == null)
@@ -79,9 +73,6 @@ namespace Unity.FantasyKingdom
             ApplyColorChange(newColor, "skin");
         }
 
-        /// <summary>
-        /// Changes the character's outfit color based on the selected color.
-        /// </summary>
         public void ChangeOutfitColor(Image image)
         {
             if (image == null)
@@ -96,9 +87,6 @@ namespace Unity.FantasyKingdom
             ApplyColorChange(newColor, "outfit");
         }
 
-        /// <summary>
-        /// Applies the selected color to the character based on the target property.
-        /// </summary>
         private void ApplyColorChange(Color color, string propertyKeyword)
         {
             LazyInit(); // Ensure everything is initialized before applying color
