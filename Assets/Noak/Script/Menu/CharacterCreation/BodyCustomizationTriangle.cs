@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.FantasyKingdom;
 
 public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     public RectTransform triangleUI;  // Assign Triangle UI Image
     public RectTransform selector;    // Assign Draggable Selector
     public CharacterCreation characterCreation; // Reference to Character System
+    public BlendShapeChanger BlendShapeChanger; // Reference to Blend Shape Changer
 
     public Vector2 A, B, C; // Triangle corners in UI space
 
@@ -37,12 +39,12 @@ public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDrag
         Vector3 bary = Barycentric(localPoint, A, B, C);
 
         // Apply values to character customization
-        characterCreation.BodySizeSkinnyBlendValue = bary.y * 100;
-        characterCreation.BodySizeHeavyBlendValue = bary.z * 100;
-        characterCreation.MusclesBlendValue = bary.x * 100;
+        characterCreation._dictionaryLibrary.BodySizeSkinnyBlendValue = bary.y * 100;
+        characterCreation._dictionaryLibrary.BodySizeHeavyBlendValue = bary.z * 100;
+        characterCreation._dictionaryLibrary.MusclesBlendValue = bary.x * 100;
 
         // Update Character Model
-        characterCreation.UpdateBodyComposition();
+        BlendShapeChanger.UpdateBodyComposition();
     }
 
     public void OnBeginDrag(PointerEventData eventData) { }

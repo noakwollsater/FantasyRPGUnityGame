@@ -17,10 +17,6 @@ public class CharacterCreation : MonoBehaviour
     public SidekickRuntime _sidekickRuntime;
     public DictionaryLibrary _dictionaryLibrary;
 
-    [Range(0f, 100f)] public float BodySizeSkinnyBlendValue;
-    [Range(0f, 100f)] public float BodySizeHeavyBlendValue;
-    [Range(0f, 100f)] public float MusclesBlendValue;
-
     // For this example we are only interested in Upper Body parts, so we filter the list of all parts to only get the ones we want.
     public List<CharacterPartType> upperBodyParts = PartGroup.UpperBody.GetPartTypes();
     public List<CharacterPartType> lowerBodyParts = PartGroup.LowerBody.GetPartTypes();
@@ -50,6 +46,7 @@ public class CharacterCreation : MonoBehaviour
         InitializeParts(lowerBodyParts);
         InitializeParts(headParts);
 
+        
         UpdateModel();
     }
 
@@ -67,7 +64,7 @@ public class CharacterCreation : MonoBehaviour
 
     public void UpdateModel()
     {
-        // Create and populate the list of parts to use from the parts list.
+        // Create and populate the list of parts to use
         List<SkinnedMeshRenderer> partsToUse = new List<SkinnedMeshRenderer>();
 
         foreach (KeyValuePair<CharacterPartType, Dictionary<string, string>> entry in _dictionaryLibrary._availablePartDictionary)
@@ -78,7 +75,7 @@ public class CharacterCreation : MonoBehaviour
             partsToUse.Add(partContainer.GetComponentInChildren<SkinnedMeshRenderer>());
         }
 
-        // Check for an existing copy of the model, if it exists, delete it so that we don't end up with duplicates.
+        // Check for an existing copy of the model, delete it to avoid duplicates
         GameObject character = GameObject.Find(_OUTPUT_MODEL_NAME);
 
         if (character != null)
@@ -86,18 +83,23 @@ public class CharacterCreation : MonoBehaviour
             Destroy(character);
         }
 
-        // Create a new character using the selected parts using the Sidekicks API.
+        // Create a new character using the selected parts
         character = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, partsToUse, false, true);
 
         if (character != null)
         {
             AddScriptAndAnimator(character);
+
+            _sidekickRuntime.BodyTypeBlendValue = _dictionaryLibrary.BodyTypeBlendValue;
+            Debug.Log($"Applying BodyTypeBlendValue: {_sidekickRuntime.BodyTypeBlendValue}");
         }
         else
         {
             Debug.LogError("Character creation failed.");
         }
     }
+
+
     private void AddScriptAndAnimator(GameObject character)
     {
         if (character == null) return;
@@ -115,27 +117,6 @@ public class CharacterCreation : MonoBehaviour
         else
         {
             Debug.LogError("Animator Controller not found at path: Assets/Noak/Animations/IdleState");
-        }
-    }
-
-    public void Gender()
-    {
-        if (_sidekickRuntime != null)
-        {
-            _sidekickRuntime.BodyTypeBlendValue = _sidekickRuntime.BodyTypeBlendValue == 100 ? 0 : 100;
-
-            UpdateModel();
-        }
-    }
-    public void UpdateBodyComposition()
-    {
-        if (_sidekickRuntime != null)
-        {
-            _sidekickRuntime.BodySizeSkinnyBlendValue = BodySizeSkinnyBlendValue;
-            _sidekickRuntime.BodySizeHeavyBlendValue = BodySizeHeavyBlendValue;
-            _sidekickRuntime.MusclesBlendValue = MusclesBlendValue;
-
-            UpdateModel();
         }
     }
 

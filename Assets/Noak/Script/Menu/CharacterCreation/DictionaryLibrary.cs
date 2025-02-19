@@ -60,4 +60,8 @@ public class DictionaryLibrary : ScriptableObject
             { "Fingernails", new List<string> { "fingernail" } }
     };
 
+    public float BodySizeSkinnyBlendValue = 0;
+    public float BodySizeHeavyBlendValue = 0;
+    public float MusclesBlendValue = 0;
+    public float BodyTypeBlendValue = 0;
 }
