@@ -69,7 +69,6 @@ public class SpeciesChooser : CharacterCreation
         Debug.Log($"Selected species: {_selectedSpecies.Name}");
         UpdateSpecies();
     }
-
     private void UpdateSpecies()
     {
         if (_selectedSpecies == null)
@@ -137,35 +136,52 @@ public class SpeciesChooser : CharacterCreation
             Debug.LogError($"Species {_selectedSpecies.Name} is missing a '_BASE_' part! Defaulting to first available part.");
         }
 
-        // **Apply Default Skin Color**
-        if (_dictionaryLibrary.speciesSkinColors.TryGetValue(_selectedSpecies.Name, out Color defaultSkinColor))
-        {
-            ApplyDefaultSkinColor(defaultSkinColor);
-        }
-        else
-        {
-            Debug.LogWarning($"No default skin color found for species: {_selectedSpecies.Name}");
-        }
+        // **Step 5: Apply Species Colors**
+        ApplySpeciesColors(_selectedSpecies.Name);
 
-
-        // **Step 5: Apply Changes**
+        // **Step 6: Apply Changes**
         UpdateModel();
     }
 
-    private void ApplyDefaultSkinColor(Color skinColor)
+    private void ApplySpeciesColors(string species)
     {
         if (_sidekickRuntime == null)
         {
-            Debug.LogError("ApplyDefaultSkinColor: SidekickRuntime is not initialized.");
+            Debug.LogError("ApplySpeciesColors: SidekickRuntime is not initialized.");
             return;
         }
-        List<SidekickColorProperty> skinProperties = SidekickColorProperty.GetAll(_dbManager);
-        List<SidekickColorProperty> selectedProperties = skinProperties.FindAll(scp => scp.Name.ToLower().Contains("skin"));
 
-
-        if (skinProperties.Count == 0)
+        if (!_dictionaryLibrary.speciesColors.TryGetValue(species, out var speciesData))
         {
-            Debug.LogError("No skin color properties found.");
+            Debug.LogWarning($"No color data found for species: {species}");
+            return;
+        }
+
+        foreach (var entry in speciesData)
+        {
+            if (_dictionaryLibrary.bodyPartMappings.TryGetValue(entry.Key, out var targetParts))
+            {
+                ApplyColorToParts(entry.Value, targetParts);
+            }
+        }
+    }
+
+    private void ApplyColorToParts(Color color, List<string> targetParts)
+    {
+        if (_sidekickRuntime == null)
+        {
+            Debug.LogError("ApplyColorToParts: SidekickRuntime is not initialized.");
+            return;
+        }
+
+        List<SidekickColorProperty> allProperties = SidekickColorProperty.GetAll(_dbManager);
+        List<SidekickColorProperty> selectedProperties = allProperties
+            .Where(scp => targetParts.Any(part => scp.Name.ToLower().Contains(part.ToLower())))
+            .ToList();
+
+        if (selectedProperties.Count == 0)
+        {
+            Debug.LogWarning($"No matching properties found for {string.Join(", ", targetParts)}.");
             return;
         }
 
@@ -174,15 +190,13 @@ public class SpeciesChooser : CharacterCreation
             SidekickColorRow row = new SidekickColorRow
             {
                 ColorProperty = property,
-                MainColor = ColorUtility.ToHtmlStringRGB(skinColor),
+                MainColor = ColorUtility.ToHtmlStringRGB(color),
             };
 
             _sidekickRuntime.UpdateColor(ColorType.MainColor, row);
+            Debug.Log($"Applied {color} to {property.Name}");
         }
-
-        Debug.Log($"Applied default skin color: {skinColor}");
     }
-
 
     public void ChooseHuman() => SelectSpecies("Human");
     public void ChooseGoblin() => SelectSpecies("Goblin");

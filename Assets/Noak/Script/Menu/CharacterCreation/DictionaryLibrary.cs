@@ -11,18 +11,53 @@ public class DictionaryLibrary : ScriptableObject
     public Dictionary<CharacterPartType, int> _partIndexDictionary = new Dictionary<CharacterPartType, int>();
     public Dictionary<CharacterPartType, Dictionary<string, string>> _availablePartDictionary = new Dictionary<CharacterPartType, Dictionary<string, string>>();
     public Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
-    public Dictionary<string, Color> speciesSkinColors = new Dictionary<string, Color>
+    public Dictionary<string, Dictionary<string, Color>> speciesColors = new Dictionary<string, Dictionary<string, Color>>
 {
-    { "Human", new Color(0.96f, 0.80f, 0.69f) },  // Light skin tone
-    { "Goblin", new Color(0.20f, 0.50f, 0.20f) }, // Greenish goblin tone
-    { "Orc", new Color(0.30f, 0.40f, 0.20f) },   // Darker green
-    { "Elf", new Color(0.90f, 0.85f, 0.75f) },   // Pale
-    { "Dwarf", new Color(0.85f, 0.70f, 0.60f) }, // Slightly tanned
-    { "Darkelf", new Color(0.25f, 0.25f, 0.35f) }, // Greyish
-    { "Draknoit", new Color(0.45f, 0.30f, 0.25f) }, // Slightly reptilian
-    { "Lynx", new Color(0.75f, 0.55f, 0.35f) }, // Furry tone
-    { "Hobbit", new Color(0.92f, 0.78f, 0.67f) }, // Similar to human
-    { "Ape", new Color(0.40f, 0.30f, 0.25f) }   // Dark fur/skin tone
+    { "Human", new Dictionary<string, Color>
+        {
+            { "Skin", new Color(0.96f, 0.80f, 0.69f) },
+            { "Eyes", new Color(1.0f, 1.0f, 1.0f) },
+            { "Hair", new Color(0.50f, 0.35f, 0.20f) },
+            { "Fingernails", new Color(0.85f, 0.65f, 0.545f) } 
+        }
+    },
+    { "Goblin", new Dictionary<string, Color>
+        {
+            { "Skin", new Color(0.533f, 0.510f, 0.298f) },
+            { "Eyes", new Color(0.85f, 0.10f, 0.10f) },
+            { "Hair", new Color(0.10f, 0.10f, 0.10f) },
+            { "Fingernails", new Color(0.282f, 0.266f, 0.165f) }
+
+        }
+    },
+    { "Orc", new Dictionary<string, Color>
+        {
+            { "Skin", new Color(0.30f, 0.40f, 0.20f) },
+            { "Eyes", new Color(0.90f, 0.80f, 0.50f) }, 
+            { "Hair", new Color(0.10f, 0.10f, 0.10f) } 
+        }
+    },
+    { "Elf", new Dictionary<string, Color>
+        {
+            { "Skin", new Color(0.90f, 0.85f, 0.75f) },
+            { "Eyes", new Color(1.0f, 1.0f, 1.0f) },
+            { "Hair", new Color(1.0f, 1.0f, 0.85f) }   
+        }
+    },
+    { "Dwarf", new Dictionary<string, Color>
+        {
+            { "Skin", new Color(0.85f, 0.70f, 0.60f) },
+            { "Eyes", new Color(1.0f, 1.0f, 1.0f) },
+            { "Hair", new Color(0.70f, 0.40f, 0.20f) }  
+        }
+    }
 };
+    public Dictionary<string, List<string>> bodyPartMappings = new Dictionary<string, List<string>>
+    {
+        { "Skin", new List<string> { "skin", "nose", "ear", "eyelids", "fingernails" } },
+        { "Eyes", new List<string> { "eye outer" } },
+        { "Hair", new List<string> { "hair", "facial hair", "eyebrow" } },
+            { "Fingernails", new List<string> { "fingernail" } }
+    };
 
 }
