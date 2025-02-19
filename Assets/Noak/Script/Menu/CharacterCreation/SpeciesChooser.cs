@@ -5,12 +5,16 @@ using Synty.SidekickCharacters.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpeciesChooser : CharacterCreation
 {
     private List<SidekickSpecies> _availableSpecies;
     private int _currentSpeciesIndex = 0;
     private SidekickSpecies _selectedSpecies;
+
+    [SerializeField] private Sprite[] RaceHeadIcons;
+    [SerializeField] private Image headIcon;
 
     void Start()
     {
@@ -33,6 +37,8 @@ public class SpeciesChooser : CharacterCreation
         _selectedSpecies = _availableSpecies[_currentSpeciesIndex];
         Debug.Log($"Initialized species: {_selectedSpecies.Name}");
 
+        UpdateImage();
+
         // Ensure SidekickRuntime is initialized
         GameObject model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
         Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
@@ -48,6 +54,29 @@ public class SpeciesChooser : CharacterCreation
 
         UpdateSpecies();
     }
+
+    private void UpdateImage()
+    {
+        int index = _availableSpecies.IndexOf(_selectedSpecies);
+
+        if (index == -1)
+        {
+            Debug.LogError($"UpdateImage: Selected species '{_selectedSpecies.Name}' not found in available species list.");
+            return;
+        }
+
+        _currentSpeciesIndex = index; // ✅ Ensure the index is updated
+
+        if (RaceHeadIcons.Length > _currentSpeciesIndex)
+        {
+            headIcon.sprite = RaceHeadIcons[_currentSpeciesIndex];
+        }
+        else
+        {
+            Debug.LogError("UpdateImage: No matching head icon found for selected species.");
+        }
+    }
+
 
     public void SelectSpecies(string speciesName)
     {
@@ -67,6 +96,7 @@ public class SpeciesChooser : CharacterCreation
         }
 
         Debug.Log($"Selected species: {_selectedSpecies.Name}");
+        UpdateImage();
         UpdateSpecies();
     }
     private void UpdateSpecies()
