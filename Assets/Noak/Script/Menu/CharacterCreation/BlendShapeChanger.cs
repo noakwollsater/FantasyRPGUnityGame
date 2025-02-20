@@ -1,21 +1,36 @@
 using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Unity.FantasyKingdom
 {
-    public class BlendShapeChanger : CharacterCreation
+    public class BlendShapeChanger : CharacterCreation, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] Sprite[] genderIcons;
         [SerializeField] Image genderIcon;
 
+        [SerializeField] Sprite[] BodySizes;
+        [SerializeField] Image BodySizeImage;
+        [SerializeField] Button bodySizeButton;
+
         private bool isMale = false;
+        private int currentBodySizeIndex = 0;
 
         void Start()
         {
             UpdateImage();
             LazyInit();
+
+            if (bodySizeButton != null)
+            {
+                EventTrigger trigger = bodySizeButton.gameObject.GetComponent<EventTrigger>();
+                if (trigger == null) trigger = bodySizeButton.gameObject.AddComponent<EventTrigger>();
+
+                AddEventTrigger(trigger, EventTriggerType.PointerEnter, OnHoverEnter);
+                AddEventTrigger(trigger, EventTriggerType.PointerExit, OnHoverExit);
+            }
         }
 
         private void LazyInit()
@@ -94,5 +109,38 @@ namespace Unity.FantasyKingdom
             }
         }
 
+        private void AddEventTrigger(EventTrigger trigger, EventTriggerType eventType, System.Action<BaseEventData> action)
+        {
+            EventTrigger.Entry entry = new EventTrigger.Entry { eventID = eventType };
+            entry.callback.AddListener((data) => action.Invoke(data));
+            trigger.triggers.Add(entry);
+        }
+
+        private void OnHoverEnter(BaseEventData data)
+        {
+            if (BodySizes.Length > 1)
+            {
+                int nextIndex = (currentBodySizeIndex + 1) % BodySizes.Length;
+                BodySizeImage.sprite = BodySizes[nextIndex];
+            }
+        }
+
+        private void OnHoverExit(BaseEventData data)
+        {
+            if (BodySizes.Length > 0)
+            {
+                BodySizeImage.sprite = BodySizes[currentBodySizeIndex];
+            }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            OnHoverEnter(eventData);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            OnHoverExit(eventData);
+        }
     }
 }
