@@ -21,6 +21,12 @@ public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDrag
         A = new Vector2(0, height / 2);    // Top (Muscle)
         B = new Vector2(-width / 2, -height / 2);  // Left (Skinny)
         C = new Vector2(width / 2, -height / 2);   // Right (Fat)
+
+        // Validate Triangle
+        if (!IsValidTriangle(A, B, C))
+        {
+            Debug.LogError("Invalid Triangle Configuration: Points are collinear.");
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -50,6 +56,13 @@ public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDrag
     public void OnBeginDrag(PointerEventData eventData) { }
     public void OnEndDrag(PointerEventData eventData) { }
 
+    // Function to check if the points form a valid triangle
+    private bool IsValidTriangle(Vector2 a, Vector2 b, Vector2 c)
+    {
+        float area = Mathf.Abs((b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y)) / 2f;
+        return area > 0.0001f; // Ensure non-zero area
+    }
+
     // Function to keep the selector inside the triangle
     private Vector2 ClampPointToTriangle(Vector2 p)
     {
@@ -76,5 +89,21 @@ public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDrag
         float beta = ((c.y - a.y) * (p.x - c.x) + (a.x - c.x) * (p.y - c.y)) / detT;
         float gamma = 1 - alpha - beta;
         return new Vector3(alpha, beta, gamma);
+    }
+
+    // Debugging visualization in the Unity Editor
+    void OnDrawGizmos()
+    {
+        if (triangleUI == null) return;
+        
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(triangleUI.TransformPoint(A), 5f);
+        Gizmos.DrawSphere(triangleUI.TransformPoint(B), 5f);
+        Gizmos.DrawSphere(triangleUI.TransformPoint(C), 5f);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(triangleUI.TransformPoint(A), triangleUI.TransformPoint(B));
+        Gizmos.DrawLine(triangleUI.TransformPoint(B), triangleUI.TransformPoint(C));
+        Gizmos.DrawLine(triangleUI.TransformPoint(C), triangleUI.TransformPoint(A));
     }
 }
