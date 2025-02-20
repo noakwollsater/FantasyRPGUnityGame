@@ -91,6 +91,9 @@ public class CharacterCreation : MonoBehaviour
             AddScriptAndAnimator(character);
 
             _sidekickRuntime.BodyTypeBlendValue = _dictionaryLibrary.BodyTypeBlendValue;
+            _sidekickRuntime.BodySizeHeavyBlendValue = _dictionaryLibrary.BodySizeHeavyBlendValue;
+            _sidekickRuntime.BodySizeSkinnyBlendValue = _dictionaryLibrary.BodySizeSkinnyBlendValue;
+            _sidekickRuntime.MusclesBlendValue = _dictionaryLibrary.MusclesBlendValue;
             Debug.Log($"Applying BodyTypeBlendValue: {_sidekickRuntime.BodyTypeBlendValue}");
         }
         else

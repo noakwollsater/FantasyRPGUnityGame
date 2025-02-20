@@ -33,7 +33,16 @@ public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDrag
     {
         // Convert screen position to local UI position
         Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(triangleUI, eventData.position, eventData.pressEventCamera, out localPoint);
+        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(triangleUI, eventData.position, eventData.pressEventCamera, out localPoint))
+        {
+            return; // Exit if the position is not in the UI rectangle
+        }
+
+        // Check if the local point is within the triangleUI bounds
+        if (!IsPointInsidePanel(localPoint))
+        {
+            return; // Do nothing if dragged outside the panel
+        }
 
         // Keep within Triangle Bounds
         localPoint = ClampPointToTriangle(localPoint);
@@ -52,6 +61,17 @@ public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDrag
         // Update Character Model
         BlendShapeChanger.UpdateBodyComposition();
     }
+    private bool IsPointInsidePanel(Vector2 localPoint)
+    {
+        // Get panel dimensions
+        float width = triangleUI.rect.width / 2f;
+        float height = triangleUI.rect.height / 2f;
+
+        // Check if point is within the panel bounds
+        return (localPoint.x >= -width && localPoint.x <= width &&
+                localPoint.y >= -height && localPoint.y <= height);
+    }
+
 
     public void OnBeginDrag(PointerEventData eventData) { }
     public void OnEndDrag(PointerEventData eventData) { }
@@ -66,20 +86,25 @@ public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDrag
     // Function to keep the selector inside the triangle
     private Vector2 ClampPointToTriangle(Vector2 p)
     {
-        float w1 = ((B.y - C.y) * (p.x - C.x) + (C.x - B.x) * (p.y - C.y)) /
-                   ((B.y - C.y) * (A.x - C.x) + (C.x - B.x) * (A.y - C.y));
+        // Compute Barycentric coordinates
+        Vector3 bary = Barycentric(p, A, B, C);
 
-        float w2 = ((C.y - A.y) * (p.x - C.x) + (A.x - C.x) * (p.y - C.y)) /
-                   ((B.y - C.y) * (A.x - C.x) + (C.x - B.x) * (A.y - C.y));
+        // If outside the triangle, clamp the barycentric coordinates correctly
+        if (bary.x < 0) bary.x = 0;
+        if (bary.y < 0) bary.y = 0;
+        if (bary.z < 0) bary.z = 0;
 
-        float w3 = 1 - w1 - w2;
+        // Normalize so that they still sum to 1
+        float sum = bary.x + bary.y + bary.z;
+        if (sum > 0)
+        {
+            bary /= sum;
+        }
 
-        w1 = Mathf.Clamp01(w1);
-        w2 = Mathf.Clamp01(w2);
-        w3 = Mathf.Clamp01(w3);
-
-        return w1 * A + w2 * B + w3 * C;
+        // Convert back to Cartesian coordinates
+        return bary.x * A + bary.y * B + bary.z * C;
     }
+
 
     // Convert local point to Barycentric coordinates
     private Vector3 Barycentric(Vector2 p, Vector2 a, Vector2 b, Vector2 c)
