@@ -15,20 +15,20 @@ namespace Unity.FantasyKingdom
         public RawImage colorWheelImage;
         public RectTransform colorWheelRect;
         public int textureSize = 256;
+
         private string currentMode = "RGB Spectrum";
-        private Texture2D generatedTexture;
         private List<string> currentParts = new List<string> { "skin", "ear", "nose" };
         private Color selectedColor;
-
+        private Texture2D generatedTexture;
         private List<SidekickColorProperty> _allColorProperties;
 
         void Start()
         {
-            LazyInit();
+            Initialize();
             GenerateAndSetColorWheel();
         }
 
-        private void LazyInit()
+        private void Initialize()
         {
             if (_dbManager == null)
             {
@@ -42,21 +42,20 @@ namespace Unity.FantasyKingdom
 
             if (_sidekickRuntime == null)
             {
-                GameObject model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
-                Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
+                var model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
+                var material = Resources.Load<Material>("Materials/M_BaseMaterial");
                 _sidekickRuntime = new SidekickRuntime(model, material, null, _dbManager);
             }
 
             if (_dictionaryLibrary == null)
             {
-                _dictionaryLibrary = new DictionaryLibrary();
-                _dictionaryLibrary._partLibrary = _sidekickRuntime.PartLibrary;
+                _dictionaryLibrary = new DictionaryLibrary
+                {
+                    _partLibrary = _sidekickRuntime.PartLibrary
+                };
             }
 
-            if (_allColorProperties == null || _allColorProperties.Count == 0)
-            {
-                _allColorProperties = SidekickColorProperty.GetAll(_dbManager);
-            }
+            _allColorProperties ??= SidekickColorProperty.GetAll(_dbManager);
         }
 
         public void SetColorMode(string mode)
@@ -90,7 +89,12 @@ namespace Unity.FantasyKingdom
                     }
                     else
                     {
-                        texture.SetPixel(x, y, mode == "Human Skin Tones" ? AngleToSkinTone(radius) : AngleToRGB(angle));
+                        texture.SetPixel(x, y, mode switch
+                        {
+                            "Human Skin Tones" => AngleToSkinTone(radius),
+                            "Goblin Tones" => AngleToGoblinTone(radius),
+                            _ => AngleToRGB(angle)
+                        });
                     }
                 }
             }
@@ -109,7 +113,7 @@ namespace Unity.FantasyKingdom
 
         private Color AngleToSkinTone(float intensity)
         {
-            Color[] skinTones = new Color[]
+            Color[] skinTones =
             {
                 new Color(1.0f, 0.85f, 0.7f),
                 new Color(0.96f, 0.75f, 0.56f),
@@ -117,15 +121,34 @@ namespace Unity.FantasyKingdom
                 new Color(0.76f, 0.55f, 0.37f),
                 new Color(0.66f, 0.44f, 0.3f),
                 new Color(0.55f, 0.34f, 0.23f),
-                new Color(0.4f, 0.26f, 0.18f),
+                new Color(0.4f, 0.26f, 0.18f)
             };
 
-            float index = intensity * (skinTones.Length - 1);
+            return GetBlendedColor(skinTones, intensity);
+        }
+
+        private Color AngleToGoblinTone(float intensity)
+        {
+            Color[] goblinTones =
+            {
+                new Color(0.55f, 0.94f, 0.55f),  // Light Green
+                new Color(0.36f, 0.78f, 0.36f),  // Medium Green
+                new Color(0.24f, 0.64f, 0.24f),  // Dark Green
+                new Color(0.18f, 0.50f, 0.18f),  // Deep Green
+                new Color(0.10f, 0.36f, 0.10f)   // Shadowed Green
+            };
+
+            return GetBlendedColor(goblinTones, intensity);
+        }
+
+        private Color GetBlendedColor(Color[] tones, float intensity)
+        {
+            float index = intensity * (tones.Length - 1);
             int lowerIndex = Mathf.FloorToInt(index);
-            int upperIndex = Mathf.Clamp(lowerIndex + 1, 0, skinTones.Length - 1);
+            int upperIndex = Mathf.Clamp(lowerIndex + 1, 0, tones.Length - 1);
             float blendFactor = index - lowerIndex;
 
-            return Color.Lerp(skinTones[lowerIndex], skinTones[upperIndex], blendFactor);
+            return Color.Lerp(tones[lowerIndex], tones[upperIndex], blendFactor);
         }
 
         public void OnPointerDown(PointerEventData eventData) => UpdateColor(eventData);
@@ -133,64 +156,60 @@ namespace Unity.FantasyKingdom
 
         private void UpdateColor(PointerEventData eventData)
         {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                colorWheelRect, eventData.position, eventData.pressEventCamera, out Vector2 localPoint);
+            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                colorWheelRect, eventData.position, eventData.pressEventCamera, out Vector2 localPoint)) return;
 
             Vector2 normalized = new Vector2(
                 (localPoint.x / colorWheelRect.rect.width) + 0.5f,
                 (localPoint.y / colorWheelRect.rect.height) + 0.5f
             );
 
-            if (normalized.x >= 0 && normalized.x <= 1 && normalized.y >= 0 && normalized.y <= 1)
-            {
-                selectedColor = generatedTexture.GetPixelBilinear(normalized.x, normalized.y);
-                ApplyColorChange(selectedColor, currentParts.ToArray());
-            }
+            if (normalized.x is < 0 or > 1 || normalized.y is < 0 or > 1) return;
+
+            selectedColor = generatedTexture.GetPixelBilinear(normalized.x, normalized.y);
+            ApplyColorChange(selectedColor, currentParts.ToArray());
         }
 
         private void ApplyColorChange(Color color, params string[] propertyKeywords)
         {
-            if (_sidekickRuntime == null || _allColorProperties == null || _allColorProperties.Count == 0)
+            if (_sidekickRuntime == null || _allColorProperties == null)
             {
-                Debug.LogError("ApplyColorChange: SidekickRuntime is not initialized or no color properties found.");
+                Debug.LogError("ApplyColorChange: SidekickRuntime or color properties are missing.");
                 return;
             }
 
-            List<SidekickColorProperty> selectedProperties = _allColorProperties
+            var selectedProperties = _allColorProperties
                 .Where(prop => propertyKeywords.Any(keyword => prop.Name.ToLower().Contains(keyword.ToLower())))
                 .ToList();
 
-            if (selectedProperties.Count == 0)
+            if (!selectedProperties.Any())
             {
                 Debug.LogError($"No color properties found for '{string.Join(", ", propertyKeywords)}'.");
                 return;
             }
 
-            foreach (SidekickColorProperty property in selectedProperties)
+            foreach (var property in selectedProperties)
             {
-                SidekickColorRow row = new SidekickColorRow
+                _sidekickRuntime.UpdateColor(ColorType.MainColor, new SidekickColorRow
                 {
                     ColorProperty = property,
-                    MainColor = ColorUtility.ToHtmlStringRGB(color),
-                };
-
-                _sidekickRuntime.UpdateColor(ColorType.MainColor, row);
+                    MainColor = ColorUtility.ToHtmlStringRGB(color)
+                });
             }
 
-            Debug.Log($"Applied color {color} to properties: {string.Join(", ", propertyKeywords)}");
+            Debug.Log($"Applied color {color} to {string.Join(", ", propertyKeywords)}");
         }
 
-        public void SetCurrentParts(params string[] parts)
-        {
-            currentParts = parts.ToList();
-            Debug.Log($"Current parts set to: {string.Join(", ", currentParts)}");
-        }
+        public void SetCurrentParts(params string[] parts) => currentParts = parts.ToList();
 
-        public void ChangeSkinColor() => SetColorMode("Human Skin Tones");
-        public void ChangeEyeColor() => SetCurrentParts("eye color");
+        public void ChangeHumanSkinColor() => SetColorMode("Human Skin Tones");
+        public void ChangeGoblinSkinColor() => SetColorMode("Goblin Tones");
+        public void ChangeRGBColor() => SetColorMode("RGB Spectrum");
+
+        public void ChangeSkinColor() => SetCurrentParts("skin", "ear", "nose");
+        public void ChangeEyeColor() => SetCurrentParts("eye");
         public void ChangeHairColor() => SetCurrentParts("hair");
         public void ChangeEyebrowColor() => SetCurrentParts("eyebrow");
         public void ChangeFacialHairColor() => SetCurrentParts("facial hair");
-        public void ChangeFingernailColor() => SetCurrentParts("fingernails");
     }
 }
