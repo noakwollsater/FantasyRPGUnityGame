@@ -5,16 +5,48 @@ using Synty.SidekickCharacters.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.EventSystems;
 
 namespace Unity.FantasyKingdom
 {
-    public class ColorPicker : CharacterCreation
+    public class ColorPicker : CharacterCreation, IPointerDownHandler, IDragHandler
     {
         private List<SidekickColorProperty> _allColorProperties;
+        public Image colorWheelImage;
+        public RectTransform colorWheelRect;
+        public Color selectedColor;
+        private Texture2D colorWheelTexture;
+        private List<string> currentParts = new List<string> { "skin", "ear", "nose" };
 
         void Start()
         {
             LazyInit();  // Ensure everything is initialized before running
+            if (colorWheelImage != null)
+            {
+                Texture2D originalTexture = colorWheelImage.sprite.texture;
+
+                // Ensure the original texture is readable
+                RenderTexture renderTex = RenderTexture.GetTemporary(
+                    originalTexture.width,
+                    originalTexture.height,
+                    0,
+                    RenderTextureFormat.Default,
+                    RenderTextureReadWrite.Linear);
+
+                Graphics.Blit(originalTexture, renderTex);
+                RenderTexture previous = RenderTexture.active;
+                RenderTexture.active = renderTex;
+
+                colorWheelTexture = new Texture2D(originalTexture.width, originalTexture.height, TextureFormat.RGBA32, false);
+                colorWheelTexture.ReadPixels(new Rect(0, 0, renderTex.width, renderTex.height), 0, 0);
+                colorWheelTexture.Apply();
+
+                RenderTexture.active = previous;
+                RenderTexture.ReleaseTemporary(renderTex);
+            }
+
+
         }
 
         private void LazyInit()
@@ -33,13 +65,7 @@ namespace Unity.FantasyKingdom
             {
                 GameObject model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
                 Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
-
                 _sidekickRuntime = new SidekickRuntime(model, material, null, _dbManager);
-                if (_sidekickRuntime == null)
-                {
-                    Debug.LogError("SidekickRuntime failed to initialize.");
-                    return;
-                }
             }
 
             if (_dictionaryLibrary == null)
@@ -51,63 +77,51 @@ namespace Unity.FantasyKingdom
             if (_allColorProperties == null || _allColorProperties.Count == 0)
             {
                 _allColorProperties = SidekickColorProperty.GetAll(_dbManager);
-                if (_allColorProperties == null || _allColorProperties.Count == 0)
-                {
-                    Debug.LogError("Failed to load color properties.");
-                    return;
-                }
             }
         }
 
-        public void ChangeSkinColor(Image image)
+        public void SetCurrentParts(params string[] parts)
         {
-            if (image == null)
-            {
-                Debug.LogError("ChangeSkinColor: Image is null.");
-                return;
-            }
-
-            LazyInit(); // Ensure everything is initialized before applying color
-
-            Color newColor = image.color;
-            ApplyColorChange(newColor, "skin");
+            currentParts = parts.ToList();
         }
 
-        public void ChangeOutfitColor(Image image)
+        public void OnPointerDown(PointerEventData eventData) => UpdateColor(eventData);
+        public void OnDrag(PointerEventData eventData) => UpdateColor(eventData);
+
+        private void UpdateColor(PointerEventData eventData)
         {
-            if (image == null)
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                colorWheelRect, eventData.position, eventData.pressEventCamera, out Vector2 localPoint);
+
+            Vector2 normalized = new Vector2(
+                (localPoint.x / colorWheelRect.rect.width) + 0.5f,
+                (localPoint.y / colorWheelRect.rect.height) + 0.5f
+            );
+
+            if (normalized.x >= 0 && normalized.x <= 1 && normalized.y >= 0 && normalized.y <= 1)
             {
-                Debug.LogError("ChangeOutfitColor: Image is null.");
-                return;
+                selectedColor = colorWheelTexture.GetPixelBilinear(normalized.x, normalized.y);
+                ApplyColorChange(selectedColor, currentParts.ToArray());
             }
-
-            LazyInit(); // Ensure everything is initialized before applying color
-
-            Color newColor = image.color;
-            ApplyColorChange(newColor, "outfit");
         }
 
-        private void ApplyColorChange(Color color, string propertyKeyword)
+        private void ApplyColorChange(Color color, params string[] propertyKeywords)
         {
-            LazyInit(); // Ensure everything is initialized before applying color
+            LazyInit();
 
-            if (_sidekickRuntime == null)
+            if (_sidekickRuntime == null || _allColorProperties == null || _allColorProperties.Count == 0)
             {
-                Debug.LogError("ApplyColorChange: SidekickRuntime is not initialized.");
+                Debug.LogError("ApplyColorChange: SidekickRuntime is not initialized or no color properties found.");
                 return;
             }
 
-            if (_allColorProperties == null || _allColorProperties.Count == 0)
-            {
-                Debug.LogError($"ApplyColorChange: No color properties found for '{propertyKeyword}'.");
-                return;
-            }
-
-            List<SidekickColorProperty> selectedProperties = _allColorProperties.FindAll(prop => prop.Name.ToLower().Contains(propertyKeyword));
+            List<SidekickColorProperty> selectedProperties = _allColorProperties
+                .Where(prop => propertyKeywords.Any(keyword => prop.Name.ToLower().Contains(keyword.ToLower())))
+                .ToList();
 
             if (selectedProperties.Count == 0)
             {
-                Debug.LogError($"No color properties found for '{propertyKeyword}'.");
+                Debug.LogError($"No color properties found for '{string.Join(", ", propertyKeywords)}'.");
                 return;
             }
 
@@ -122,7 +136,14 @@ namespace Unity.FantasyKingdom
                 _sidekickRuntime.UpdateColor(ColorType.MainColor, row);
             }
 
-            Debug.Log($"Applied {propertyKeyword} color: {color}");
+            Debug.Log($"Applied color {color} to properties: {string.Join(", ", propertyKeywords)}");
         }
+
+        public void ChangeSkinColor() => SetCurrentParts("skin", "ear", "nose");
+        public void ChangeEyeColor() => SetCurrentParts("eye color");
+        public void ChangeHairColor() => SetCurrentParts("hair");
+        public void ChangeEyebrowcolors() => SetCurrentParts("eyebrow");
+        public void ChangeFacialhairColor() => SetCurrentParts("facial hair");
+        public void ChangeFingernailColor() => SetCurrentParts("fingernails");
     }
 }
