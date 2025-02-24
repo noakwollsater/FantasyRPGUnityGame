@@ -135,12 +135,17 @@ namespace Unity.FantasyKingdom
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (!eventData.pointerEnter.transform.IsChildOf(bodySizeButton.transform))
+                return;
             OnHoverEnter(eventData);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (!eventData.pointerEnter.transform.IsChildOf(bodySizeButton.transform))
+                return;
             OnHoverExit(eventData);
         }
+
     }
 }
