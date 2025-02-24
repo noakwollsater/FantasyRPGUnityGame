@@ -26,6 +26,8 @@ namespace Unity.FantasyKingdom
         {
             Initialize();
             GenerateAndSetColorWheel();
+            ChangeSkinTone();
+
         }
 
         private void Initialize()
@@ -200,10 +202,23 @@ namespace Unity.FantasyKingdom
             Debug.Log($"Applied color {color} to {string.Join(", ", propertyKeywords)}");
         }
 
+        private void ChangeSkinTone()
+        {
+            if (_dictionaryLibrary.selectedSpecies == "Human")
+            {
+                SetColorMode("Human Skin Tones");
+            }
+            else if (_dictionaryLibrary.selectedSpecies == "Goblin")
+            {
+                SetColorMode("Goblin Tones");
+            }
+        }
+
         public void SetCurrentParts(params string[] parts) => currentParts = parts.ToList();
 
-        public void ChangeHumanSkinColor() => SetColorMode("Human Skin Tones");
-        public void ChangeGoblinSkinColor() => SetColorMode("Goblin Tones");
+        public void ChangeCharacterSkin() => ChangeSkinTone();
+        //public void ChangeHumanSkinColor() => SetColorMode("Human Skin Tones");
+        //public void ChangeGoblinSkinColor() => SetColorMode("Goblin Tones");
         public void ChangeRGBColor() => SetColorMode("RGB Spectrum");
 
         public void ChangeSkinColor() => SetCurrentParts("skin", "ear", "nose");

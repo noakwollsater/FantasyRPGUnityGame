@@ -167,6 +167,7 @@ public class SpeciesChooser : CharacterCreation
         }
 
         // **Step 5: Apply Species Colors**
+        _dictionaryLibrary.selectedSpecies = _selectedSpecies.Name;
         ApplySpeciesColors(_selectedSpecies.Name);
 
         // **Step 6: Apply Changes**

@@ -83,17 +83,15 @@ public class CharacterCreation : MonoBehaviour
             Destroy(character);
         }
 
+        SetSize();
         // Create a new character using the selected parts
         character = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, partsToUse, false, true);
 
         if (character != null)
         {
             AddScriptAndAnimator(character);
+            SetSize();
 
-            _sidekickRuntime.BodyTypeBlendValue = _dictionaryLibrary.BodyTypeBlendValue;
-            _sidekickRuntime.BodySizeHeavyBlendValue = _dictionaryLibrary.BodySizeHeavyBlendValue;
-            _sidekickRuntime.BodySizeSkinnyBlendValue = _dictionaryLibrary.BodySizeSkinnyBlendValue;
-            _sidekickRuntime.MusclesBlendValue = _dictionaryLibrary.MusclesBlendValue;
             Debug.Log($"Applying BodyTypeBlendValue: {_sidekickRuntime.BodyTypeBlendValue}");
         }
         else
@@ -102,6 +100,13 @@ public class CharacterCreation : MonoBehaviour
         }
     }
 
+    private void SetSize()
+    {
+        _sidekickRuntime.BodyTypeBlendValue = _dictionaryLibrary.BodyTypeBlendValue;
+        _sidekickRuntime.BodySizeHeavyBlendValue = _dictionaryLibrary.BodySizeHeavyBlendValue;
+        _sidekickRuntime.BodySizeSkinnyBlendValue = _dictionaryLibrary.BodySizeSkinnyBlendValue;
+        _sidekickRuntime.MusclesBlendValue = _dictionaryLibrary.MusclesBlendValue;
+    }
 
     private void AddScriptAndAnimator(GameObject character)
     {

@@ -64,4 +64,6 @@ public class DictionaryLibrary : ScriptableObject
     public float BodySizeHeavyBlendValue = 0;
     public float MusclesBlendValue = 0;
     public float BodyTypeBlendValue = 0;
+
+    public string selectedSpecies;
 }
