@@ -133,11 +133,13 @@ namespace Unity.FantasyKingdom
         {
             Color[] goblinTones =
             {
-                new Color(0.55f, 0.94f, 0.55f),  // Light Green
-                new Color(0.36f, 0.78f, 0.36f),  // Medium Green
-                new Color(0.24f, 0.64f, 0.24f),  // Dark Green
-                new Color(0.18f, 0.50f, 0.18f),  // Deep Green
-                new Color(0.10f, 0.36f, 0.10f)   // Shadowed Green
+                new Color(0.72f, 0.71f, 0.58f),
+                new Color(0.63f, 0.61f, 0.44f),
+                new Color(0.533f, 0.509f, 0.298f),
+                new Color(0.43f, 0.41f, 0.24f),
+                new Color(0.32f, 0.31f, 0.18f),
+                new Color(0.27f, 0.25f, 0.15f)
+
             };
 
             return GetBlendedColor(goblinTones, intensity);
