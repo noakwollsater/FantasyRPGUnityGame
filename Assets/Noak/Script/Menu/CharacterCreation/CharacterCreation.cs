@@ -57,10 +57,25 @@ public class CharacterCreation : MonoBehaviour
             if (ExcludedParts.Contains(type) || !_dictionaryLibrary._partLibrary.ContainsKey(type))
                 continue;
 
-            _dictionaryLibrary._availablePartDictionary[type] = _dictionaryLibrary._partLibrary[type];
+            // Check if the body part has a restricted list
+            if (_dictionaryLibrary.AllowedParts.ContainsKey(type))
+            {
+                var filteredParts = _dictionaryLibrary._partLibrary[type]
+                    .Where(kvp => _dictionaryLibrary.AllowedParts[type].Contains(kvp.Key)) // Filter based on allowed parts
+                    .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+                _dictionaryLibrary._availablePartDictionary[type] = filteredParts;
+            }
+            else
+            {
+                _dictionaryLibrary._availablePartDictionary[type] = _dictionaryLibrary._partLibrary[type];
+            }
+
             _dictionaryLibrary._partIndexDictionary[type] = _dictionaryLibrary._availablePartDictionary[type].Count - 1;
         }
     }
+
+
 
     public void UpdateModel()
     {
@@ -136,39 +151,90 @@ public class CharacterCreation : MonoBehaviour
             _dictionaryLibrary._partIndexDictionary[partType] = 0;
         }
 
+        var availableParts = _dictionaryLibrary._availablePartDictionary[partType];
+
+        if (availableParts.Count == 0)
+        {
+            Debug.LogWarning($"No available parts for {partType}");
+            return;
+        }
+
         int index = _dictionaryLibrary._partIndexDictionary[partType];
-        index = forward ? (index + 1) % _dictionaryLibrary._availablePartDictionary[partType].Count
-                        : (index - 1 + _dictionaryLibrary._availablePartDictionary[partType].Count) % _dictionaryLibrary._availablePartDictionary[partType].Count;
+
+        do
+        {
+            index = forward
+                ? (index + 1) % availableParts.Count
+                : (index - 1 + availableParts.Count) % availableParts.Count;
+
+            string selectedPartName = availableParts.Keys.ElementAt(index);
+
+            // Ensure the part follows the allowed list if applicable
+            if (!_dictionaryLibrary.AllowedParts.ContainsKey(partType) || _dictionaryLibrary.AllowedParts[partType].Contains(selectedPartName))
+            {
+                break;
+            }
+
+        } while (true);
 
         _dictionaryLibrary._partIndexDictionary[partType] = index;
         UpdateModel();
     }
+
+
     private void ChangePairedParts(CharacterPartType leftPart, CharacterPartType rightPart, bool forward)
     {
-        if (!_dictionaryLibrary._availablePartDictionary.ContainsKey(leftPart))
+        if (!_dictionaryLibrary._availablePartDictionary.ContainsKey(leftPart) ||
+            !_dictionaryLibrary._availablePartDictionary.ContainsKey(rightPart))
         {
             _dictionaryLibrary._availablePartDictionary[leftPart] = _dictionaryLibrary._partLibrary[leftPart];
-            _dictionaryLibrary._partIndexDictionary[leftPart] = 0;
-        }
-        if (!_dictionaryLibrary._availablePartDictionary.ContainsKey(rightPart))
-        {
             _dictionaryLibrary._availablePartDictionary[rightPart] = _dictionaryLibrary._partLibrary[rightPart];
+
+            _dictionaryLibrary._partIndexDictionary[leftPart] = 0;
             _dictionaryLibrary._partIndexDictionary[rightPart] = 0;
         }
 
-        int index = _dictionaryLibrary._partIndexDictionary[leftPart];
-        int index2 = _dictionaryLibrary._partIndexDictionary[rightPart];
+        var availableLeftParts = _dictionaryLibrary._availablePartDictionary[leftPart];
+        var availableRightParts = _dictionaryLibrary._availablePartDictionary[rightPart];
 
-        index = forward ? (index + 1) % _dictionaryLibrary._availablePartDictionary[leftPart].Count
-                        : (index - 1 + _dictionaryLibrary._availablePartDictionary[leftPart].Count) % _dictionaryLibrary._availablePartDictionary[leftPart].Count;
+        if (availableLeftParts.Count == 0 || availableRightParts.Count == 0)
+        {
+            Debug.LogWarning($"No available parts for {leftPart} or {rightPart}");
+            return;
+        }
 
-        index2 = forward ? (index2 + 1) % _dictionaryLibrary._availablePartDictionary[rightPart].Count
-                         : (index2 - 1 + _dictionaryLibrary._availablePartDictionary[rightPart].Count) % _dictionaryLibrary._availablePartDictionary[rightPart].Count;
+        int leftIndex = _dictionaryLibrary._partIndexDictionary[leftPart];
+        int rightIndex = _dictionaryLibrary._partIndexDictionary[rightPart];
 
-        _dictionaryLibrary._partIndexDictionary[leftPart] = index;
-        _dictionaryLibrary._partIndexDictionary[rightPart] = index2;
+        do
+        {
+            leftIndex = forward
+                ? (leftIndex + 1) % availableLeftParts.Count
+                : (leftIndex - 1 + availableLeftParts.Count) % availableLeftParts.Count;
+
+            rightIndex = forward
+                ? (rightIndex + 1) % availableRightParts.Count
+                : (rightIndex - 1 + availableRightParts.Count) % availableRightParts.Count;
+
+            string leftSelectedPartName = availableLeftParts.Keys.ElementAt(leftIndex);
+            string rightSelectedPartName = availableRightParts.Keys.ElementAt(rightIndex);
+
+            // Ensure both left and right parts are allowed if there are restrictions
+            bool isLeftAllowed = !_dictionaryLibrary.AllowedParts.ContainsKey(leftPart) || _dictionaryLibrary.AllowedParts[leftPart].Contains(leftSelectedPartName);
+            bool isRightAllowed = !_dictionaryLibrary.AllowedParts.ContainsKey(rightPart) || _dictionaryLibrary.AllowedParts[rightPart].Contains(rightSelectedPartName);
+
+            if (isLeftAllowed && isRightAllowed)
+            {
+                break;
+            }
+
+        } while (true);
+
+        _dictionaryLibrary._partIndexDictionary[leftPart] = leftIndex;
+        _dictionaryLibrary._partIndexDictionary[rightPart] = rightIndex;
         UpdateModel();
     }
+
 
     //Head Parts
     public void ForwardHair() => ChangePart(CharacterPartType.Hair, true);

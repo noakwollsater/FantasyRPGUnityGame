@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_FaceLayer_InPain
+      name: A_FacePose_InPain
       takeName: A_FaceLayer_InPain
       internalID: 4125411246846673275
       firstFrame: 2

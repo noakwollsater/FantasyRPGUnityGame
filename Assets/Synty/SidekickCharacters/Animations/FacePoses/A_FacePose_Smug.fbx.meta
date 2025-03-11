@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_FaceLayer_Smug
+      name: A_FacePose_Smug
       takeName: A_FaceLayer_Smug
       internalID: -3952174853749390076
       firstFrame: 2

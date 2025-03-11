@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 05_Sad
+  m_Name: A_FacePose_Sad
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -33,7 +33,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 06_Distraught
+  m_Name: A_FacePose_Distraught
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -59,7 +59,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 01_Worried
+  m_Name: A_FacePose_Worried
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -138,7 +138,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 16_Delighted
+  m_Name: A_FacePose_Delighted
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -164,7 +164,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 11_Anger
+  m_Name: A_FacePose_Angry
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -190,7 +190,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 04_Surprised
+  m_Name: A_FacePose_Surprised
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -262,7 +262,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 14_Content
+  m_Name: A_FacePose_Content
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -288,7 +288,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 07_InPain
+  m_Name: A_FacePose_InPain
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -314,7 +314,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 13_Smug
+  m_Name: A_FacePose_Smug
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -367,7 +367,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 12_Enraged
+  m_Name: A_FacePose_Enraged
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -511,7 +511,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 03_Terrified
+  m_Name: A_FacePose_Terrified
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -636,7 +636,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 10_Grumpy
+  m_Name: A_FacePose_Grumpy
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -684,7 +684,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 08_Disgusted
+  m_Name: A_FacePose_Disgusted
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -710,7 +710,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 15_Happy
+  m_Name: A_FacePose_Happy
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -736,7 +736,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 09_Suspicious
+  m_Name: A_FacePose_Suspicious
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -762,7 +762,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 02_Scared
+  m_Name: A_FacePose_Scared
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

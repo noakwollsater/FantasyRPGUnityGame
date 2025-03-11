@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_FaceLayer_Grumpy
+      name: A_FacePose_Grumpy
       takeName: A_FaceLayer_Grumpy
       internalID: 3564207599122097798
       firstFrame: 2

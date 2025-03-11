@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_FaceLayer_Disgusted
+      name: A_FacePose_Disgusted
       takeName: A_FaceLayer_Disgusted
       internalID: 3289102938780943060
       firstFrame: 2

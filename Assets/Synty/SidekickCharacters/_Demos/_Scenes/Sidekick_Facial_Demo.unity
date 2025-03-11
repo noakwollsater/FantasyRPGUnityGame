@@ -2036,8 +2036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956373788f9dd55489810c0d6e6d9918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emotionText: {fileID: 1357139559}
-  transitionTimeSlider: {fileID: 1952287873}
+  _emotionText: {fileID: 1357139559}
+  _transitionTimeSlider: {fileID: 1952287873}
 --- !u!1 &1015661153
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,7 +2736,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ANGER
+  m_Text: NEUTRAL
 --- !u!222 &1357139560
 CanvasRenderer:
   m_ObjectHideFlags: 0

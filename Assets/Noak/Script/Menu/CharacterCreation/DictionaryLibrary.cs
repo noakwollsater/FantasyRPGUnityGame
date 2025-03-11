@@ -3,8 +3,6 @@ using System.Collections;
 using Synty.SidekickCharacters.Enums;
 using System.Collections.Generic;
 
-using UnityEngine;
-
 [CreateAssetMenu(fileName = "NewDictionaryLibrary", menuName = "Custom/Dictionary Library")]
 public class DictionaryLibrary : ScriptableObject
 {
@@ -59,6 +57,71 @@ public class DictionaryLibrary : ScriptableObject
         { "Hair", new List<string> { "hair", "facial hair", "eyebrow" } },
             { "Fingernails", new List<string> { "fingernail" } }
     };
+    public Dictionary<CharacterPartType, HashSet<string>> AllowedParts = new()
+    {
+        { CharacterPartType.Torso, new HashSet<string> {
+            "SK_HUMN_BASE_01_10TORS_HU01",
+            "SK_VIKG_WARR_05_10TORS_HU01",
+            "SK_APOC_OUTL_04_10TORS_HU01",
+            "SK_PIRT_CAPT_09_10TORS_HU01",
+            "SK_PIRT_CAPT_10_10TORS_HU01"} },
+
+        { CharacterPartType.ArmUpperLeft, new HashSet<string> {
+            "SK_HUMN_BASE_01_11AUPL_HU01",
+            "SK_PIRT_CAPT_10_11AUPL_HU01",
+            "SK_APOC_OUTL_03_11AUPL_HU01",
+            "SK_APOC_OUTL_08_11AUPL_HU01"} },
+
+        { CharacterPartType.ArmUpperRight, new HashSet<string> {
+            "SK_HUMN_BASE_01_12AUPR_HU01",
+            "SK_PIRT_CAPT_10_12AUPR_HU01",
+            "SK_APOC_OUTL_03_12AUPR_HU01",
+            "SK_APOC_OUTL_08_12AUPR_HU01" } },
+
+        { CharacterPartType.ArmLowerLeft, new HashSet<string> {
+            "SK_HUMN_BASE_01_13ALWL_HU01",
+            "SK_PIRT_CAPT_10_13ALWL_HU01",
+            "SK_APOC_OUTL_10_13ALWL_HU01"} },
+
+        { CharacterPartType.ArmLowerRight, new HashSet<string> {
+            "SK_HUMN_BASE_01_14ALWR_HU01",
+            "SK_PIRT_CAPT_10_14ALWR_HU01",
+            "SK_APOC_OUTL_10_14ALWR_HU01" } },
+
+        { CharacterPartType.HandLeft, new HashSet<string> {
+            "SK_HUMN_BASE_01_15HNDL_HU01",
+            "SK_PIRT_CAPT_08_15HNDL_HU01",
+            "SK_PIRT_CAPT_10_15HNDL_HU01"} },
+        { CharacterPartType.HandRight, new HashSet<string> {
+            "SK_HUMN_BASE_01_16HNDR_HU01",
+            "SK_PIRT_CAPT_08_16HNDR_HU01",
+            "SK_PIRT_CAPT_10_16HNDR_HU01" } },
+
+        { CharacterPartType.Hips, new HashSet<string> {
+            "SK_HUMN_BASE_01_17HIPS_HU01",
+            "SK_APOC_OUTL_07_17HIPS_HU01",
+            "SK_PIRT_CAPT_09_17HIPS_HU01", } },
+
+        { CharacterPartType.LegLeft, new HashSet<string> {
+            "SK_HUMN_BASE_01_18LEGL_HU01",
+            "SK_APOC_OUTL_08_18LEGL_HU01",
+            "SK_PIRT_CAPT_06_18LEGL_HU01"
+            }},
+        { CharacterPartType.LegRight, new HashSet<string> {
+            "SK_HUMN_BASE_01_19LEGR_HU01",
+            "SK_APOC_OUTL_08_19LEGR_HU01",
+            "SK_PIRT_CAPT_06_19LEGR_HU01" } },
+
+        { CharacterPartType.FootLeft, new HashSet<string> {
+            "SK_HUMN_BASE_01_20FOTL_HU01",
+            "SK_APOC_OUTL_06_20FOTL_HU01" }},
+
+        { CharacterPartType.FootRight, new HashSet<string> {
+            "SK_HUMN_BASE_01_21FOTR_HU01",
+            "SK_APOC_OUTL_06_21FOTR_HU01" } },
+
+    };
+
 
     public float BodySizeSkinnyBlendValue = 0;
     public float BodySizeHeavyBlendValue = 0;
@@ -67,3 +130,9 @@ public class DictionaryLibrary : ScriptableObject
 
     public string selectedSpecies;
 }
+
+// För att lägga till fler delar till AllowedParts:
+//void AddMoreHipsParts()
+//{
+//    AllowedParts[CharacterPartType.Hips].Add("Hips_Chainmail03");
+//}

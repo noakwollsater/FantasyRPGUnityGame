@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_FaceLayer_Neutral
+      name: A_FacePose_Neutral
       takeName: A_FaceLayer_Neutral
       internalID: -4965968063830899559
       firstFrame: 2

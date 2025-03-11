@@ -54,6 +54,7 @@ namespace Synty.SidekickCharacters.API
         private Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
         private Dictionary<string, List<string>> _partOutfitMap;
         private Dictionary<string, bool> _partOutfitToggleMap;
+        private int _partCount;
 
         private float _bodyTypeBlendValue;
         private float _bodySizeSkinnyBlendValue;
@@ -123,6 +124,12 @@ namespace Synty.SidekickCharacters.API
         {
             get => _partLibrary;
             set => _partLibrary = value;
+        }
+
+        public int PartCount
+        {
+            get => _partCount;
+            private set => _partCount = value;
         }
 
         public Dictionary<string, List<string>> PartOutfitMap
@@ -370,6 +377,7 @@ namespace Synty.SidekickCharacters.API
             _partLibrary = new Dictionary<CharacterPartType, Dictionary<string, string>>();
             _partOutfitMap = new Dictionary<string, List<string>>();
             _partOutfitToggleMap = new Dictionary<string, bool>();
+            _partCount = 0;
 
             List<string> files = Directory.GetFiles("Assets", "SK_*_*_*_*_*.fbx", SearchOption.AllDirectories).ToList();
 
@@ -386,6 +394,7 @@ namespace Synty.SidekickCharacters.API
                     if (characterPartType > 0 && characterPartType == partType && !partLocationDictionary.ContainsKey(partName))
                     {
                         partLocationDictionary.Add(partName, file);
+                        _partCount++;
 
                         // TODO: populate with actual outfit data when we have proper information about part outfits
                         string tempPartOutfit = GetOutfitNameFromPartName(partName);

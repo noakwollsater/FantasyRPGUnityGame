@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_FaceLayer_Enraged
+      name: A_FacePose_Enraged
       takeName: A_FaceLayer_Enraged
       internalID: 3217306785218064031
       firstFrame: 2

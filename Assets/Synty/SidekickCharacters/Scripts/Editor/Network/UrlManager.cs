@@ -5,6 +5,8 @@
 //
 // For additional details, see the LICENSE.MD file bundled with this software.
 
+#if UNITY_EDITOR
+
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine.Networking;
@@ -81,3 +83,4 @@ namespace Synty.SidekickCharacters.Network
         }
     }
 }
+#endif

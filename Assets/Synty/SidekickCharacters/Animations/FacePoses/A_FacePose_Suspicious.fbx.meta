@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_FaceLayer_Suspicious
+      name: A_FacePose_Suspicious
       takeName: A_FaceLayer_Suspicious
       internalID: 1842056759524808719
       firstFrame: 2

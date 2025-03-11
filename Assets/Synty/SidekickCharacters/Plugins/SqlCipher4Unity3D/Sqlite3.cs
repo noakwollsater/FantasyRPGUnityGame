@@ -111,16 +111,10 @@ namespace SqlCipher4Unity3D
 
     public static partial class SQLite3
     {
-#if UNITY_EDITOR
-        private const string DLL_NAME = "sqlcipher";
-#elif UNITY_STANDALONE
-        private const string DLL_NAME = "sqlcipher";
-#elif UNITY_WSA // define directive for Universal Windows Platform.
-		private const string DLL_NAME = "sqlcipher";
-#elif UNITY_ANDROID
-		private const string DLL_NAME = "sqlcipher";
-#elif UNITY_IOS
+#if UNITY_IOS
 		private const string DLL_NAME = "__Internal";
+#else
+        private const string DLL_NAME = "sqlcipher";
 #endif
 
 		[DllImport(DLL_NAME, EntryPoint = "sqlite3_threadsafe", CallingConvention = CallingConvention.Cdecl)]

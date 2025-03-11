@@ -5,8 +5,8 @@ using Synty.SidekickCharacters.Enums;
 using Synty.SidekickCharacters.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -252,7 +252,8 @@ namespace Synty.SidekickCharacters.Demo
                         CharacterPartType type = Enum.Parse<CharacterPartType>(CharacterPartTypeUtils.GetTypeNameFromShortcode(row.PartType));
                         Dictionary<string, string> partLocationDictionary = _partLibrary[type];
                         string partLocation = partLocationDictionary[row.PartName];
-                        GameObject selectedPart = AssetDatabase.LoadAssetAtPath<GameObject>(partLocation);
+                        string resource = GetResourcePath(partLocation);
+                        GameObject selectedPart = Resources.Load<GameObject>(resource);
                         SkinnedMeshRenderer selectedMesh = selectedPart.GetComponentInChildren<SkinnedMeshRenderer>();
                         partsToUse.Add(selectedMesh);
                     }
@@ -285,6 +286,19 @@ namespace Synty.SidekickCharacters.Demo
 
             // Create a new character using the selected parts using the Sidekicks API.
             character = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, partsToUse, false, true);
+        }
+
+        /// <summary>
+        ///     Gets a resource path for using with Resources.Load() from a full path.
+        /// </summary>
+        /// <param name="fullPath">The full path to get the resource path from.</param>
+        /// <returns>The resource path.</returns>
+        private string GetResourcePath(string fullPath)
+        {
+            string directory = Path.GetDirectoryName(fullPath);
+            int startIndex = directory.IndexOf("Resources") + 10;
+            directory = directory.Substring(startIndex, directory.Length - startIndex);
+            return Path.Combine(directory, Path.GetFileNameWithoutExtension(fullPath));
         }
     }
 }

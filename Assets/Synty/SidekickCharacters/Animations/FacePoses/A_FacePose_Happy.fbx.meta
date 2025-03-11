@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_FaceLayer_Happy
+      name: A_FacePose_Happy
       takeName: A_FaceLayer_Happy
       internalID: 4892307718131804325
       firstFrame: 2

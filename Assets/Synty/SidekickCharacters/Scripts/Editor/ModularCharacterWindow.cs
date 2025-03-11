@@ -5,6 +5,8 @@
 //
 // For additional details, see the LICENSE.MD file bundled with this software.
 
+#if UNITY_EDITOR
+
 using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Database.DTO;
@@ -30,6 +32,8 @@ namespace Synty.SidekickCharacters
 {
     public class ModularCharacterWindow : EditorWindow
     {
+        private const string _AUTOSAVE_KEY = "SK_Autosave_character";
+        private const string _AUTOSAVE_STATE = "SK_Autosave_state";
         private const string _BASE_COLOR_SET_NAME = "Species";
         private const string _BASE_COLOR_SET_PATH = "Assets/Synty/SidekickCharacters/Resources/Species";
         private const string _BASE_MESH_NAME = "Meshes/SK_BaseModel";
@@ -128,6 +132,7 @@ namespace Synty.SidekickCharacters
         private SidekickRuntime _sidekickRuntime;
         private DropdownField _speciesField;
         private DropdownField _speciesPresetField;
+        private bool _useAutoSaveAndLoad = false;
         private List<SidekickColorSet> _visibleColorSets = new List<SidekickColorSet>();
 
         /// <inheritdoc cref="Awake" />
@@ -139,33 +144,69 @@ namespace Synty.SidekickCharacters
         /// <inheritdoc cref="OnDestroy" />
         private void OnDestroy()
         {
+            if (_useAutoSaveAndLoad)
+            {
+                SerializedCharacter savedCharacter = CreateSerializedCharacter(_OUTPUT_MODEL_NAME);
+                Serializer serializer = new Serializer();
+                string serializedCharacter = serializer.Serialize(savedCharacter);
+                EditorPrefs.SetString(_AUTOSAVE_KEY, serializedCharacter);
+            }
+
             // ensures we release the file lock on the database
             _dbManager.CloseConnection();
         }
 
-// #if UNITY_EDITOR
-//         /// <inheritdoc cref="OnEnable" />
-//         private void OnEnable()
-//         {
-//             EditorApplication.playModeStateChanged += StateChange;
-//         }
-//
-//         /// <summary>
-//         ///     Processes the callback from the play mode state change.
-//         /// </summary>
-//         /// <param name="stateChange">The current PlayModeStateChange</param>
-//         private void StateChange(PlayModeStateChange stateChange)
-//         {
-//             if (stateChange == PlayModeStateChange.EnteredEditMode)
-//             {
-//                 AddBodyShapeTabContent(_bodyShapeView);
-//             }
-//         }
-// #endif
+#if UNITY_EDITOR
+         /// <inheritdoc cref="OnEnable" />
+         private void OnEnable()
+         {
+             EditorApplication.playModeStateChanged += StateChange;
+         }
+
+         /// <summary>
+         ///     Processes the callback from the play mode state change.
+         /// </summary>
+         /// <param name="stateChange">The current PlayModeStateChange</param>
+         private void StateChange(PlayModeStateChange stateChange)
+         {
+             if (_useAutoSaveAndLoad && stateChange == PlayModeStateChange.ExitingEditMode
+                 || _useAutoSaveAndLoad && stateChange == PlayModeStateChange.ExitingPlayMode)
+             {
+                 SerializedCharacter savedCharacter = CreateSerializedCharacter(_OUTPUT_MODEL_NAME);
+                 Serializer serializer = new Serializer();
+                 string serializedCharacter = serializer.Serialize(savedCharacter);
+                 EditorPrefs.SetString(_AUTOSAVE_KEY, serializedCharacter);
+             }
+
+             if (_useAutoSaveAndLoad && stateChange == PlayModeStateChange.EnteredEditMode
+                 || _useAutoSaveAndLoad && stateChange == PlayModeStateChange.EnteredPlayMode)
+             {
+                 if (stateChange == PlayModeStateChange.EnteredEditMode)
+                 {
+                     GameObject existingModel = GameObject.Find(_OUTPUT_MODEL_NAME);
+                     while (existingModel != null)
+                     {
+                         GameObject.DestroyImmediate(existingModel);
+                         existingModel = GameObject.Find(_OUTPUT_MODEL_NAME);
+                     }
+                 }
+
+                 string serializedCharacterString = EditorPrefs.GetString(_AUTOSAVE_KEY, null);
+
+                 if (!string.IsNullOrEmpty(serializedCharacterString))
+                 {
+                     Deserializer deserializer = new Deserializer();
+                     SerializedCharacter serializedCharacter = deserializer.Deserialize<SerializedCharacter>(serializedCharacterString);
+                     LoadSerializedCharacter(serializedCharacter, _showAllColourProperties);
+                 }
+             }
+         }
+#endif
 
         /// <inheritdoc cref="CreateGUI" />
         public void CreateGUI()
         {
+            InitializeEditorWindow();
             VisualElement root = rootVisualElement;
             if (_editorStyle != null)
             {
@@ -413,6 +454,7 @@ namespace Synty.SidekickCharacters
             _sidekickRuntime = new SidekickRuntime((GameObject) _baseModelField.value, (Material) _materialField.value, _currentAnimationController, _dbManager);
 
             _partLibrary = _sidekickRuntime.PopulatePartLibrary();
+            _partCountLabel.text = _sidekickRuntime.PartCount + _PART_COUNT_BODY;
             _partOutfitMap = _sidekickRuntime.PartOutfitMap;
             _partOutfitToggleMap = _sidekickRuntime.PartOutfitToggleMap;
             UpdatePartUVData();
@@ -474,6 +516,23 @@ namespace Synty.SidekickCharacters
                 }
             };
             root.Add(createCharacterButton);
+
+            if (_currentSpecies == null)
+            {
+                _currentSpecies = _currentSpecies = _allSpecies.FirstOrDefault(species => species.Name == _speciesField.value);
+            }
+
+            if (_useAutoSaveAndLoad)
+            {
+                string serializedCharacterString = EditorPrefs.GetString(_AUTOSAVE_KEY, null);
+
+                if (!string.IsNullOrEmpty(serializedCharacterString))
+                {
+                    Deserializer deserializer = new Deserializer();
+                    SerializedCharacter serializedCharacter = deserializer.Deserialize<SerializedCharacter>(serializedCharacterString);
+                    LoadSerializedCharacter(serializedCharacter, _showAllColourProperties);
+                }
+            }
         }
 
         /// <summary>
@@ -498,6 +557,7 @@ namespace Synty.SidekickCharacters
         {
             _editorStyle = Resources.Load<StyleSheet>("Styles/EditorStyles");
             _openWindowOnStart = EditorPrefs.GetBool(_AUTO_OPEN_STATE, true);
+            _useAutoSaveAndLoad = EditorPrefs.GetBool(_AUTOSAVE_STATE, false);
         }
 
         /// <summary>
@@ -1179,6 +1239,7 @@ namespace Synty.SidekickCharacters
             uploadLibraryButton.clickable.clicked += delegate
             {
                 _partLibrary = _sidekickRuntime.PopulatePartLibrary();
+                _partCountLabel.text = _sidekickRuntime.PartCount + _PART_COUNT_BODY;
             };
 
             updateLibraryLayout.Add(uploadLibraryButton);
@@ -1206,7 +1267,8 @@ namespace Synty.SidekickCharacters
                 {
                     marginTop = 10,
                     marginLeft = 15
-                }
+                },
+                tooltip = "Whether or not to bake all the meshes down to a single mesh in the output model."
             };
 
             combineToggle.RegisterValueChangedCallback(
@@ -1225,7 +1287,8 @@ namespace Synty.SidekickCharacters
                 {
                     marginTop = 10,
                     marginLeft = 15
-                }
+                },
+                tooltip = "Whether or not to bake the body blend shapes into the mesh in the output model."
             };
 
             bakeBlendsToggle.RegisterValueChangedCallback(
@@ -1305,6 +1368,27 @@ namespace Synty.SidekickCharacters
             );
 
             view.Add(autoOpenToggle);
+
+            Toggle autoSaveToggle = new Toggle("Auto save and load character on run/stop and unity or tool open and close.")
+            {
+                value = _useAutoSaveAndLoad,
+                style =
+                {
+                    marginTop = 10,
+                    marginLeft = 15
+                },
+                tooltip = "Auto saves and loads character on run/stop and unity or tool open and close."
+            };
+
+            autoSaveToggle.RegisterValueChangedCallback(
+                evt =>
+                {
+                    _useAutoSaveAndLoad = evt.newValue;
+                    EditorPrefs.SetBool(_AUTOSAVE_STATE, _useAutoSaveAndLoad);
+                }
+            );
+
+            view.Add(autoSaveToggle);
 
             VisualElement row = new VisualElement
             {
@@ -3108,7 +3192,11 @@ namespace Synty.SidekickCharacters
 
                     if (!_applyingPreset && _previewToggle.value)
                     {
-                        if (_newModel != null) DestroyImmediate(_newModel);
+                        if (_newModel != null)
+                        {
+                            DestroyImmediate(_newModel);
+                        }
+
                         List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
                         foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
                         {
@@ -3230,10 +3318,28 @@ namespace Synty.SidekickCharacters
             }
 
             string filename = Path.GetFileNameWithoutExtension(savePath);
+            SerializedCharacter savedCharacter = CreateSerializedCharacter(filename);
+
+            Serializer serializer = new Serializer();
+
+            File.WriteAllBytes(savePath, Encoding.ASCII.GetBytes(serializer.Serialize(savedCharacter)));
+            if (showSuccessMessage)
+            {
+                EditorUtility.DisplayDialog("Save Successful", "Character successfully saved to " + Path.GetFileName(savePath), "OK");
+            }
+        }
+
+        /// <summary>
+        ///     Crates a serialized character from the current tool selections.
+        /// </summary>
+        /// <param name="characterName">The name to store in the serialized character.</param>
+        /// <returns>A SerializedCharacter from the selections in the tool.</returns>
+        private SerializedCharacter CreateSerializedCharacter(string characterName)
+        {
             SerializedCharacter savedCharacter = new SerializedCharacter
             {
                 Species = _currentSpecies.ID,
-                Name = filename
+                Name = characterName
             };
 
             List<SerializedPart> usedParts = new List<SerializedPart>();
@@ -3263,13 +3369,7 @@ namespace Synty.SidekickCharacters
 
             savedCharacter.ColorRows = savedColorRows;
 
-            Serializer serializer = new Serializer();
-
-            File.WriteAllBytes(savePath, Encoding.ASCII.GetBytes(serializer.Serialize(savedCharacter)));
-            if (showSuccessMessage)
-            {
-                EditorUtility.DisplayDialog("Save Successful", "Character successfully saved to " + Path.GetFileName(savePath), "OK");
-            }
+            return savedCharacter;
         }
 
         /// <summary>
@@ -3296,7 +3396,17 @@ namespace Synty.SidekickCharacters
             Deserializer deserializer = new Deserializer();
             SerializedCharacter savedCharacter = deserializer.Deserialize<SerializedCharacter>(data);
 
-            SidekickSpecies species = SidekickSpecies.GetByID(_dbManager, savedCharacter.Species);
+            LoadSerializedCharacter(savedCharacter, showAllColors);
+        }
+
+        /// <summary>
+        ///     Loads a character into the tool from a serialized character.
+        /// </summary>
+        /// <param name="serializedCharacter">The serialized character to load.</param>
+        /// <param name="showAllColors">Whether to show all colors or not.</param>
+        private void LoadSerializedCharacter(SerializedCharacter serializedCharacter, bool showAllColors)
+        {
+            SidekickSpecies species = SidekickSpecies.GetByID(_dbManager, serializedCharacter.Species);
             _speciesField.value = species.Name;
             ProcessSpeciesChange(species.Name);
 
@@ -3305,7 +3415,7 @@ namespace Synty.SidekickCharacters
             foreach (CharacterPartType currentType in Enum.GetValues(typeof(CharacterPartType)))
             {
                 PopupField<string> currentField = _partSelectionDictionary[currentType];
-                SerializedPart part = savedCharacter.Parts.FirstOrDefault(p => p.PartType == currentType);
+                SerializedPart part = serializedCharacter.Parts.FirstOrDefault(p => p.PartType == currentType);
                 if (part != null)
                 {
                     UpdateResult result = UpdatePartDropdown(currentField, part.Name, errorMessage, hasErrors);
@@ -3327,15 +3437,28 @@ namespace Synty.SidekickCharacters
                 );
             }
 
-            LoadColorSet(savedCharacter);
+            LoadColorSet(serializedCharacter);
 
-            if (savedCharacter.BlendShapes != null)
+            if (serializedCharacter.BlendShapes != null)
             {
-                LoadBlendShapes(savedCharacter);
+                LoadBlendShapes(serializedCharacter);
             }
 
             _showAllColourProperties = showAllColors;
             UpdateColorTabContent();
+
+            if (_newModel != null)
+            {
+                DestroyImmediate(_newModel);
+            }
+
+            List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
+            foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
+            {
+                parts.Add(entry.Value);
+            }
+
+            _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, _combineMeshes, true);
         }
 
         /// <summary>
@@ -3808,3 +3931,4 @@ namespace Synty.SidekickCharacters
         }
     }
 }
+#endif

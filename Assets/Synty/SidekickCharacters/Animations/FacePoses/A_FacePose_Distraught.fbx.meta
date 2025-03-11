@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_FaceLayer_Distraught
+      name: A_FacePose_Distraught
       takeName: A_FaceLayer_Distraught
       internalID: -8235357193426449191
       firstFrame: 2

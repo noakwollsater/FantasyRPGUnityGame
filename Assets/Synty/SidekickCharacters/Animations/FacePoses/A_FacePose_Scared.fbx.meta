@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: A_FaceLayer_Scared
+      name: A_FacePose_Scared
       takeName: A_FaceLayer_Scared
       internalID: -5905619219767354576
       firstFrame: 2

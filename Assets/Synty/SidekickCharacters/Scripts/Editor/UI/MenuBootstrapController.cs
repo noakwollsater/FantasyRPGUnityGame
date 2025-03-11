@@ -5,7 +5,8 @@
 //
 // For additional details, see the LICENSE.MD file bundled with this software.
 
-using System.Collections;
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEngine;
 
@@ -63,3 +64,4 @@ namespace Synty.SidekickCharacters.UI
         }
     }
 }
+#endif
