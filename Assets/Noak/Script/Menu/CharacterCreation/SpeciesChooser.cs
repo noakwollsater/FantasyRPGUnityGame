@@ -141,8 +141,11 @@ public class SpeciesChooser : CharacterCreation
             if (ExcludedParts.Contains(partType)) continue;
 
             var partsForSpecies = _dictionaryLibrary._partLibrary[partType]
-                .Where(part => SidekickPart.GetSpeciesForPart(_availableSpecies, part.Key) == _selectedSpecies)
+                .Where(part =>
+                    SidekickPart.GetSpeciesForPart(_availableSpecies, part.Key) == _selectedSpecies ||
+                    IsPartUniversal(part.Key))  // ✅ Allow universal parts
                 .ToDictionary(p => p.Key, p => p.Value);
+
 
             if (partsForSpecies.Count > 0)
             {
@@ -173,6 +176,15 @@ public class SpeciesChooser : CharacterCreation
         // **Step 6: Apply Changes**
         UpdateModel();
     }
+
+    private bool IsPartUniversal(string partKey)
+    {
+        return partKey.Contains("APOC") || 
+            partKey.Contains("FANT") || partKey.Contains("PIRT") || 
+            partKey.Contains("SCFI") || partKey.Contains("VIKG") || 
+            partKey.Contains("GOBL") && !partKey.Contains("GOBL_BASE");
+    }
+
 
     private void ApplySpeciesColors(string species)
     {
