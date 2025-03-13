@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
@@ -95,6 +95,7 @@ namespace Unity.FantasyKingdom
                         {
                             "Human Skin Tones" => AngleToSkinTone(radius),
                             "Goblin Tones" => AngleToGoblinTone(radius),
+                            "Cloth Tones" => AngleOToClothTone(radius, angle),
                             _ => AngleToRGB(angle)
                         });
                     }
@@ -144,6 +145,98 @@ namespace Unity.FantasyKingdom
 
             return GetBlendedColor(goblinTones, intensity);
         }
+
+        private Color AngleOToClothTone(float intensity, float angle)
+        {
+            Color[] redTones =
+            {
+        new Color(0.75f, 0.2f, 0.2f),  // Brick Red
+        new Color(0.6f, 0.1f, 0.1f),   // Deep Red
+        new Color(0.5f, 0.05f, 0.05f)  // Dark Crimson
+    };
+
+            Color[] brownTones =
+            {
+        new Color(0.6f, 0.4f, 0.2f),   // Warm Brown
+        new Color(0.5f, 0.3f, 0.1f),   // Leather Brown
+        new Color(0.35f, 0.2f, 0.1f)   // Dark Brown
+    };
+
+            Color[] yellowTones =
+            {
+        new Color(0.9f, 0.8f, 0.3f),   // Golden Yellow
+        new Color(0.8f, 0.7f, 0.2f),   // Mustard Yellow
+        new Color(0.7f, 0.6f, 0.1f)    // Earthy Yellow
+    };
+
+            Color[] greenTones =
+            {
+        new Color(0.3f, 0.5f, 0.2f),   // Olive Green
+        new Color(0.2f, 0.4f, 0.15f),  // Moss Green
+        new Color(0.15f, 0.3f, 0.1f)   // Forest Green
+    };
+
+            Color[] blueTones =
+            {
+        new Color(0.2f, 0.3f, 0.6f),   // Deep Blue
+        new Color(0.3f, 0.4f, 0.7f),   // Denim Blue
+        new Color(0.15f, 0.2f, 0.5f)   // Navy Blue
+    };
+
+            Color[] purpleTones =
+            {
+        new Color(0.6f, 0.4f, 0.7f),   // Muted Violet
+        new Color(0.7f, 0.5f, 0.8f),   // Soft Purple
+        new Color(0.5f, 0.3f, 0.6f)    // Dark Lavender
+    };
+
+            // **Fix: Normalize angle mapping for equal segment sizes**
+            float normalizedAngle = (angle % (2 * Mathf.PI) + 2 * Mathf.PI) % (2 * Mathf.PI);
+            normalizedAngle /= (2 * Mathf.PI);
+            float sector = normalizedAngle * 6; // Map to 6 color segments
+            int lowerIndex = Mathf.FloorToInt(sector) % 6;
+            int upperIndex = (lowerIndex + 1) % 6;
+            float blendFactor = sector - lowerIndex; // Fractional blending between two segments
+
+            Color[] lowerColorSet = lowerIndex switch
+            {
+                0 => redTones,
+                1 => brownTones,
+                2 => yellowTones,
+                3 => greenTones,
+                4 => blueTones,
+                _ => purpleTones
+            };
+
+            Color[] upperColorSet = upperIndex switch
+            {
+                0 => redTones,
+                1 => brownTones,
+                2 => yellowTones,
+                3 => greenTones,
+                4 => blueTones,
+                _ => purpleTones
+            };
+
+            // **Fix: Ensure better blending between yellow-green and red-purple**
+            if (lowerIndex == 5 && upperIndex == 0)
+            {
+                blendFactor = Mathf.SmoothStep(0f, 1f, blendFactor * 0.75f); // More gradual transition
+            }
+
+
+            Color blendedColor1 = GetBlendedColor(lowerColorSet, intensity);
+            Color blendedColor2 = GetBlendedColor(upperColorSet, intensity);
+            Color finalColor = Color.Lerp(blendedColor1, blendedColor2, blendFactor);
+
+            // **Final Fix: Slightly increase contrast to avoid washed-out areas**
+            float grayscale = Mathf.Clamp01(1 - intensity); // White in center, black near edges
+            Color shadingBlend = Color.Lerp(Color.white, Color.black, intensity * 0.7f);
+            finalColor = Color.Lerp(finalColor, shadingBlend, 0.15f); // Subtle contrast boost
+
+            return finalColor;
+        }
+
 
         private Color GetBlendedColor(Color[] tones, float intensity)
         {
@@ -219,14 +312,17 @@ namespace Unity.FantasyKingdom
         public void SetCurrentParts(params string[] parts) => currentParts = parts.ToList();
 
         public void ChangeCharacterSkin() => ChangeSkinTone();
-        //public void ChangeHumanSkinColor() => SetColorMode("Human Skin Tones");
-        //public void ChangeGoblinSkinColor() => SetColorMode("Goblin Tones");
         public void ChangeRGBColor() => SetColorMode("RGB Spectrum");
+        public void ChangeClothColor() => SetColorMode("Cloth Tones");
 
         public void ChangeSkinColor() => SetCurrentParts("skin", "ear", "nose");
-        public void ChangeEyeColor() => SetCurrentParts("eye");
-        public void ChangeHairColor() => SetCurrentParts("hair");
+        public void ChangeEyeColor() => SetCurrentParts("edge","eye color");
+        public void ChangeHairColor() => SetCurrentParts("hair 01");
         public void ChangeEyebrowColor() => SetCurrentParts("eyebrow");
         public void ChangeFacialHairColor() => SetCurrentParts("facial hair");
+        public void ChangeOutfit01() => SetCurrentParts("outfit 01");
+        public void ChangeOutfit02() => SetCurrentParts("outfit 02");
+        public void Changestrap() => SetCurrentParts("strap");
+
     }
 }

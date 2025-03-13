@@ -179,12 +179,13 @@ public class SpeciesChooser : CharacterCreation
 
     private bool IsPartUniversal(string partKey)
     {
-        return partKey.Contains("APOC") || 
-            partKey.Contains("FANT") || partKey.Contains("PIRT") || 
-            partKey.Contains("SCFI") || partKey.Contains("VIKG") || 
-            partKey.Contains("GOBL") && !partKey.Contains("GOBL_BASE");
+        return 
+            partKey.Contains("GOBL") && !partKey.Contains("GOBL_BASE") && !partKey.Contains("EAR") ||
+            partKey.Contains("HU01") && !partKey.Contains("HUMN_BASE") && !partKey.Contains("EAR");
     }
-
+    //partKey.Contains("APOC") || 
+    //        partKey.Contains("FANT") || partKey.Contains("PIRT") ||
+    //        partKey.Contains("SCFI") || partKey.Contains("VIKG") ||
 
     private void ApplySpeciesColors(string species)
     {

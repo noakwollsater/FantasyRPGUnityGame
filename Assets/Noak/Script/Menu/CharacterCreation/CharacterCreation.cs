@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterCreation : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class CharacterCreation : MonoBehaviour
         CharacterPartType.Hair, CharacterPartType.EyebrowLeft, CharacterPartType.EyebrowRight, CharacterPartType.AttachmentFace,
         CharacterPartType.FacialHair
     };
+
+    //Ear and Nose stuff
+    public bool isNose = false;
 
     void Start()
     {
@@ -235,14 +239,38 @@ public class CharacterCreation : MonoBehaviour
         UpdateModel();
     }
 
+    public void ForwardEarOrNose()
+    {
+        if (isNose)
+        {
+            ForwardNose();
+        }
+        else
+        {
+            ForwardEars();
+        }
+    }
+    public void BackwardEarOrNose()
+    {
+        if (isNose)
+        {
+            BackwardNose();
+        }
+        else
+        {
+            BackwardEars();
+        }
+    }
 
     //Head Parts
     public void ForwardHair() => ChangePart(CharacterPartType.Hair, true);
     public void BackwardHair() => ChangePart(CharacterPartType.Hair, false);
     public void ForwardEyebrows() => ChangePairedParts(CharacterPartType.EyebrowLeft, CharacterPartType.EyebrowRight, true);
     public void BackwardEyebrows() => ChangePairedParts(CharacterPartType.EyebrowLeft, CharacterPartType.EyebrowRight, false);
-    public void ForwardEars() => ChangePairedParts(CharacterPartType.EarLeft, CharacterPartType.EarRight, true);
-    public void BackwardEars() => ChangePairedParts(CharacterPartType.EarLeft, CharacterPartType.EarRight, false);
+    private void ForwardEars() => ChangePairedParts(CharacterPartType.EarLeft, CharacterPartType.EarRight, true);
+    private void BackwardEars() => ChangePairedParts(CharacterPartType.EarLeft, CharacterPartType.EarRight, false);
+    private void ForwardNose() => ChangePart(CharacterPartType.Nose, true);
+    private void BackwardNose() => ChangePart(CharacterPartType.Nose, false);
     public void ForwardTeeth() => ChangePart(CharacterPartType.Teeth, true);
     public void BackwardTeeth() => ChangePart(CharacterPartType.Teeth, false);
     public void ForwardFacialHair() => ChangePart(CharacterPartType.FacialHair, true);
