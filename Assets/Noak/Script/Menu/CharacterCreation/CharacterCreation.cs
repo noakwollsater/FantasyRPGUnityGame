@@ -34,7 +34,7 @@ public class CharacterCreation : MonoBehaviour
     };
 
     //Ear and Nose stuff
-    public bool isNose = false;
+    public bool isNose;
 
     void Start()
     {
@@ -241,26 +241,36 @@ public class CharacterCreation : MonoBehaviour
 
     public void ForwardEarOrNose()
     {
+        Debug.Log($"ForwardEarOrNose: isNose={isNose}");
+
         if (isNose)
         {
+            Debug.Log("Calling ForwardNose()");
             ForwardNose();
         }
         else
         {
+            Debug.Log("Calling ForwardEars()");
             ForwardEars();
         }
     }
+
     public void BackwardEarOrNose()
     {
+        Debug.Log($"BackwardEarOrNose: isNose={isNose}");
+
         if (isNose)
         {
+            Debug.Log("Calling BackwardNose()");
             BackwardNose();
         }
         else
         {
+            Debug.Log("Calling BackwardEars()");
             BackwardEars();
         }
     }
+
 
     //Head Parts
     public void ForwardHair() => ChangePart(CharacterPartType.Hair, true);

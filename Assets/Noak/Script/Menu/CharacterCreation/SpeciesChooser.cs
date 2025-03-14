@@ -181,7 +181,7 @@ public class SpeciesChooser : CharacterCreation
     {
         return 
             partKey.Contains("GOBL") && !partKey.Contains("GOBL_BASE") && !partKey.Contains("EAR") ||
-            partKey.Contains("HU01") && !partKey.Contains("HUMN_BASE") && !partKey.Contains("EAR");
+            partKey.Contains("HU01") && !partKey.Contains("HUMN_BASE") && !partKey.Contains("EAR") && !partKey.Contains("NOSE");
     }
     //partKey.Contains("APOC") || 
     //        partKey.Contains("FANT") || partKey.Contains("PIRT") ||
