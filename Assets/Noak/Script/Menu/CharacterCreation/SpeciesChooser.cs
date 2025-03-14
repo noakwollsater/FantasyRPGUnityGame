@@ -169,6 +169,24 @@ public class SpeciesChooser : CharacterCreation
             Debug.LogError($"Species {_selectedSpecies.Name} is missing a '_BASE_' part! Defaulting to first available part.");
         }
 
+        CharacterPartType teethPartType = CharacterPartType.Teeth;
+
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(teethPartType))
+        {
+            var teethParts = _dictionaryLibrary._availablePartDictionary[teethPartType].Keys.ToList();
+
+            if (teethParts.Count > 0)
+            {
+                int randomIndex = Random.Range(0, teethParts.Count);
+                _dictionaryLibrary._partIndexDictionary[teethPartType] = randomIndex;
+                Debug.Log($"Randomized teeth part: {teethParts[randomIndex]} for species {_selectedSpecies.Name}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"No teeth parts found for species {_selectedSpecies.Name}.");
+        }
+
         // **Step 5: Apply Species Colors**
         _dictionaryLibrary.selectedSpecies = _selectedSpecies.Name;
         ApplySpeciesColors(_selectedSpecies.Name);
@@ -180,12 +198,9 @@ public class SpeciesChooser : CharacterCreation
     private bool IsPartUniversal(string partKey)
     {
         return 
-            partKey.Contains("GOBL") && !partKey.Contains("GOBL_BASE") && !partKey.Contains("EAR") ||
-            partKey.Contains("HU01") && !partKey.Contains("HUMN_BASE") && !partKey.Contains("EAR") && !partKey.Contains("NOSE");
+            partKey.Contains("GOBL") && !partKey.Contains("GOBL_BASE") && !partKey.Contains("EAR") && !partKey.Contains("TETH") ||
+            partKey.Contains("HU01") && !partKey.Contains("HUMN_BASE") && !partKey.Contains("EAR") && !partKey.Contains("NOSE") && !partKey.Contains("TETH");
     }
-    //partKey.Contains("APOC") || 
-    //        partKey.Contains("FANT") || partKey.Contains("PIRT") ||
-    //        partKey.Contains("SCFI") || partKey.Contains("VIKG") ||
 
     private void ApplySpeciesColors(string species)
     {
