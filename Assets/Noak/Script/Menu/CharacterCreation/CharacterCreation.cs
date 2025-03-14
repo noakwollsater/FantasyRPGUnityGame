@@ -1,14 +1,11 @@
 ﻿using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
-using Synty.SidekickCharacters.Database.DTO;
 using Synty.SidekickCharacters.Enums;
 using Synty.SidekickCharacters.Utils;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CharacterCreation : MonoBehaviour
 {
@@ -90,7 +87,8 @@ public class CharacterCreation : MonoBehaviour
         {
             int index = _dictionaryLibrary._partIndexDictionary[entry.Key];
             string path = entry.Value.Values.ToArray()[index];
-            GameObject partContainer = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            string resource = GetResourcePath(path);
+            GameObject partContainer = Resources.Load<GameObject>(resource);
             partsToUse.Add(partContainer.GetComponentInChildren<SkinnedMeshRenderer>());
         }
 
@@ -117,6 +115,14 @@ public class CharacterCreation : MonoBehaviour
         {
             Debug.LogError("Character creation failed.");
         }
+    }
+
+    private string GetResourcePath(string fullPath)
+    {
+        string directory = Path.GetDirectoryName(fullPath);
+        int startIndex = directory.IndexOf("Resources") + 10;
+        directory = directory.Substring(startIndex, directory.Length - startIndex);
+        return Path.Combine(directory, Path.GetFileNameWithoutExtension(fullPath));
     }
 
     private void SetSize()
