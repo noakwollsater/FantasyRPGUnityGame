@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 3
+  m_CurrentQuality: 4
   m_QualitySettings:
   - serializedVersion: 4
     name: Mobile Low
@@ -215,7 +215,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 0ef3b100f2972d9478f52cab9e88ce22, type: 2}
+    customRenderPipeline: {fileID: 11400000, guid: b1c3cb960ef8ae743b3fb5f8b19fc53e, type: 2}
     terrainQualityOverrides: 3
     terrainPixelError: 12
     terrainDetailDensityScale: 1
@@ -260,7 +260,7 @@ QualitySettings:
     realtimeGICPUUsage: 75
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
-    lodBias: 2.5
+    lodBias: 1
     maximumLODLevel: 0
     enableLODCrossFade: 1
     streamingMipmapsActive: 0
@@ -274,7 +274,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 24e04cb166586494ba56cb3fc3ea3f41, type: 2}
+    customRenderPipeline: {fileID: 11400000, guid: 49b5c9fa1cc1f804bbfee5399635efa5, type: 2}
     terrainQualityOverrides: 3
     terrainPixelError: 4
     terrainDetailDensityScale: 1
