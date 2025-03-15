@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 19c058f6c60366741b0fb62d6612cec7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 6b2603bd697dd2d42873d5bcfcdf6ec6, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 19c058f6c60366741b0fb62d6612cec7, type: 3}
       propertyPath: m_Name
       value: Rocks_01

@@ -35,13 +35,13 @@ public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDrag
         Vector2 localPoint;
         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(triangleUI, eventData.position, eventData.pressEventCamera, out localPoint))
         {
-            return; // Exit if the position is not in the UI rectangle
+            return;
         }
 
-        // Check if the local point is within the triangleUI bounds
+        // Check if the local point is within the triangle UI bounds
         if (!IsPointInsidePanel(localPoint))
         {
-            return; // Do nothing if dragged outside the panel
+            return;
         }
 
         // Keep within Triangle Bounds
@@ -53,14 +53,20 @@ public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDrag
         // Convert to Barycentric Coordinates for Blend Values
         Vector3 bary = Barycentric(localPoint, A, B, C);
 
-        // Apply values to character customization
-        characterCreation._dictionaryLibrary.BodySizeSkinnyBlendValue = bary.y * 100;
-        characterCreation._dictionaryLibrary.BodySizeHeavyBlendValue = bary.z * 100;
-        characterCreation._dictionaryLibrary.MusclesBlendValue = bary.x * 100;
+        // Convert to 0-100 range for character system
+        float muscle = bary.x * 100;
+        float skinny = bary.y * 100;
+        float fat = bary.z * 100;
 
-        // Update Character Model
+        // Apply blend shape changes
+        characterCreation._dictionaryLibrary.BodySizeSkinnyBlendValue = skinny;
+        characterCreation._dictionaryLibrary.BodySizeHeavyBlendValue = fat;
+        characterCreation._dictionaryLibrary.MusclesBlendValue = muscle;
+
+        // Update character attributes based on body composition
         BlendShapeChanger.UpdateBodyComposition();
     }
+
     private bool IsPointInsidePanel(Vector2 localPoint)
     {
         // Get panel dimensions
@@ -71,7 +77,6 @@ public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDrag
         return (localPoint.x >= -width && localPoint.x <= width &&
                 localPoint.y >= -height && localPoint.y <= height);
     }
-
 
     public void OnBeginDrag(PointerEventData eventData) { }
     public void OnEndDrag(PointerEventData eventData) { }
@@ -104,7 +109,6 @@ public class BodyCustomizationTriangle : MonoBehaviour, IDragHandler, IBeginDrag
         // Convert back to Cartesian coordinates
         return bary.x * A + bary.y * B + bary.z * C;
     }
-
 
     // Convert local point to Barycentric coordinates
     private Vector3 Barycentric(Vector2 p, Vector2 a, Vector2 b, Vector2 c)

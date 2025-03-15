@@ -1,5 +1,6 @@
 using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -69,9 +70,34 @@ namespace Unity.FantasyKingdom
         {
             if (_sidekickRuntime != null)
             {
-                _sidekickRuntime.BodySizeSkinnyBlendValue = _dictionaryLibrary.BodySizeSkinnyBlendValue;
-                _sidekickRuntime.BodySizeHeavyBlendValue = _dictionaryLibrary.BodySizeHeavyBlendValue;
-                _sidekickRuntime.MusclesBlendValue = _dictionaryLibrary.MusclesBlendValue;
+                // Convert 0-100 values into 0-1 scale for body composition
+                float muscle = _sidekickRuntime.MusclesBlendValue / 100f;
+                float skinny = _sidekickRuntime.BodySizeSkinnyBlendValue / 100f;
+                float fat = _sidekickRuntime.BodySizeHeavyBlendValue / 100f;
+
+                // Get selected race
+                Race selectedRace = RaceDatabase.Instance.GetRace(RaceSelectionUI.SelectedRace);
+                if (selectedRace == null)
+                {
+                    Debug.LogError($"Race '{RaceSelectionUI.SelectedRace}' not found!");
+                    return;
+                }
+
+                // Generate base stats (racial base + bonuses)
+                AttributeSet playerAttributes = new AttributeSet(
+                    selectedRace.BaseAttributes.Strength + selectedRace.RacialBonuses.Strength,
+                    selectedRace.BaseAttributes.Dexterity + selectedRace.RacialBonuses.Dexterity,
+                    selectedRace.BaseAttributes.Constitution + selectedRace.RacialBonuses.Constitution,
+                    selectedRace.BaseAttributes.Intelligence + selectedRace.RacialBonuses.Intelligence,
+                    selectedRace.BaseAttributes.Wisdom + selectedRace.RacialBonuses.Wisdom,
+                    selectedRace.BaseAttributes.Charisma + selectedRace.RacialBonuses.Charisma
+                );
+
+                // Apply body composition effects
+                playerAttributes.ApplyBodyCompositionModifiers(muscle, skinny, fat);
+
+                // Update race UI
+                RaceSelectionUI.Instance.UpdateRaceStats(RaceSelectionUI.SelectedRace, playerAttributes);
 
                 UpdateModel();
             }
@@ -93,7 +119,6 @@ namespace Unity.FantasyKingdom
             UpdateImage();
             UpdateModel();
         }
-
 
         private void UpdateImage()
         {
@@ -146,6 +171,5 @@ namespace Unity.FantasyKingdom
                 return;
             OnHoverExit(eventData);
         }
-
     }
 }
