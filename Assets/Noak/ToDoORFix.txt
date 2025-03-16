@@ -1,0 +1,10 @@
+- Färdigställa poängen i stat scripten
+- Styla statpanel
+- Fixa ljus ASE HDRP
+- Börja med klasser
+- Börja med Bakgrund
+- Sista skill delen
+- Spara data till ES3 , kryptera datan
+	- Spara data
+	- Ladda data
+- Lösa problemet med script på fbx
