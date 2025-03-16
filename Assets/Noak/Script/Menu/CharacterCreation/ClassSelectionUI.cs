@@ -58,33 +58,31 @@ public class ClassSelectionUI : MonoBehaviour
             return;
         }
 
-        Race selectedRace = RaceDatabase.Instance.GetRace(RaceSelectionUI.SelectedRace);
         Class selectedClass = ClassDatabase.Instance.GetClass(SelectedClass);
 
-        if (selectedRace == null || selectedClass == null)
+        if (selectedClass == null)
         {
-            Debug.LogError($"Race or Class not found!");
+            Debug.LogError($"Class '{SelectedClass}' not found!");
             return;
         }
 
-        // 🛠 Hämta basattributen utan att generera nya
-        AttributeSet baseAttributes = new AttributeSet(
-            selectedRace.BaseAttributes.Strength,
-            selectedRace.BaseAttributes.Dexterity,
-            selectedRace.BaseAttributes.Constitution,
-            selectedRace.BaseAttributes.Intelligence,
-            selectedRace.BaseAttributes.Wisdom,
-            selectedRace.BaseAttributes.Charisma
+        // ✅ Sätt klassbonusarna
+        RaceSelectionUI.Instance.UpdateClassBonuses(
+            selectedClass.ClassBonuses.Strength,
+            selectedClass.ClassBonuses.Dexterity,
+            selectedClass.ClassBonuses.Constitution,
+            selectedClass.ClassBonuses.Intelligence,
+            selectedClass.ClassBonuses.Wisdom,
+            selectedClass.ClassBonuses.Charisma
         );
 
-        // 🛠 Applicera kroppskomposition (utan att skriva över grundvärdena)
-        baseAttributes.ApplyBodyCompositionModifiers(
-            DefaultBodyComposition.DefaultMuscle,
-            DefaultBodyComposition.DefaultSkinny,
-            DefaultBodyComposition.DefaultFat
-        );
+        // 🛠️ Beräkna modifierade stats
 
-        // ✅ Skicka klassbonusarna som en separat parameter
-        RaceSelectionUI.Instance.UpdateRaceStats(selectedRace.RaceName, baseAttributes, selectedClass.ClassBonuses);
+        // 📌 Hämta modifierade stats från RaceSelectionUI
+        var modifiedStats = RaceSelectionUI.Instance.GetModifiedStats();
+
+        // ✅ Update UI to reflect the changes
+        RaceSelectionUI.Instance.UpdateRaceStats(RaceSelectionUI.SelectedRace, modifiedStats);
     }
+
 }

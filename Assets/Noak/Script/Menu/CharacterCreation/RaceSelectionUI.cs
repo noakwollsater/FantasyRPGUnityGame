@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using TMPro;  // Import TextMeshPro for UI
+using TMPro;
 
 public class RaceSelectionUI : MonoBehaviour
 {
+    public CharacterCreation characterCreation; // Reference to CharacterCreation script
+
     public static string SelectedRace { get; private set; } = "Human"; // Default race
     public static RaceSelectionUI Instance;
 
@@ -12,19 +14,31 @@ public class RaceSelectionUI : MonoBehaviour
 
     [Header("UI Elements for Displaying Stats")]
     public TextMeshProUGUI raceNameText;
-    public TextMeshProUGUI descriptionText; // 📝 New description field
+    public TextMeshProUGUI descriptionText;
 
     public TextMeshProUGUI strengthText, dexterityText, constitutionText, intelligenceText, wisdomText, charismaText;
 
+    private AttributeSet classBonuses = new AttributeSet(0, 0, 0, 0, 0, 0);
+    private AttributeSet modifiedAttributes;
+
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         SelectedRace = "Human"; // Force reset to Human on restart
     }
 
-
     void Start()
     {
+        // Assign button listeners
         humanButton.onClick.AddListener(() => SelectRace("Human"));
         goblinButton.onClick.AddListener(() => SelectRace("Goblin"));
         orcButton.onClick.AddListener(() => SelectRace("Orc"));
@@ -43,11 +57,20 @@ public class RaceSelectionUI : MonoBehaviour
     {
         SelectedRace = raceName;
         Debug.Log($"Selected Race: {raceName}");
-
         UpdateRaceStats(raceName);
     }
 
-    public void UpdateRaceStats(string raceName, AttributeSet modifiedStats = null, AttributeSet classBonuses = null)
+    public void UpdateClassBonuses(int strBonus, int dexBonus, int conBonus, int intBonus, int wisBonus, int chaBonus)
+    {
+        classBonuses = new AttributeSet(strBonus, dexBonus, conBonus, intBonus, wisBonus, chaBonus);
+    }
+
+    public AttributeSet GetModifiedStats()
+    {
+        return modifiedAttributes;
+    }
+
+    public void UpdateRaceStats(string raceName, AttributeSet modifiedStats = null)
     {
         Race selectedRace = RaceDatabase.Instance.GetRace(raceName);
         if (selectedRace == null)
@@ -59,9 +82,17 @@ public class RaceSelectionUI : MonoBehaviour
         raceNameText.text = selectedRace.RaceName;
         descriptionText.text = selectedRace.Description;
 
+        modifiedAttributes = modifiedStats;
+
+        int classStr = classBonuses.Strength;
+        int classDex = classBonuses.Dexterity;
+        int classCon = classBonuses.Constitution;
+        int classInt = classBonuses.Intelligence;
+        int classWis = classBonuses.Wisdom;
+        int classCha = classBonuses.Charisma;
+
         if (modifiedStats != null)
         {
-            // Ta bort både raceBonus och classBonus från modifierade stats innan vi visar dem
             int strength = modifiedStats.Strength - selectedRace.RacialBonuses.Strength;
             int dexterity = modifiedStats.Dexterity - selectedRace.RacialBonuses.Dexterity;
             int constitution = modifiedStats.Constitution - selectedRace.RacialBonuses.Constitution;
@@ -69,23 +100,21 @@ public class RaceSelectionUI : MonoBehaviour
             int wisdom = modifiedStats.Wisdom - selectedRace.RacialBonuses.Wisdom;
             int charisma = modifiedStats.Charisma - selectedRace.RacialBonuses.Charisma;
 
-            // Lägg till klassbonus endast i parentesen, utan att ändra basvärdet
-            strengthText.text = $"{strength} (+{selectedRace.RacialBonuses.Strength}, +{classBonuses?.Strength ?? 0})";
-            dexterityText.text = $"{dexterity} (+{selectedRace.RacialBonuses.Dexterity}, +{classBonuses?.Dexterity ?? 0})";
-            constitutionText.text = $"{constitution} (+{selectedRace.RacialBonuses.Constitution}, +{classBonuses?.Constitution ?? 0})";
-            intelligenceText.text = $"{intelligence} (+{selectedRace.RacialBonuses.Intelligence}, +{classBonuses?.Intelligence ?? 0})";
-            wisdomText.text = $"{wisdom} (+{selectedRace.RacialBonuses.Wisdom}, +{classBonuses?.Wisdom ?? 0})";
-            charismaText.text = $"{charisma} (+{selectedRace.RacialBonuses.Charisma}, +{classBonuses?.Charisma ?? 0})";
+            strengthText.text = $"{strength} (+{selectedRace.RacialBonuses.Strength}, +{classStr})";
+            dexterityText.text = $"{dexterity} (+{selectedRace.RacialBonuses.Dexterity}, +{classDex})";
+            constitutionText.text = $"{constitution} (+{selectedRace.RacialBonuses.Constitution}, +{classCon})";
+            intelligenceText.text = $"{intelligence} (+{selectedRace.RacialBonuses.Intelligence}, +{classInt})";
+            wisdomText.text = $"{wisdom} (+{selectedRace.RacialBonuses.Wisdom}, +{classWis})";
+            charismaText.text = $"{charisma} (+{selectedRace.RacialBonuses.Charisma}, +{classCha})";
         }
         else
         {
-            // Visa bara grundvärden från rasen
-            strengthText.text = $"{selectedRace.BaseAttributes.Strength} (+{selectedRace.RacialBonuses.Strength})";
-            dexterityText.text = $"{selectedRace.BaseAttributes.Dexterity} (+{selectedRace.RacialBonuses.Dexterity})";
-            constitutionText.text = $"{selectedRace.BaseAttributes.Constitution} (+{selectedRace.RacialBonuses.Constitution})";
-            intelligenceText.text = $"{selectedRace.BaseAttributes.Intelligence} (+{selectedRace.RacialBonuses.Intelligence})";
-            wisdomText.text = $"{selectedRace.BaseAttributes.Wisdom} (+{selectedRace.RacialBonuses.Wisdom})";
-            charismaText.text = $"{selectedRace.BaseAttributes.Charisma} (+{selectedRace.RacialBonuses.Charisma})";
+            strengthText.text = $"{selectedRace.BaseAttributes.Strength} (+{selectedRace.RacialBonuses.Strength}, +{classStr})";
+            dexterityText.text = $"{selectedRace.BaseAttributes.Dexterity} (+{selectedRace.RacialBonuses.Dexterity}, +{classDex})";
+            constitutionText.text = $"{selectedRace.BaseAttributes.Constitution} (+{selectedRace.RacialBonuses.Constitution}, +{classCon})";
+            intelligenceText.text = $"{selectedRace.BaseAttributes.Intelligence} (+{selectedRace.RacialBonuses.Intelligence}, +{classInt})";
+            wisdomText.text = $"{selectedRace.BaseAttributes.Wisdom} (+{selectedRace.RacialBonuses.Wisdom}, +{classWis})";
+            charismaText.text = $"{selectedRace.BaseAttributes.Charisma} (+{selectedRace.RacialBonuses.Charisma}, +{classCha})";
         }
     }
 }
