@@ -19,10 +19,15 @@ namespace Unity.FantasyKingdom
         private bool isMale = false;
         private int currentBodySizeIndex = 0;
 
+        public float DefaultMuscle = 33f;
+        public float DefaultSkinny = 33f;
+        public float DefaultFat = 33f;
+
         void Start()
         {
             UpdateImage();
             LazyInit();
+            DefaultValues();
 
             if (bodySizeButton != null)
             {
@@ -33,6 +38,21 @@ namespace Unity.FantasyKingdom
                 AddEventTrigger(trigger, EventTriggerType.PointerExit, OnHoverExit);
             }
         }
+
+        private void DefaultValues()
+        {
+            Debug.Log("Resetting character to default size...");
+
+            // Återställ blendshapes till defaultvärden
+            _sidekickRuntime.MusclesBlendValue = DefaultMuscle;
+            _sidekickRuntime.BodySizeSkinnyBlendValue = DefaultSkinny;
+            _sidekickRuntime.BodySizeHeavyBlendValue = DefaultFat;
+
+            _dictionaryLibrary.BodySizeSkinnyBlendValue = DefaultSkinny;
+            _dictionaryLibrary.BodySizeHeavyBlendValue = DefaultFat;
+            _dictionaryLibrary.MusclesBlendValue = DefaultMuscle;
+        }
+
 
         private void LazyInit()
         {
@@ -70,12 +90,10 @@ namespace Unity.FantasyKingdom
         {
             if (_sidekickRuntime != null)
             {
-                // Convert 0-100 values into 0-1 scale for body composition
                 float muscle = _sidekickRuntime.MusclesBlendValue / 100f;
                 float skinny = _sidekickRuntime.BodySizeSkinnyBlendValue / 100f;
                 float fat = _sidekickRuntime.BodySizeHeavyBlendValue / 100f;
 
-                // Get selected race
                 Race selectedRace = RaceDatabase.Instance.GetRace(RaceSelectionUI.SelectedRace);
                 if (selectedRace == null)
                 {
@@ -83,8 +101,8 @@ namespace Unity.FantasyKingdom
                     return;
                 }
 
-                // Generate base stats (racial base + bonuses)
-                AttributeSet playerAttributes = new AttributeSet(
+                // Skapa en separat kopia för modifierade stats
+                AttributeSet baseAttributes = new AttributeSet(
                     selectedRace.BaseAttributes.Strength + selectedRace.RacialBonuses.Strength,
                     selectedRace.BaseAttributes.Dexterity + selectedRace.RacialBonuses.Dexterity,
                     selectedRace.BaseAttributes.Constitution + selectedRace.RacialBonuses.Constitution,
@@ -93,15 +111,21 @@ namespace Unity.FantasyKingdom
                     selectedRace.BaseAttributes.Charisma + selectedRace.RacialBonuses.Charisma
                 );
 
-                // Apply body composition effects
-                playerAttributes.ApplyBodyCompositionModifiers(muscle, skinny, fat);
+                // Modifierade stats baserat på storlek
+                AttributeSet modifiedAttributes = new AttributeSet(
+                    baseAttributes.Strength, baseAttributes.Dexterity, baseAttributes.Constitution,
+                    baseAttributes.Intelligence, baseAttributes.Wisdom, baseAttributes.Charisma
+                );
 
-                // Update race UI
-                RaceSelectionUI.Instance.UpdateRaceStats(RaceSelectionUI.SelectedRace, playerAttributes);
+                modifiedAttributes.ApplyBodyCompositionModifiers(muscle, skinny, fat);
+
+                // Uppdatera UI:t med separata värden
+                RaceSelectionUI.Instance.UpdateRaceStats(RaceSelectionUI.SelectedRace, modifiedAttributes);
 
                 UpdateModel();
             }
         }
+
 
         public void SetGender()
         {

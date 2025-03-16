@@ -42,12 +42,11 @@ public class AttributeSet
 
         // Intelligence now suffers more from high muscle
         Intelligence -= Mathf.RoundToInt(muscle * 2f); // Max -2 INT if very muscular (was 1.5)
-        Intelligence += Mathf.RoundToInt(fat * 1.5f);  // Max +1.5 INT if very heavy
+        Intelligence += Mathf.RoundToInt(fat * 2.5f);  // Max +1.5 INT if very heavy
 
         // Wisdom now suffers more from muscle
         Wisdom += Mathf.RoundToInt(skinny * 1.5f); // Max +1.5 WIS if very thin
         Wisdom -= Mathf.RoundToInt(fat * 1);       // Slight -1 WIS if very heavy
-        Wisdom -= Mathf.RoundToInt(muscle * 1.5f); // New: Max -1.5 WIS if very strong
 
         // Charisma benefits from strength, but still penalized by fat
         Charisma += Mathf.RoundToInt(muscle * 2);  // Max +2 CHA if very strong (was 1)
@@ -186,14 +185,14 @@ public class RaceDatabase : MonoBehaviour
 
         Races.Add(new Race(
             "Hobbit",
-            "Hobbits (also known as Shortmen) are small, clever, and charismatic. They may not be the strongest, but their agility and charm make them excellent diplomats and thieves.",
+            "Hobbits are small, clever, and charismatic. They may not be the strongest, but their agility and charm make them excellent diplomats and thieves.",
             new AttributeSet(6, 10, 7, 8, 8, 10),
             new AttributeSet(0, 2, 0, 0, 0, 2)
         ));
 
         Races.Add(new Race(
             "Lynx",
-            "Lynxfolk (also known as Catmen) are quick, dexterous, and instinctual hunters. They excel in speed and agility but lack physical endurance.",
+            "Lynxfolk are quick, dexterous, and instinctual hunters. They excel in speed and agility but lack physical endurance.",
             new AttributeSet(7, 12, 6, 9, 8, 8),
             new AttributeSet(0, 2, -1, 1, 0, 0)
         ));
@@ -208,29 +207,45 @@ public class RaceDatabase : MonoBehaviour
     }
 }
 
+public static class DefaultBodyComposition
+{
+    public const float DefaultMuscle = 33f;  // Starta med 33% muskel
+    public const float DefaultSkinny = 33f; // Starta med 33% smalhet
+    public const float DefaultFat = 33f;    // Starta med 33% fett
+}
+
 public class CharacterStatCreation
 {
-    public static AttributeSet CreateCharacter(string raceName, bool usePointBuy, float muscle, float skinny, float fat)
+    public static AttributeSet CreateCharacter(string raceName, string className, bool usePointBuy)
     {
         Race selectedRace = RaceDatabase.Instance.GetRace(raceName);
+        Class selectedClass = ClassDatabase.Instance.GetClass(className);
 
-        AttributeSet playerAttributes;
+        AttributeSet baseAttributes;
         if (usePointBuy)
         {
-            playerAttributes = PointBuySystem.GeneratePointBuyAttributes();
+            baseAttributes = PointBuySystem.GeneratePointBuyAttributes();
         }
         else
         {
-            playerAttributes = AttributeSet.GenerateRandomAttributes();
+            baseAttributes = AttributeSet.GenerateRandomAttributes();
         }
 
-        // Apply racial bonuses
-        playerAttributes.ApplyRacialBonuses(selectedRace.RacialBonuses);
+        AttributeSet modifiedAttributes = new AttributeSet(
+            baseAttributes.Strength, baseAttributes.Dexterity, baseAttributes.Constitution,
+            baseAttributes.Intelligence, baseAttributes.Wisdom, baseAttributes.Charisma
+        );
 
-        // Apply body composition modifiers
-        playerAttributes.ApplyBodyCompositionModifiers(muscle, skinny, fat);
+        modifiedAttributes.ApplyBodyCompositionModifiers(
+            DefaultBodyComposition.DefaultMuscle,
+            DefaultBodyComposition.DefaultSkinny,
+            DefaultBodyComposition.DefaultFat
+        );
 
-        return playerAttributes;
+        baseAttributes.ApplyRacialBonuses(selectedRace.RacialBonuses);
+        modifiedAttributes.ApplyRacialBonuses(selectedClass.ClassBonuses);
+
+        return modifiedAttributes;
     }
 }
 

@@ -47,7 +47,6 @@ public class CharacterCreation : MonoBehaviour
         InitializeParts(lowerBodyParts);
         InitializeParts(headParts);
 
-        
         UpdateModel();
     }
 
@@ -75,8 +74,6 @@ public class CharacterCreation : MonoBehaviour
             _dictionaryLibrary._partIndexDictionary[type] = _dictionaryLibrary._availablePartDictionary[type].Count - 1;
         }
     }
-
-
 
     public void UpdateModel()
     {
