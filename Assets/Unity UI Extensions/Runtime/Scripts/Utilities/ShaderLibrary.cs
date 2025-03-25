@@ -1,8 +1,9 @@
 ﻿/// Credit SimonDarksideJ
 
 using System.Collections.Generic;
+using UnityEngine;
 
-namespace UnityEngine.UI.Extensions
+namespace Synty.UIExtensions
 {
     public static class ShaderLibrary
     {
