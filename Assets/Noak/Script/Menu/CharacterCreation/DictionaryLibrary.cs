@@ -135,6 +135,34 @@ public class DictionaryLibrary : ScriptableObject
             "SK_GOBL_BASE_01_21FOTR_GO01",
             "SK_APOC_OUTL_06_21FOTR_HU01" } },
     };
+    public Dictionary<string, List<string>> skillMap = new Dictionary<string, List<string>>
+{
+    // Environment-related skills
+    { "a poor district", new List<string> { "Stealth", "Sleight of Hand" } },
+    { "a remote mountain village", new List<string> { "Nature", "Survival" } },
+    { "a nomadic tribe", new List<string> { "Animal Handling", "Survival" } },
+    { "a noble estate", new List<string> { "History", "Persuasion" } },
+    { "a forgotten ruin city", new List<string> { "Investigation", "Arcana" } },
+    { "a guildhall in a bustling city", new List<string> { "Insight", "Persuasion" } },
+
+    // Attitude-related skills
+    { "a cynical loner", new List<string> { "Perception", "Deception" } },
+    { "a driven avenger", new List<string> { "Intimidation", "Athletics" } },
+    { "a protective leader", new List<string> { "Persuasion", "Medicine" } },
+    { "a curious explorer", new List<string> { "Investigation", "Nature" } },
+    { "a hidden hero", new List<string> { "Stealth", "Insight" } },
+    { "a hesitant but loyal friend", new List<string> { "Insight", "Medicine" } },
+
+    // Mentor-related (optional)
+    { "an old assassin", new List<string> { "Stealth", "Deception" } },
+    { "a secret order", new List<string> { "Arcana", "Religion" } },
+    { "your uncle, a former adventurer", new List<string> { "Survival", "Athletics" } },
+    { "temple priests", new List<string> { "Religion", "Medicine" } },
+    { "a disguised dragon", new List<string> { "Arcana", "Intimidation" } },
+    { "the warrior academy in the stone fortress", new List<string> { "Athletics", "History" } },
+};
+    public List<string> backgroundSkills = new List<string>();
+
 
 
     public float BodySizeSkinnyBlendValue = 0;
