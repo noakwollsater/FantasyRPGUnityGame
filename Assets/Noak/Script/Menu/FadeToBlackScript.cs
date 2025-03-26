@@ -5,8 +5,8 @@ using System.Collections;
 
 public class FadeToBlackScript : MonoBehaviour
 {
-    public GameObject fadeToBlack;
-    public Button[] buttonToUse;
+    [SerializeField] private GameObject fadeToBlack;
+    [SerializeField] private Button[] buttonToUse;
 
     void Start()
     {

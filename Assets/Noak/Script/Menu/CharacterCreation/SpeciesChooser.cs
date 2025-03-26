@@ -4,6 +4,7 @@ using Synty.SidekickCharacters.Database.DTO;
 using Synty.SidekickCharacters.Enums;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.FantasyKingdom;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ public class SpeciesChooser : CharacterCreation
     private List<SidekickSpecies> _availableSpecies;
     private int _currentSpeciesIndex = 0;
     private SidekickSpecies _selectedSpecies;
+
+    [SerializeField] private SummaryCreation summaryCreation;
 
     [SerializeField] private Sprite[] RaceHeadIcons;
     [SerializeField] private Image headIcon;
@@ -98,6 +101,7 @@ public class SpeciesChooser : CharacterCreation
         Debug.Log($"Selected species: {_selectedSpecies.Name}");
         UpdateImage();
         UpdateSpecies();
+        summaryCreation.UpdateSummary();
     }
     private void UpdateSpecies()
     {

@@ -2,10 +2,21 @@ using UnityEngine;
 using System.Collections;
 using Synty.SidekickCharacters.Enums;
 using System.Collections.Generic;
+using static RaceSelectionUI;
 
 [CreateAssetMenu(fileName = "NewDictionaryLibrary", menuName = "Custom/Dictionary Library")]
 public class DictionaryLibrary : ScriptableObject
 {
+    [System.Serializable]
+    public class RaceAgeData
+    {
+        public string race;
+        public int minAge;
+        public int maxAge;
+        public int defaultAge;
+    }
+
+
     public Dictionary<CharacterPartType, int> _partIndexDictionary = new Dictionary<CharacterPartType, int>();
     public Dictionary<CharacterPartType, Dictionary<string, string>> _availablePartDictionary = new Dictionary<CharacterPartType, Dictionary<string, string>>();
     public Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
@@ -162,8 +173,13 @@ public class DictionaryLibrary : ScriptableObject
     { "the warrior academy in the stone fortress", new List<string> { "Athletics", "History" } },
 };
     public List<string> backgroundSkills = new List<string>();
-
-
+    public List<RaceAgeData> raceAgeDataList = new List<RaceAgeData>
+    {
+        new RaceAgeData { race = "Human", minAge = 16, maxAge = 80, defaultAge = 25 },
+        new RaceAgeData { race = "Elf", minAge = 50, maxAge = 1000, defaultAge = 120 },
+        new RaceAgeData { race = "Goblin", minAge = 8, maxAge = 40, defaultAge = 20 },
+        new RaceAgeData { race = "Orc", minAge = 12, maxAge = 60, defaultAge = 30 },
+    };
 
     public float BodySizeSkinnyBlendValue = 0;
     public float BodySizeHeavyBlendValue = 0;
@@ -171,6 +187,11 @@ public class DictionaryLibrary : ScriptableObject
     public float BodyTypeBlendValue = 0;
 
     public string selectedSpecies;
+    public string selectedClass;
+    public string firstName;
+    public string lastName;
+    public string age;
+    public string backgroundSummary;
 }
 
 // För att lägga till fler delar till AllowedParts:

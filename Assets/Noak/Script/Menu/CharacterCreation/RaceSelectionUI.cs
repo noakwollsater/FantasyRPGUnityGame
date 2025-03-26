@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.FantasyKingdom;
 
 public class RaceSelectionUI : MonoBehaviour
 {
@@ -13,8 +14,8 @@ public class RaceSelectionUI : MonoBehaviour
     public Button humanButton, goblinButton, orcButton, apeButton, darkElfButton, drakoniteButton, dwarfButton, elfButton, hobbitButton, lynxButton;
 
     [Header("UI Elements for Displaying Stats")]
-    public TextMeshProUGUI raceNameText;
-    public TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI raceNameText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
 
     public TextMeshProUGUI strengthText, dexterityText, constitutionText, intelligenceText, wisdomText, charismaText;
 
@@ -116,5 +117,38 @@ public class RaceSelectionUI : MonoBehaviour
             wisdomText.text = $"{selectedRace.BaseAttributes.Wisdom} (+{selectedRace.RacialBonuses.Wisdom}, +{classWis})";
             charismaText.text = $"{selectedRace.BaseAttributes.Charisma} (+{selectedRace.RacialBonuses.Charisma}, +{classCha})";
         }
+
+        modifiedAttributes = new AttributeSet(
+            selectedRace.BaseAttributes.Strength + selectedRace.RacialBonuses.Strength,
+            selectedRace.BaseAttributes.Dexterity + selectedRace.RacialBonuses.Dexterity,
+            selectedRace.BaseAttributes.Constitution + selectedRace.RacialBonuses.Constitution,
+            selectedRace.BaseAttributes.Intelligence + selectedRace.RacialBonuses.Intelligence,
+            selectedRace.BaseAttributes.Wisdom + selectedRace.RacialBonuses.Wisdom,
+            selectedRace.BaseAttributes.Charisma + selectedRace.RacialBonuses.Charisma
+        );
+
+
+        GetFinalAttributes();    
+    }
+
+    public static AttributeSet GetFinalAttributes()
+    {
+        if (Instance == null || Instance.modifiedAttributes == null)
+        {
+            Debug.LogWarning("⚠️ GetFinalAttributes: Instance or modifiedAttributes is null.");
+            return new AttributeSet(0, 0, 0, 0, 0, 0); // or default fallback
+        }
+
+        var classValue = Instance.classBonuses;
+        var modifiedStats = Instance.modifiedAttributes;
+
+        int finalStr = modifiedStats.Strength + classValue.Strength;
+        int finalDex = modifiedStats.Dexterity + classValue.Dexterity;
+        int finalCon = modifiedStats.Constitution + classValue.Constitution;
+        int finalInt = modifiedStats.Intelligence + classValue.Intelligence;
+        int finalWis = modifiedStats.Wisdom + classValue.Wisdom;
+        int finalCha = modifiedStats.Charisma + classValue.Charisma;
+
+        return new AttributeSet(finalStr, finalDex, finalCon, finalInt, finalWis, finalCha);
     }
 }

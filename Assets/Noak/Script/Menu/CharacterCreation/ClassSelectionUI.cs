@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using TMPro;
+using Unity.FantasyKingdom;
 
-public class ClassSelectionUI : MonoBehaviour
+public class ClassSelectionUI : CharacterCreation
 {
     public static string SelectedClass { get; private set; } = "Barbarian"; // Default class
 
     [Header("UI Elements for Displaying Class Info")]
-    public TextMeshProUGUI classNameText;
-    public TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI classNameText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
+
+    [SerializeField] private SummaryCreation summaryCreation;
 
     void Start()
     {
@@ -19,8 +22,9 @@ public class ClassSelectionUI : MonoBehaviour
     {
         SelectedClass = className;
         UpdateClassInfo(className);
-
+        _dictionaryLibrary.selectedClass = className;
         ApplyClassBonuses();
+        summaryCreation.UpdateSummary();
     }
 
     // 📌 Assign these methods to buttons in Unity Inspector

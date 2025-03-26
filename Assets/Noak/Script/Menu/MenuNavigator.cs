@@ -5,21 +5,21 @@ namespace Unity.FantasyKingdom
     public class MenuNavigator : MonoBehaviour
     {
         [Header("Standard Menus")]
-        public GameObject StartMenu;
-        public GameObject MainMenu;
-        public GameObject GameMenu;
-        public GameObject CharacterCreationMenu;
-        public GameObject LoadGameMenu;
+        [SerializeField] private GameObject StartMenu;
+        [SerializeField] private GameObject MainMenu;
+        [SerializeField] private GameObject GameMenu;
+        [SerializeField] private GameObject CharacterCreationMenu;
+        [SerializeField] private GameObject LoadGameMenu;
 
         [Header("Character Creation Menu")]
-        public GameObject CharacterCreator;
+        [SerializeField] private GameObject CharacterCreator;
 
         [Header("Other Menus")]
-        public GameObject OptionsMenu;
-        public GameObject LoadingScreen;
-        public GameObject LoadGameConfirmationMenu;
-        public GameObject ScreenBrightnessMenu;
-        public GameObject LicensAgreementMenu;
-        //public GameObject CreditsMenu;
+        [SerializeField] private GameObject OptionsMenu;
+        [SerializeField] private GameObject LoadingScreen;
+        [SerializeField] private GameObject LoadGameConfirmationMenu;
+        [SerializeField] private GameObject ScreenBrightnessMenu;
+        [SerializeField] private GameObject LicensAgreementMenu;
+        //[SerializeField] private GameObject CreditsMenu;
     }
 }

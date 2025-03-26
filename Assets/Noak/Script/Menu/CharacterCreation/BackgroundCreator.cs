@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.EventSystems;
+using Unity.FantasyKingdom;
 
 public class BackgroundCreator : CharacterCreation
 {
@@ -14,12 +15,14 @@ public class BackgroundCreator : CharacterCreation
         public List<string> answers;    // list of 6 options
     }
 
+    [SerializeField] private SummaryCreation summaryCreation;
+
     [Header("UI References")]
-    public TMP_Text questionText;
-    public List<Button> answerButtons;
-    public TMP_Text textSummary;
-    public List<GameObject> questionIndicators; // one for each question
-    public GameObject summaryPanel; // Drag this in via Inspector
+    [SerializeField] private TMP_Text questionText;
+    [SerializeField] private List<Button> answerButtons;
+    [SerializeField] private TMP_Text textSummary;
+    [SerializeField] private List<GameObject> questionIndicators; // one for each question
+    [SerializeField] private GameObject summaryPanel; // Drag this in via Inspector
 
     private List<QuestionData> questions = new List<QuestionData>();
     private Dictionary<string, string> selectedValues = new Dictionary<string, string>();
@@ -224,6 +227,10 @@ public class BackgroundCreator : CharacterCreation
         // ✅ Show the summary panel!
         if (summaryPanel != null)
             summaryPanel.SetActive(true);
+
+        _dictionaryLibrary.backgroundSummary = summary;
+
+        summaryCreation.UpdateSummary();
     }
 
     public void ResetBackgroundCreator()
