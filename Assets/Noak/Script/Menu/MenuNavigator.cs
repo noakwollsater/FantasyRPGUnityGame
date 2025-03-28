@@ -22,6 +22,7 @@ namespace Unity.FantasyKingdom
         [SerializeField] private GameObject LoadGameConfirmationMenu;
         [SerializeField] private GameObject ScreenBrightnessMenu;
         [SerializeField] private GameObject LicensAgreementMenu;
+        [SerializeField] private GameObject QuitGameMenu;
 
         private Stack<GameObject> menuHistory = new Stack<GameObject>();
 
@@ -85,10 +86,15 @@ namespace Unity.FantasyKingdom
 
         public void GoToCharacterCreation()
         {
-            PushAndShowMenu(LoadingScreen);
-            Invoke(nameof(ShowCharacterCreation), 1f); // Simulate async loading
+            if (GetCurrentActiveMenu() != null)
+                menuHistory.Push(GetCurrentActiveMenu());
+
+            HideAllMenus();
+            ShowMenu(LoadingScreen);
+            Invoke(nameof(ShowCharacterCreation), 1f);
             NavBar.SetActive(false);
         }
+
 
         private void ShowCharacterCreation()
         {
@@ -111,6 +117,20 @@ namespace Unity.FantasyKingdom
             PushAndShowMenu(MainMenu);
         }
 
+        public void GoToAreYouSureYouWantToQuit()
+        {
+            ShowMenu(QuitGameMenu);
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Application.Quit();
+            }
+        }
+
+        public void CloseQuitPanel()
+        {
+            HideMenu(QuitGameMenu);
+        }
+
         private void HideAllMenus()
         {
             StartMenu.SetActive(false);
@@ -122,6 +142,7 @@ namespace Unity.FantasyKingdom
             ScreenBrightnessMenu.SetActive(false);
             LicensAgreementMenu.SetActive(false);
             LoadingScreen.SetActive(false);
+            QuitGameMenu.SetActive(false);
         }
 
         void Update()
@@ -134,15 +155,26 @@ namespace Unity.FantasyKingdom
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                GoBack();
+                if (QuitGameMenu.activeSelf)
+                {
+                    CloseQuitPanel();
+                }
+                else
+                {
+                    GoBack(); // 🔙 Normal back behavior
+                }
             }
 
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(KeyCode.Tab) && !StartMenu.activeSelf)
             {
                 if (!OptionsMenu.activeSelf)
                     GoToOptions();
                 else
                     GoBack();
+            }
+            if (Input.GetKeyDown(KeyCode.CapsLock))
+            {
+                GoToAreYouSureYouWantToQuit();
             }
         }
 
@@ -172,6 +204,13 @@ namespace Unity.FantasyKingdom
                 {
                     HideAllMenus();
                     ShowMenu(previousMenu);
+
+                    // ✅ Re-enable NavBar if needed
+                    if (previousMenu == MainMenu || previousMenu == GameMenu || previousMenu == LoadGameMenu)
+                        NavBar.SetActive(true);
+                    else
+                        NavBar.SetActive(false);
+
                     return;
                 }
             }
@@ -181,11 +220,13 @@ namespace Unity.FantasyKingdom
 
         private void PushAndShowMenu(GameObject newMenu)
         {
+            // 👇 Capture the current menu BEFORE hiding everything
             GameObject currentMenu = GetCurrentActiveMenu();
 
-            // 🧠 Only push if the current menu is not the same as the one we’re about to show
             if (currentMenu != null && currentMenu != newMenu)
+            {
                 menuHistory.Push(currentMenu);
+            }
 
             HideAllMenus();
             ShowMenu(newMenu);
