@@ -17,7 +17,7 @@ namespace Unity.FantasyKingdom
         [SerializeField] private Button backBtn;
 
         [SerializeField] private TMP_Text backBtnText;
-        [SerializeField] private string mainMenuSceneName = "MainMenu"; // Change to your actual scene name
+        [SerializeField] private string mainMenuSceneName = "Menu"; // Change to your actual scene name
 
         private int currentStage = 0; // Start at 0 for array indexing
 
@@ -42,13 +42,15 @@ namespace Unity.FantasyKingdom
         {
             if (currentStage == 0)
             {
-                SceneManager.LoadScene(mainMenuSceneName); // Exit to main menu
+                PlayerPrefs.SetInt("ReturnToMainMenu", 1);
+                SceneManager.LoadScene("Menu");
                 return;
             }
 
             currentStage--;
             UpdateStage();
         }
+
 
         private void UpdateStage()
         {
