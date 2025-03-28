@@ -124,8 +124,6 @@ namespace Unity.FantasyKingdom
             }
         }
 
-
-
         private void ShowCharacterCreation()
         {
             HideMenu(LoadingScreen);
@@ -150,7 +148,7 @@ namespace Unity.FantasyKingdom
         public void GoToAreYouSureYouWantToQuit()
         {
             ShowMenu(QuitGameMenu);
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.KeypadEnter))
             {
                 Application.Quit();
             }
