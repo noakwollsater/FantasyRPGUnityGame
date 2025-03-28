@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace Unity.FantasyKingdom
 {
@@ -13,6 +15,9 @@ namespace Unity.FantasyKingdom
 
         [SerializeField] private Button nextBtn;
         [SerializeField] private Button backBtn;
+
+        [SerializeField] private TMP_Text backBtnText;
+        [SerializeField] private string mainMenuSceneName = "MainMenu"; // Change to your actual scene name
 
         private int currentStage = 0; // Start at 0 for array indexing
 
@@ -35,11 +40,14 @@ namespace Unity.FantasyKingdom
 
         private void PreviousStage()
         {
-            if (currentStage > 0)
+            if (currentStage == 0)
             {
-                currentStage--;
-                UpdateStage();
+                SceneManager.LoadScene(mainMenuSceneName); // Exit to main menu
+                return;
             }
+
+            currentStage--;
+            UpdateStage();
         }
 
         private void UpdateStage()
@@ -57,17 +65,15 @@ namespace Unity.FantasyKingdom
             }
 
             // Navigation button interactivity
-            backBtn.interactable = currentStage > 0;
+            backBtn.interactable = true;
             nextBtn.interactable = currentStage < stagePanels.Length - 1;
 
             // === 🧠 Stat Panel Logic ===
-            // Show race panel on step 0 (race) and last step (background)
             if (currentStage == 0 || currentStage == stagePanels.Length - 1)
             {
                 raceStatsPanel.SetActive(true);
                 classStatsPanel.SetActive(false);
             }
-            // Show class panel on step 1 (class)
             else if (currentStage == 2)
             {
                 raceStatsPanel.SetActive(false);
@@ -78,6 +84,9 @@ namespace Unity.FantasyKingdom
                 raceStatsPanel.SetActive(true);
                 classStatsPanel.SetActive(false);
             }
+
+            // Update Back Button Text
+            backBtnText.text = currentStage == 0 ? "Exit" : "Back";
         }
     }
 }

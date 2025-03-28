@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
+using UnityEngine.UI;
 
 
 namespace Unity.FantasyKingdom
@@ -23,6 +25,9 @@ namespace Unity.FantasyKingdom
         [SerializeField] private GameObject ScreenBrightnessMenu;
         [SerializeField] private GameObject LicensAgreementMenu;
         [SerializeField] private GameObject QuitGameMenu;
+
+        [Header("Loading Screen")]
+        [SerializeField] private Slider loadingSlider;
 
         private Stack<GameObject> menuHistory = new Stack<GameObject>();
 
@@ -90,10 +95,35 @@ namespace Unity.FantasyKingdom
                 menuHistory.Push(GetCurrentActiveMenu());
 
             HideAllMenus();
-            ShowMenu(LoadingScreen);
-            Invoke(nameof(ShowCharacterCreation), 1f);
+            StartCoroutine(LoadCharacterCreationAsync());
             NavBar.SetActive(false);
         }
+        private IEnumerator LoadCharacterCreationAsync()
+        {
+            ShowMenu(LoadingScreen);
+            NavBar.SetActive(false);
+
+            AsyncOperation operation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("CharacterCreation");
+
+            operation.allowSceneActivation = false;
+
+            while (!operation.isDone)
+            {
+                float progress = Mathf.Clamp01(operation.progress / 0.9f);
+                // 🔁 Update your loading slider here!
+                loadingSlider.value = progress;
+
+                // Unity loads up to 0.9, then waits for activation
+                if (operation.progress >= 0.9f)
+                {
+                    // Optional: Add delay, or wait for user input before continuing
+                    operation.allowSceneActivation = true;
+                }
+
+                yield return null;
+            }
+        }
+
 
 
         private void ShowCharacterCreation()
