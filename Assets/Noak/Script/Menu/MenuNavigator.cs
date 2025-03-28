@@ -47,10 +47,19 @@ namespace Unity.FantasyKingdom
             }
             else
             {
-                PushAndShowMenu(StartMenu);
+                // Check for return from Character Creation
+                if (PlayerPrefs.HasKey("ReturnToMainMenu") && PlayerPrefs.GetInt("ReturnToMainMenu") == 1)
+                {
+                    PlayerPrefs.DeleteKey("ReturnToMainMenu");
+                    PushAndShowMenu(MainMenu);  // 👉 Skip StartMenu
+                    NavBar.SetActive(true);
+                }
+                else
+                {
+                    PushAndShowMenu(StartMenu); // 👈 Default start
+                    NavBar.SetActive(false);
+                }
             }
-
-            NavBar.SetActive(false); // Start with NavBar hidden
         }
 
         void LoadSettings()
@@ -148,10 +157,6 @@ namespace Unity.FantasyKingdom
         public void GoToAreYouSureYouWantToQuit()
         {
             ShowMenu(QuitGameMenu);
-            if (Input.GetKeyDown(KeyCode.KeypadEnter))
-            {
-                Application.Quit();
-            }
         }
 
         public void CloseQuitPanel()
@@ -179,6 +184,8 @@ namespace Unity.FantasyKingdom
             {
                 if (StartMenu.activeSelf)
                     OnContinueFromStart();
+                else if (QuitGameMenu.activeSelf)
+                    Application.Quit();
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))

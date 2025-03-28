@@ -41,7 +41,6 @@ public class SceneTransitionManager : MonoBehaviour
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
             if (progressBar != null)
                 progressBar.value = progress;
-
             if (operation.progress >= 0.9f)
             {
                 yield return new WaitForSeconds(0.5f); // Optional delay
