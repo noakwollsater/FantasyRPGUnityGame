@@ -38,29 +38,51 @@ namespace Unity.FantasyKingdom
         {
             LoadSettings();
 
-            if (gameSettings.firstTime)
+            if (gameSettings.firstTime || !gameSettings.acceptLicense)
             {
                 ShowMenu(ScreenBrightnessMenu);
-                ShowMenu(LicensAgreementMenu);
                 gameSettings.firstTime = false;
+                NavBar.SetActive(false);
                 SaveSettings();
             }
             else
             {
-                // Check for return from Character Creation
                 if (PlayerPrefs.HasKey("ReturnToMainMenu") && PlayerPrefs.GetInt("ReturnToMainMenu") == 1)
                 {
                     PlayerPrefs.DeleteKey("ReturnToMainMenu");
-                    PushAndShowMenu(MainMenu);  // 👉 Skip StartMenu
+                    PushAndShowMenu(MainMenu);
                     NavBar.SetActive(true);
                 }
                 else
                 {
-                    PushAndShowMenu(StartMenu); // 👈 Default start
+                    PushAndShowMenu(StartMenu);
                     NavBar.SetActive(false);
                 }
             }
         }
+
+        public void OnBrightnessConfirmed()
+        {
+            HideMenu(ScreenBrightnessMenu);
+            ShowMenu(LicensAgreementMenu);
+        }
+
+        public void OnLicenseAccepted()
+        {
+            gameSettings.acceptLicense = true;
+            SaveSettings();
+            HideMenu(LicensAgreementMenu);
+            PushAndShowMenu(StartMenu);
+            NavBar.SetActive(false);
+        }
+
+        public void OnLicenseRejected()
+        {
+            gameSettings.acceptLicense = false;
+            SaveSettings();
+            Application.Quit();
+        }
+
 
         void LoadSettings()
         {
