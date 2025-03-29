@@ -59,12 +59,14 @@ namespace Unity.FantasyKingdom
             if (_dbManager == null)
             {
                 _dbManager = new DatabaseManager();
-                if (_dbManager.GetCurrentDbConnection() == null)
+                var connection = _dbManager.GetDbConnection(); // <-- This actually initializes the connection
+                if (connection == null)
                 {
                     Debug.LogError("Database connection failed.");
                     return;
                 }
             }
+
 
             if (_sidekickRuntime == null)
             {
