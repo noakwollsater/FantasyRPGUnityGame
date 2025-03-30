@@ -9,12 +9,6 @@ namespace Unity.FantasyKingdom
         [Header("Brightness")]
         [SerializeField] private Slider brightnessSlider;
 
-        [Header("Volume")]
-        [SerializeField] private Slider masterVolumeSlider;
-        [SerializeField] private Slider sfxVolumeSlider;
-        [SerializeField] private Slider musicVolumeSlider;
-        [SerializeField] private Slider DialogueVolumeSlider;
-
         [Header("Misc")]
         [SerializeField] private Button[] DynamicRangeBtns;
         [SerializeField] private Button[] MusicFrequencyBtns;
@@ -42,14 +36,10 @@ namespace Unity.FantasyKingdom
         [Header("Graphics")]
         [SerializeField] private Button[] GraphicsMode;
         [SerializeField] private TMP_Text GraphicsQuality;
-        [SerializeField] private Button[] DisplayMode;
-        [SerializeField] private TMP_Text DisplayText;
 
         [Header("Graphics Settings")]
         [SerializeField] private Slider Brightnessslider;
         [SerializeField] private Slider ContrastSlider;
-        [SerializeField] private Button[] DisplayResolution;
-        [SerializeField] private TMP_Text DisplayResolutionText;
         [SerializeField] private Button[] AmbientOcclusion;
         [SerializeField] private TMP_Text AmbientOcclusionText;
         [SerializeField] private Button[] TextureQuality;
@@ -58,9 +48,6 @@ namespace Unity.FantasyKingdom
         [SerializeField] private TMP_Text TextureFilteringText;
         [SerializeField] private Button[] WaterQuality;
         [SerializeField] private TMP_Text WaterQualityText;
-        [SerializeField] private Button[] RefreshRate;
-        [SerializeField] private TMP_Text RefreshRateText;
-        [SerializeField] private Toggle VSync;
         [SerializeField] private Toggle BackgroundCryptoMining;
         [SerializeField] private Toggle RayTracedReflections;
         [SerializeField] private Toggle MotionBlur;
@@ -108,34 +95,6 @@ namespace Unity.FantasyKingdom
             ContrastSlider.onValueChanged.AddListener(value =>
             {
                 gameSettings.contrast = value;
-                SaveSettings();
-            });
-
-            //Master Volume
-            masterVolumeSlider.onValueChanged.AddListener(value =>
-            {
-                gameSettings.masterVolume = value;
-                SaveSettings();
-            });
-
-            // SFX Volume
-            sfxVolumeSlider.onValueChanged.AddListener(value =>
-            {
-                gameSettings.sfxVolume = value;
-                SaveSettings();
-            });
-
-            // Music Volume
-            musicVolumeSlider.onValueChanged.AddListener(value =>
-            {
-                gameSettings.musicVolume = value;
-                SaveSettings();
-            });
-
-            // Dialogue Volume
-            DialogueVolumeSlider.onValueChanged.AddListener(value =>
-            {
-                gameSettings.dialogueVolume = value;
                 SaveSettings();
             });
 
@@ -211,14 +170,6 @@ namespace Unity.FantasyKingdom
             foreach (var btn in GraphicsMode)
                 btn.onClick.AddListener(() => SetGraphicsMode(btn));
 
-            // Display Mode
-            foreach (var btn in DisplayMode)
-                btn.onClick.AddListener(() => SetDisplayMode(btn));
-
-            // Display Resolution
-            foreach (var btn in DisplayResolution)
-                btn.onClick.AddListener(() => SetDisplayResolution(btn));
-
             // Ambient Occlusion
             foreach (var btn in AmbientOcclusion)
                 btn.onClick.AddListener(() => SetAmbientOcclusion(btn));
@@ -234,17 +185,6 @@ namespace Unity.FantasyKingdom
             // Water Quality
             foreach (var btn in WaterQuality)
                 btn.onClick.AddListener(() => SetWaterQuality(btn));
-
-            // Refresh Rate
-            foreach (var btn in RefreshRate)
-                btn.onClick.AddListener(() => SetRefreshRate(btn));
-
-            // VSync
-            VSync.onValueChanged.AddListener(value =>
-            {
-                gameSettings.vsync = value;
-                SaveSettings();
-            });
 
             // Background Crypto Mining
             BackgroundCryptoMining.onValueChanged.AddListener(value =>
@@ -329,38 +269,6 @@ namespace Unity.FantasyKingdom
             SaveSettings();
         }
 
-        void SetDisplayMode(Button selectedBtn)
-        {
-            string mode = DisplayText.text;
-            DisplayText.text = mode;
-            gameSettings.displaymode = mode;
-
-            switch (mode.ToLower())
-            {
-                case "fullscreen":
-                    Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                    break;
-                case "windowed":
-                    Screen.fullScreenMode = FullScreenMode.Windowed;
-                    break;
-                case "borderless":
-                case "fullscreen window":
-                    Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                    break;
-            }
-
-            ApplyResolution(); // reapply resolution with new mode
-            SaveSettings();
-        }
-
-
-        void SetDisplayResolution(Button selectedBtn)
-        {
-            gameSettings.resolution = DisplayResolutionText.text;
-            DisplayResolutionText.text = gameSettings.resolution;
-            SaveSettings();
-        }
-
         void SetAmbientOcclusion(Button selectedBtn)
         {
             gameSettings.ambientOcclusion = AmbientOcclusionText.text;
@@ -389,13 +297,6 @@ namespace Unity.FantasyKingdom
             SaveSettings();
         }
 
-        void SetRefreshRate(Button selectedBtn)
-        {
-            gameSettings.refreshRate = RefreshRateText.text;
-            RefreshRateText.text = gameSettings.refreshRate;
-            SaveSettings();
-        }
-
         void SetAudioLanguage(Button selectedBtn)
         {
             gameSettings.audiolanguage = AudioLanguageText.text;
@@ -421,11 +322,6 @@ namespace Unity.FantasyKingdom
         {
             brightnessSlider.value = gameSettings.screenBrightness;
 
-            masterVolumeSlider.value = gameSettings.masterVolume;
-            sfxVolumeSlider.value = gameSettings.sfxVolume;
-            musicVolumeSlider.value = gameSettings.musicVolume;
-            DialogueVolumeSlider.value = gameSettings.dialogueVolume;
-
             DynamicRange.text = gameSettings.dynamicRange;
             MusicFrequency.text = gameSettings.musicFrequency;
 
@@ -443,17 +339,13 @@ namespace Unity.FantasyKingdom
             WallHackz.isOn = gameSettings.wallhackz;
 
             GraphicsQuality.text = gameSettings.graphicsQuality;
-            DisplayText.text = gameSettings.displaymode;
 
             Brightnessslider.value = gameSettings.screenBrightness;
             ContrastSlider.value = gameSettings.contrast;
-            DisplayResolutionText.text = gameSettings.resolution;
             AmbientOcclusionText.text = gameSettings.ambientOcclusion;
             TextureQualityText.text = gameSettings.textureQuality;
             TextureFilteringText.text = gameSettings.textureFiltering;
             WaterQualityText.text = gameSettings.waterQuality;
-            RefreshRateText.text = gameSettings.refreshRate;
-            VSync.isOn = gameSettings.vsync;
             BackgroundCryptoMining.isOn = gameSettings.backgroundcryptomining;
             RayTracedReflections.isOn = gameSettings.raytracedreflections;
             MotionBlur.isOn = gameSettings.motionblur;
@@ -465,29 +357,6 @@ namespace Unity.FantasyKingdom
             SubtitleLanguageText.text = gameSettings.subtitleslanguage;
             GameplayerLangueageText.text = gameSettings.gameplaylanguage;
         }
-
-        void ApplyResolution()
-        {
-            string[] parts = gameSettings.resolution.ToLower().Replace(" ", "").Split('x');
-            if (parts.Length == 2 &&
-                int.TryParse(parts[0], out int width) &&
-                int.TryParse(parts[1], out int height))
-            {
-                int refreshRate = 60;
-                if (!string.IsNullOrEmpty(gameSettings.refreshRate))
-                {
-                    string refresh = gameSettings.refreshRate.Replace("Hz", "").Trim();
-                    int.TryParse(refresh, out refreshRate);
-                }
-
-                Screen.SetResolution(width, height, Screen.fullScreenMode, refreshRate);
-            }
-            else
-            {
-                Debug.LogWarning($"Invalid resolution format: {gameSettings.resolution}");
-            }
-        }
-
 
         void SaveSettings()
         {

@@ -9,6 +9,8 @@ namespace Unity.FantasyKingdom
 {
     public class SummaryCreation : CharacterCreation
     {
+        [SerializeField] private GameObject ThankYouForTestingMyGamePanel;
+
         [Header("Summary UI")]
         [SerializeField] private TMP_Text raceNameText;
         [SerializeField] private TMP_Text classNameText;
@@ -137,8 +139,8 @@ namespace Unity.FantasyKingdom
             // 🔐 Set up encryption
             var settings = new ES3Settings(fileName)
             {
-                encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = "MySuperSecretPassword123!" // You should store this more securely in a real project
+                //encryptionType = ES3.EncryptionType.AES,
+                //encryptionPassword = "MySuperSecretPassword123!" // You should store this more securely in a real project
             };
 
             CharacterSaveData data = new CharacterSaveData
@@ -173,5 +175,16 @@ namespace Unity.FantasyKingdom
             Debug.Log("✅ Character saved!");
         }
 
+
+        public void OpenThankyouPanel()
+        {
+            ThankYouForTestingMyGamePanel.SetActive(true);
+        }
+
+        public void BackToMainMenu()
+        {
+            PlayerPrefs.SetInt("ReturnToMainMenu", 1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        }
     }
 }

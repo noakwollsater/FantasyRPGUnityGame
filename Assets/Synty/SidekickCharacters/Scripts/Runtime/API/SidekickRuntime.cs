@@ -379,38 +379,56 @@ namespace Synty.SidekickCharacters.API
             _partOutfitToggleMap = new Dictionary<string, bool>();
             _partCount = 0;
 
-            List<string> files = Directory.GetFiles("Assets", "SK_*_*_*_*_*.fbx", SearchOption.AllDirectories).ToList();
+            // Load from known subfolders of Resources/Meshes/
+            List<GameObject> allParts = new List<GameObject>();
+            GameObject baseModel = Resources.Load<GameObject>("Meshes/SK_BaseModel");
+            if (baseModel != null)
+            {
+                allParts.Add(baseModel);
+            }
+            else
+            {
+                Debug.LogWarning("SK_BaseModel could not be loaded from Resources/Meshes/");
+            }
+
+            allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Species/Humans"));
+            allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Species/Goblins"));
+
+            allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/VikingWarriors"));
+            allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/PirateCaptains"));
+            allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/ApocalypseOutlaws"));
+            allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/GoblinFighters"));
+            allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/ScifiSoldiers"));
+            // Add more folders as needed
 
             foreach (CharacterPartType partType in Enum.GetValues(typeof(CharacterPartType)))
             {
                 Dictionary<string, string> partLocationDictionary = new Dictionary<string, string>();
 
-                foreach (string file in files)
+                foreach (GameObject model in allParts)
                 {
-                    FileInfo fileInfo = new FileInfo(file);
-                    string partName = fileInfo.Name;
-                    partName = partName.Substring(0, partName.IndexOf(".fbx", StringComparison.Ordinal));
+                    if (model == null) continue;
+
+                    string partName = model.name;
                     CharacterPartType characterPartType = ExtractPartType(partName);
+
                     if (characterPartType > 0 && characterPartType == partType && !partLocationDictionary.ContainsKey(partName))
                     {
-                        partLocationDictionary.Add(partName, file);
+                        // Store the relative path to Resources folder (required for loading later)
+                        string resourcePath = GetResourcePathForModel(model);
+                        partLocationDictionary.Add(partName, resourcePath);
                         _partCount++;
 
-                        // TODO: populate with actual outfit data when we have proper information about part outfits
-                        string tempPartOutfit = GetOutfitNameFromPartName(partName);
-                        List<string> partNameList;
-                        if (_partOutfitMap.TryGetValue(tempPartOutfit, out List<string> value))
+                        string outfitName = GetOutfitNameFromPartName(partName);
+
+                        if (_partOutfitMap.TryGetValue(outfitName, out List<string> partList))
                         {
-                            partNameList = value;
-                            partNameList.Add(partName);
-                            _partOutfitMap[tempPartOutfit] = partNameList;
+                            partList.Add(partName);
                         }
                         else
                         {
-                            partNameList = new List<string>();
-                            partNameList.Add(partName);
-                            _partOutfitMap.Add(tempPartOutfit, partNameList);
-                            _partOutfitToggleMap.Add(tempPartOutfit, true);
+                            _partOutfitMap[outfitName] = new List<string> { partName };
+                            _partOutfitToggleMap[outfitName] = true;
                         }
                     }
                 }
@@ -420,6 +438,43 @@ namespace Synty.SidekickCharacters.API
 
             return _partLibrary;
         }
+        private string GetResourcePathForModel(GameObject model)
+        {
+            if (model == null)
+            {
+                Debug.LogWarning("[GetResourcePathForModel] Model is null.");
+                return null;
+            }
+
+            string modelName = model.name;
+
+            // Attempt to infer folder path from known structure
+            string[] knownFolders = new[]
+            {
+        "Meshes/Species/Humans",
+        "Meshes/Species/Goblins",
+        "Meshes/Outfits/VikingWarriors",
+        "Meshes/Outfits/PirateCaptains",
+        "Meshes/Outfits/ApocalypseOutlaws",
+        "Meshes/Outfits/GoblinFighters",
+        "Meshes/Outfits/ScifiSoldiers"
+        // Add any other folders your game uses
+    };
+
+            foreach (string folder in knownFolders)
+            {
+                GameObject loaded = Resources.Load<GameObject>($"{folder}/{modelName}");
+                if (loaded == model)
+                {
+                    return $"{folder}/{modelName}";
+                }
+            }
+
+            Debug.LogWarning($"[GetResourcePathForModel] Could not find resource path for model '{modelName}'. Make sure it's in a known Resources folder.");
+            return null;
+        }
+
+
 
         /// <summary>
         ///     Gets the "outfit" name from the part name.

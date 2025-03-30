@@ -33,7 +33,7 @@ public class CharacterCreation : MonoBehaviour
     //Ear and Nose stuff
     public bool isNose;
 
-    void Start()
+    protected virtual void Start()
     {
         _dbManager = new DatabaseManager();
 
@@ -43,12 +43,13 @@ public class CharacterCreation : MonoBehaviour
         _sidekickRuntime = new SidekickRuntime(model, material, null, _dbManager);
         _dictionaryLibrary._partLibrary = _sidekickRuntime.PartLibrary;
 
-        InitializeParts(upperBodyParts);
-        InitializeParts(lowerBodyParts);
-        InitializeParts(headParts);
-
-        UpdateModel();
+        // Defer to a default species selection (if derived class doesn't override)
+        if (this is SpeciesChooser chooser)
+        {
+            chooser.SelectSpecies("Human");
+        }
     }
+
 
     public void InitializeParts(List<CharacterPartType> partList)
     {
@@ -83,9 +84,9 @@ public class CharacterCreation : MonoBehaviour
         foreach (KeyValuePair<CharacterPartType, Dictionary<string, string>> entry in _dictionaryLibrary._availablePartDictionary)
         {
             int index = _dictionaryLibrary._partIndexDictionary[entry.Key];
-            string path = entry.Value.Values.ToArray()[index];
-            string resource = GetResourcePath(path);
-            GameObject partContainer = Resources.Load<GameObject>(resource);
+            string resourcePath = entry.Value.Values.ToArray()[index];
+            GameObject partContainer = Resources.Load<GameObject>(resourcePath);
+
             partsToUse.Add(partContainer.GetComponentInChildren<SkinnedMeshRenderer>());
         }
 
@@ -117,10 +118,20 @@ public class CharacterCreation : MonoBehaviour
     private string GetResourcePath(string fullPath)
     {
         string directory = Path.GetDirectoryName(fullPath);
-        int startIndex = directory.IndexOf("Resources") + 10;
-        directory = directory.Substring(startIndex, directory.Length - startIndex);
-        return Path.Combine(directory, Path.GetFileNameWithoutExtension(fullPath));
+        int index = directory.IndexOf("Resources");
+
+        if (index == -1)
+        {
+            Debug.LogError($"GetResourcePath failed: 'Resources' not found in path '{fullPath}'");
+            return string.Empty;
+        }
+
+        string relativePath = directory.Substring(index + "Resources/".Length);
+        string fileName = Path.GetFileNameWithoutExtension(fullPath);
+
+        return Path.Combine(relativePath, fileName).Replace("\\", "/");
     }
+
 
     private void SetSize()
     {
