@@ -7,6 +7,13 @@ using static RaceSelectionUI;
 [CreateAssetMenu(fileName = "NewDictionaryLibrary", menuName = "Custom/Dictionary Library")]
 public class DictionaryLibrary : ScriptableObject
 {
+    public static DictionaryLibrary Instance;
+
+    private void OnEnable()
+    {
+        Instance = this;
+    }
+
     [System.Serializable]
     public class RaceAgeData
     {
@@ -15,7 +22,6 @@ public class DictionaryLibrary : ScriptableObject
         public int maxAge;
         public int defaultAge;
     }
-
 
     public Dictionary<CharacterPartType, int> _partIndexDictionary = new Dictionary<CharacterPartType, int>();
     public Dictionary<CharacterPartType, Dictionary<string, string>> _availablePartDictionary = new Dictionary<CharacterPartType, Dictionary<string, string>>();

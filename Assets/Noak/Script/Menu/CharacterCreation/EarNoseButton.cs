@@ -8,12 +8,10 @@ public class EarNoseButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private Image earNoseIcon;
     [SerializeField] private Sprite[] Icons;
 
-    private CharacterCreation characterCreation; // Reference to the CharacterCreation instance
+    [SerializeField] private CharacterCreation characterCreation; // Reference to the CharacterCreation instance
 
     private void Start()
     {
-        characterCreation = FindObjectOfType<CharacterCreation>(); // Get reference to CharacterCreation
-
         if (characterCreation == null)
         {
             Debug.LogError("EarNoseButton: CharacterCreation not found in the scene.");

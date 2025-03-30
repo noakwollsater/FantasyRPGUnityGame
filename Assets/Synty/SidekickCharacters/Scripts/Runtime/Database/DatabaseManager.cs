@@ -8,6 +8,8 @@
 using SqlCipher4Unity3D;
 using Synty.SidekickCharacters.Database.DTO;
 using System;
+using System.IO;
+using UnityEngine;
 
 namespace Synty.SidekickCharacters.Database
 {
@@ -16,7 +18,8 @@ namespace Synty.SidekickCharacters.Database
     /// </summary>
     public class DatabaseManager
     {
-        private static readonly string _DATABASE_PATH = "Assets/Synty/SidekickCharacters/Database/Proto_Side_Kick_Data";
+        private static readonly string _DATABASE_PATH = Path.Combine(Application.streamingAssetsPath, "Proto_Side_Kick_Data");
+
 
         private static SQLiteConnection _connection;
         private static int _connectionHash;
@@ -34,6 +37,8 @@ namespace Synty.SidekickCharacters.Database
             if (_connection == null)
             {
                 _connection = new SQLiteConnection(_DATABASE_PATH, true);
+                Debug.Log($"DB Path: {_DATABASE_PATH}");
+
             }
             else
             {

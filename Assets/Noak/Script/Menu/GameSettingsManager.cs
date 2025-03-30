@@ -331,10 +331,28 @@ namespace Unity.FantasyKingdom
 
         void SetDisplayMode(Button selectedBtn)
         {
-            gameSettings.displaymode = DisplayText.text;
-            DisplayText.text = gameSettings.displaymode;
+            string mode = DisplayText.text;
+            DisplayText.text = mode;
+            gameSettings.displaymode = mode;
+
+            switch (mode.ToLower())
+            {
+                case "fullscreen":
+                    Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+                    break;
+                case "windowed":
+                    Screen.fullScreenMode = FullScreenMode.Windowed;
+                    break;
+                case "borderless":
+                case "fullscreen window":
+                    Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                    break;
+            }
+
+            ApplyResolution(); // reapply resolution with new mode
             SaveSettings();
         }
+
 
         void SetDisplayResolution(Button selectedBtn)
         {
@@ -446,6 +464,28 @@ namespace Unity.FantasyKingdom
             AudioLanguageText.text = gameSettings.audiolanguage;
             SubtitleLanguageText.text = gameSettings.subtitleslanguage;
             GameplayerLangueageText.text = gameSettings.gameplaylanguage;
+        }
+
+        void ApplyResolution()
+        {
+            string[] parts = gameSettings.resolution.ToLower().Replace(" ", "").Split('x');
+            if (parts.Length == 2 &&
+                int.TryParse(parts[0], out int width) &&
+                int.TryParse(parts[1], out int height))
+            {
+                int refreshRate = 60;
+                if (!string.IsNullOrEmpty(gameSettings.refreshRate))
+                {
+                    string refresh = gameSettings.refreshRate.Replace("Hz", "").Trim();
+                    int.TryParse(refresh, out refreshRate);
+                }
+
+                Screen.SetResolution(width, height, Screen.fullScreenMode, refreshRate);
+            }
+            else
+            {
+                Debug.LogWarning($"Invalid resolution format: {gameSettings.resolution}");
+            }
         }
 
 

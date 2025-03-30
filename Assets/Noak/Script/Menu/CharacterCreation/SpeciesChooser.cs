@@ -36,12 +36,6 @@ public class SpeciesChooser : CharacterCreation
             return;
         }
 
-        // ✅ Ensure _selectedSpecies is set
-        _selectedSpecies = _availableSpecies[_currentSpeciesIndex];
-        Debug.Log($"Initialized species: {_selectedSpecies.Name}");
-
-        UpdateImage();
-
         // Ensure SidekickRuntime is initialized
         GameObject model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
         Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
@@ -55,7 +49,10 @@ public class SpeciesChooser : CharacterCreation
             return;
         }
 
-        UpdateSpecies();
+        _currentSpeciesIndex = 0;
+        SelectSpecies("Human"); // <- This fixes the issue
+
+        UpdateImage(); // optional, if needed here
     }
 
     private void UpdateImage()

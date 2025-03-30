@@ -82,11 +82,18 @@ public class ClassSelectionUI : CharacterCreation
 
         // 🛠️ Beräkna modifierade stats
 
-        // 📌 Hämta modifierade stats från RaceSelectionUI
-        var modifiedStats = RaceSelectionUI.Instance.GetModifiedStats();
 
-        // ✅ Update UI to reflect the changes
+        var modifiedStats = RaceSelectionUI.RecalculateAttributes(RaceSelectionUI.SelectedRace, selectedClass.ClassBonuses);
+        RaceSelectionUI.Instance.UpdateClassBonuses(
+            selectedClass.ClassBonuses.Strength,
+            selectedClass.ClassBonuses.Dexterity,
+            selectedClass.ClassBonuses.Constitution,
+            selectedClass.ClassBonuses.Intelligence,
+            selectedClass.ClassBonuses.Wisdom,
+            selectedClass.ClassBonuses.Charisma
+        );
         RaceSelectionUI.Instance.UpdateRaceStats(RaceSelectionUI.SelectedRace, modifiedStats);
+
     }
 
 }

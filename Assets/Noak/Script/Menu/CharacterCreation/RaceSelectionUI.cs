@@ -133,22 +133,64 @@ public class RaceSelectionUI : MonoBehaviour
 
     public static AttributeSet GetFinalAttributes()
     {
-        if (Instance == null || Instance.modifiedAttributes == null)
+        if (Instance == null)
         {
-            Debug.LogWarning("⚠️ GetFinalAttributes: Instance or modifiedAttributes is null.");
-            return new AttributeSet(0, 0, 0, 0, 0, 0); // or default fallback
+            Debug.LogWarning("⚠️ GetFinalAttributes: Instance is null.");
+            return new AttributeSet(0, 0, 0, 0, 0, 0);
         }
 
-        var classValue = Instance.classBonuses;
-        var modifiedStats = Instance.modifiedAttributes;
+        Race race = RaceDatabase.Instance.GetRace(SelectedRace);
+        AttributeSet baseStats = new AttributeSet(
+            race.BaseAttributes.Strength + race.RacialBonuses.Strength,
+            race.BaseAttributes.Dexterity + race.RacialBonuses.Dexterity,
+            race.BaseAttributes.Constitution + race.RacialBonuses.Constitution,
+            race.BaseAttributes.Intelligence + race.RacialBonuses.Intelligence,
+            race.BaseAttributes.Wisdom + race.RacialBonuses.Wisdom,
+            race.BaseAttributes.Charisma + race.RacialBonuses.Charisma
+        );
 
-        int finalStr = modifiedStats.Strength + classValue.Strength;
-        int finalDex = modifiedStats.Dexterity + classValue.Dexterity;
-        int finalCon = modifiedStats.Constitution + classValue.Constitution;
-        int finalInt = modifiedStats.Intelligence + classValue.Intelligence;
-        int finalWis = modifiedStats.Wisdom + classValue.Wisdom;
-        int finalCha = modifiedStats.Charisma + classValue.Charisma;
+        float muscle = DictionaryLibrary.Instance.MusclesBlendValue / 100f;
+        float skinny = DictionaryLibrary.Instance.BodySizeSkinnyBlendValue / 100f;
+        float fat = DictionaryLibrary.Instance.BodySizeHeavyBlendValue / 100f;
 
-        return new AttributeSet(finalStr, finalDex, finalCon, finalInt, finalWis, finalCha);
+        baseStats.ApplyBodyCompositionModifiers(muscle, skinny, fat);
+
+        AttributeSet finalStats = new AttributeSet(
+            baseStats.Strength + Instance.classBonuses.Strength,
+            baseStats.Dexterity + Instance.classBonuses.Dexterity,
+            baseStats.Constitution + Instance.classBonuses.Constitution,
+            baseStats.Intelligence + Instance.classBonuses.Intelligence,
+            baseStats.Wisdom + Instance.classBonuses.Wisdom,
+            baseStats.Charisma + Instance.classBonuses.Charisma
+        );
+
+        return finalStats;
     }
+
+
+    public static AttributeSet RecalculateAttributes(string raceName, AttributeSet classBonuses)
+    {
+        Race selectedRace = RaceDatabase.Instance.GetRace(raceName);
+
+        // Base + race bonuses
+        AttributeSet combined = new AttributeSet(
+            selectedRace.BaseAttributes.Strength + selectedRace.RacialBonuses.Strength,
+            selectedRace.BaseAttributes.Dexterity + selectedRace.RacialBonuses.Dexterity,
+            selectedRace.BaseAttributes.Constitution + selectedRace.RacialBonuses.Constitution,
+            selectedRace.BaseAttributes.Intelligence + selectedRace.RacialBonuses.Intelligence,
+            selectedRace.BaseAttributes.Wisdom + selectedRace.RacialBonuses.Wisdom,
+            selectedRace.BaseAttributes.Charisma + selectedRace.RacialBonuses.Charisma
+        );
+
+        // Apply body composition again
+        float muscle = DictionaryLibrary.Instance.MusclesBlendValue / 100f;
+        float skinny = DictionaryLibrary.Instance.BodySizeSkinnyBlendValue / 100f;
+        float fat = DictionaryLibrary.Instance.BodySizeHeavyBlendValue / 100f;
+
+        combined.ApplyBodyCompositionModifiers(muscle, skinny, fat);
+
+        // Return result BEFORE class bonuses; they'll be displayed separately in UI
+        return combined;
+    }
+
 }
