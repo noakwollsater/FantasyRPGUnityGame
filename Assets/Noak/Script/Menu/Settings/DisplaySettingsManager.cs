@@ -91,14 +91,14 @@ namespace Unity.FantasyKingdom
             // Set Display Mode
             switch (gameSettings.displaymode.ToLower())
             {
-                case "fullscreen":
+                case "Fullscreen":
                     Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
                     break;
-                case "windowed":
+                case "Windowed":
                     Screen.fullScreenMode = FullScreenMode.Windowed;
                     break;
-                case "borderless":
-                case "fullscreen window":
+                case "Borderless":
+                case "Fullscreen window":
                     Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
                     break;
             }
