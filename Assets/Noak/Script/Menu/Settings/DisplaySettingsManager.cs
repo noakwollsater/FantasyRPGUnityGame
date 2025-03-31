@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -9,66 +9,91 @@ namespace Unity.FantasyKingdom
         private const string settingsKey = "GameSettings";
         private GameSettingsData gameSettings;
 
-        [Header("Display Settings")]
-        [SerializeField] private Button[] displayModeButtons;
+        [Header("Display Mode Settings")]
+        [SerializeField] private Button displayModeLeftButton;
+        [SerializeField] private Button displayModeRightButton;
         [SerializeField] private TMP_Text displayModeText;
 
-        [SerializeField] private Button[] resolutionButtons;
+        [Header("Resolution Settings")]
+        [SerializeField] private Button resolutionLeftButton;
+        [SerializeField] private Button resolutionRightButton;
         [SerializeField] private TMP_Text resolutionText;
 
-        [SerializeField] private Button[] refreshRateButtons;
+        [Header("Refresh Rate Settings")]
+        [SerializeField] private Button refreshRateLeftButton;
+        [SerializeField] private Button refreshRateRightButton;
         [SerializeField] private TMP_Text refreshRateText;
 
         [SerializeField] private Toggle vSyncToggle;
 
+        private readonly string[] displayModes = { "Fullscreen", "Windowed", "Borderless" };
+        private readonly string[] resolutions = { "1280x720", "1920x1080", "2560x1440", "2560x1080", "3840x2160", "1024x768" };
+        private readonly string[] refreshRates = { "60Hz", "75Hz", "120Hz", "144Hz", "165Hz", "240Hz" };
+
+        private int currentDisplayModeIndex = 0;
+        private int currentResolutionIndex = 0;
+        private int currentRefreshRateIndex = 0;
+
         void Start()
         {
-            // Load saved settings
+            // Load or create settings
             if (ES3.KeyExists(settingsKey))
                 gameSettings = ES3.Load<GameSettingsData>(settingsKey);
             else
                 gameSettings = new GameSettingsData();
 
-            ApplyDisplaySettings();
+            // Initialize indexes
+            currentDisplayModeIndex = System.Array.IndexOf(displayModes, gameSettings.displaymode);
+            if (currentDisplayModeIndex < 0) currentDisplayModeIndex = 0;
+
+            currentResolutionIndex = System.Array.IndexOf(resolutions, gameSettings.resolution);
+            if (currentResolutionIndex < 0) currentResolutionIndex = 0;
+
+            currentRefreshRateIndex = System.Array.IndexOf(refreshRates, gameSettings.refreshRate);
+            if (currentRefreshRateIndex < 0) currentRefreshRateIndex = 0;
+
             SetupUI();
+            ApplyDisplaySettings();
         }
 
         private void SetupUI()
         {
-            // Display Mode Buttons
-            foreach (var btn in displayModeButtons)
+            displayModeLeftButton.onClick.AddListener(() =>
             {
-                btn.onClick.AddListener(() =>
-                {
-                    gameSettings.displaymode = displayModeText.text;
-                    ES3.Save(settingsKey, gameSettings);
-                    ApplyDisplaySettings();
-                });
-            }
+                currentDisplayModeIndex = (currentDisplayModeIndex - 1 + displayModes.Length) % displayModes.Length;
+                UpdateDisplayMode();
+            });
 
-            // Resolution Buttons
-            foreach (var btn in resolutionButtons)
+            displayModeRightButton.onClick.AddListener(() =>
             {
-                btn.onClick.AddListener(() =>
-                {
-                    gameSettings.resolution = resolutionText.text;
-                    ES3.Save(settingsKey, gameSettings);
-                    ApplyDisplaySettings();
-                });
-            }
+                currentDisplayModeIndex = (currentDisplayModeIndex + 1) % displayModes.Length;
+                UpdateDisplayMode();
+            });
 
-            // Refresh Rate Buttons
-            foreach (var btn in refreshRateButtons)
+            resolutionLeftButton.onClick.AddListener(() =>
             {
-                btn.onClick.AddListener(() =>
-                {
-                    gameSettings.refreshRate = refreshRateText.text;
-                    ES3.Save(settingsKey, gameSettings);
-                    ApplyDisplaySettings();
-                });
-            }
+                currentResolutionIndex = (currentResolutionIndex - 1 + resolutions.Length) % resolutions.Length;
+                UpdateResolution();
+            });
 
-            // VSync Toggle
+            resolutionRightButton.onClick.AddListener(() =>
+            {
+                currentResolutionIndex = (currentResolutionIndex + 1) % resolutions.Length;
+                UpdateResolution();
+            });
+
+            refreshRateLeftButton.onClick.AddListener(() =>
+            {
+                currentRefreshRateIndex = (currentRefreshRateIndex - 1 + refreshRates.Length) % refreshRates.Length;
+                UpdateRefreshRate();
+            });
+
+            refreshRateRightButton.onClick.AddListener(() =>
+            {
+                currentRefreshRateIndex = (currentRefreshRateIndex + 1) % refreshRates.Length;
+                UpdateRefreshRate();
+            });
+
             if (vSyncToggle != null)
             {
                 vSyncToggle.isOn = gameSettings.vsync;
@@ -76,55 +101,89 @@ namespace Unity.FantasyKingdom
                 {
                     gameSettings.vsync = value;
                     ES3.Save(settingsKey, gameSettings);
-                    ApplyDisplaySettings();
+                    ApplyVSync();
                 });
             }
 
-            // Update UI texts with saved data
+            // Set initial UI text
+            displayModeText.text = displayModes[currentDisplayModeIndex];
+            resolutionText.text = resolutions[currentResolutionIndex];
+            refreshRateText.text = refreshRates[currentRefreshRateIndex];
+        }
+
+        private void UpdateDisplayMode()
+        {
+            gameSettings.displaymode = displayModes[currentDisplayModeIndex];
             displayModeText.text = gameSettings.displaymode;
+            ES3.Save(settingsKey, gameSettings);
+            GetSelectedFullScreenMode();
+        }
+
+        private void UpdateResolution()
+        {
+            gameSettings.resolution = resolutions[currentResolutionIndex];
             resolutionText.text = gameSettings.resolution;
+            ES3.Save(settingsKey, gameSettings);
+            ApplyResolution();
+        }
+
+        private void UpdateRefreshRate()
+        {
+            gameSettings.refreshRate = refreshRates[currentRefreshRateIndex];
             refreshRateText.text = gameSettings.refreshRate;
+            ES3.Save(settingsKey, gameSettings);
+            GetSelectedRefreshRate();
         }
 
         private void ApplyDisplaySettings()
         {
-            // Set Display Mode
-            switch (gameSettings.displaymode.ToLower())
-            {
-                case "Fullscreen":
-                    Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                    break;
-                case "Windowed":
-                    Screen.fullScreenMode = FullScreenMode.Windowed;
-                    break;
-                case "Borderless":
-                case "Fullscreen window":
-                    Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                    break;
-            }
+            ApplyResolution(); // Handles mode + refresh too
+            ApplyVSync();
+        }
 
-            // Set Resolution
+        private void ApplyResolution()
+        {
             string[] parts = gameSettings.resolution.ToLower().Replace(" ", "").Split('x');
-            if (parts.Length == 2 &&
-                int.TryParse(parts[0], out int width) &&
-                int.TryParse(parts[1], out int height))
-            {
-                int refreshRate = 60;
-                if (!string.IsNullOrEmpty(gameSettings.refreshRate))
-                {
-                    string refresh = gameSettings.refreshRate.Replace("Hz", "").Trim();
-                    int.TryParse(refresh, out refreshRate);
-                }
-
-                Screen.SetResolution(width, height, Screen.fullScreenMode, refreshRate);
-            }
-            else
+            if (parts.Length != 2 || !int.TryParse(parts[0], out int width) || !int.TryParse(parts[1], out int height))
             {
                 Debug.LogWarning($"Invalid resolution format: {gameSettings.resolution}");
+                return;
             }
 
-            // VSync
+            int refreshRate = GetSelectedRefreshRate();
+            FullScreenMode mode = GetSelectedFullScreenMode();
+
+            Screen.SetResolution(width, height, mode, refreshRate);
+
+            Debug.Log($"[ApplyResolution] {width}x{height} @ {refreshRate}Hz | Mode: {mode}");
+        }
+
+        private FullScreenMode GetSelectedFullScreenMode()
+        {
+            switch (gameSettings.displaymode.ToLower())
+            {
+                case "fullscreen": return FullScreenMode.ExclusiveFullScreen;
+                case "borderless": return FullScreenMode.FullScreenWindow;
+                case "windowed":
+                default: return FullScreenMode.Windowed;
+            }
+        }
+
+        private int GetSelectedRefreshRate()
+        {
+            if (!string.IsNullOrEmpty(gameSettings.refreshRate))
+            {
+                string hz = gameSettings.refreshRate.Replace("Hz", "").Trim();
+                if (int.TryParse(hz, out int result))
+                    return result;
+            }
+            return 60;
+        }
+
+        private void ApplyVSync()
+        {
             QualitySettings.vSyncCount = gameSettings.vsync ? 1 : 0;
+            Debug.Log($"[ApplyVSync] VSync: {(gameSettings.vsync ? "On" : "Off")}");
         }
     }
 }
