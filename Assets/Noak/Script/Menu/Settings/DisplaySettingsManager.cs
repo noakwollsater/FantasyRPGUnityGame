@@ -27,7 +27,7 @@ namespace Unity.FantasyKingdom
         [SerializeField] private Toggle vSyncToggle;
 
         private readonly string[] displayModes = { "Fullscreen", "Windowed", "Borderless" };
-        private readonly string[] resolutions = { "1280x720", "1920x1080", "2560x1440", "2560x1080", "3840x2160", "1024x768" };
+        private readonly string[] resolutions = { "1920x1080", "1280x720", "2560x1440", "2560x1080", "3840x2160", "1024x768" };
         private readonly string[] refreshRates = { "60Hz", "75Hz", "120Hz", "144Hz", "165Hz", "240Hz" };
 
         private int currentDisplayModeIndex = 0;
@@ -116,7 +116,7 @@ namespace Unity.FantasyKingdom
             gameSettings.displaymode = displayModes[currentDisplayModeIndex];
             displayModeText.text = gameSettings.displaymode;
             ES3.Save(settingsKey, gameSettings);
-            GetSelectedFullScreenMode();
+            ApplyDisplaySettings();
         }
 
         private void UpdateResolution()
@@ -124,7 +124,7 @@ namespace Unity.FantasyKingdom
             gameSettings.resolution = resolutions[currentResolutionIndex];
             resolutionText.text = gameSettings.resolution;
             ES3.Save(settingsKey, gameSettings);
-            ApplyResolution();
+            ApplyDisplaySettings();
         }
 
         private void UpdateRefreshRate()
@@ -132,7 +132,7 @@ namespace Unity.FantasyKingdom
             gameSettings.refreshRate = refreshRates[currentRefreshRateIndex];
             refreshRateText.text = gameSettings.refreshRate;
             ES3.Save(settingsKey, gameSettings);
-            GetSelectedRefreshRate();
+            ApplyDisplaySettings();
         }
 
         private void ApplyDisplaySettings()
