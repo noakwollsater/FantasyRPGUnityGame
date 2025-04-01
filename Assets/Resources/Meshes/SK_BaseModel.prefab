@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SK_BaseModel
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 4ea9b29909d2f59439fc86be5a268eae, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 8aa795124ab1fff4e9d9fdfbe10830d5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

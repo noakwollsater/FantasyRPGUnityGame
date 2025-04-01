@@ -40,6 +40,7 @@ MonoBehaviour:
     - Kamgam.MeshExtractor
     - Opsive.Shared.Runtime
     - Opsive.UltimateCharacterController
+    - Opsive.UltimateCharacterController.Demo
     - Opsive.UltimateCharacterController.Integrations.UltimateInventorySystem
     - Opsive.UltimateInventorySystem
     - Polyperfect.LowPolyAnimatedFantasyCreatures
