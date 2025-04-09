@@ -399,6 +399,7 @@ namespace Synty.SidekickCharacters.API
             allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/ApocalypseOutlaws"));
             allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/GoblinFighters"));
             allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/ScifiSoldiers"));
+            allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/ScifiCivilians"));
             // Add more folders as needed
 
             foreach (CharacterPartType partType in Enum.GetValues(typeof(CharacterPartType)))
@@ -451,15 +452,16 @@ namespace Synty.SidekickCharacters.API
             // Attempt to infer folder path from known structure
             string[] knownFolders = new[]
             {
-        "Meshes/Species/Humans",
-        "Meshes/Species/Goblins",
-        "Meshes/Outfits/VikingWarriors",
-        "Meshes/Outfits/PirateCaptains",
-        "Meshes/Outfits/ApocalypseOutlaws",
-        "Meshes/Outfits/GoblinFighters",
-        "Meshes/Outfits/ScifiSoldiers"
-        // Add any other folders your game uses
-    };
+                "Meshes/Species/Humans",
+                "Meshes/Species/Goblins",
+                "Meshes/Outfits/VikingWarriors",
+                "Meshes/Outfits/PirateCaptains",
+                "Meshes/Outfits/ApocalypseOutlaws",
+                "Meshes/Outfits/GoblinFighters",
+                "Meshes/Outfits/ScifiSoldiers",
+                "Meshes/Outfits/ScifiCivilians"
+                // Add any other folders your game uses
+            };
 
             foreach (string folder in knownFolders)
             {
