@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Synty.SidekickCharacters.Serialization;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using static DictionaryLibrary;
@@ -135,6 +138,10 @@ namespace Unity.FantasyKingdom
         public void SaveCharacter(string saveKey = "MyCharacter")
         {
             string fileName = $"CharacterSave_{_dictionaryLibrary.firstName + " " + _dictionaryLibrary.lastName}.es3";
+
+            // Save playerprefs reference to use during loading
+            PlayerPrefs.SetString("SavedCharacterName", _dictionaryLibrary.firstName + " " + _dictionaryLibrary.lastName);
+            PlayerPrefs.Save();
 
             // 🔐 Set up encryption
             var settings = new ES3Settings(fileName)

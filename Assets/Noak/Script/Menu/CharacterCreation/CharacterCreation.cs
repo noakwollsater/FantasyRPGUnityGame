@@ -115,24 +115,6 @@ public class CharacterCreation : MonoBehaviour
         }
     }
 
-    private string GetResourcePath(string fullPath)
-    {
-        string directory = Path.GetDirectoryName(fullPath);
-        int index = directory.IndexOf("Resources");
-
-        if (index == -1)
-        {
-            Debug.LogError($"GetResourcePath failed: 'Resources' not found in path '{fullPath}'");
-            return string.Empty;
-        }
-
-        string relativePath = directory.Substring(index + "Resources/".Length);
-        string fileName = Path.GetFileNameWithoutExtension(fullPath);
-
-        return Path.Combine(relativePath, fileName).Replace("\\", "/");
-    }
-
-
     private void SetSize()
     {
         _sidekickRuntime.BodyTypeBlendValue = _dictionaryLibrary.BodyTypeBlendValue;

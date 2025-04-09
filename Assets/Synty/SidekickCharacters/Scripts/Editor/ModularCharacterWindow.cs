@@ -11,6 +11,7 @@ using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Database.DTO;
 using Synty.SidekickCharacters.Enums;
+using Synty.SidekickCharacters.Filters;
 using Synty.SidekickCharacters.Serialization;
 using Synty.SidekickCharacters.SkinnedMesh;
 using Synty.SidekickCharacters.Utils;
@@ -63,10 +64,12 @@ namespace Synty.SidekickCharacters
         private readonly List<SidekickColorRow> _visibleColorRows = new List<SidekickColorRow>();
 
         private List<SidekickColorRow> _allColorRows = new List<SidekickColorRow>();
+        private List<SidekickPart> _allParts;
         private List<SidekickSpecies> _allSpecies;
         private ObjectField _animationField;
+        private FilterGroup _appliedPartFilters;
         private bool _applyingPreset = false;
-        private List<string> _availablePartList;
+        private List<SidekickPart> _availablePartList;
         private bool _bakeBlends = true;
         private ObjectField _baseModelField;
         private Dictionary<string, Vector3> _blendShapeRigMovement = new Dictionary<string, Vector3>();
@@ -86,6 +89,7 @@ namespace Synty.SidekickCharacters
         private bool _combineMeshes = true;
         private AnimatorController _currentAnimationController;
         private Dictionary<string, SidekickBodyShapePreset> _currentBodyPresetDictionary = new Dictionary<string, SidekickBodyShapePreset>();
+        private Dictionary<CharacterPartType, SidekickPart> _currentCharacter = new Dictionary<CharacterPartType, SidekickPart>();
         private Dictionary<string, SidekickColorPreset> _currentColorSpeciesPresetDictionary = new Dictionary<string, SidekickColorPreset>();
         private Dictionary<string, SidekickColorPreset> _currentColorOutfitsPresetDictionary = new Dictionary<string, SidekickColorPreset>();
         private Dictionary<string, SidekickColorPreset> _currentColorAttachmentsPresetDictionary = new Dictionary<string, SidekickColorPreset>();
@@ -120,8 +124,10 @@ namespace Synty.SidekickCharacters
         private Label _partCountLabel;
         private Dictionary<CharacterPartType, SkinnedMeshRenderer> _partDictionary;
         private Dictionary<CharacterPartType, Dictionary<string, string>> _partLibrary;
+        private Dictionary<CharacterPartType, List<SidekickPart>> _allPartsLibrary;
         private Dictionary<string, List<string>> _partOutfitMap;
         private Dictionary<CharacterPartType, PopupField<string>> _partSelectionDictionary;
+        private Foldout _partsFoldout;
         private Dictionary<SidekickSpecies, List<string>> _partSpeciesMap;
         private Dictionary<string, bool> _partOutfitToggleMap;
         private ScrollView _partView;
@@ -450,10 +456,12 @@ namespace Synty.SidekickCharacters
             AddOptionsTabContent(_optionSelectionView);
 
             _partDictionary = new Dictionary<CharacterPartType, SkinnedMeshRenderer>();
+            _currentCharacter = new Dictionary<CharacterPartType, SidekickPart>();
 
             _sidekickRuntime = new SidekickRuntime((GameObject) _baseModelField.value, (Material) _materialField.value, _currentAnimationController, _dbManager);
 
             _partLibrary = _sidekickRuntime.PopulatePartLibrary();
+            _allParts = SidekickPart.GetAll(_dbManager);
             _partCountLabel.text = _sidekickRuntime.PartCount + _PART_COUNT_BODY;
             _partOutfitMap = _sidekickRuntime.PartOutfitMap;
             _partOutfitToggleMap = _sidekickRuntime.PartOutfitToggleMap;
@@ -715,13 +723,7 @@ namespace Synty.SidekickCharacters
 
                     if (_newModel == null)
                     {
-                        List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
-                        foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
-                        {
-                            parts.Add(entry.Value);
-                        }
-
-                        _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, false, true);
+                        _newModel = GenerateCharacter(false, true);
                         UpdatePartUVData();
                     }
 
@@ -759,13 +761,7 @@ namespace Synty.SidekickCharacters
 
                     if (_newModel == null)
                     {
-                        List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
-                        foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
-                        {
-                            parts.Add(entry.Value);
-                        }
-
-                        _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, false, true);
+                        _newModel = GenerateCharacter(false, true);
                         UpdatePartUVData();
                     }
 
@@ -783,13 +779,7 @@ namespace Synty.SidekickCharacters
 
                     if (_newModel == null)
                     {
-                        List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
-                        foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
-                        {
-                            parts.Add(entry.Value);
-                        }
-
-                        _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, false, true);
+                        _newModel = GenerateCharacter(false, true);
                         UpdatePartUVData();
                     }
 
@@ -2524,13 +2514,7 @@ namespace Synty.SidekickCharacters
                     DestroyImmediate(_newModel);
                 }
 
-                List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
-                foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
-                {
-                    parts.Add(entry.Value);
-                }
-
-                _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, false, true);
+                _newModel = GenerateCharacter(false, true);
                 UpdatePartUVData();
             };
 
@@ -2720,9 +2704,14 @@ namespace Synty.SidekickCharacters
                                 {
                                     if (_partSelectionDictionary.TryGetValue(partType, out PopupField<string> currentField))
                                     {
+                                        if (presetPart.Part != null)
+                                        {
+                                            _currentCharacter[partType] = presetPart.Part;
+                                        }
+
                                         UpdateResult result = UpdatePartDropdown(
                                             currentField,
-                                            presetPart.PartName ?? "None",
+                                            presetPart.Part?.Name ?? "None",
                                             errorMessage,
                                             hasErrors
                                         );
@@ -2745,6 +2734,8 @@ namespace Synty.SidekickCharacters
                                 }
                             }
 
+                            RefreshPartDropdowns(_partsFoldout);
+
                             if (hasErrors)
                             {
                                 EditorUtility.DisplayDialog(
@@ -2763,13 +2754,7 @@ namespace Synty.SidekickCharacters
                                 DestroyImmediate(_newModel);
                             }
 
-                            List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
-                            foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
-                            {
-                                parts.Add(entry.Value);
-                            }
-
-                            _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, false, true);
+                            _newModel = GenerateCharacter(false, true);
                             UpdatePartUVData();
                             break;
                         case PresetDropdownType.Body:
@@ -2945,7 +2930,7 @@ namespace Synty.SidekickCharacters
         {
             _partView.Clear();
 
-            _availablePartList = new List<string>();
+            _availablePartList = new List<SidekickPart>();
             _partSelectionDictionary = new Dictionary<CharacterPartType, PopupField<string>>();
 
             Foldout speciesFoldout = new Foldout
@@ -2981,46 +2966,7 @@ namespace Synty.SidekickCharacters
             speciesFoldout.Add(_speciesField);
             _partView.Add(speciesFoldout);
 
-            // TODO: Uncomment when Outfit Filters are properly implemented
-            // Foldout filterFoldout = new Foldout()
-            // {
-            //     text = "Select - Outfit Filter",
-            //     style =
-            //     {
-            //         unityFontStyleAndWeight = new StyleEnum<FontStyle>(FontStyle.Bold)
-            //     }
-            // };
-            //
-            foreach (KeyValuePair<string, List<string>> outfitMap in _partOutfitMap)
-            {
-                Toggle outfitToggle = new Toggle(outfitMap.Key)
-                {
-                    value = _partOutfitToggleMap[outfitMap.Key]
-                };
-
-                if (outfitToggle.value)
-                {
-                    _availablePartList.AddRange(outfitMap.Value);
-                }
-
-                // TODO: Hidden due to early access, enable when feature complete
-                //
-                //     outfitToggle.RegisterValueChangedCallback(
-                //         evt =>
-                //         {
-                //             _partOutfitToggleMap[outfitMap.Key] = evt.newValue;
-                //             PopulatePartUI();
-                //         }
-                //     );
-                //
-                //     filterFoldout.Add(outfitToggle);
-            }
-
-            // TODO: Hidden due to early access, enable when feature complete
-            //
-            // _partView.Add(filterFoldout);
-
-            Foldout partsFoldout = new Foldout()
+            _partsFoldout = new Foldout()
             {
                 text = "Select - Parts",
                 style =
@@ -3028,6 +2974,162 @@ namespace Synty.SidekickCharacters
                     unityFontStyleAndWeight = new StyleEnum<FontStyle>(FontStyle.Bold)
                 }
             };
+
+            List<SidekickPartFilter> outfitFilters = SidekickPartFilter.GetAllForFilterType(_dbManager, FilterType.Outfit);
+            List<SidekickPartFilter> orderedFilters = new List<SidekickPartFilter>();
+
+            SidekickPartFilter allFilter = outfitFilters.Find(filter => filter.Term == "All");
+            if (allFilter != null)
+            {
+                orderedFilters.Add(allFilter);
+                outfitFilters.Remove(allFilter);
+            }
+
+            outfitFilters.Sort(
+                (filterA, filterB) => String.CompareOrdinal(filterA.Term, filterB.Term)
+            );
+
+            orderedFilters.AddRange(outfitFilters);
+
+            Foldout filterFoldout = new Foldout()
+            {
+                text = "Select - Outfit Filter",
+                style =
+                {
+                    unityFontStyleAndWeight = new StyleEnum<FontStyle>(FontStyle.Bold)
+                }
+            };
+
+            _appliedPartFilters = new FilterGroup()
+            {
+                DbManager = _dbManager,
+                CombineType = FilterCombineType.Or
+            };
+
+            ScrollView toggleList = new ScrollView()
+            {
+                style =
+                {
+                    maxHeight = 150
+                },
+                horizontalScrollerVisibility = ScrollerVisibility.Hidden
+            };
+
+            List<Toggle> allFilterToggles = new List<Toggle>();
+
+            foreach (SidekickPartFilter filter in orderedFilters)
+            {
+                Toggle outfitToggle = new Toggle(filter.Term)
+                {
+                    value = true
+                };
+
+                FilterItem filterItem = new FilterItem(_dbManager, filter, FilterCombineType.Or);
+                _appliedPartFilters.AddFilterItem(filterItem);
+
+                outfitToggle.RegisterValueChangedCallback(
+                    evt =>
+                    {
+                        if (evt.newValue)
+                        {
+                            _appliedPartFilters.AddFilterItem(filterItem);
+                        }
+                        else
+                        {
+                            _appliedPartFilters.RemoveFilterItem(filterItem);
+                        }
+                        RefreshPartDropdowns(_partsFoldout);
+                    }
+                );
+
+                toggleList.Add(outfitToggle);
+                allFilterToggles.Add(outfitToggle);
+            }
+
+            filterFoldout.Add(toggleList);
+
+            VisualElement buttonRow = new VisualElement()
+            {
+                style =
+                {
+                    flexDirection = new StyleEnum<FlexDirection>(FlexDirection.Row)
+                }
+            };
+
+            Button selectAll = new Button(
+                delegate
+                {
+                    foreach (Toggle toggle in allFilterToggles)
+                    {
+                        toggle.value = true;
+                    }
+                }
+            )
+            {
+                text = "Select All"
+            };
+
+            Button selectNone = new Button(
+                delegate
+                {
+                    foreach (Toggle toggle in allFilterToggles)
+                    {
+                        toggle.value = false;
+                    }
+                }
+            )
+            {
+                text = "Select None"
+            };
+
+            buttonRow.Add(selectAll);
+            buttonRow.Add(selectNone);
+
+            filterFoldout.Add(buttonRow);
+
+            // foreach (KeyValuePair<string, List<string>> outfitMap in _partOutfitMap)
+            // {
+            //     Toggle outfitToggle = new Toggle(outfitMap.Key)
+            //     {
+            //         value = _partOutfitToggleMap[outfitMap.Key]
+            //     };
+            //
+            //     if (outfitToggle.value)
+            //     {
+            //         _availablePartList.AddRange(outfitMap.Value);
+            //     }
+            //
+            //     // TODO: Hidden due to early access, enable when feature complete
+            //     //
+            //     //     outfitToggle.RegisterValueChangedCallback(
+            //     //         evt =>
+            //     //         {
+            //     //             _partOutfitToggleMap[outfitMap.Key] = evt.newValue;
+            //     //             PopulatePartUI();
+            //     //         }
+            //     //     );
+            //
+            //         // filterFoldout.Add(outfitToggle);
+            // }
+
+            // TODO: Hidden due to early access, enable when feature complete
+            _partView.Add(filterFoldout);
+
+            RefreshPartDropdowns(_partsFoldout);
+
+            _partView.Add(_partsFoldout);
+        }
+
+        /// <summary>
+        ///     Refreshes the part dropdown UI
+        /// </summary>
+        /// <param name="view">The view to populate the part dropdown UI into</param>
+        private void RefreshPartDropdowns(VisualElement view)
+        {
+            view.Clear();
+
+            _availablePartList = _appliedPartFilters.GetFilteredParts();
+            _partSelectionDictionary = new Dictionary<CharacterPartType, PopupField<string>>();
 
             foreach (PartGroup partGroup in Enum.GetValues(typeof(PartGroup)))
             {
@@ -3060,10 +3162,8 @@ namespace Synty.SidekickCharacters
                     BuildPartDetails(value, partContainer);
                     partGroupFoldout.Add(partContainer);
                 }
-                partsFoldout.Add(partGroupFoldout);
+                view.Add(partGroupFoldout);
             }
-
-            _partView.Add(partsFoldout);
         }
 
         /// <summary>
@@ -3073,7 +3173,7 @@ namespace Synty.SidekickCharacters
         /// <param name="partContainer">The container to add the UI to.</param>
         private void BuildPartDetails(CharacterPartType type, VisualElement partContainer)
         {
-            Dictionary<string, string> partsList = _partLibrary[type];
+            List<SidekickPart> partsList = _allPartsLibrary[type];
 
             Label partTypeTitle = new Label(type.ToString())
             {
@@ -3148,27 +3248,22 @@ namespace Synty.SidekickCharacters
                 "None"
             };
 
-            foreach (string key in partsList.Keys.ToList())
+            foreach (SidekickPart part in partsList)
             {
-                if ((!(type.IsSpeciesSpecificPartType() || PartUtils.IsBaseSpeciesPart(key))
-                        || _currentSpecies.ID == SidekickPart.GetSpeciesForPart(_allSpecies, key).ID)
-                    && _availablePartList.Contains(key))
+                if ((!(type.IsSpeciesSpecificPartType() || PartUtils.IsBaseSpeciesPart(part.Name))
+                        || _currentSpecies.ID == part.Species.ID)
+                    && _availablePartList.Any(p => p.ID == part.ID))
                 {
-                    popupValues.Add(key);
+                    popupValues.Add(part.Name);
                 }
             }
 
-            string currentSelection = _currentPartSelections[type];
-            if (!popupValues.Contains(currentSelection))
+            // string currentSelection = _currentPartSelections[type];
+            _currentCharacter.TryGetValue(type, out SidekickPart selectedPart);
+            string currentSelection = selectedPart?.Name ?? "None";
+            if (_processingSpeciesChange && PartUtils.IsBaseSpeciesPart(currentSelection))
             {
-                if (_processingSpeciesChange && PartUtils.IsBaseSpeciesPart(currentSelection))
-                {
-                    currentSelection = popupValues.Find(n => n.Contains("BASE"))?? "None";
-                }
-                else
-                {
-                    currentSelection = "None";
-                }
+                currentSelection = popupValues.Find(n => n.Contains("BASE"))?? "None";
             }
 
             PopupField<string> partSelection = new PopupField<string>(popupValues, 0)
@@ -3178,12 +3273,20 @@ namespace Synty.SidekickCharacters
             partSelection.RegisterCallback<ChangeEvent<string>>(
                 changeEvent =>
                 {
-                    if (partsList.TryGetValue(changeEvent.newValue, out string partPath))
+                    SidekickPart selectedPart = partsList.FirstOrDefault(p => p.Name == changeEvent.newValue);
+                    if (selectedPart != null)
                     {
-                        GameObject selectedPart = AssetDatabase.LoadAssetAtPath<GameObject>(partPath);
-                        SkinnedMeshRenderer selectedMesh = selectedPart.GetComponentInChildren<SkinnedMeshRenderer>();
+                        GameObject partModel = selectedPart.GetPartModel();
+                        SkinnedMeshRenderer selectedMesh = partModel.GetComponentInChildren<SkinnedMeshRenderer>();
                         _partDictionary[type] = selectedMesh;
                         _currentPartSelections[type] = changeEvent.newValue;
+                        _currentCharacter[type] = selectedPart;
+                    }
+                    else if (changeEvent.newValue == "None")
+                    {
+                        _currentCharacter.Remove(type);
+                        _currentPartSelections.Remove(type);
+                        _partDictionary.Remove(type);
                     }
                     else
                     {
@@ -3197,12 +3300,7 @@ namespace Synty.SidekickCharacters
                             DestroyImmediate(_newModel);
                         }
 
-                        List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
-                        foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
-                        {
-                            parts.Add(entry.Value);
-                        }
-                        _newModel = _sidekickRuntime.CreateCharacter( _OUTPUT_MODEL_NAME, parts, false, true);
+                        _newModel = GenerateCharacter(false, true);
                         UpdatePartUVData();
                     }
 
@@ -3214,20 +3312,6 @@ namespace Synty.SidekickCharacters
             );
 
             _partSelectionDictionary.Add(type, partSelection);
-
-            // If a part has previously been selected when the library is updated, it will try to reselect that part.
-            if (_partDictionary.TryGetValue(type, out SkinnedMeshRenderer skinnedMesh))
-            {
-                if (partSelection.choices.Contains(skinnedMesh.name))
-                {
-                    partSelection.index = partSelection.choices.IndexOf(skinnedMesh.name);
-                }
-                else
-                {
-                    partSelection.value = "None";
-                    _partDictionary.Remove(type);
-                }
-            }
 
             // Disable buttons based on what the current selected index is, or both if no parts to select.
             previousButton.SetEnabled(partSelection.index > 0);
@@ -3290,6 +3374,30 @@ namespace Synty.SidekickCharacters
         }
 
         /// <summary>
+        ///     Generates a character from the current selected parts.
+        /// </summary>
+        private GameObject GenerateCharacter(bool combineMesh, bool processBoneMovement)
+        {
+            List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
+            foreach (KeyValuePair<CharacterPartType, SidekickPart> entry in _currentCharacter)
+            {
+                if (entry.Value != null)
+                {
+                    GameObject partModel = entry.Value.GetPartModel();
+                    SkinnedMeshRenderer selectedMesh = partModel.GetComponentInChildren<SkinnedMeshRenderer>();
+                    if (selectedMesh != null)
+                    {
+                        parts.Add(selectedMesh);
+                    }
+                }
+            }
+
+            GameObject newModel = _sidekickRuntime.CreateCharacter( _OUTPUT_MODEL_NAME, parts, combineMesh, processBoneMovement);
+
+            return newModel;
+        }
+
+        /// <summary>
         ///     Saves a character (Parts and Colors) out to a file which can be imported by the tool into any project.
         /// </summary>
         private void SaveCharacter()
@@ -3343,10 +3451,10 @@ namespace Synty.SidekickCharacters
             };
 
             List<SerializedPart> usedParts = new List<SerializedPart>();
-            foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
+            foreach (KeyValuePair<CharacterPartType, SidekickPart> entry in _currentCharacter)
             {
                 // TODO: Update the part version to use actual version once the information is available.
-                usedParts.Add(new SerializedPart(entry.Value.name, entry.Key, "1"));
+                usedParts.Add(new SerializedPart(entry.Value.Name, entry.Key, "1"));
             }
 
             savedCharacter.Parts = usedParts;
@@ -3416,9 +3524,10 @@ namespace Synty.SidekickCharacters
             {
                 PopupField<string> currentField = _partSelectionDictionary[currentType];
                 SerializedPart part = serializedCharacter.Parts.FirstOrDefault(p => p.PartType == currentType);
-                if (part != null)
+                SidekickPart skPart = SidekickPart.SearchForByName(_dbManager, part?.Name);
+                if (skPart != null)
                 {
-                    UpdateResult result = UpdatePartDropdown(currentField, part.Name, errorMessage, hasErrors);
+                    UpdateResult result = UpdatePartDropdown(currentField, skPart.Name, errorMessage, hasErrors);
                     hasErrors = result.HasErrors;
                     errorMessage = result.ErrorMessage;
                 }
@@ -3452,13 +3561,8 @@ namespace Synty.SidekickCharacters
                 DestroyImmediate(_newModel);
             }
 
-            List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
-            foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
-            {
-                parts.Add(entry.Value);
-            }
-
-            _newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, _combineMeshes, true);
+            _newModel = GenerateCharacter(_combineMeshes, true);
+            UpdatePartUVData();
         }
 
         /// <summary>
@@ -3471,9 +3575,21 @@ namespace Synty.SidekickCharacters
         /// <returns>A PartUpdateResult with the results of the update.</returns>
         private UpdateResult UpdatePartDropdown(PopupField<string> currentField, string partName, string errorMessage, bool hasErrors)
         {
-            if (currentField.choices.Contains(partName))
+            if (partName == "None" || _allParts.Any(part => part.Name == partName))
             {
-                currentField.value = partName;
+                if (!currentField.choices.Contains(partName) && PartUtils.IsBaseSpeciesPart(partName))
+                {
+                    currentField.value = currentField.choices.Find(n => n.Contains("BASE")) ?? "None";
+                    if (currentField.value == "None")
+                    {
+                        hasErrors = true;
+                        errorMessage += partName + "\n";
+                    }
+                }
+                else
+                {
+                    currentField.value = partName;
+                }
             }
             else if (PartUtils.IsBaseSpeciesPart(partName))
             {
@@ -3639,15 +3755,7 @@ namespace Synty.SidekickCharacters
             }
             AssetDatabase.Refresh();
 
-            List<SkinnedMeshRenderer> parts = new List<SkinnedMeshRenderer>();
-            foreach (KeyValuePair<CharacterPartType, SkinnedMeshRenderer> entry in _partDictionary)
-            {
-                parts.Add(entry.Value);
-            }
-
-            // don't process bone movements here. we need to bake the mesh first
-            GameObject clonedModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, _combineMeshes, false);
-            UpdatePartUVData();
+            GameObject clonedModel = GenerateCharacter(_combineMeshes, false);
 
             List<SkinnedMeshRenderer> allRenderers = clonedModel.GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
             SkinnedMeshRenderer clonedRenderer = allRenderers[0];

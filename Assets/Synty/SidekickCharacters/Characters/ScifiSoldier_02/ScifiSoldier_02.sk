@@ -1,3 +1,4 @@
+Name: ScifiSoldier_02
 Species: 1
 Parts:
 - Name: SK_HUMN_BASE_01_01HEAD_HU01
@@ -6,8 +7,8 @@ Parts:
 - Name: SK_HUMN_BASE_01_03EBRL_HU01
   PartType: EyebrowLeft
   PartVersion: 1
-- Name: SK_SCFI_SOLD_02_11AUPL_HU01
-  PartType: ArmUpperLeft
+- Name: SK_HUMN_BASE_01_04EBRR_HU01
+  PartType: EyebrowRight
   PartVersion: 1
 - Name: SK_HUMN_BASE_01_05EYEL_HU01
   PartType: EyeLeft
@@ -21,20 +22,11 @@ Parts:
 - Name: SK_HUMN_BASE_01_08EARR_HU01
   PartType: EarRight
   PartVersion: 1
-- Name: SK_HUMN_BASE_01_04EBRR_HU01
-  PartType: EyebrowRight
-  PartVersion: 1
-- Name: SK_HUMN_BASE_01_35NOSE_HU01
-  PartType: Nose
-  PartVersion: 1
 - Name: SK_SCFI_SOLD_08_10TORS_HU01
   PartType: Torso
   PartVersion: 1
-- Name: SK_SCFI_SOLD_01_36TETH_HU01
-  PartType: Teeth
-  PartVersion: 1
-- Name: SK_HUMN_BASE_01_37TONG_HU01
-  PartType: Tongue
+- Name: SK_SCFI_SOLD_02_11AUPL_HU01
+  PartType: ArmUpperLeft
   PartVersion: 1
 - Name: SK_SCFI_SOLD_02_12AUPR_HU01
   PartType: ArmUpperRight
@@ -51,18 +43,6 @@ Parts:
 - Name: SK_SCFI_SOLD_03_16HNDR_HU01
   PartType: HandRight
   PartVersion: 1
-- Name: SK_SCFI_SOLD_02_24ABAC_HU01
-  PartType: AttachmentBack
-  PartVersion: 1
-- Name: SK_SCFI_SOLD_02_29ASHL_HU01
-  PartType: AttachmentShoulderLeft
-  PartVersion: 1
-- Name: SK_SCFI_SOLD_02_31AEBL_HU01
-  PartType: AttachmentElbowLeft
-  PartVersion: 1
-- Name: SK_SCFI_SOLD_02_32AEBR_HU01
-  PartType: AttachmentElbowRight
-  PartVersion: 1
 - Name: SK_SCFI_SOLD_02_17HIPS_HU01
   PartType: Hips
   PartVersion: 1
@@ -72,32 +52,53 @@ Parts:
 - Name: SK_SCFI_SOLD_06_19LEGR_HU01
   PartType: LegRight
   PartVersion: 1
+- Name: SK_SCFI_SOLD_04_20FOTL_HU01
+  PartType: FootLeft
+  PartVersion: 1
 - Name: SK_SCFI_SOLD_04_21FOTR_HU01
   PartType: FootRight
-  PartVersion: 1
-- Name: SK_SCFI_SOLD_04_27AHPL_HU01
-  PartType: AttachmentHipsLeft
-  PartVersion: 1
-- Name: SK_SCFI_SOLD_02_26AHPB_HU01
-  PartType: AttachmentHipsBack
-  PartVersion: 1
-- Name: SK_SCFI_SOLD_08_28AHPR_HU01
-  PartType: AttachmentHipsRight
   PartVersion: 1
 - Name: SK_SCFI_SOLD_02_22AHED_HU01
   PartType: AttachmentHead
   PartVersion: 1
+- Name: SK_SCFI_SOLD_02_24ABAC_HU01
+  PartType: AttachmentBack
+  PartVersion: 1
+- Name: SK_SCFI_SOLD_02_29ASHL_HU01
+  PartType: AttachmentShoulderLeft
+  PartVersion: 1
+- Name: SK_SCFI_SOLD_04_27AHPL_HU01
+  PartType: AttachmentHipsLeft
+  PartVersion: 1
+- Name: SK_SCFI_SOLD_08_28AHPR_HU01
+  PartType: AttachmentHipsRight
+  PartVersion: 1
 - Name: SK_SCFI_SOLD_02_30ASHR_HU01
   PartType: AttachmentShoulderRight
   PartVersion: 1
-- Name: SK_SCFI_SOLD_04_20FOTL_HU01
-  PartType: FootLeft
+- Name: SK_HUMN_BASE_01_35NOSE_HU01
+  PartType: Nose
   PartVersion: 1
 - Name: SK_SCFI_SOLD_02_33AKNL_HU01
   PartType: AttachmentKneeLeft
   PartVersion: 1
 - Name: SK_SCFI_SOLD_02_34AKNR_HU01
   PartType: AttachmentKneeRight
+  PartVersion: 1
+- Name: SK_SCFI_SOLD_02_32AEBR_HU01
+  PartType: AttachmentElbowRight
+  PartVersion: 1
+- Name: SK_SCFI_SOLD_01_36TETH_HU01
+  PartType: Teeth
+  PartVersion: 1
+- Name: SK_HUMN_BASE_01_37TONG_HU01
+  PartType: Tongue
+  PartVersion: 1
+- Name: SK_SCFI_SOLD_02_31AEBL_HU01
+  PartType: AttachmentElbowLeft
+  PartVersion: 1
+- Name: SK_SCFI_SOLD_02_26AHPB_HU01
+  PartType: AttachmentHipsBack
   PartVersion: 1
 ColorSet:
   Species: 1
@@ -1498,5 +1499,5 @@ ColorRows:
   Opacity: FFFFFF
 BlendShapes:
   BodyTypeValue: 100
-  BodySizeValue: 71
+  BodySizeValue: 11.3999996
   MuscleValue: -100

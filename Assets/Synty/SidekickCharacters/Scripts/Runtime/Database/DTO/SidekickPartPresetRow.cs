@@ -16,6 +16,7 @@ namespace Synty.SidekickCharacters.Database.DTO
     public class SidekickPartPresetRow
     {
         private SidekickPartPreset _partPreset;
+        private SidekickPart _part;
 
         [PrimaryKey]
         [AutoIncrement]
@@ -25,6 +26,9 @@ namespace Synty.SidekickCharacters.Database.DTO
         public string PartName { get; set; }
         [Column("ptr_part_preset")]
         public int PtrPreset { get; set; }
+
+        [Column("ptr_part")]
+        public int PtrPart { get; set; } = -1;
         [Column("part_type")]
         public string PartType { get; set; }
 
@@ -36,6 +40,17 @@ namespace Synty.SidekickCharacters.Database.DTO
             {
                 _partPreset = value;
                 PtrPreset = value.ID;
+            }
+        }
+
+        [Ignore]
+        public SidekickPart Part
+        {
+            get => _part;
+            set
+            {
+                _part = value;
+                PtrPart = value.ID;
             }
         }
 
@@ -83,7 +98,7 @@ namespace Synty.SidekickCharacters.Database.DTO
 
             foreach (SidekickPartPresetRow presetPart in presetParts)
             {
-                presetPart.PartPreset = partPreset;
+                Decorate(dbManager, presetPart);
             }
 
             return presetParts;
@@ -97,7 +112,27 @@ namespace Synty.SidekickCharacters.Database.DTO
         /// <returns>A color set with all DTO class properties set</returns>
         private static void Decorate(DatabaseManager dbManager, SidekickPartPresetRow partPreset)
         {
-            partPreset.PartPreset ??= SidekickPartPreset.GetByID(dbManager, partPreset.PtrPreset);
+            if (partPreset != null)
+            {
+                if (partPreset.PartPreset == null && partPreset.PtrPreset >= 0)
+                {
+                    partPreset.PartPreset = SidekickPartPreset.GetByID(dbManager, partPreset.PtrPreset);
+                }
+
+                if (partPreset.Part == null && partPreset.PtrPart >= 0)
+                {
+                    partPreset.Part = SidekickPart.GetByID(dbManager, partPreset.PtrPart);
+                }
+                else if (partPreset.Part == null && partPreset.PtrPart < 0)
+                {
+                    SidekickPart part = SidekickPart.SearchForByName(dbManager, partPreset.PartName);
+                    if (part != null)
+                    {
+                        partPreset.Part = part;
+                    }
+                }
+            }
+
         }
 
         /// <summary>

@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &381040922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 381040923}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &381040923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381040922}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 718.1219, y: -685.2018, z: 1001.7871}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &720194139
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +168,7 @@ GameObject:
   - component: {fileID: 720194142}
   - component: {fileID: 720194141}
   - component: {fileID: 720194140}
+  - component: {fileID: 720194150}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -281,6 +313,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &720194150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720194139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b4cac08a3999a498df145e4db0e09c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1386036004
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,11 +395,11 @@ Light:
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 2
-  m_AreaSize: {x: 1, y: 1}
+  m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 6.8133e-40, y: 2.524355e-29, z: 0, w: 8.3e-44}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 10.353554}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -373,7 +417,7 @@ Transform:
   m_GameObject: {fileID: 1386036004}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 548, y: 238, z: 436}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -532,9 +576,7 @@ GameObject:
   - component: {fileID: 1420768799}
   - component: {fileID: 1420768798}
   - component: {fileID: 1420768797}
-  - component: {fileID: 1420768802}
-  - component: {fileID: 1420768801}
-  - component: {fileID: 1420768800}
+  - component: {fileID: 1420768803}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -594,8 +636,8 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
+  m_HDR: 0
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -616,7 +658,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1420768800
+--- !u!114 &1420768803
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -625,263 +667,136 @@ MonoBehaviour:
   m_GameObject: {fileID: 1420768796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 721e59e8d6c5af944bc5ca4b238ac893, type: 3}
+  m_Script: {fileID: 11500000, guid: 23c1ce4fb46143f46bc5cb5224c934f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_States:
-  - m_Name: Default
-    m_Preset: {fileID: 0}
-    m_BlockList: []
-    m_Default: 1
-  m_ColorPropertyName: _BaseColor
-  m_ModePropertyName: _Surface
-  m_ModeTransparentValue: 1
-  m_CharacterFade: 1
-  m_CacheCharacterMaterials: 1
-  m_StartFadeDistance: 1.8
-  m_EndFadeDistance: 1
-  m_CharacterFadeStateChangeCooldown: 0.3
-  m_ObstructingObjectsFade: 0
-  m_CollisionRadius: 0.05
-  m_FadeSpeed: 0.02
-  m_FadeColor: {r: 1, g: 1, b: 1, a: 0}
-  m_AutoSetMode: 0
-  m_DisableCollider: 1
-  m_MaxObstructingColliderCount: 20
-  m_MaxObstructingMaterialCount: 30
-  m_TransformOffset: {x: 0, y: 0.9, z: 0}
---- !u!114 &1420768801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420768796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17fc15acee3ae0748a3d9254b8292944, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ZoomInputName: Fire2
-  m_ContinuousZoom: 1
-  m_TogglePerspectiveInputName: Toggle Perspective
---- !u!114 &1420768802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420768796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2abbde65f14b8a340a813027b901bfaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_States:
-  - m_Name: Default
-    m_Preset: {fileID: 0}
-    m_BlockList: []
-    m_Default: 1
-  m_InitCharacterOnAwake: 1
-  m_Character: {fileID: 0}
-  m_Anchor: {fileID: 0}
-  m_AutoAnchor: 0
-  m_AutoAnchorBone: 10
-  m_AnchorOffset: {x: 0, y: 1.8, z: 0}
-  m_ViewTypeFullName: Opsive.UltimateCharacterController.FirstPersonController.Camera.ViewTypes.Combat
-  m_FirstPersonViewTypeFullName: Opsive.UltimateCharacterController.FirstPersonController.Camera.ViewTypes.Combat
-  m_ThirdPersonViewTypeFullName: Opsive.UltimateCharacterController.ThirdPersonController.Camera.ViewTypes.Adventure
-  m_ViewTypes:
-  - rid: 45326298446299160
-  - rid: 45326298446299161
-  - rid: 45326298446299162
-  m_CanChangePerspectives: 1
-  m_CanZoom: 1
-  m_ZoomState: Zoom
-  m_AdjustWithTimescale: 1
-  m_StateAppendItemIdentifierName: 0
-  m_OnChangeViewTypesEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnChangePerspectivesEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_OnZoomEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  references:
-    version: 2
-    RefIds:
-    - rid: 45326298446299160
-      type: {class: Transition, ns: Opsive.UltimateCharacterController.Camera.ViewTypes, asm: Opsive.UltimateCharacterController}
-      data:
-        m_States:
-        - m_Name: Default
-          m_Preset: {fileID: 0}
-          m_BlockList: []
-          m_Default: 1
-        m_FieldOfView: 70
-        m_FieldOfViewDamping: 0.2
-        m_FirstToThirdTransitionDuration: 0.1
-        m_StartFirstPersonCameraOffset: {x: 0, y: 0, z: -0.4}
-        m_ThirdToFirstTransitionDuration: 0.1
-        m_EndFirstPersonCameraOffset: {x: 0, y: 0, z: -0.4}
-        m_ThirdToThirdTransitionDuration: 0.1
-    - rid: 45326298446299161
-      type: {class: Adventure, ns: Opsive.UltimateCharacterController.ThirdPersonController.Camera.ViewTypes, asm: Opsive.UltimateCharacterController}
-      data:
-        m_States:
-        - m_Name: Default
-          m_Preset: {fileID: 0}
-          m_BlockList: []
-          m_Default: 1
-        m_FieldOfView: 70
-        m_FieldOfViewDamping: 0.2
-        m_LookDirectionDistance: 100
-        m_ForwardAxis: {x: 0, y: 0, z: 1}
-        m_LookOffset: {x: 0.5, y: 0, z: -2.5}
-        m_LookOffsetSmoothing: 0.05
-        m_CollisionRadius: 0.05
-        m_CollisionAnchorOffset: {x: 0, y: 0, z: 0}
-        m_RotationSpeed: 0.6
-        m_SecondaryRotationSpeed: 0.8
-        m_HorizontalPivotFreedom: 0
-        m_PositionSpring:
-          m_Stiffness: 0.2
-          m_Damping: 0.25
-          m_VelocityFadeInLength: 1
-          m_MaxSoftForceFrames: 120
-          m_MinVelocity: 0.00001
-          m_MaxVelocity: 10000
-          m_MinValue: {x: -10000, y: -10000, z: -10000}
-          m_MaxValue: {x: 10000, y: 10000, z: 10000}
-        m_RotationSpring:
-          m_Stiffness: 0.2
-          m_Damping: 0.25
-          m_VelocityFadeInLength: 1
-          m_MaxSoftForceFrames: 120
-          m_MinVelocity: 0.00001
-          m_MaxVelocity: 10000
-          m_MinValue: {x: -10000, y: -10000, z: -10000}
-          m_MaxValue: {x: 10000, y: 10000, z: 10000}
-        m_SecondaryPositionSpring:
-          m_Stiffness: 0.2
-          m_Damping: 0.25
-          m_VelocityFadeInLength: 1
-          m_MaxSoftForceFrames: 120
-          m_MinVelocity: 0.00001
-          m_MaxVelocity: 10000
-          m_MinValue: {x: -10000, y: -10000, z: -10000}
-          m_MaxValue: {x: 10000, y: 10000, z: 10000}
-        m_SecondaryRotationSpring:
-          m_Stiffness: 0.2
-          m_Damping: 0.25
-          m_VelocityFadeInLength: 1
-          m_MaxSoftForceFrames: 120
-          m_MinVelocity: 0.00001
-          m_MaxVelocity: 10000
-          m_MinValue: {x: -10000, y: -10000, z: -10000}
-          m_MaxValue: {x: 10000, y: 10000, z: 10000}
-        m_StepZoomInputName: Mouse ScrollWheel
-        m_StepZoomSensitivity: 0
-        m_StepZoomLimit:
-          m_MinValue: 0
-          m_MaxValue: 1
-        m_PitchLimit:
-          m_MinValue: -72
-          m_MaxValue: 72
-        m_YawLimit:
-          m_MinValue: -180
-          m_MaxValue: 180
-        m_YawLimitLerpSpeed: 0.7
-        m_RotateWithCharacter: 0
-    - rid: 45326298446299162
-      type: {class: Combat, ns: Opsive.UltimateCharacterController.FirstPersonController.Camera.ViewTypes, asm: Opsive.UltimateCharacterController}
-      data:
-        m_States:
-        - m_Name: Default
-          m_Preset: {fileID: 0}
-          m_BlockList: []
-          m_Default: 1
-        m_FieldOfView: 70
-        m_FieldOfViewDamping: 0.2
-        m_LookDirectionDistance: 100
-        m_LookOffset: {x: 0, y: 0.1, z: 0.27}
-        m_LookDownOffset: {x: 0, y: 0, z: 0.28}
-        m_CullingMask:
-          serializedVersion: 2
-          m_Bits: 3758096383
-        m_FirstPersonPositionOffset: {x: 0, y: 0, z: 0}
-        m_FirstPersonRotationOffset: {x: 0, y: 0, z: 0}
-        m_OverlayRenderType: 1
-        m_FirstPersonCamera: {fileID: 0}
-        m_FirstPersonCullingMask:
-          serializedVersion: 2
-          m_Bits: 536870912
-        m_SynchronizeFieldOfView: 1
-        m_FirstPersonFieldOfView: 30
-        m_FirstPersonFieldOfViewDamping: 0.2
-        m_PositionLowerVerticalLimit: 0.25
-        m_PositionFallImpact: 2
-        m_PositionFallImpactSoftness: 4
-        m_RotationStrafeRoll: 0.01
-        m_RotationFallImpact: 0.1
-        m_RotationFallImpactSoftness: 1
-        m_SecondaryRotationSpeed: 0.8
-        m_PositionSpring:
-          m_Stiffness: 0.2
-          m_Damping: 0.25
-          m_VelocityFadeInLength: 1
-          m_MaxSoftForceFrames: 120
-          m_MinVelocity: 0.00001
-          m_MaxVelocity: 10000
-          m_MinValue: {x: -10000, y: -10000, z: -10000}
-          m_MaxValue: {x: 10000, y: 10000, z: 10000}
-        m_RotationSpring:
-          m_Stiffness: 0.2
-          m_Damping: 0.25
-          m_VelocityFadeInLength: 1
-          m_MaxSoftForceFrames: 120
-          m_MinVelocity: 0.00001
-          m_MaxVelocity: 10000
-          m_MinValue: {x: -10000, y: -10000, z: -10000}
-          m_MaxValue: {x: 10000, y: 10000, z: 10000}
-        m_SecondaryPositionSpring:
-          m_Stiffness: 0.2
-          m_Damping: 0.25
-          m_VelocityFadeInLength: 1
-          m_MaxSoftForceFrames: 120
-          m_MinVelocity: 0.00001
-          m_MaxVelocity: 10000
-          m_MinValue: {x: -10000, y: -10000, z: -10000}
-          m_MaxValue: {x: 10000, y: 10000, z: 10000}
-        m_SecondaryRotationSpring:
-          m_Stiffness: 0.2
-          m_Damping: 0.25
-          m_VelocityFadeInLength: 1
-          m_MaxSoftForceFrames: 120
-          m_MinVelocity: 0.00001
-          m_MaxVelocity: 10000
-          m_MinValue: {x: -10000, y: -10000, z: -10000}
-          m_MaxValue: {x: 10000, y: 10000, z: 10000}
-        m_PitchLimit:
-          m_MinValue: -72
-          m_MaxValue: 72
-        m_BobPositionalRate: {x: 0, y: 1.4, z: 0}
-        m_BobPositionalAmplitude: {x: 0, y: 0.35, z: 0}
-        m_BobRollRate: 0.9
-        m_BobRollAmplitude: 1.7
-        m_BobInputVelocityScale: 1
-        m_BobMaxInputVelocity: 1000
-        m_BobMinTroughVerticalOffset: -0.01
-        m_BobTroughForce: {x: 0, y: 0, z: 0}
-        m_BobRequireGroundContact: 1
-        m_ShakeSpeed: 0.1
-        m_ShakeAmplitude: {x: 10, y: 10, z: 0}
-        m_SmoothHeadOffsetSteps: 2
-        m_CollisionRadius: 0.05
-        m_RotateWithHead: 0
-        m_VerticalOffsetLerpSpeed: 0.2
+  clearColorMode: 0
+  backgroundColorHDR: {r: 0.025, g: 0.07, b: 0.19, a: 0}
+  clearDepth: 1
+  volumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  volumeAnchorOverride: {fileID: 0}
+  antialiasing: 0
+  SMAAQuality: 2
+  dithering: 0
+  stopNaNs: 0
+  taaSharpenStrength: 0.5
+  TAAQuality: 1
+  taaSharpenMode: 0
+  taaRingingReduction: 0
+  taaHistorySharpening: 0.35
+  taaAntiFlicker: 0.5
+  taaMotionVectorRejection: 0
+  taaAntiHistoryRinging: 0
+  taaBaseBlendFactor: 0.875
+  taaJitterScale: 1
+  physicalParameters:
+    m_Iso: 200
+    m_ShutterSpeed: 0.005
+    m_Aperture: 16
+    m_FocusDistance: 10
+    m_BladeCount: 5
+    m_Curvature: {x: 2, y: 11}
+    m_BarrelClipping: 0.25
+    m_Anamorphism: 0
+  flipYMode: 0
+  xrRendering: 1
+  fullscreenPassthrough: 0
+  allowDynamicResolution: 0
+  customRenderingSettings: 0
+  invertFaceCulling: 0
+  probeLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  hasPersistentHistory: 0
+  screenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  screenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  allowDeepLearningSuperSampling: 1
+  deepLearningSuperSamplingUseCustomQualitySettings: 0
+  deepLearningSuperSamplingQuality: 0
+  deepLearningSuperSamplingUseCustomAttributes: 0
+  deepLearningSuperSamplingUseOptimalSettings: 1
+  deepLearningSuperSamplingSharpening: 0
+  allowFidelityFX2SuperResolution: 1
+  fidelityFX2SuperResolutionUseCustomQualitySettings: 0
+  fidelityFX2SuperResolutionQuality: 0
+  fidelityFX2SuperResolutionUseCustomAttributes: 0
+  fidelityFX2SuperResolutionUseOptimalSettings: 1
+  fidelityFX2SuperResolutionEnableSharpening: 0
+  fidelityFX2SuperResolutionSharpening: 0
+  fsrOverrideSharpness: 0
+  fsrSharpness: 0.92
+  exposureTarget: {fileID: 0}
+  materialMipBias: 0
+  m_RenderingPathCustomFrameSettings:
+    bitDatas:
+      data1: 5770166122053453
+      data2: 12934340311651418136
+    lodBias: 1
+    lodBiasMode: 0
+    lodBiasQualityLevel: 0
+    maximumLODLevel: 0
+    maximumLODLevelMode: 0
+    maximumLODLevelQualityLevel: 0
+    sssQualityMode: 0
+    sssQualityLevel: 0
+    sssCustomSampleBudget: 20
+    sssCustomDownsampleSteps: 0
+    msaaMode: 1
+    materialQuality: 0
+  renderingPathCustomFrameSettingsOverrideMask:
+    mask:
+      data1: 0
+      data2: 0
+  defaultFrameSettings: 0
+  m_Version: 9
+  m_ObsoleteRenderingPath: 0
+  m_ObsoleteFrameSettings:
+    overrides: 0
+    enableShadow: 0
+    enableContactShadows: 0
+    enableShadowMask: 0
+    enableSSR: 0
+    enableSSAO: 0
+    enableSubsurfaceScattering: 0
+    enableTransmission: 0
+    enableAtmosphericScattering: 0
+    enableVolumetrics: 0
+    enableReprojectionForVolumetrics: 0
+    enableLightLayers: 0
+    enableExposureControl: 1
+    diffuseGlobalDimmer: 0
+    specularGlobalDimmer: 0
+    shaderLitMode: 0
+    enableDepthPrepassWithDeferredRendering: 0
+    enableTransparentPrepass: 0
+    enableMotionVectors: 0
+    enableObjectMotionVectors: 0
+    enableDecals: 0
+    enableRoughRefraction: 0
+    enableTransparentPostpass: 0
+    enableDistortion: 0
+    enablePostprocess: 0
+    enableOpaqueObjects: 0
+    enableTransparentObjects: 0
+    enableRealtimePlanarReflection: 0
+    enableMSAA: 0
+    enableAsyncCompute: 0
+    runLightListAsync: 0
+    runSSRAsync: 0
+    runSSAOAsync: 0
+    runContactShadowsAsync: 0
+    runVolumeVoxelizationAsync: 0
+    lightLoopSettings:
+      overrides: 0
+      enableDeferredTileAndCluster: 0
+      enableComputeLightEvaluation: 0
+      enableComputeLightVariants: 0
+      enableComputeMaterialVariants: 0
+      enableFptlForForwardOpaque: 0
+      enableBigTilePrepass: 0
+      isFptlEnabled: 0
 --- !u!1 &1714800522
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,63 +890,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3788933993649877185
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5763536491115554846, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
-      propertyPath: m_Name
-      value: SK_BaseModel
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993253475120665379, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 68.735245
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993253475120665379, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.0000038146973
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993253475120665379, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 126.52589
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993253475120665379, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993253475120665379, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993253475120665379, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993253475120665379, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993253475120665379, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993253475120665379, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6993253475120665379, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a837d4bb5ca4cb04b801a61b222a4131, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1040,4 +898,4 @@ SceneRoots:
   - {fileID: 1386036006}
   - {fileID: 1714800525}
   - {fileID: 720194149}
-  - {fileID: 3788933993649877185}
+  - {fileID: 381040923}

@@ -116,7 +116,13 @@ namespace Synty.SidekickCharacters.Database.DTO
         /// <returns>A color set with all DTO class properties set</returns>
         private static void Decorate(DatabaseManager dbManager, SidekickColorPresetImage partPresetImage)
         {
-            partPresetImage.ColorPreset ??= SidekickColorPreset.GetByID(dbManager, partPresetImage.PtrPreset);
+            if (partPresetImage != null)
+            {
+                if (partPresetImage.ColorPreset == null && partPresetImage.PtrPreset >= 0)
+                {
+                    partPresetImage.ColorPreset = SidekickColorPreset.GetByID(dbManager, partPresetImage.PtrPreset);
+                }
+            }
         }
 
         /// <summary>

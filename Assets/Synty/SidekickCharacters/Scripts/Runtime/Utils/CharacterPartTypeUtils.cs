@@ -73,6 +73,11 @@ namespace Synty.SidekickCharacters.Utils
             }
         }
 
+        /// <summary>
+        ///     Checks if the given part type is a species specific part or not.
+        /// </summary>
+        /// <param name="partType">The part type to check.</param>
+        /// <returns>True if a species specific part type; otherwise false.</returns>
         public static bool IsSpeciesSpecificPartType(this CharacterPartType partType)
         {
             switch (partType)
@@ -96,6 +101,11 @@ namespace Synty.SidekickCharacters.Utils
             }
         }
 
+        /// <summary>
+        ///     Gets the string value of the part type from a part short code.
+        /// </summary>
+        /// <param name="shortCode">The short code to get the part type name for.</param>
+        /// <returns>The part type name for the given short code.</returns>
         public static string GetTypeNameFromShortcode(string shortCode)
         {
             switch (shortCode)
