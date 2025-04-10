@@ -18,22 +18,11 @@ namespace Unity.FantasyKingdom
         private readonly string outputModelName = "Player";
 
         private CharacterSaveData data;
-
-        [SerializeField] GameObject clonePrefab; // Drag your full "Clone" prefab here
         private GameObject character;               // Your Sidekick-generated runtime player
 
         void Start()
         {
             LoadCharacterFromSave();
-
-            if (character != null)
-            {
-                CloneRuntimeSetup.Inject(clonePrefab, character); // 💉 Inject scripts & structure
-            }
-            else
-            {
-                Debug.LogError("❌ Player object was not created before injecting Clone!");
-            }
         }
 
 
@@ -119,8 +108,6 @@ namespace Unity.FantasyKingdom
             character = _sidekickRuntime.CreateCharacter(outputModelName, partsToUse, false, true);
             SetSize(); // ⬅️ From CharacterCreation.cs
             ForceBlendshapeUpdate(character);
-
-            Debug.Log($"👤 Återskapad karaktär: {data.firstName} {data.lastName} ({data.race})");
         }
         private void SetSize()
         {
