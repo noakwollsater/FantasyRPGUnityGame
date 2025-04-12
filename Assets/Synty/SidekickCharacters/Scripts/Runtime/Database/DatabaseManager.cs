@@ -1,4 +1,9 @@
-// Copyright (c) 2024 Synty Studios Limited. All rights reserved.
+using SqlCipher4Unity3D;
+using Synty.SidekickCharacters.Database.DTO;
+
+using System;
+
+// Copyright(c) 2024 Synty Studios Limited. All rights reserved.
 //
 // Use of this software is subject to the terms and conditions of the Synty Studios End User Licence Agreement (EULA)
 // available at: https://syntystore.com/pages/end-user-licence-agreement
@@ -8,7 +13,8 @@
 using SqlCipher4Unity3D;
 using Synty.SidekickCharacters.Database.DTO;
 using System;
-using System.Linq;
+using System.IO;
+using UnityEngine;
 
 namespace Synty.SidekickCharacters.Database
 {
@@ -17,8 +23,8 @@ namespace Synty.SidekickCharacters.Database
     /// </summary>
     public class DatabaseManager
     {
-        private static readonly string _DATABASE_PATH = "Assets/Synty/SidekickCharacters/Database/Proto_Side_Kick_Data";
-        private readonly string _CURRENT_VERSION = "1.0.2";
+        private static readonly string _DATABASE_PATH = Path.Combine(Application.streamingAssetsPath, "Proto_Side_Kick_Data");
+
 
         private static SQLiteConnection _connection;
         private static int _connectionHash;
@@ -36,6 +42,8 @@ namespace Synty.SidekickCharacters.Database
             if (_connection == null)
             {
                 _connection = new SQLiteConnection(_DATABASE_PATH, true);
+                Debug.Log($"DB Path: {_DATABASE_PATH}");
+
             }
             else
             {
@@ -44,9 +52,12 @@ namespace Synty.SidekickCharacters.Database
 
             if (checkDbOnLoad)
             {
-                bool createTables = !IsDatabaseConfigured();
+                InitialiseDatabase();
 
-                InitialiseDatabase(createTables);
+                if (!IsDatabaseConfigured())
+                {
+                    throw new Exception("Database not configured correctly");
+                }
             }
 
             return _connection;
@@ -82,8 +93,7 @@ namespace Synty.SidekickCharacters.Database
         /// <summary>
         ///     Initialises the Sidekicks database with required data, if they don't already exist.
         /// </summary>
-        /// <param name="createTables">Whether to update the database and create the needed tables or not.</param>
-        private void InitialiseDatabase(bool createTables = false)
+        private void InitialiseDatabase()
         {
             // ensure we have a default color set (a bunch of other code relies on this, not safe to remove yet)
             try
@@ -106,37 +116,6 @@ namespace Synty.SidekickCharacters.Database
 
                 newSet.Save(this);
             }
-
-            if (createTables)
-            {
-                GetCurrentDbConnection().CreateTable<SidekickDBVersion>();
-
-                SidekickDBVersion version;
-
-                if (GetCurrentDbConnection().Table<SidekickDBVersion>().Any())
-                {
-                    version = GetCurrentDbConnection().Table<SidekickDBVersion>().FirstOrDefault();
-                    version.SemanticVersion = _CURRENT_VERSION;
-                    version.LastUpdated = DateTime.Now;
-                }
-                else
-                {
-                    version = new SidekickDBVersion()
-                    {
-                        ID = -1,
-                        SemanticVersion = _CURRENT_VERSION,
-                        LastUpdated = DateTime.Now
-                    };
-                }
-
-                version.Save(this);
-
-                GetCurrentDbConnection().CreateTable<SidekickPart>();
-                GetCurrentDbConnection().CreateTable<SidekickPartImage>();
-                GetCurrentDbConnection().CreateTable<SidekickPartFilter>();
-                GetCurrentDbConnection().CreateTable<SidekickPartFilterRow>();
-                GetCurrentDbConnection().CreateTable<SidekickPartPresetRow>();
-            }
         }
 
         /// <summary>
@@ -146,34 +125,7 @@ namespace Synty.SidekickCharacters.Database
         /// <returns>True if the tables are present; otherwise false.</returns>
         private bool IsDatabaseConfigured()
         {
-            bool configured = !(GetCurrentDbConnection().GetTableInfo("sk_vdata").Count < 1);
-
-            if (GetCurrentDbConnection().GetTableInfo("sk_part").Count < 1)
-            {
-                configured = false;
-            }
-
-            if (GetCurrentDbConnection().GetTableInfo("sk_part_image").Count < 1)
-            {
-                configured = false;
-            }
-
-            if (GetCurrentDbConnection().GetTableInfo("sk_part_filter").Count < 1)
-            {
-                configured = false;
-            }
-
-            if (GetCurrentDbConnection().GetTableInfo("sk_part_filter_row").Count < 1)
-            {
-                configured = false;
-            }
-
-            if (GetCurrentDbConnection().GetTableInfo("sk_part_preset_row").Count < 5)
-            {
-                configured = false;
-            }
-
-            return configured;
+            return GetCurrentDbConnection().GetTableInfo("sk_vdata").Count > 0;
         }
 
         /// <summary>
