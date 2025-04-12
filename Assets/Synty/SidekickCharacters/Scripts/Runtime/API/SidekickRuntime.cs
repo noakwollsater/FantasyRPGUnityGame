@@ -36,7 +36,7 @@ namespace Synty.SidekickCharacters.API
         private const string _TEXTURE_OPACITY_NAME = "OpacityMap.png";
         private const string _TEXTURE_PREFIX = "T_";
 
-        private static readonly int _COLOR_MAP = Shader.PropertyToID("_ColorMap");
+        private static readonly int _COLOR_MAP = Shader.PropertyToID("_BaseColorMap"); // HDRP Lit
         private static readonly int _METALLIC_MAP = Shader.PropertyToID("_MetallicMap");
         private static readonly int _SMOOTHNESS_MAP = Shader.PropertyToID("_SmoothnessMap");
         private static readonly int _REFLECTION_MAP = Shader.PropertyToID("_ReflectionMap");
