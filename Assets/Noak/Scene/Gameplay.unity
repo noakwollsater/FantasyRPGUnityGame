@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 381040923}
+  - component: {fileID: 381040924}
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Untagged
@@ -150,6 +151,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &381040924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381040922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b02ae9419ba6b943ab7231a29d7d564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeshFolder: {fileID: 0}
 --- !u!1 &720194139
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,6 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b4cac08a3999a498df145e4db0e09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPrefab: {fileID: 2303988149593244163, guid: d6a6ddf381592de4b83fd45cfc9de533, type: 3}
 --- !u!1 &1386036004
 GameObject:
   m_ObjectHideFlags: 0
