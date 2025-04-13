@@ -1,5 +1,4 @@
-﻿using Sirenix.OdinInspector.Editor.Internal;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class GoblinProportionAdjuster : MonoBehaviour
