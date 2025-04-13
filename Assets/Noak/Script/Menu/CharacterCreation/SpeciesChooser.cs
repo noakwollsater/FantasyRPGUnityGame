@@ -117,10 +117,8 @@ public class SpeciesChooser : CharacterCreation
         Debug.Log($"Updating model for species: {_selectedSpecies.Name}");
 
         // **Step 1: Reset Model to Base**
-        GameObject baseModel = Resources.Load<GameObject>("Meshes/SK_BaseModel");
-        Material baseMaterial = Resources.Load<Material>("Materials/M_BaseMaterial");
-
-        _sidekickRuntime = new SidekickRuntime(baseModel, baseMaterial, null, _dbManager);
+        CharacterRuntimeManager.InitIfNeeded();
+        _sidekickRuntime = CharacterRuntimeManager.RuntimeInstance;
 
         if (_sidekickRuntime == null)
         {
