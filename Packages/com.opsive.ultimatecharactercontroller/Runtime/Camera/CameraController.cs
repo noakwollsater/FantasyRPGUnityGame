@@ -26,7 +26,7 @@ namespace Opsive.UltimateCharacterController.Camera
     public class CameraController : StateBehavior, ILookSource, Shared.Camera.ICamera
     {
         [Tooltip("Should the character be initialized on awake?")]
-        [SerializeField] protected bool m_InitCharacterOnAwake = true;
+        [SerializeField] protected bool m_InitCharacterOnAwake = false;
         [Tooltip("The character that the camera should follow.")]
         [SerializeField] protected GameObject m_Character;
         [Tooltip("The transform of the object to attach the camera relative to.")]

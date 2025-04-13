@@ -3,6 +3,7 @@ using UnityEngine;
 using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Enums;
+using Opsive.UltimateCharacterController.Camera;
 
 namespace Unity.FantasyKingdom
 {
@@ -10,8 +11,8 @@ namespace Unity.FantasyKingdom
     {
         private readonly string saveKey = "MyCharacter";
 
-        private DatabaseManager _dbManager;
         private DictionaryLibrary _dictionaryLibrary;
+        [SerializeField] private CameraController _cameraController;
         private CharacterSaveData data;
         private GameObject character;
 
@@ -39,14 +40,15 @@ namespace Unity.FantasyKingdom
             data = ES3.Load<CharacterSaveData>(saveKey, settings);
             Debug.Log("✅ Laddade sparad karaktär!");
 
-            _dbManager = new DatabaseManager();
-
             character = GameObject.Find(outputModelName);
             if (character == null)
             {
                 Debug.Log("📦 Instantiating character prefab...");
                 character = Instantiate(characterPrefab, transform);
                 character.name = outputModelName;
+
+                _cameraController.Character = character;
+
             }
 
 
