@@ -1,50 +1,79 @@
+﻿using Sirenix.OdinInspector.Editor.Internal;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public class GoblinProportionAdjuster : MonoBehaviour
 {
-    private Animator animator;
+    private readonly string saveKey = "MyCharacter";
 
-    // Justerbara proportioner i inspectorn
-    [Header("Head Scale")]
-    public Vector3 headScale = new Vector3(1.4f, 1.4f, 1.4f);
+    [Header("Overall Scale")]
+    public float heightScale = 0.85f;
 
-    [Header("Arm Scale")]
-    public Vector3 armScale = new Vector3(0.7f, 0.7f, 0.7f);
+    [Header("Head Proportion")]
+    public Transform headBone;
+    public float headScale = 1.4f;
 
-    [Header("Leg Scale")]
-    public Vector3 legScale = new Vector3(0.8f, 0.8f, 0.8f);
+    [Header("Goblin Scale (optional)")]
+    public Transform leftArm;
+    public Transform rightArm;
+    public Transform leftLeg;
+    public Transform rightLeg;
+    public float limbScale = 0.95f;
 
-    [Header("Spine Scale")]
-    public Vector3 spineScale = new Vector3(0.85f, 0.85f, 0.85f);
+    [SerializeField, Tooltip("Hur mycket armarna dras ut från kroppen (X-axeln).")]
+    private float armSpreadOffset = 0.05f; // Justera efter smak
+
+
+    private CharacterSaveData data;
+
+    private string selectedRace;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        string fileName = $"CharacterSave_{PlayerPrefs.GetString("SavedCharacterName", "Default")}.es3";
+        var settings = new ES3Settings(fileName);
 
-        AdjustProportions();
+        if (!ES3.FileExists(fileName) || !ES3.KeyExists(saveKey, settings))
+        {
+            Debug.LogWarning("⚠️ Ingen sparad karaktär hittades.");
+            return;
+        }
+
+        data = ES3.Load<CharacterSaveData>(saveKey, settings);
+        Debug.Log("✅ Laddade sparad karaktär!");
+
+        selectedRace = data.race.ToString();
+
+        if(selectedRace == "Goblin")
+        {
+            SetGoblinSize();
+        }
     }
 
-    void AdjustProportions()
+    private void SetGoblinSize()
     {
-        // Huvud
-        Transform head = animator.GetBoneTransform(HumanBodyBones.Head);
-        if (head) head.localScale = headScale;
+        // Shrink whole body
+        transform.localScale = Vector3.one * heightScale;
 
-        // Armar
-        Transform leftArm = animator.GetBoneTransform(HumanBodyBones.LeftUpperArm);
-        Transform rightArm = animator.GetBoneTransform(HumanBodyBones.RightUpperArm);
-        if (leftArm) leftArm.localScale = armScale;
-        if (rightArm) rightArm.localScale = armScale;
+        // Enlarge head
+        if (headBone != null)
+            headBone.localScale = Vector3.one * headScale;
 
-        // Ben
-        Transform leftLeg = animator.GetBoneTransform(HumanBodyBones.LeftUpperLeg);
-        Transform rightLeg = animator.GetBoneTransform(HumanBodyBones.RightUpperLeg);
-        if (leftLeg) leftLeg.localScale = legScale;
-        if (rightLeg) rightLeg.localScale = legScale;
+        // Shrink limbs
+        if (leftArm != null) leftArm.localScale = Vector3.one * limbScale;
+        if (rightArm != null) rightArm.localScale = Vector3.one * limbScale;
+        if (leftLeg != null) leftLeg.localScale = Vector3.one * limbScale;
+        if (rightLeg != null) rightLeg.localScale = Vector3.one * limbScale;
 
-        // Rygg
-        Transform spine = animator.GetBoneTransform(HumanBodyBones.Spine);
-        if (spine) spine.localScale = spineScale;
+        if(data.fat > 60)
+        {
+            // Anpassa armar – skala ut i X-led
+            if (leftArm != null)
+                leftArm.localScale = new Vector3(1.1f, limbScale, limbScale);
+
+            if (rightArm != null)
+                rightArm.localScale = new Vector3(1.1f, limbScale, limbScale);
+
+        }
     }
 }
