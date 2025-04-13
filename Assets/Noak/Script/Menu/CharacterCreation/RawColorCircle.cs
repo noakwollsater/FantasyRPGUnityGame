@@ -44,9 +44,8 @@ namespace Unity.FantasyKingdom
 
             if (_sidekickRuntime == null)
             {
-                var model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
-                var material = Resources.Load<Material>("Materials/M_BaseMaterial");
-                _sidekickRuntime = new SidekickRuntime(model, material, null, _dbManager);
+                CharacterRuntimeManager.InitIfNeeded();
+                _sidekickRuntime = CharacterRuntimeManager.RuntimeInstance;
             }
 
             if (_dictionaryLibrary == null)

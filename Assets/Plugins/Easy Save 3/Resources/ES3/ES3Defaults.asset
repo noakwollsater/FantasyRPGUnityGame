@@ -45,6 +45,7 @@ MonoBehaviour:
     - Opsive.UltimateInventorySystem
     - Polyperfect.LowPolyAnimatedFantasyCreatures
     - SidekickCharacters
+    - Sirenix.OdinInspector.Modules.Unity.Addressables
     - SqlCipher4Unity3D
     - UnityUIExtensions
     showAdvancedSettings: 0

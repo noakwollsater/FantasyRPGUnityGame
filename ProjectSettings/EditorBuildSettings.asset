@@ -21,6 +21,7 @@ EditorBuildSettings:
     path: Assets/Noak/Scene/CharacterCreation.unity
     guid: 219d173bbbcae6e449166e9ed6b6e32c
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: d079b25e09a01334784fc01ca80fef1f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 57aa1a4c82454616bed26f7b365eb456, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: edc1d34b6f340c54dbb170d06a6d201f, type: 2}
   m_UseUCBPForAssetBundles: 0

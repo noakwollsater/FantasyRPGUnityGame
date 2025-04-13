@@ -70,10 +70,8 @@ namespace Unity.FantasyKingdom
 
             if (_sidekickRuntime == null)
             {
-                GameObject model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
-                Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
-
-                _sidekickRuntime = new SidekickRuntime(model, material, null, _dbManager);
+                CharacterRuntimeManager.InitIfNeeded();
+                _sidekickRuntime = CharacterRuntimeManager.RuntimeInstance;
                 if (_sidekickRuntime == null)
                 {
                     Debug.LogError("SidekickRuntime failed to initialize.");
