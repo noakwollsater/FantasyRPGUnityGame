@@ -6,6 +6,7 @@ namespace Unity.FantasyKingdom
     public class LoadCharacterData : MonoBehaviour
     {
         private CharacterSaveData data;
+
         private readonly string saveKey = "MyCharacter";
 
         [Header("🧙 Character Info")]
@@ -96,6 +97,9 @@ namespace Unity.FantasyKingdom
 
             // Final attributes
             finalAttributes = data.finalAttributes;
+
+            // Load selected parts
+            var selectedParts = data.selectedParts;
         }
     }
 }

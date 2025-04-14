@@ -5,7 +5,9 @@ namespace Unity.FantasyKingdom
 {
     public class SaveGameManager : MonoBehaviour
     {
-        public LoadCharacterData characterData; // Dra in via Inspector eller hitta via kod
+        [SerializeField] private LoadCharacterData characterData; // Dra in via Inspector eller hitta via kod
+        [SerializeField] private GetActiveParts getActiveParts;
+
         private readonly string saveKey = "MyCharacter";
 
         [ContextMenu("💾 Save Character Data")]
@@ -16,6 +18,8 @@ namespace Unity.FantasyKingdom
                 Debug.LogError("❌ Character data reference is missing!");
                 return;
             }
+
+            getActiveParts.GetActivePartsFromCharacter();
 
             CharacterSaveData data = new CharacterSaveData
             {
@@ -45,7 +49,9 @@ namespace Unity.FantasyKingdom
                 completedQuests = new System.Collections.Generic.List<string>(characterData.completedQuests),
                 backgroundSkills = new System.Collections.Generic.List<string>(characterData.backgroundSkills),
 
-                finalAttributes = characterData.finalAttributes
+                finalAttributes = characterData.finalAttributes,
+
+                selectedParts = getActiveParts.selectedParts
             };
 
             string savedName = PlayerPrefs.GetString("SavedCharacterName", "Default");
