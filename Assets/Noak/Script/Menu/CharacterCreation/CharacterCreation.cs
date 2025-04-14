@@ -37,8 +37,10 @@ public class CharacterCreation : MonoBehaviour
     {
         _dbManager = new DatabaseManager();
 
-        CharacterRuntimeManager.InitIfNeeded();
-        _sidekickRuntime = CharacterRuntimeManager.RuntimeInstance;
+        GameObject model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
+        Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
+
+        _sidekickRuntime = new SidekickRuntime(model, material, null, _dbManager);
         _dictionaryLibrary._partLibrary = _sidekickRuntime.PartLibrary;
 
         // Defer to a default species selection (if derived class doesn't override)
