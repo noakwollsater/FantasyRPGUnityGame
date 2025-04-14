@@ -204,6 +204,10 @@ namespace Opsive.UltimateCharacterController.Camera
                     Debug.LogWarning("Warning: No character has been assigned to the Camera Controller. It will automatically be assigned to the GameObject with the Player tag.");
                     m_Character = GameObject.FindGameObjectWithTag("Player");
                     if (m_Character == null) {
+                        m_Character = GameObject.FindGameObjectWithTag("Player");
+                    }
+                    else
+                    {
                         Debug.LogError("Error: Unable to find the character with the Player tag. The camera will be disabled.");
                     }
                 }

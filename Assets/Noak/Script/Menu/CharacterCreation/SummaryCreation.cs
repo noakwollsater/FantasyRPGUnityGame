@@ -190,8 +190,8 @@ namespace Unity.FantasyKingdom
 
         public void BackToMainMenu()
         {
-            PlayerPrefs.SetInt("ReturnToMainMenu", 1);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+            PlayerPrefs.SetInt("ToGameMode", 1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Gameplay");
         }
     }
 }
