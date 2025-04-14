@@ -188,7 +188,7 @@ namespace Unity.FantasyKingdom
             ThankYouForTestingMyGamePanel.SetActive(true);
         }
 
-        public void BackToMainMenu()
+        public void BackToGame()
         {
             PlayerPrefs.SetInt("ToGameMode", 1);
             UnityEngine.SceneManagement.SceneManager.LoadScene("Gameplay");

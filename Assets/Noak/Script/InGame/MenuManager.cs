@@ -9,6 +9,9 @@ namespace Unity.FantasyKingdom
         [SerializeField] private GameObject mainMenuPanel;
         [SerializeField] private GameObject inventoryPanel;
 
+        [SerializeField] private GameObject radialPanel;
+        [SerializeField] private GameObject settingsPanel;
+
         [SerializeField] private CameraController cameraController;
 
         private UltimateCharacterLocomotion characterLocomotion;
@@ -64,12 +67,24 @@ namespace Unity.FantasyKingdom
                     mainMenuPanel.SetActive(false);
                 }
             }
+
+            // Close Settings if open
+
+            if (settingsPanel.activeSelf && Input.GetKeyDown(KeyCode.Tab))
+            {
+                Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
+                Cursor.visible = isInventoryOpen;
+                settingsPanel.SetActive(false);
+                mainMenuPanel.SetActive(true);
+            }
         }
 
         public void ResumeGame()
         {
             isMainMenuOpen = false;
             mainMenuPanel.SetActive(false);
+            radialPanel.SetActive(true);
+            settingsPanel.SetActive(false);
 
             if (characterLocomotion != null)
                 characterLocomotion.enabled = true;
@@ -107,6 +122,18 @@ namespace Unity.FantasyKingdom
         {
             PlayerPrefs.SetInt("ReturnToMainMenu", 1);
             UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        }
+
+        public void OpenSettings()
+        {
+            settingsPanel.SetActive(true);
+            radialPanel.SetActive(false);
+        }
+
+        public void CloseSettings()
+        {
+            settingsPanel.SetActive(false);
+            radialPanel.SetActive(true);
         }
     }
 }
