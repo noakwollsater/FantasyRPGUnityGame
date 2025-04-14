@@ -182,7 +182,6 @@ namespace Unity.FantasyKingdom
             Debug.Log("✅ Character saved!");
         }
 
-
         public void OpenThankyouPanel()
         {
             ThankYouForTestingMyGamePanel.SetActive(true);

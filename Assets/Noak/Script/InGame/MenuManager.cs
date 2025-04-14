@@ -13,6 +13,9 @@ namespace Unity.FantasyKingdom
         [SerializeField] private GameObject settingsPanel;
 
         [SerializeField] private CameraController cameraController;
+        [SerializeField] private SaveGameManager saveGameManager;
+
+        private CharacterSaveData data;
 
         private UltimateCharacterLocomotion characterLocomotion;
         private GameObject Character;
@@ -129,6 +132,8 @@ namespace Unity.FantasyKingdom
 
         public void QuitGame()
         {
+            saveGameManager.SaveCharacterData();
+            saveGameManager.SaveGame("Start of the Journey", SaveType.Manual, "00:00", Character.transform);
             PlayerPrefs.SetInt("ReturnToMainMenu", 1);
             UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
         }
