@@ -102,5 +102,11 @@ namespace Unity.FantasyKingdom
                 inventoryPanel.SetActive(false);
             }
         }
+
+        public void QuitGame()
+        {
+            PlayerPrefs.SetInt("ReturnToMainMenu", 1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        }
     }
 }
