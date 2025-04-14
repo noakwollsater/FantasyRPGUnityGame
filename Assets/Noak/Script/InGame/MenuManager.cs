@@ -75,9 +75,24 @@ namespace Unity.FantasyKingdom
                 Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
                 Cursor.visible = isInventoryOpen;
                 settingsPanel.SetActive(false);
-                mainMenuPanel.SetActive(true);
+                radialPanel.SetActive(true);
             }
         }
+
+        private void UpdateCursorState()
+        {
+            if (isMainMenuOpen || isInventoryOpen || settingsPanel.activeSelf)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
 
         public void ResumeGame()
         {
@@ -91,9 +106,6 @@ namespace Unity.FantasyKingdom
 
             if (cameraController != null)
                 cameraController.enabled = true;
-
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
 
         private void OpenMainMenu()
@@ -106,9 +118,6 @@ namespace Unity.FantasyKingdom
 
             if (cameraController != null)
                 cameraController.enabled = false;
-
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
 
             // Close inventory if open
             if (isInventoryOpen)
