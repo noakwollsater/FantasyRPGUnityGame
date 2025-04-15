@@ -6,6 +6,7 @@ namespace Unity.FantasyKingdom
     public class LoadCharacterData : MonoBehaviour
     {
         private CharacterSaveData data;
+
         private readonly string saveKey = "MyCharacter";
 
         [Header("🧙 Character Info")]
@@ -52,7 +53,12 @@ namespace Unity.FantasyKingdom
         {
             string savedName = PlayerPrefs.GetString("SavedCharacterName", "Default");
             string fileName = $"CharacterSave_{savedName}.es3";
-            var settings = new ES3Settings(fileName);
+            var settings = new ES3Settings(fileName)
+            {
+                encryptionType = ES3.EncryptionType.AES,
+                encryptionPassword = "MySuperSecretPassword123!" // ❗ Samma som du använde vid sparning!
+            };
+
 
             if (!ES3.FileExists(fileName) || !ES3.KeyExists(saveKey, settings))
             {
@@ -96,6 +102,9 @@ namespace Unity.FantasyKingdom
 
             // Final attributes
             finalAttributes = data.finalAttributes;
+
+            // Load selected parts
+            var selectedParts = data.selectedParts;
         }
     }
 }

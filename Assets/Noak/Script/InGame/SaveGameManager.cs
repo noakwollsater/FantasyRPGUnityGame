@@ -5,8 +5,11 @@ namespace Unity.FantasyKingdom
 {
     public class SaveGameManager : MonoBehaviour
     {
-        public LoadCharacterData characterData; // Dra in via Inspector eller hitta via kod
+        [SerializeField] private LoadCharacterData characterData; // Dra in via Inspector eller hitta via kod
+        [SerializeField] private GetActiveParts getActiveParts;
+
         private readonly string saveKey = "MyCharacter";
+        private const string encryptionPassword = "MySuperSecretPassword123!";
 
         [ContextMenu("💾 Save Character Data")]
         public void SaveCharacterData()
@@ -16,6 +19,8 @@ namespace Unity.FantasyKingdom
                 Debug.LogError("❌ Character data reference is missing!");
                 return;
             }
+
+            getActiveParts.GetActivePartsFromCharacter();
 
             CharacterSaveData data = new CharacterSaveData
             {
@@ -45,18 +50,25 @@ namespace Unity.FantasyKingdom
                 completedQuests = new System.Collections.Generic.List<string>(characterData.completedQuests),
                 backgroundSkills = new System.Collections.Generic.List<string>(characterData.backgroundSkills),
 
-                finalAttributes = characterData.finalAttributes
+                finalAttributes = characterData.finalAttributes,
+
+                selectedParts = getActiveParts.selectedParts
             };
 
             string savedName = PlayerPrefs.GetString("SavedCharacterName", "Default");
             string fileName = $"CharacterSave_{savedName}.es3";
-            var settings = new ES3Settings(fileName);
+            var settings = new ES3Settings(fileName)
+            {
+                encryptionType = ES3.EncryptionType.AES,
+                encryptionPassword = "MySuperSecretPassword123!"
+            };
+
 
             ES3.Save(saveKey, data, settings);
             Debug.Log("✅ Character data saved!");
         }
 
-        public void SaveGame(string chapterName, SaveType saveType, string inGameTimeOfDay, Transform characterTransform)
+        public void SaveGameData(string chapterName, string areaName, SaveType saveType, string inGameTimeOfDay, Transform characterTransform)
         {
             if (characterData == null)
             {
@@ -67,22 +79,26 @@ namespace Unity.FantasyKingdom
             GameSaveData saveData = new GameSaveData
             {
                 chapterName = chapterName,
+                areaName = areaName,
                 saveType = saveType,
                 saveDateTime = DateTime.Now,
                 inGameTimeOfDay = inGameTimeOfDay,
-                characterFullName = $"{characterData.name}",
+                characterFullName = characterData.characterName,
                 characterPosition = characterTransform.position,
             };
 
-
-            string fileName = $"GameSave_{characterData.name}.es3";
-            var settings = new ES3Settings(fileName);
+            string fileName = $"GameSave_{characterData.characterName}.es3";
+            var settings = new ES3Settings(fileName)
+            {
+                encryptionType = ES3.EncryptionType.AES,
+                encryptionPassword = "MySuperSecretPassword123!"
+            };
 
             ES3.Save("GameSave", saveData, settings);
             PlayerPrefs.SetString("LastSavedGame", fileName);
             PlayerPrefs.Save();
 
-            Debug.Log("✅ Game saved with character!");
+            Debug.Log("✅ Game saved with character (encrypted)!");
         }
     }
 }

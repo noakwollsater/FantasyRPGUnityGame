@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameSaveData
 {
     public string chapterName;
+    public string areaName;
     public SaveType saveType;
     public DateTime saveDateTime;
     public string inGameTimeOfDay;

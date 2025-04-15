@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Synty Studios Limited. All rights reserved.
+﻿// Copyright (c) 2024 Synty Studios Limited. All rights reserved.
 //
 // Use of this software is subject to the terms and conditions of the End User Licence Agreement (EULA) 
 // of the store at which you purchased this asset. 
@@ -27,6 +27,12 @@ namespace Synty.Interface.FantasyMenus.Samples
         public Selectable inputBlocker;
         public Animator animator;
 
+        [Header("Save Data")]
+        SaveLoader saveLoader;
+        public string savedCharacterName;
+        public string savedGameFile;
+
+
         [Header("Parameters")]
         public bool selfDismiss;
         public float dismissTime;
@@ -42,12 +48,10 @@ namespace Synty.Interface.FantasyMenus.Samples
 
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                if( acceptObject != null ) 
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    acceptObject.ShowMe();
+                    OnAccept();
                 }
-                
-                DismissMe();
             }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -58,6 +62,12 @@ namespace Synty.Interface.FantasyMenus.Samples
 
                 DismissMe();
             }
+        }
+
+        public void OnAccept()
+        {
+            SceneTransitionManager.Instance.LoadScene("Gameplay");
+            DismissMe();
         }
 
         public void ShowMe()
