@@ -1,54 +1,58 @@
-// Copyright (c) 2024 Synty Studios Limited. All rights reserved.
-//
-// Use of this software is subject to the terms and conditions of the End User Licence Agreement (EULA) 
-// of the store at which you purchased this asset. 
-//
-// Synty assets are available at:
-// https://www.syntystore.com
-// https://assetstore.unity.com/publishers/5217
-// https://www.fab.com/sellers/Synty%20Studios
-//
-// Sample scripts are included only as examples and are not intended as production-ready.
-
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace Synty.Interface.FantasyMenus.Samples
 {
     /// <summary>
-    ///     Toggles referenced game object on and off an object based on the toggle's value
+    /// Aktivator som visar ett tillhörande objekt när dess knapp klickas,
+    /// och döljer alla andras.
     /// </summary>
     public class SampleSelectedObjectActivator : MonoBehaviour
     {
-         [Header("References")]
+        [Header("References")]
         public Selectable selectable;
-
         public GameObject isOnObject;
 
-        private void Start()
+        private void Awake()
         {
-            SetActiveObjects();
-        }
-        
-        private void LateUpdate()
-        {
-            SetActiveObjects();
+            // Försök auto-hämta om inte satt via Inspector
+            if (selectable == null)
+                selectable = GetComponent<Selectable>();
         }
 
-        private void SetActiveObjects()
+        private void OnEnable()
         {
-            if (isOnObject != null) 
+            if (selectable is Button btn)
+                btn.onClick.AddListener(HandleClick);
+        }
+
+        private void OnDisable()
+        {
+            if (selectable is Button btn)
+                btn.onClick.RemoveListener(HandleClick);
+        }
+
+        private void HandleClick()
+        {
+            // Aktivera vårt objekt
+            if (isOnObject != null)
+                isOnObject.SetActive(true);
+
+            // Inaktivera alla andras
+            var allActivators = FindObjectsOfType<SampleSelectedObjectActivator>();
+
+            foreach (var activator in allActivators)
             {
-                if (!isOnObject.activeSelf && selectable != null && EventSystem.current.currentSelectedGameObject == selectable.gameObject)
+                if (activator != this && activator.isOnObject != null)
                 {
-                    isOnObject.SetActive(true);
-                }
-                if (isOnObject.activeSelf && selectable != null && EventSystem.current.currentSelectedGameObject != selectable.gameObject)
-                {
-                    isOnObject.SetActive(false);
+                    activator.isOnObject.SetActive(false);
                 }
             }
+
+            // Markera denna som vald i EventSystem
+            EventSystem.current.SetSelectedGameObject(selectable.gameObject);
         }
     }
 }

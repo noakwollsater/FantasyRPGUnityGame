@@ -133,7 +133,7 @@ namespace Unity.FantasyKingdom
         public void QuitGame()
         {
             saveGameManager.SaveCharacterData();
-            saveGameManager.SaveGame("Start of the Journey", SaveType.Manual, "00:00", Character.transform);
+            saveGameManager.SaveGameData("Start of the Journey", "Heimdal", SaveType.Manual, "00:00", Character.transform);
             PlayerPrefs.SetInt("ReturnToMainMenu", 1);
             UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
         }

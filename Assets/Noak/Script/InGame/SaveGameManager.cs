@@ -62,7 +62,7 @@ namespace Unity.FantasyKingdom
             Debug.Log("✅ Character data saved!");
         }
 
-        public void SaveGame(string chapterName, SaveType saveType, string inGameTimeOfDay, Transform characterTransform)
+        public void SaveGameData(string chapterName, string areaName, SaveType saveType, string inGameTimeOfDay, Transform characterTransform)
         {
             if (characterData == null)
             {
@@ -73,15 +73,16 @@ namespace Unity.FantasyKingdom
             GameSaveData saveData = new GameSaveData
             {
                 chapterName = chapterName,
+                areaName = areaName,
                 saveType = saveType,
                 saveDateTime = DateTime.Now,
                 inGameTimeOfDay = inGameTimeOfDay,
-                characterFullName = $"{characterData.name}",
+                characterFullName = characterData.characterName,
                 characterPosition = characterTransform.position,
             };
 
 
-            string fileName = $"GameSave_{characterData.name}.es3";
+            string fileName = $"GameSave_{characterData.characterName}.es3";
             var settings = new ES3Settings(fileName);
 
             ES3.Save("GameSave", saveData, settings);
