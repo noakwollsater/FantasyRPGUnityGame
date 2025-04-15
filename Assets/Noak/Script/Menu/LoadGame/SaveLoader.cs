@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -12,7 +12,12 @@ public class SaveLoader : MonoBehaviour
 
         foreach (string file in Directory.GetFiles(savePath, $"{saveFilePrefix}*.es3"))
         {
-            var settings = new ES3Settings(file);
+            var settings = new ES3Settings(file)
+            {
+                encryptionType = ES3.EncryptionType.AES,
+                encryptionPassword = "MySuperSecretPassword123!" // ❗ Samma som du använde vid sparning!
+            };
+
             if (ES3.KeyExists("GameSave", settings))
             {
                 GameSaveData save = ES3.Load<GameSaveData>("GameSave", settings);

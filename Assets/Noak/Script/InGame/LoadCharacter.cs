@@ -7,6 +7,7 @@ namespace Unity.FantasyKingdom
     public class LoadCharacter : MonoBehaviour
     {
         private readonly string saveKey = "MyCharacter";
+        private const string encryptionPassword = "MySuperSecretPassword123!";
 
         private DictionaryLibrary _dictionaryLibrary;
         [SerializeField] private CameraController _cameraController;
@@ -27,7 +28,11 @@ namespace Unity.FantasyKingdom
         private void LoadCharacterFromSave()
         {
             string fileName = $"CharacterSave_{PlayerPrefs.GetString("SavedCharacterName", "Default")}.es3";
-            var settings = new ES3Settings(fileName);
+            var settings = new ES3Settings(fileName)
+            {
+                encryptionType = ES3.EncryptionType.AES,
+                encryptionPassword = "MySuperSecretPassword123!"
+            };
 
             if (!ES3.FileExists(fileName) || !ES3.KeyExists(saveKey, settings))
             {
@@ -155,7 +160,11 @@ namespace Unity.FantasyKingdom
                 return;
             }
 
-            var settings = new ES3Settings(lastSavedGameFile);
+            var settings = new ES3Settings(lastSavedGameFile)
+            {
+                encryptionType = ES3.EncryptionType.AES,
+                encryptionPassword = "MySuperSecretPassword123!"
+            };
 
             if (!ES3.KeyExists("GameSave", settings))
             {
@@ -173,6 +182,5 @@ namespace Unity.FantasyKingdom
                 Debug.Log($"🚶‍♂️ Flyttade karaktär till sparad position: {gameData.characterPosition}");
             }
         }
-
     }
 }

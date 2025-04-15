@@ -53,7 +53,12 @@ namespace Unity.FantasyKingdom
         {
             string savedName = PlayerPrefs.GetString("SavedCharacterName", "Default");
             string fileName = $"CharacterSave_{savedName}.es3";
-            var settings = new ES3Settings(fileName);
+            var settings = new ES3Settings(fileName)
+            {
+                encryptionType = ES3.EncryptionType.AES,
+                encryptionPassword = "MySuperSecretPassword123!" // ❗ Samma som du använde vid sparning!
+            };
+
 
             if (!ES3.FileExists(fileName) || !ES3.KeyExists(saveKey, settings))
             {

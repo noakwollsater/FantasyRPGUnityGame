@@ -9,6 +9,7 @@ namespace Unity.FantasyKingdom
         [SerializeField] private GetActiveParts getActiveParts;
 
         private readonly string saveKey = "MyCharacter";
+        private const string encryptionPassword = "MySuperSecretPassword123!";
 
         [ContextMenu("💾 Save Character Data")]
         public void SaveCharacterData()
@@ -56,7 +57,12 @@ namespace Unity.FantasyKingdom
 
             string savedName = PlayerPrefs.GetString("SavedCharacterName", "Default");
             string fileName = $"CharacterSave_{savedName}.es3";
-            var settings = new ES3Settings(fileName);
+            var settings = new ES3Settings(fileName)
+            {
+                encryptionType = ES3.EncryptionType.AES,
+                encryptionPassword = "MySuperSecretPassword123!"
+            };
+
 
             ES3.Save(saveKey, data, settings);
             Debug.Log("✅ Character data saved!");
@@ -81,15 +87,18 @@ namespace Unity.FantasyKingdom
                 characterPosition = characterTransform.position,
             };
 
-
             string fileName = $"GameSave_{characterData.characterName}.es3";
-            var settings = new ES3Settings(fileName);
+            var settings = new ES3Settings(fileName)
+            {
+                encryptionType = ES3.EncryptionType.AES,
+                encryptionPassword = "MySuperSecretPassword123!"
+            };
 
             ES3.Save("GameSave", saveData, settings);
             PlayerPrefs.SetString("LastSavedGame", fileName);
             PlayerPrefs.Save();
 
-            Debug.Log("✅ Game saved with character!");
+            Debug.Log("✅ Game saved with character (encrypted)!");
         }
     }
 }
