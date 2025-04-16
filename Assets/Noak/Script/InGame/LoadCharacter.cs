@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Opsive.UltimateCharacterController.Camera;
+using Mightland.Scripts.SK;
 
 namespace Unity.FantasyKingdom
 {
     public class LoadCharacter : MonoBehaviour
     {
+        [SerializeField] SidekickConfigurator _sidekickConfigurator;
+
         private readonly string saveKey = "MyCharacter";
         private const string encryptionPassword = "MySuperSecretPassword123!";
 
@@ -52,6 +55,12 @@ namespace Unity.FantasyKingdom
 
                 _cameraController.Character = character;
 
+                _sidekickConfigurator = character.GetComponentInChildren<SidekickConfigurator>();
+                if (_sidekickConfigurator == null)
+                {
+                    Debug.LogError("❌ SidekickConfigurator saknas på karaktären!");
+                    return;
+                }
             }
 
 
@@ -69,53 +78,67 @@ namespace Unity.FantasyKingdom
             _dictionaryLibrary.BodySizeSkinnyBlendValue = data.skinny;
             _dictionaryLibrary.MusclesBlendValue = data.muscle;
 
+            // ⬇️ Tilldela blendshape-data till SidekickConfigurator
+            _sidekickConfigurator.bodyTypeBlendValue = data.genderBlend;
+            _sidekickConfigurator.bodySizeValue = data.fat - data.skinny;
+            _sidekickConfigurator.musclesBlendValue = data.muscle;
 
-            ActivateSavedParts();
+            ApplySavedPartsToSidekickConfigurator();
             SetBlendShapes();
         }
-        private void ActivateSavedParts()
+        private void ApplySavedPartsToSidekickConfigurator()
         {
-            var skinnedMeshes = character.GetComponentsInChildren<SkinnedMeshRenderer>(true);
-            HashSet<string> activePartNames = new HashSet<string>();
-
-            foreach (var kvp in data.selectedParts)
+            if (_sidekickConfigurator == null || data.selectedParts == null)
             {
-                // ✅ Om värdet är "True" eller "False", använd key som mesh-namn
-                if (bool.TryParse(kvp.Value, out bool isActive) && isActive)
-                {
-                    activePartNames.Add(kvp.Key);
-                }
-                // ✅ Annars antar vi att värdet är själva mesh-namnet
-                else
-                {
-                    activePartNames.Add(kvp.Value);
-                }
+                Debug.LogWarning("⚠️ SidekickConfigurator eller sparade delar saknas.");
+                return;
             }
 
-            Debug.Log("🧩 Aktiva delar att matcha:");
-            foreach (var name in activePartNames)
+            for (int i = 0; i < _sidekickConfigurator.partGroups.Count; i++)
             {
-                Debug.Log($"🧩 {name}");
-            }
+                string partGroup = _sidekickConfigurator.partGroups[i];
+                List<SidekickMesh> groupParts = _sidekickConfigurator.meshPartsList[i].items;
 
-            foreach (var smr in skinnedMeshes)
-            {
-                string smrName = smr.name.Replace("(Clone)", "").Trim();
-                bool shouldActivate = false;
-
-                foreach (var partName in activePartNames)
+                for (int j = 0; j < groupParts.Count; j++)
                 {
-                    if (smrName.Contains(partName))
+                    if (groupParts[j] == null) continue;
+
+                    string meshName = groupParts[j].partName;
+                    bool match = false;
+
+                    foreach (var kvp in data.selectedParts)
                     {
-                        shouldActivate = true;
-                        break;
+                        // Stöd både boolean och direkt namn
+                        if (bool.TryParse(kvp.Value, out bool isActive))
+                        {
+                            if (isActive && meshName.Contains(kvp.Key))
+                                match = true;
+                        }
+                        else if (meshName.Contains(kvp.Value))
+                        {
+                            match = true;
+                        }
+
+                        if (match)
+                        {
+                            // Avaktivera tidigare aktiv
+                            if (_sidekickConfigurator.meshPartsList[i].items[_sidekickConfigurator.meshPartsActive[i]]?.meshTransform != null)
+                            {
+                                _sidekickConfigurator.meshPartsList[i].items[_sidekickConfigurator.meshPartsActive[i]].meshTransform.gameObject.SetActive(false);
+                            }
+
+                            _sidekickConfigurator.meshPartsActive[i] = j;
+                            groupParts[j].meshTransform.gameObject.SetActive(true);
+                            break;
+                        }
                     }
                 }
-
-                smr.gameObject.SetActive(shouldActivate);
-                Debug.Log($"{(shouldActivate ? "✅" : "❌")} {(shouldActivate ? "Activated" : "Deactivated")}: {smr.name}");
             }
+
+            _sidekickConfigurator.ApplyBlendShapes();
+            Debug.Log("✅ Sparade mesh-delar tillämpade!");
         }
+
 
         private void SetBlendShapes()
         {

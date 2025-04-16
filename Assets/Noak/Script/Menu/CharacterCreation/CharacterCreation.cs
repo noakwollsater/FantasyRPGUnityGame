@@ -27,7 +27,7 @@ public class CharacterCreation : MonoBehaviour
         CharacterPartType.AttachmentHipsFront, CharacterPartType.AttachmentHipsLeft, CharacterPartType.AttachmentHipsRight,
         CharacterPartType.AttachmentKneeLeft, CharacterPartType.AttachmentKneeRight, CharacterPartType.AttachmentHead,
         CharacterPartType.Hair, CharacterPartType.EyebrowLeft, CharacterPartType.EyebrowRight, CharacterPartType.AttachmentFace,
-        CharacterPartType.FacialHair
+        CharacterPartType.FacialHair, CharacterPartType.Wrap
     };
 
     //Ear and Nose stuff

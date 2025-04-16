@@ -53,36 +53,6 @@ namespace Mightland.Scripts.SK
             }
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                bodyTypeBlendValue = Random.Range(-100, 100);
-                bodySizeValue = Random.Range(-100, 100);
-                musclesBlendValue = Random.Range(-100, 100);
-
-                for (var index = 0; index < partGroups.Count; index++)
-                {
-                    var itemSize = meshPartsList[index].items.Count;
-                    var activePart = meshPartsList[index].items[meshPartsActive[index]];
-                    var nextPart = Random.Range(index <= 23 ? 1 : 0, itemSize);
-
-                    if (activePart.meshTransform)
-                    {
-                        activePart.meshTransform.gameObject.SetActive(false);
-                    }
-
-                    if (meshPartsList[index].items[nextPart].meshTransform)
-                    {
-                        meshPartsList[index].items[nextPart].meshTransform.gameObject.SetActive(true);
-                        meshPartsActive[index] = nextPart;
-                    }
-                }
-
-                ApplyBlendShapes();
-            }
-        }
-
         public void ApplyBlendShapes()
         {
             for (var i = 0; i < partGroups.Count; i++)
@@ -748,6 +718,31 @@ namespace Mightland.Scripts.SK
 
                 EditorGUILayout.EndHorizontal();
             }
+
+            EditorGUILayout.Space();
+            if (GUILayout.Button("Cycle All Parts Forward"))
+            {
+                for (int i = 0; i < configurator.partGroups.Count; i++)
+                {
+                    int activeIndex = configurator.meshPartsActive[i];
+                    int nextIndex = activeIndex == configurator.meshPartsList[i].items.Count - 1 ? 0 : activeIndex + 1;
+
+                    if (configurator.meshPartsList[i].items[activeIndex]?.meshTransform)
+                    {
+                        configurator.meshPartsList[i].items[activeIndex].meshTransform.gameObject.SetActive(false);
+                    }
+
+                    if (configurator.meshPartsList[i].items[nextIndex]?.meshTransform)
+                    {
+                        configurator.meshPartsList[i].items[nextIndex].meshTransform.gameObject.SetActive(true);
+                    }
+
+                    configurator.meshPartsActive[i] = nextIndex;
+                }
+
+                configurator.ApplyBlendShapes();
+            }
+
         }
     }
 #endif

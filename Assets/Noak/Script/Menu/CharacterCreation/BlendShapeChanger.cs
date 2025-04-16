@@ -1,5 +1,6 @@
 using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
+using Synty.SidekickCharacters.Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,11 +23,13 @@ namespace Unity.FantasyKingdom
         public float DefaultMuscle = 33f;
         public float DefaultSkinny = 33f;
         public float DefaultFat = 33f;
+        public float DefaultGender = 0f;
+
 
         void Start()
         {
-            UpdateImage();
             LazyInit();
+            UpdateImage();
             DefaultValues();
 
             if (bodySizeButton != null)
@@ -47,10 +50,12 @@ namespace Unity.FantasyKingdom
             _sidekickRuntime.MusclesBlendValue = DefaultMuscle;
             _sidekickRuntime.BodySizeSkinnyBlendValue = DefaultSkinny;
             _sidekickRuntime.BodySizeHeavyBlendValue = DefaultFat;
+            _sidekickRuntime.BodyTypeBlendValue = DefaultGender;
 
             _dictionaryLibrary.BodySizeSkinnyBlendValue = DefaultSkinny;
             _dictionaryLibrary.BodySizeHeavyBlendValue = DefaultFat;
             _dictionaryLibrary.MusclesBlendValue = DefaultMuscle;
+            _dictionaryLibrary.BodyTypeBlendValue = DefaultGender;
         }
 
 
@@ -139,6 +144,30 @@ namespace Unity.FantasyKingdom
 
             _sidekickRuntime.BodyTypeBlendValue = isMale ? 100 : 0; // <-- Updates gender
             _dictionaryLibrary.BodyTypeBlendValue = _sidekickRuntime.BodyTypeBlendValue;
+
+            if (_sidekickRuntime.BodyTypeBlendValue == 100)
+            {
+                // Enable the Wrap part for females
+                if (_dictionaryLibrary._partLibrary.ContainsKey(CharacterPartType.Wrap))
+                {
+                    _dictionaryLibrary._availablePartDictionary[CharacterPartType.Wrap] = _dictionaryLibrary._partLibrary[CharacterPartType.Wrap];
+                    _dictionaryLibrary._availablePartDictionary[CharacterPartType.Head] = _dictionaryLibrary._partLibrary[CharacterPartType.Head];
+
+                    // Default to the first wrap part (can be refined based on your preference)
+                    _dictionaryLibrary._partIndexDictionary[CharacterPartType.Wrap] = 0;
+                    _dictionaryLibrary._partIndexDictionary[CharacterPartType.Head] = 1;
+                }
+            }
+            else
+            {
+                // Remove the Wrap part for males
+                if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.Wrap) && _dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.Wrap) != null)
+                {
+                    _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.Wrap);
+                    _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.Wrap);
+                    _dictionaryLibrary._partIndexDictionary[CharacterPartType.Head] = 0;
+                }
+            }
 
             UpdateImage();
             UpdateModel();
