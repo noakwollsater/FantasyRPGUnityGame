@@ -50,8 +50,8 @@ namespace Synty.SidekickCharacters.Enums
         Nose,
         Teeth,
         Tongue,
-        // Wrap,
-        // AttachmentHandLeft,
-        // AttachmentHandRight,
+        Wrap,
+        AttachmentHandLeft,
+        AttachmentHandRight,
     }
 }
