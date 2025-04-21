@@ -3,7 +3,6 @@ using UnityEngine;
 using Opsive.UltimateCharacterController.Camera;
 using Mightland.Scripts.SK;
 using FIMSpace.FTail;
-using static UnityEditor.Recorder.OutputPath;
 
 namespace Unity.FantasyKingdom
 {
