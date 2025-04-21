@@ -33,6 +33,7 @@ public class CharacterCreation : MonoBehaviour
 
     //Ear and Nose stuff
     public bool isNose;
+    public Transform root;
 
     protected virtual void Start()
     {
@@ -108,7 +109,7 @@ public class CharacterCreation : MonoBehaviour
             AddScriptAndAnimator(character);
             SetSize();
 
-            Transform root = character.transform.Find("root");
+            root = character.transform.Find("root");
             if (root != null)
             {
                 AttachTailAnimators(root);
@@ -134,7 +135,8 @@ public class CharacterCreation : MonoBehaviour
             return;
         }
 
-        foreach (Transform child in root)
+        // Traverse all children in the hierarchy
+        foreach (Transform child in root.GetComponentsInChildren<Transform>(true))
         {
             if (child == null) continue;
 
@@ -144,10 +146,21 @@ public class CharacterCreation : MonoBehaviour
                 if (!child.TryGetComponent<TailAnimator2>(out _))
                 {
                     child.gameObject.AddComponent<TailAnimator2>();
+                    TailAnimator2 tailAnimator = child.GetComponent<TailAnimator2>();
+                    ConfigureTailAnimator(tailAnimator);
                     Debug.Log($"TailAnimator2 added to {child.name}");
                 }
             }
         }
+    }
+
+    private void ConfigureTailAnimator(TailAnimator2 tail)
+    {
+        if (tail == null) return;
+
+        tail.UseWaving = false;
+        tail.MotionInfluence = 1.5f;
+        tail.ReactionSpeed = 1f;
     }
 
 
