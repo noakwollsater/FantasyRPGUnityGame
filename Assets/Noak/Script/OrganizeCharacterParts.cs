@@ -6,6 +6,9 @@ public class OrganizeCharacterParts : MonoBehaviour
     [Tooltip("Drag the mesh folder of your character here")]
     public GameObject MeshFolder;
 
+    [Tooltip("Drag the material you want here")]
+    public Material MaterialToApply;
+
     private Dictionary<string, Transform> folders = new();
 
     private readonly List<string> categories = new()
@@ -92,5 +95,34 @@ public class OrganizeCharacterParts : MonoBehaviour
         }
 
         Debug.Log("Character parts organized with friendly folder names, deactivated, and cleaned up!");
+    }
+
+    [ContextMenu("Apply Material")]
+    public void ApplyMaterial()
+    {
+        if (MaterialToApply == null)
+        {
+            Debug.LogError("Material not assigned!");
+            return;
+        }
+
+        var skinnedMeshRenderers = MeshFolder.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+
+        foreach (var smr in skinnedMeshRenderers)
+        {
+            int materialCount = smr.sharedMaterials.Length;
+
+            Material[] newMats = new Material[materialCount];
+            for (int i = 0; i < materialCount; i++)
+            {
+                newMats[i] = MaterialToApply;
+            }
+
+            smr.materials = newMats;
+
+            Debug.Log($"Applied {MaterialToApply.name} to all {materialCount} material slots on {smr.gameObject.name}");
+        }
+
+        Debug.Log("Material applied to all SkinnedMeshRenderers!");
     }
 }

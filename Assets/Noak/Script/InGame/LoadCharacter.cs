@@ -2,9 +2,18 @@
 using UnityEngine;
 using Opsive.UltimateCharacterController.Camera;
 using Mightland.Scripts.SK;
+using FIMSpace.FTail;
+using static UnityEditor.Recorder.OutputPath;
 
 namespace Unity.FantasyKingdom
 {
+    public enum TailType
+    {
+        Default,
+        Torso,
+        Hips
+    }
+
     public class LoadCharacter : MonoBehaviour
     {
         [SerializeField] SidekickConfigurator _sidekickConfigurator;
@@ -18,6 +27,7 @@ namespace Unity.FantasyKingdom
         private GameObject character;
 
         [SerializeField] private GameObject characterPrefab;
+        private Transform root;
 
 
         private readonly string outputModelName = "Player";
@@ -52,8 +62,18 @@ namespace Unity.FantasyKingdom
                 Debug.Log("📦 Instantiating character prefab...");
                 character = Instantiate(characterPrefab, transform);
                 character.name = outputModelName;
-
                 _cameraController.Character = character;
+
+                Transform player = character.transform.Find("Player");
+                root = player.transform.Find("root");
+                if (root != null)
+                {
+                    AttachTailAnimators(root);
+                }
+                else
+                {
+                    Debug.LogError("Root transform not found in character model.");
+                }
 
                 _sidekickConfigurator = character.GetComponentInChildren<SidekickConfigurator>();
                 if (_sidekickConfigurator == null)
@@ -62,7 +82,6 @@ namespace Unity.FantasyKingdom
                     return;
                 }
             }
-
 
             // Build library data
             _dictionaryLibrary = ScriptableObject.CreateInstance<DictionaryLibrary>();
@@ -137,6 +156,89 @@ namespace Unity.FantasyKingdom
 
             _sidekickConfigurator.ApplyBlendShapes();
             Debug.Log("✅ Sparade mesh-delar tillämpade!");
+        }
+
+
+        public void AttachTailAnimators(Transform root)
+        {
+            if (root == null)
+            {
+                Debug.LogWarning("AttachTailAnimators: root is null");
+                return;
+            }
+
+            foreach (Transform child in root.GetComponentsInChildren<Transform>(true))
+            {
+                if (child == null) continue;
+
+                string name = child.name?.ToLower();
+                if (!string.IsNullOrEmpty(name) && name.Contains("dyn"))
+                {
+                    if (!child.TryGetComponent<TailAnimator2>(out _))
+                    {
+                        TailAnimator2 tailAnimator = child.gameObject.AddComponent<TailAnimator2>();
+
+                        // Different configs based on name
+                        if (name.Contains("tors"))
+                        {
+                            ConfigureTailAnimator(tailAnimator, TailType.Torso);
+                        }
+                        else if (name.Contains("hips"))
+                        {
+                            ConfigureTailAnimator(tailAnimator, TailType.Hips);
+                        }
+                        else
+                        {
+                            ConfigureTailAnimator(tailAnimator, TailType.Default);
+                        }
+
+                        Debug.Log($"TailAnimator2 added to {child.name}");
+                    }
+                }
+            }
+        }
+
+
+        private void ConfigureTailAnimator(TailAnimator2 tail)
+        {
+            if (tail == null) return;
+
+            tail.UseWaving = false;  
+            tail.MotionInfluence = 0.3f;   
+            tail.ReactionSpeed = 0.7f;   
+            tail.MaxStretching = 0.15f;
+            tail.IKAutoWeights = true;
+            tail.IKAutoAngleLimits = true;
+        }
+
+        private void ConfigureTailAnimator(TailAnimator2 tail, TailType type)
+        {
+            if (tail == null) return;
+
+            tail.UseWaving = false;
+            tail.IKAutoWeights = true;
+            tail.IKAutoAngleLimits = true;
+
+            switch (type)
+            {
+                case TailType.Torso:
+                    tail.MotionInfluence = 0f;
+                    tail.ReactionSpeed = 0.7f;
+                    tail.MaxStretching = 0.15f;
+                    break;
+
+                case TailType.Hips:
+                    tail.MotionInfluence = 0.15f;
+                    tail.ReactionSpeed = 0.7f;
+                    tail.MaxStretching = 0.15f;
+                    break;
+
+                default:
+                    tail.MotionInfluence = 0.3f;
+                    tail.ReactionSpeed = 0.7f;
+                    tail.MaxStretching = 0.15f;
+                    break;
+            }
         }
 
 

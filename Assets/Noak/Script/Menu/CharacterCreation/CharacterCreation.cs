@@ -1,4 +1,5 @@
-﻿using Synty.SidekickCharacters.API;
+﻿using FIMSpace.FTail;
+using Synty.SidekickCharacters.API;
 using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Enums;
 using Synty.SidekickCharacters.Utils;
@@ -32,6 +33,7 @@ public class CharacterCreation : MonoBehaviour
 
     //Ear and Nose stuff
     public bool isNose;
+    public Transform root;
 
     protected virtual void Start()
     {
@@ -107,6 +109,16 @@ public class CharacterCreation : MonoBehaviour
             AddScriptAndAnimator(character);
             SetSize();
 
+            root = character.transform.Find("root");
+            if (root != null)
+            {
+                AttachTailAnimators(root);
+            }
+            else
+            {
+                Debug.LogError("Root transform not found in character model.");
+            }
+
             Debug.Log($"Applying BodyTypeBlendValue: {_sidekickRuntime.BodyTypeBlendValue}");
         }
         else
@@ -114,6 +126,43 @@ public class CharacterCreation : MonoBehaviour
             Debug.LogError("Character creation failed.");
         }
     }
+
+    public void AttachTailAnimators(Transform root)
+    {
+        if (root == null)
+        {
+            Debug.LogWarning("AttachTailAnimators: root is null");
+            return;
+        }
+
+        // Traverse all children in the hierarchy
+        foreach (Transform child in root.GetComponentsInChildren<Transform>(true))
+        {
+            if (child == null) continue;
+
+            string name = child.name?.ToLower();
+            if (!string.IsNullOrEmpty(name) && name.Contains("dyn"))
+            {
+                if (!child.TryGetComponent<TailAnimator2>(out _))
+                {
+                    child.gameObject.AddComponent<TailAnimator2>();
+                    TailAnimator2 tailAnimator = child.GetComponent<TailAnimator2>();
+                    ConfigureTailAnimator(tailAnimator);
+                    Debug.Log($"TailAnimator2 added to {child.name}");
+                }
+            }
+        }
+    }
+
+    private void ConfigureTailAnimator(TailAnimator2 tail)
+    {
+        if (tail == null) return;
+
+        tail.UseWaving = false;
+        tail.MotionInfluence = 1.5f;
+        tail.ReactionSpeed = 1f;
+    }
+
 
     private void SetSize()
     {
