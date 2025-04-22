@@ -18,7 +18,7 @@ namespace Unity.FantasyKingdom
         [SerializeField] SidekickConfigurator _sidekickConfigurator;
 
         private readonly string saveKey = "MyCharacter";
-        private const string encryptionPassword = "MySuperSecretPassword123!";
+        private const string encryptionPassword = "K00a03j23s50a25";
 
         private DictionaryLibrary _dictionaryLibrary;
         [SerializeField] private CameraController _cameraController;
@@ -39,11 +39,14 @@ namespace Unity.FantasyKingdom
 
         private void LoadCharacterFromSave()
         {
-            string fileName = $"CharacterSave_{PlayerPrefs.GetString("SavedCharacterName", "Default")}.es3";
+            string characterName = PlayerPrefs.GetString("SavedCharacterName", "Default");
+            string folderName = $"PlayerSave_{characterName}";
+            string fileName = $"{folderName}/CharacterSave_{characterName}.es3";
+
             var settings = new ES3Settings(fileName)
             {
                 encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = "MySuperSecretPassword123!"
+                encryptionPassword = encryptionPassword
             };
 
             if (!ES3.FileExists(fileName) || !ES3.KeyExists(saveKey, settings))
@@ -156,8 +159,6 @@ namespace Unity.FantasyKingdom
             _sidekickConfigurator.ApplyBlendShapes();
             Debug.Log("✅ Sparade mesh-delar tillämpade!");
         }
-
-
         public void AttachTailAnimators(Transform root)
         {
             if (root == null)
@@ -195,19 +196,6 @@ namespace Unity.FantasyKingdom
                     }
                 }
             }
-        }
-
-
-        private void ConfigureTailAnimator(TailAnimator2 tail)
-        {
-            if (tail == null) return;
-
-            tail.UseWaving = false;  
-            tail.MotionInfluence = 0.3f;   
-            tail.ReactionSpeed = 0.7f;   
-            tail.MaxStretching = 0.15f;
-            tail.IKAutoWeights = true;
-            tail.IKAutoAngleLimits = true;
         }
 
         private void ConfigureTailAnimator(TailAnimator2 tail, TailType type)
@@ -276,18 +264,20 @@ namespace Unity.FantasyKingdom
 
         private void LoadGameDataFromSave()
         {
-            string lastSavedGameFile = PlayerPrefs.GetString("LastSavedGame", string.Empty);
+            string savedName = PlayerPrefs.GetString("SavedCharacterName", "Default");
+            string folderName = $"PlayerSave_{savedName}";
+            string fileName = $"{folderName}/GameSave_{savedName}.es3";
 
-            if (string.IsNullOrEmpty(lastSavedGameFile) || !ES3.FileExists(lastSavedGameFile))
+            if (!ES3.FileExists(fileName))
             {
                 Debug.LogWarning("⚠️ Inget sparat spel hittades.");
                 return;
             }
 
-            var settings = new ES3Settings(lastSavedGameFile)
+            var settings = new ES3Settings(fileName)
             {
                 encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = "MySuperSecretPassword123!"
+                encryptionPassword = encryptionPassword // Use the const if you've centralized it
             };
 
             if (!ES3.KeyExists("GameSave", settings))

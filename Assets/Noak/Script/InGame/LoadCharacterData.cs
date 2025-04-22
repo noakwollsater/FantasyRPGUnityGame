@@ -52,13 +52,14 @@ namespace Unity.FantasyKingdom
         private void LoadCharacterSaveData()
         {
             string savedName = PlayerPrefs.GetString("SavedCharacterName", "Default");
-            string fileName = $"CharacterSave_{savedName}.es3";
+            string folderName = $"PlayerSave_{savedName}";
+            string fileName = $"{folderName}/CharacterSave_{savedName}.es3";
+
             var settings = new ES3Settings(fileName)
             {
                 encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = "MySuperSecretPassword123!" // ❗ Samma som du använde vid sparning!
+                encryptionPassword = "K00a03j23s50a25" // ❗ Ensure this matches your save method
             };
-
 
             if (!ES3.FileExists(fileName) || !ES3.KeyExists(saveKey, settings))
             {
@@ -103,7 +104,7 @@ namespace Unity.FantasyKingdom
             // Final attributes
             finalAttributes = data.finalAttributes;
 
-            // Load selected parts
+            // Selected parts (if needed for logic elsewhere)
             var selectedParts = data.selectedParts;
         }
     }

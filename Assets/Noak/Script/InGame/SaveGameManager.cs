@@ -5,11 +5,11 @@ namespace Unity.FantasyKingdom
 {
     public class SaveGameManager : MonoBehaviour
     {
-        [SerializeField] private LoadCharacterData characterData; // Dra in via Inspector eller hitta via kod
+        [SerializeField] private LoadCharacterData characterData;
         [SerializeField] private GetActiveParts getActiveParts;
 
         private readonly string saveKey = "MyCharacter";
-        private const string encryptionPassword = "MySuperSecretPassword123!";
+        private const string encryptionPassword = "K00a03j23s50a25";
 
         [ContextMenu("💾 Save Character Data")]
         public void SaveCharacterData()
@@ -55,17 +55,21 @@ namespace Unity.FantasyKingdom
                 selectedParts = getActiveParts.selectedParts
             };
 
-            string savedName = PlayerPrefs.GetString("SavedCharacterName", "Default");
-            string fileName = $"CharacterSave_{savedName}.es3";
+            string characterName = characterData.characterName;
+            string folderName = $"PlayerSave_{characterName}";
+            string fileName = $"{folderName}/CharacterSave_{characterName}.es3";
+
             var settings = new ES3Settings(fileName)
             {
                 encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = "MySuperSecretPassword123!"
+                encryptionPassword = encryptionPassword
             };
 
+            PlayerPrefs.SetString("SavedCharacterName", characterName);
+            PlayerPrefs.Save();
 
             ES3.Save(saveKey, data, settings);
-            Debug.Log("✅ Character data saved!");
+            Debug.Log($"✅ Character data saved to: {fileName}");
         }
 
         public void SaveGameData(string chapterName, string areaName, SaveType saveType, string inGameTimeOfDay, Transform characterTransform)
@@ -87,18 +91,21 @@ namespace Unity.FantasyKingdom
                 characterPosition = characterTransform.position,
             };
 
-            string fileName = $"GameSave_{characterData.characterName}.es3";
+            string characterName = characterData.characterName;
+            string folderName = $"PlayerSave_{characterName}";
+            string fileName = $"{folderName}/GameSave_{characterName}.es3";
+
             var settings = new ES3Settings(fileName)
             {
                 encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = "MySuperSecretPassword123!"
+                encryptionPassword = encryptionPassword
             };
 
             ES3.Save("GameSave", saveData, settings);
             PlayerPrefs.SetString("LastSavedGame", fileName);
             PlayerPrefs.Save();
 
-            Debug.Log("✅ Game saved with character (encrypted)!");
+            Debug.Log($"✅ Game data saved to: {fileName}");
         }
     }
 }
