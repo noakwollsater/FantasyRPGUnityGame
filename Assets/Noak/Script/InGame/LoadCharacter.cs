@@ -3,6 +3,11 @@ using UnityEngine;
 using Opsive.UltimateCharacterController.Camera;
 using Mightland.Scripts.SK;
 using FIMSpace.FTail;
+using Synty.SidekickCharacters.API;
+using Synty.SidekickCharacters.Database.DTO;
+using Synty.SidekickCharacters.Database;
+using Synty.SidekickCharacters.Enums;
+using System.Linq;
 
 namespace Unity.FantasyKingdom
 {
@@ -16,6 +21,7 @@ namespace Unity.FantasyKingdom
     public class LoadCharacter : MonoBehaviour
     {
         [SerializeField] SidekickConfigurator _sidekickConfigurator;
+        private SidekickRuntime _sidekickRuntime;
 
         private readonly string saveKey = "MyCharacter";
         private const string encryptionPassword = "K00a03j23s50a25";
@@ -83,6 +89,13 @@ namespace Unity.FantasyKingdom
                     Debug.LogError("❌ SidekickConfigurator saknas på karaktären!");
                     return;
                 }
+
+                GameObject model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
+                Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
+
+                DatabaseManager db = new DatabaseManager();
+                _sidekickRuntime = new SidekickRuntime(model, material, null, db);
+
             }
 
             // Build library data
@@ -106,6 +119,7 @@ namespace Unity.FantasyKingdom
 
             ApplySavedPartsToSidekickConfigurator();
             SetBlendShapes();
+            ApplySavedColors();
         }
         private void ApplySavedPartsToSidekickConfigurator()
         {
@@ -228,7 +242,6 @@ namespace Unity.FantasyKingdom
             }
         }
 
-
         private void SetBlendShapes()
         {
             foreach (var smr in character.GetComponentsInChildren<SkinnedMeshRenderer>(true))
@@ -260,6 +273,44 @@ namespace Unity.FantasyKingdom
             }
 
             Debug.Log("✅ Blendshapes applied to all active parts!");
+        }
+        private void ApplySavedColors()
+        {
+            if (_sidekickRuntime == null || data.selectedColors == null || data.selectedColors.Count == 0)
+            {
+                Debug.Log("🎨 Inga färger att ladda eller SidekickRuntime saknas.");
+                return;
+            }
+
+            var colorProps = SidekickColorProperty.GetAll(new DatabaseManager());
+
+            foreach (var kvp in data.selectedColors)
+            {
+                string keyword = kvp.Key.ToLower();
+                string hexColor = kvp.Value;
+
+                if (!ColorUtility.TryParseHtmlString("#" + hexColor, out var color))
+                {
+                    Debug.LogWarning($"❓ Kunde inte tolka färg: {hexColor} för {keyword}");
+                    continue;
+                }
+
+                var matchingProps = colorProps
+                    .Where(prop => prop.Name.ToLower().Contains(keyword)
+                                   && !(keyword == "hair" && prop.Name.ToLower().Contains("facial")))
+                    .ToList();
+
+                foreach (var prop in matchingProps)
+                {
+                    _sidekickRuntime.UpdateColor(ColorType.MainColor, new SidekickColorRow
+                    {
+                        ColorProperty = prop,
+                        MainColor = hexColor
+                    });
+                }
+            }
+
+            Debug.Log("✅ Färger applicerade från sparfil!");
         }
 
         private void LoadGameDataFromSave()
@@ -296,5 +347,22 @@ namespace Unity.FantasyKingdom
                 Debug.Log($"🚶‍♂️ Flyttade karaktär till sparad position: {gameData.characterPosition}");
             }
         }
+
+        [ContextMenu("🧪 Debug Färgdata")]
+        private void DebugSavedColors()
+        {
+            if (data?.selectedColors == null || data.selectedColors.Count == 0)
+            {
+                Debug.Log("⚠️ Inga färger sparade i karaktären.");
+                return;
+            }
+
+            Debug.Log($"🧪 Debug: {data.selectedColors.Count} färger funna:");
+            foreach (var kvp in data.selectedColors)
+            {
+                Debug.Log($"🎯 Del: {kvp.Key} = #{kvp.Value}");
+            }
+        }
+
     }
 }

@@ -22,6 +22,8 @@ namespace Unity.FantasyKingdom
         private Texture2D generatedTexture;
         private List<SidekickColorProperty> _allColorProperties;
 
+        private Dictionary<string, string> _savedColors = new();
+
         void Start()
         {
             Initialize();
@@ -287,6 +289,12 @@ namespace Unity.FantasyKingdom
                     ColorProperty = property,
                     MainColor = ColorUtility.ToHtmlStringRGB(color)
                 });
+
+                // ✅ Save the color per keyword (e.g. "hair", "skin", etc)
+                foreach (string keyword in propertyKeywords)
+                {
+                    _savedColors[keyword] = ColorUtility.ToHtmlStringRGB(color);
+                }
             }
 
             Debug.Log($"Applied color {color} to {string.Join(", ", propertyKeywords)}");
@@ -305,6 +313,8 @@ namespace Unity.FantasyKingdom
         }
 
         public void SetCurrentParts(params string[] parts) => currentParts = parts.ToList();
+
+        public Dictionary<string, string> GetSelectedColors() => _savedColors;
 
         public void ClearCurrentParts() => currentParts = new List<string>();
         public void ChangeCharacterSkin() => ChangeSkinTone();
