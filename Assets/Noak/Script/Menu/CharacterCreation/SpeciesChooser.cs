@@ -37,10 +37,8 @@ public class SpeciesChooser : CharacterCreation
         }
 
         // Ensure SidekickRuntime is initialized
-        GameObject model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
-        Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
-
-        _sidekickRuntime = new SidekickRuntime(model, material, null, _dbManager);
+        CharacterRuntimeManager.InitIfNeeded();
+        _sidekickRuntime = CharacterRuntimeManager.RuntimeInstance;
         _dictionaryLibrary._partLibrary = _sidekickRuntime?.PartLibrary;
 
         if (_dictionaryLibrary._partLibrary == null)
