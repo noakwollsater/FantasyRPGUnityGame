@@ -88,6 +88,9 @@ public class AudioManager : MonoBehaviour
 
     public void ApplySoundSettings()
     {
+        if (ES3.KeyExists(settingsKey))
+            gameSettings = ES3.Load<GameSettingsData>(settingsKey);
+
         float master = Mathf.Clamp01(gameSettings.masterVolume);
 
         if (musicSources != null)
