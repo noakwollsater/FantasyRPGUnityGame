@@ -137,17 +137,19 @@ namespace Unity.FantasyKingdom
 
         public void SaveCharacter(string saveKey = "MyCharacter")
         {
-            string fileName = $"CharacterSave_{_dictionaryLibrary.firstName + " " + _dictionaryLibrary.lastName}.es3";
+            string characterName = _dictionaryLibrary.firstName + " " + _dictionaryLibrary.lastName;
+            string folderName = $"PlayerSave_{characterName}";
+            string fileName = $"{folderName}/CharacterSave_{characterName}.es3";
 
             // Save playerprefs reference to use during loading
-            PlayerPrefs.SetString("SavedCharacterName", _dictionaryLibrary.firstName + " " + _dictionaryLibrary.lastName);
+            PlayerPrefs.SetString("SavedCharacterName", characterName);
             PlayerPrefs.Save();
 
             // 🔐 Set up encryption
             var settings = new ES3Settings(fileName)
             {
                 encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = "MySuperSecretPassword123!" // You should store this more securely in a real project
+                encryptionPassword = "K00a03j23s50a25"
             };
 
             CharacterSaveData data = new CharacterSaveData
