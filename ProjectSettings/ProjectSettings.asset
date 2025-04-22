@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Tedster
-  productName: Chronicles Of Eldoria
+  productName: 'Vinterkyla: Shattered Realms'
   defaultCursor: {fileID: 2800000, guid: dcf51396c8090f047a1ed590f5f7530e, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
@@ -305,7 +305,7 @@ PlayerSettings:
       m_Height: 1024
       m_Kind: 0
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 7409b88a53cc6b646bcdfd53a0db18dd, type: 3}
+      m_Icon: {fileID: 2800000, guid: eb0c42aeece7b7f45a3564122432fe7b, type: 3}
       m_Width: 512
       m_Height: 512
       m_Kind: 0
