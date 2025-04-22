@@ -11,7 +11,7 @@ public static class CharacterRuntimeManager
         if (RuntimeInstance == null)
         {
             var model = Addressables.LoadAssetAsync<GameObject>("SK_BaseModel").WaitForCompletion();
-            var material = Addressables.LoadAssetAsync<Material>("M_BaseMaterial").WaitForCompletion();
+            Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
             RuntimeInstance = new SidekickRuntime(model, material, null, new DatabaseManager());
         }
     }

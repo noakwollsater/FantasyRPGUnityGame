@@ -30,29 +30,13 @@ namespace Unity.FantasyKingdom
 
         private void Initialize()
         {
-            if (_dbManager == null)
-            {
-                _dbManager = new DatabaseManager();
-                if (_dbManager.GetCurrentDbConnection() == null)
-                {
-                    Debug.LogError("Database connection failed.");
-                    return;
-                }
-            }
+            _dbManager = new DatabaseManager();
 
-            if (_sidekickRuntime == null)
-            {
-                CharacterRuntimeManager.InitIfNeeded();
-                _sidekickRuntime = CharacterRuntimeManager.RuntimeInstance;
-            }
+            GameObject model = Resources.Load<GameObject>("Meshes/SK_BaseModel");
+            Material material = Resources.Load<Material>("Materials/M_BaseMaterial");
 
-            if (_dictionaryLibrary == null)
-            {
-                _dictionaryLibrary = new DictionaryLibrary
-                {
-                    _partLibrary = _sidekickRuntime.PartLibrary
-                };
-            }
+            _sidekickRuntime = new SidekickRuntime(model, material, null, _dbManager);
+            _dictionaryLibrary._partLibrary = _sidekickRuntime.PartLibrary;
 
             _allColorProperties ??= SidekickColorProperty.GetAll(_dbManager);
         }
