@@ -103,9 +103,6 @@ namespace Unity.FantasyKingdom
 
             // Final attributes
             finalAttributes = data.finalAttributes;
-
-            // Selected parts (if needed for logic elsewhere)
-            var selectedParts = data.selectedParts;
         }
     }
 }

@@ -28,6 +28,8 @@ namespace Unity.FantasyKingdom
         [Header("Background Skills UI")]
         [SerializeField] private TMP_Text[] backgroundSkillsTexts;
 
+        [SerializeField] private DynamicColorWheel colorWheel; // Dra in i Inspector
+
         void Start()
         {
             UpdateSummary();
@@ -170,7 +172,9 @@ namespace Unity.FantasyKingdom
                 backgroundSkills = new List<string>(_dictionaryLibrary.backgroundSkills),
                 finalAttributes = RaceSelectionUI.GetFinalAttributes(),
 
-                selectedParts = _dictionaryLibrary._partIndexDictionary.ToDictionary(
+                selectedColors = new Dictionary<string, string>(colorWheel.GetSelectedColors()),
+
+            selectedParts = _dictionaryLibrary._partIndexDictionary.ToDictionary(
                     entry => entry.Key.ToString(),
                     entry => {
                         var partDict = _dictionaryLibrary._availablePartDictionary[entry.Key];
@@ -178,8 +182,9 @@ namespace Unity.FantasyKingdom
                         return partDict.Keys.ElementAt(index); // get the part's name
                     }
                 )
-            };
 
+
+            };
             ES3.Save(saveKey, data, settings);
             Debug.Log("✅ Character saved!");
         }

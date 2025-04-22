@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Unity.FantasyKingdom
@@ -7,6 +8,7 @@ namespace Unity.FantasyKingdom
     {
         [SerializeField] private LoadCharacterData characterData;
         [SerializeField] private GetActiveParts getActiveParts;
+        [SerializeField] private GetActiveColors getActiveColors;
 
         private readonly string saveKey = "MyCharacter";
         private const string encryptionPassword = "K00a03j23s50a25";
@@ -21,6 +23,7 @@ namespace Unity.FantasyKingdom
             }
 
             getActiveParts.GetActivePartsFromCharacter();
+            getActiveColors.GetColorsFromRuntime();
 
             CharacterSaveData data = new CharacterSaveData
             {
@@ -52,8 +55,11 @@ namespace Unity.FantasyKingdom
 
                 finalAttributes = characterData.finalAttributes,
 
-                selectedParts = getActiveParts.selectedParts
-            };
+                selectedParts = getActiveParts.selectedParts,
+
+                selectedColors = new Dictionary<string, string>(getActiveColors.selectedColors)
+
+        };
 
             string characterName = characterData.characterName;
             string folderName = $"PlayerSave_{characterName}";
