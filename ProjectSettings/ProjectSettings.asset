@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Tedster
-  productName: 'Vinterkyla: Shattered Realms'
+  productName: Vinterkyla Shattered Realms
   defaultCursor: {fileID: 2800000, guid: dcf51396c8090f047a1ed590f5f7530e, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
