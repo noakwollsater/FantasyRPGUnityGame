@@ -4,6 +4,8 @@ using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Enums;
 using Synty.SidekickCharacters.Utils;
 using System.Collections.Generic;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using System.IO;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +17,8 @@ public class CharacterCreation : MonoBehaviour
     public DatabaseManager _dbManager;
     public SidekickRuntime _sidekickRuntime;
     public DictionaryLibrary _dictionaryLibrary;
+
+    private Material _addressableMaterial;
 
     // For this example we are only interested in Upper Body parts, so we filter the list of all parts to only get the ones we want.
     public List<CharacterPartType> upperBodyParts = PartGroup.UpperBody.GetPartTypes();
@@ -51,7 +55,6 @@ public class CharacterCreation : MonoBehaviour
             chooser.SelectSpecies("Human");
         }
     }
-
 
     public void InitializeParts(List<CharacterPartType> partList)
     {
