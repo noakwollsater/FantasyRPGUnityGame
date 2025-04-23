@@ -167,6 +167,26 @@ public class RaceSelectionUI : MonoBehaviour
         return finalStats;
     }
 
+    public static ExtendedStats GetFinalStats()
+    {
+        if (Instance == null)
+        {
+            Debug.LogWarning("⚠️ GetFinalStats: Instance is null.");
+            return null;
+        }
+
+        Race race = RaceDatabase.Instance.GetRace(SelectedRace);
+
+        return new ExtendedStats(
+            race.ExtendedStats.HP,
+            race.ExtendedStats.Stamina,
+            race.ExtendedStats.Hunger,
+            race.ExtendedStats.Thirst,
+            race.ExtendedStats.Speed,
+            race.ExtendedStats.Armor,
+            race.ExtendedStats.Mana
+        );
+    }
 
     public static AttributeSet RecalculateAttributes(string raceName, AttributeSet classBonuses)
     {

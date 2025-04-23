@@ -50,15 +50,15 @@ namespace Unity.FantasyKingdom
                 fat = characterData.fat,
                 genderBlend = characterData.genderBlend,
 
-                completedQuests = new System.Collections.Generic.List<string>(characterData.completedQuests),
-                backgroundSkills = new System.Collections.Generic.List<string>(characterData.backgroundSkills),
+                completedQuests = new List<string>(characterData.completedQuests),
+                backgroundSkills = new List<string>(characterData.backgroundSkills),
 
                 finalAttributes = characterData.finalAttributes,
+                finalStats = characterData.finalStats,
 
                 selectedParts = getActiveParts.selectedParts,
 
                 selectedColors = new Dictionary<string, string>(getActiveColors.selectedColors)
-
         };
 
             string characterName = characterData.characterName;
