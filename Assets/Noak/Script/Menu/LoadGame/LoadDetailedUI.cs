@@ -1,10 +1,5 @@
-using Synty.Interface.FantasyMenus.Samples;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Unity.FantasyKingdom
 {
@@ -24,7 +19,15 @@ namespace Unity.FantasyKingdom
             saveTypeText.text = data.saveType.ToString();
             saveDateText.text = data.saveDateTime.ToString("yyyy-MM-dd HH:mm:ss");
             characterNameText.text = data.characterFullName;
-            inGameTimeText.text = data.inGameTimeOfDay;
+            int hours = Mathf.FloorToInt(data.inGameTimeMinutes / 60f);
+            int minutes = Mathf.FloorToInt(data.inGameTimeMinutes % 60f);
+            string timeFormatted = $"{hours:00}:{minutes:00}";
+
+            //Beräkna månadsnamn på engelska.
+            string[] monthNames = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            string monthName = monthNames[data.inGameMonth - 1];
+
+            inGameTimeText.text = $"{data.inGameDay} {monthName} kl. {timeFormatted}";
         }
     }
 }

@@ -80,9 +80,17 @@ namespace Unity.FantasyKingdom
 
         public void SaveGameData(string chapterName, string areaName, SaveType saveType, string inGameTimeOfDay, Transform characterTransform)
         {
+
             if (characterData == null)
             {
                 Debug.LogError("❌ characterData is null! Cannot save.");
+                return;
+            }
+
+            var timeManager = TimeManager.Instance;
+            if (timeManager == null)
+            {
+                Debug.LogError("❌ TimeManager not found! Cannot save time.");
                 return;
             }
 
@@ -92,7 +100,10 @@ namespace Unity.FantasyKingdom
                 areaName = areaName,
                 saveType = saveType,
                 saveDateTime = DateTime.Now,
-                inGameTimeOfDay = inGameTimeOfDay,
+                inGameYear = timeManager.year,
+                inGameMonth = timeManager.month,
+                inGameDay = timeManager.dayCount,
+                inGameTimeMinutes = timeManager.currentTime,
                 characterFullName = characterData.characterName,
                 characterPosition = characterTransform.position,
             };

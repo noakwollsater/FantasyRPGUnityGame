@@ -322,6 +322,7 @@ namespace Unity.FantasyKingdom
             if (!ES3.FileExists(fileName))
             {
                 Debug.LogWarning("⚠️ Inget sparat spel hittades.");
+                TimeManager.Instance?.SetRandomTime();
                 return;
             }
 
@@ -339,7 +340,12 @@ namespace Unity.FantasyKingdom
 
             GameSaveData gameData = ES3.Load<GameSaveData>("GameSave", settings);
 
-            Debug.Log($"✅ Game loaded! Kapitel: {gameData.chapterName}, Tid: {gameData.inGameTimeOfDay}");
+            if (TimeManager.Instance != null)
+            {
+                TimeManager.Instance.LoadTimeFromData(gameData);
+            }
+
+            Debug.Log($"✅ Game loaded! Kapitel: {gameData.chapterName}, Tid: {gameData.inGameTimeMinutes}");
 
             if (character != null)
             {
