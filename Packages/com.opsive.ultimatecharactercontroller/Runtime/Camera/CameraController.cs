@@ -48,7 +48,7 @@ namespace Opsive.UltimateCharacterController.Camera
         [Tooltip("Can the camera change perspectives?")]
         [SerializeField] protected bool m_CanChangePerspectives = true;
         [Tooltip("Can the camera zoom?")]
-        [SerializeField] protected bool m_CanZoom = true;
+        [SerializeField] public bool m_CanZoom = true;
         [Tooltip("The state that should be activated when zoomed.")]
         [SerializeField] protected string m_ZoomState = "Zoom";
         [Tooltip("Should the camera movement be adjusted based on the character and Unity timescale?")]
@@ -81,7 +81,7 @@ namespace Opsive.UltimateCharacterController.Camera
         private Transition m_Transitioner;
 
         private bool m_ZoomInput;
-        private bool m_Zoom;
+        public bool m_Zoom;
 
         [System.NonSerialized] private GameObject m_GameObject;
         private Transform m_Transform;

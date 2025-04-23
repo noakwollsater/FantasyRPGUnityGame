@@ -5,6 +5,8 @@ namespace Unity.FantasyKingdom
 {
     public class LoadCharacterData : MonoBehaviour
     {
+        [SerializeField] private ZoomFunction _zoomFunction;
+
         private CharacterSaveData data;
 
         private readonly string saveKey = "MyCharacter";
@@ -46,6 +48,7 @@ namespace Unity.FantasyKingdom
         void Start()
         {
             LoadCharacterSaveData();
+            SkillCheckers();
         }
 
         [ContextMenu("🔁 Load Character Data")]
@@ -103,6 +106,77 @@ namespace Unity.FantasyKingdom
 
             // Final attributes
             finalAttributes = data.finalAttributes;
+        }
+
+        private void SkillCheckers()
+        {
+            foreach (var skill in backgroundSkills)
+            {
+                if (skill == "Stealth")
+                {
+                    // Add your logic for Stealth skill here
+                }
+                else if (skill == "Sleight of Hand")
+                {
+                    // Add your logic for Sleight of Hand skill here
+                }
+                else if (skill == "Survival")
+                {
+                    _zoomFunction.EnableZoom();
+                }
+                else if (skill == "Investigation")
+                {
+                    _zoomFunction.EnableZoom();
+                }
+                else if (skill == "Arcana")
+                {
+                    // Add your logic for Arcana skill here
+                }
+                else if (skill == "History")
+                {
+                    // Add your logic for History skill here
+                }
+                else if (skill == "Persuasion")
+                {
+                    // Add your logic for Persuasion skill here
+                }
+                else if (skill == "Insight")
+                {
+                    // Add your logic for Insight skill here
+                }
+                else if (skill == "Medicine")
+                {
+                    // Add your logic for Medicine skill here
+                }
+                else if (skill == "Animal Handling")
+                {
+                    // Add your logic for Animal Handling skill here
+                }
+                else if (skill == "Deception")
+                {
+                    // Add your logic for Deception skill here
+                }
+                else if (skill == "Intimidation")
+                {
+                    // Add your logic for Intimidation skill here
+                }
+                else if (skill == "Nature")
+                {
+                    // Add your logic for Nature skill here
+                }
+                else if (skill == "Athletics")
+                {
+                    // Add your logic for Athletics skill here
+                }
+                else if (skill == "Perception")
+                {
+                    // Add your logic for Perception skill here
+                }
+                else if (skill == "Religion")
+                {
+                    //Add your logic for Religion skill here
+                }
+            }
         }
     }
 }
