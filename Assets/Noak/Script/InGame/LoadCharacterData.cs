@@ -45,6 +45,7 @@ namespace Unity.FantasyKingdom
         [Header("🎯 Final Attributes")]
         public AttributeSet finalAttributes;
         public ExtendedStats finalStats;
+        public ExtendedStats currentStats;
 
 
         void Start()
@@ -109,6 +110,7 @@ namespace Unity.FantasyKingdom
             // Final attributes
             finalAttributes = data.finalAttributes;
             finalStats = data.finalStats;
+            currentStats = data.currentStats;
         }
 
         private void SkillCheckers()

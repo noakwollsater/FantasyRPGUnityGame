@@ -55,6 +55,7 @@ namespace Unity.FantasyKingdom
 
                 finalAttributes = characterData.finalAttributes,
                 finalStats = characterData.finalStats,
+                currentStats = characterData.currentStats,
 
                 selectedParts = getActiveParts.selectedParts,
 
