@@ -8,6 +8,7 @@ namespace Unity.FantasyKingdom
     {
         [SerializeField] private GameObject mainMenuPanel;
         [SerializeField] private GameObject inventoryPanel;
+        [SerializeField] private GameObject IngameUI;
 
         [SerializeField] private GameObject radialPanel;
         [SerializeField] private GameObject settingsPanel;
@@ -68,6 +69,7 @@ namespace Unity.FantasyKingdom
                 {
                     isMainMenuOpen = false;
                     mainMenuPanel.SetActive(false);
+                    IngameUI.SetActive(false);
                 }
             }
 
@@ -103,6 +105,7 @@ namespace Unity.FantasyKingdom
             mainMenuPanel.SetActive(false);
             radialPanel.SetActive(true);
             settingsPanel.SetActive(false);
+            IngameUI.SetActive(true);
 
             if (characterLocomotion != null)
                 characterLocomotion.enabled = true;
@@ -115,6 +118,7 @@ namespace Unity.FantasyKingdom
         {
             isMainMenuOpen = true;
             mainMenuPanel.SetActive(true);
+            IngameUI.SetActive(false);
 
             if (characterLocomotion != null)
                 characterLocomotion.enabled = false;

@@ -171,6 +171,8 @@ namespace Unity.FantasyKingdom
 
                 backgroundSkills = new List<string>(_dictionaryLibrary.backgroundSkills),
                 finalAttributes = RaceSelectionUI.GetFinalAttributes(),
+                finalStats = RaceSelectionUI.GetFinalStats(),
+                currentStats = RaceSelectionUI.GetFinalStats(),
 
                 selectedColors = new Dictionary<string, string>(colorWheel.GetSelectedColors()),
 
@@ -182,8 +184,6 @@ namespace Unity.FantasyKingdom
                         return partDict.Keys.ElementAt(index); // get the part's name
                     }
                 )
-
-
             };
             ES3.Save(saveKey, data, settings);
             Debug.Log("✅ Character saved!");

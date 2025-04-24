@@ -8,7 +8,12 @@ public class GameSaveData
     public string areaName;
     public SaveType saveType;
     public DateTime saveDateTime;
-    public string inGameTimeOfDay;
+
+    //Spara ingame tid här
+    public int inGameYear;
+    public int inGameMonth;
+    public int inGameDay;
+    public float inGameTimeMinutes;
 
     public string characterFullName;
     public Vector3 characterPosition;

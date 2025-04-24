@@ -30,6 +30,9 @@ public class CharacterSaveData
 
     public AttributeSet finalAttributes;
 
+    public ExtendedStats finalStats;
+    public ExtendedStats currentStats;
+
     public Dictionary<string, string> selectedParts = new();
 
     public string background;
