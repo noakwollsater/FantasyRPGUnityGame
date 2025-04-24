@@ -29,13 +29,10 @@ namespace Unity.FantasyKingdom
             if (_loadCharacterData == null)
             {
                 Debug.LogError("LoadCharacterData not assigned!");
-                enabled = false;
                 return;
             }
-            experienceBar.value = 0.5f;
-
-            UpdateAllUI(force: true);
         }
+
 
         void Update()
         {
@@ -114,7 +111,7 @@ namespace Unity.FantasyKingdom
             Debug.Log($"XP updated: {currentXP}/{requiredXP} = {normalizedXP}");
         }
 
-        private void UpdateAllUI(bool force = false)
+        public void UpdateAllUI(bool force = false)
         {
             if (force || _loadCharacterData.level != _lastLevel)
                 levelText.text = _loadCharacterData.level.ToString();

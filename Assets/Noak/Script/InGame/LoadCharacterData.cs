@@ -6,6 +6,7 @@ namespace Unity.FantasyKingdom
     public class LoadCharacterData : MonoBehaviour
     {
         [SerializeField] private ZoomFunction _zoomFunction;
+        [SerializeField] private LevelManager _levelManager;
 
         private CharacterSaveData data;
 
@@ -51,6 +52,7 @@ namespace Unity.FantasyKingdom
         void Start()
         {
             LoadCharacterSaveData();
+            updateStats();
             SkillCheckers();
         }
 
@@ -111,6 +113,11 @@ namespace Unity.FantasyKingdom
             finalAttributes = data.finalAttributes;
             finalStats = data.finalStats;
             currentStats = data.currentStats;
+        }
+
+        private void updateStats()
+        {
+            _levelManager.UpdateAllUI(force: true);
         }
 
         private void SkillCheckers()
