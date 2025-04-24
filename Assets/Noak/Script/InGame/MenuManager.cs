@@ -42,10 +42,12 @@ namespace Unity.FantasyKingdom
                 if (!isMainMenuOpen)
                 {
                     OpenMainMenu();
+                    UpdateCursorState();
                 }
                 else
                 {
                     ResumeGame();
+                    UpdateCursorState();
                 }
             }
 
