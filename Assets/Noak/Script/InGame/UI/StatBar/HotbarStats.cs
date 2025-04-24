@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace Unity.FantasyKingdom
 {
@@ -25,24 +26,23 @@ namespace Unity.FantasyKingdom
         [SerializeField] private Animator _hungerAnimator;
         [SerializeField] private Animator _thirstAnimator;
         [SerializeField] private Animator _manaAnimator;
+        [SerializeField] private Animator _damageFX;
+        [SerializeField] private Animator _healFX;
+        [SerializeField] private Animator _poisenedFX;
 
         [SerializeField] private float lowStatThreshold = 0.2f;
 
-        // Animator parameter hashes
         private static readonly int HealthParam = Animator.StringToHash("Health");
-        private static readonly int IsLowHealth = Animator.StringToHash("IsLowHealth");
-
         private static readonly int StaminaParam = Animator.StringToHash("Health");
-        private static readonly int IsLowStamina = Animator.StringToHash("IsLowStamina");
-
         private static readonly int HungerParam = Animator.StringToHash("Health");
-        private static readonly int IsLowHunger = Animator.StringToHash("IsLowHunger");
-
         private static readonly int ThirstParam = Animator.StringToHash("Health");
-        private static readonly int IsLowThirst = Animator.StringToHash("IsLowThirst");
-
         private static readonly int ManaParam = Animator.StringToHash("Health");
-        private static readonly int IsLowMana = Animator.StringToHash("IsLowMana");
+
+        private static readonly int DamageFXParam = Animator.StringToHash("Hit");
+        private static readonly int HealFXParam = Animator.StringToHash("Heal");
+        private static readonly int PoisenedFXParam = Animator.StringToHash("Poisoned");
+
+        private Coroutine _statCoroutine;
 
         void Start()
         {
@@ -62,37 +62,46 @@ namespace Unity.FantasyKingdom
 
         private void UpdateAllBars()
         {
-            UpdateStatBar(StatType.HP, _loadCharacterData.currentStats.HP, _loadCharacterData.finalStats.HP);
-            UpdateStatBar(StatType.Stamina, _loadCharacterData.currentStats.Stamina, _loadCharacterData.finalStats.Stamina);
-            UpdateStatBar(StatType.Hunger, _loadCharacterData.currentStats.Hunger, _loadCharacterData.finalStats.Hunger);
-            UpdateStatBar(StatType.Thirst, _loadCharacterData.currentStats.Thirst, _loadCharacterData.finalStats.Thirst);
-            UpdateStatBar(StatType.Mana, _loadCharacterData.currentStats.Mana, _loadCharacterData.finalStats.Mana);
+            foreach (StatType stat in System.Enum.GetValues(typeof(StatType)))
+            {
+                UpdateStatBar(stat, GetCurrentStat(stat), GetMaxStat(stat));
+            }
         }
 
         private void ModifyStat(StatType type, int amount)
         {
-            Debug.Log($"Modifying {type} by {amount}");
+            float current = GetCurrentStat(type);
+            float max = GetMaxStat(type);
+            float newValue = Mathf.Clamp(current + amount, 0, max);
 
-            switch (type)
+            if (amount < 0)
+                _damageFX.SetTrigger(DamageFXParam);
+            else if (amount > 0)
+                _healFX.SetTrigger(HealFXParam);
+
+            if (_statCoroutine != null)
+                StopCoroutine(_statCoroutine);
+
+            _statCoroutine = StartCoroutine(SmoothModifyStat(type, newValue));
+        }
+
+        private IEnumerator SmoothModifyStat(StatType type, float targetValue, float duration = 0.5f)
+        {
+            float currentValue = GetCurrentStat(type);
+            float elapsed = 0f;
+            float initialValue = currentValue;
+
+            while (elapsed < duration)
             {
-                case StatType.HP:
-                    _loadCharacterData.currentStats.HP = Mathf.Clamp(_loadCharacterData.currentStats.HP + amount, 0, _loadCharacterData.finalStats.HP);
-                    break;
-                case StatType.Stamina:
-                    _loadCharacterData.currentStats.Stamina = Mathf.Clamp(_loadCharacterData.currentStats.Stamina + amount, 0, _loadCharacterData.finalStats.Stamina);
-                    break;
-                case StatType.Hunger:
-                    _loadCharacterData.currentStats.Hunger = Mathf.Clamp(_loadCharacterData.currentStats.Hunger + amount, 0, _loadCharacterData.finalStats.Hunger);
-                    break;
-                case StatType.Thirst:
-                    _loadCharacterData.currentStats.Thirst = Mathf.Clamp(_loadCharacterData.currentStats.Thirst + amount, 0, _loadCharacterData.finalStats.Thirst);
-                    break;
-                case StatType.Mana:
-                    _loadCharacterData.currentStats.Mana = Mathf.Clamp(_loadCharacterData.currentStats.Mana + amount, 0, _loadCharacterData.finalStats.Mana);
-                    break;
+                elapsed += Time.deltaTime;
+                float newValue = Mathf.Lerp(initialValue, targetValue, elapsed / duration);
+                SetCurrentStat(type, newValue);
+                UpdateStatBar(type, newValue, GetMaxStat(type));
+                yield return null;
             }
 
-            UpdateAllBars();
+            SetCurrentStat(type, targetValue);
+            UpdateStatBar(type, targetValue, GetMaxStat(type));
         }
 
         private void UpdateStatBar(StatType type, float current, float max)
@@ -104,61 +113,92 @@ namespace Unity.FantasyKingdom
                 case StatType.HP:
                     _healthLowFillBar.fillAmount = normalized;
                     if (_healthAnimator != null)
-                    {
                         _healthAnimator.SetFloat(HealthParam, normalized);
-                        _healthAnimator.SetBool(IsLowHealth, normalized <= lowStatThreshold);
-                    }
-                    else _healthFillBar.fillAmount = normalized;
+                    else
+                        _healthFillBar.fillAmount = normalized;
                     break;
 
                 case StatType.Stamina:
                     _staminaLowFillBar.fillAmount = normalized;
                     if (_staminaAnimator != null)
-                    {
                         _staminaAnimator.SetFloat(StaminaParam, normalized);
-                        _staminaAnimator.SetBool(IsLowStamina, normalized <= lowStatThreshold);
-                    }
-                    else _staminaFillBar.fillAmount = normalized;
+                    else
+                        _staminaFillBar.fillAmount = normalized;
                     break;
 
                 case StatType.Hunger:
                     _hungerLowFillBar.fillAmount = normalized;
                     if (_hungerAnimator != null)
-                    {
                         _hungerAnimator.SetFloat(HungerParam, normalized);
-                        _hungerAnimator.SetBool(IsLowHunger, normalized <= lowStatThreshold);
-                    }
-                    else _hungerFillBar.fillAmount = normalized;
+                    else
+                        _hungerFillBar.fillAmount = normalized;
                     break;
 
                 case StatType.Thirst:
                     _thirstLowFillBar.fillAmount = normalized;
                     if (_thirstAnimator != null)
-                    {
                         _thirstAnimator.SetFloat(ThirstParam, normalized);
-                        _thirstAnimator.SetBool(IsLowThirst, normalized <= lowStatThreshold);
-                    }
-                    else _thirstFillBar.fillAmount = normalized;
+                    else
+                        _thirstFillBar.fillAmount = normalized;
                     break;
 
                 case StatType.Mana:
                     _manaLowFillBar.fillAmount = normalized;
                     if (_manaAnimator != null)
-                    {
                         _manaAnimator.SetFloat(ManaParam, normalized);
-                        _manaAnimator.SetBool(IsLowMana, normalized <= lowStatThreshold);
-                    }
-                    else _manaFillBar.fillAmount = normalized;
+                    else
+                        _manaFillBar.fillAmount = normalized;
                     break;
             }
 
             Debug.Log($"{type} updated: {current}/{max} = {normalized}");
         }
 
+        private float GetCurrentStat(StatType type)
+        {
+            switch (type)
+            {
+                case StatType.HP: return _loadCharacterData.currentStats.HP;
+                case StatType.Stamina: return _loadCharacterData.currentStats.Stamina;
+                case StatType.Hunger: return _loadCharacterData.currentStats.Hunger;
+                case StatType.Thirst: return _loadCharacterData.currentStats.Thirst;
+                case StatType.Mana: return _loadCharacterData.currentStats.Mana;
+                default: return 0;
+            }
+        }
+
+        private float GetMaxStat(StatType type)
+        {
+            switch (type)
+            {
+                case StatType.HP: return _loadCharacterData.finalStats.HP;
+                case StatType.Stamina: return _loadCharacterData.finalStats.Stamina;
+                case StatType.Hunger: return _loadCharacterData.finalStats.Hunger;
+                case StatType.Thirst: return _loadCharacterData.finalStats.Thirst;
+                case StatType.Mana: return _loadCharacterData.finalStats.Mana;
+                default: return 0;
+            }
+        }
+
+        private void SetCurrentStat(StatType type, float value)
+        {
+            int intValue = Mathf.RoundToInt(value); // Round to closest int
+
+            switch (type)
+            {
+                case StatType.HP: _loadCharacterData.currentStats.HP = intValue; break;
+                case StatType.Stamina: _loadCharacterData.currentStats.Stamina = intValue; break;
+                case StatType.Hunger: _loadCharacterData.currentStats.Hunger = intValue; break;
+                case StatType.Thirst: _loadCharacterData.currentStats.Thirst = intValue; break;
+                case StatType.Mana: _loadCharacterData.currentStats.Mana = intValue; break;
+            }
+        }
+
         void Update()
         {
             // For testing: reduce stats with keys
             if (Input.GetKeyDown(KeyCode.B)) ModifyStat(StatType.HP, -10);
+            if (Input.GetKeyDown(KeyCode.L)) ModifyStat(StatType.HP, +10);
             if (Input.GetKeyDown(KeyCode.N)) ModifyStat(StatType.Stamina, -10);
             if (Input.GetKeyDown(KeyCode.M)) ModifyStat(StatType.Hunger, -10);
             if (Input.GetKeyDown(KeyCode.Comma)) ModifyStat(StatType.Thirst, -10);
