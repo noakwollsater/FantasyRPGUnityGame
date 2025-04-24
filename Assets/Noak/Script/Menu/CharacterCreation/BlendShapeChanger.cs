@@ -25,7 +25,6 @@ namespace Unity.FantasyKingdom
         public float DefaultFat = 33f;
         public float DefaultGender = 0f;
 
-
         void Start()
         {
             LazyInit();
@@ -151,11 +150,16 @@ namespace Unity.FantasyKingdom
                 if (_dictionaryLibrary._partLibrary.ContainsKey(CharacterPartType.Wrap))
                 {
                     _dictionaryLibrary._availablePartDictionary[CharacterPartType.Wrap] = _dictionaryLibrary._partLibrary[CharacterPartType.Wrap];
+
+                    if (RaceSelectionUI.SelectedRace == "Human")
                     _dictionaryLibrary._availablePartDictionary[CharacterPartType.Head] = _dictionaryLibrary._partLibrary[CharacterPartType.Head];
 
                     // Default to the first wrap part (can be refined based on your preference)
                     _dictionaryLibrary._partIndexDictionary[CharacterPartType.Wrap] = 0;
-                    _dictionaryLibrary._partIndexDictionary[CharacterPartType.Head] = 1;
+                    if (RaceSelectionUI.SelectedRace == "Human")
+                    {
+                        _dictionaryLibrary._partIndexDictionary[CharacterPartType.Head] = 1;
+                    }
                 }
             }
             else
@@ -165,7 +169,10 @@ namespace Unity.FantasyKingdom
                 {
                     _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.Wrap);
                     _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.Wrap);
-                    _dictionaryLibrary._partIndexDictionary[CharacterPartType.Head] = 0;
+                    if (RaceSelectionUI.SelectedRace == "Human")
+                    {
+                        _dictionaryLibrary._partIndexDictionary[CharacterPartType.Head] = 0;
+                    }
                 }
             }
 
