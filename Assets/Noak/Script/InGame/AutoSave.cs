@@ -6,7 +6,7 @@ namespace Unity.FantasyKingdom
     {
         [SerializeField] private SaveGameManager saveGameManager;
         [SerializeField] private GameObject autoSavePanel;
-        [SerializeField] private float saveInterval = 30f; // var femte minut
+        [SerializeField] private float saveInterval = 300f; // var femte minut
         [SerializeField] private float savePopupDuration = 1.5f;
 
         private float saveTimer;
