@@ -7,6 +7,7 @@ namespace Unity.FantasyKingdom
     {
         [SerializeField] private ZoomFunction _zoomFunction;
         [SerializeField] private LevelManager _levelManager;
+        [SerializeField] private HotbarStats _hotbarStats;
 
         private CharacterSaveData data;
 
@@ -60,7 +61,7 @@ namespace Unity.FantasyKingdom
         private void LoadCharacterSaveData()
         {
             string savedName = PlayerPrefs.GetString("SavedCharacterName", "Default");
-            string folderName = $"PlayerSave_{savedName}";
+            string folderName = $"PlayerSave_{savedName}"; 
             string fileName = $"{folderName}/CharacterSave_{savedName}.es3";
 
             var settings = new ES3Settings(fileName)
@@ -118,6 +119,7 @@ namespace Unity.FantasyKingdom
         private void updateStats()
         {
             _levelManager.UpdateAllUI(force: true);
+            _hotbarStats.InitStats();
         }
 
         private void SkillCheckers()

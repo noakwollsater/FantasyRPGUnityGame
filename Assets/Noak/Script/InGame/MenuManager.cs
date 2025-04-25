@@ -6,100 +6,125 @@ namespace Unity.FantasyKingdom
 {
     public class MenuManager : MonoBehaviour
     {
+        [Header("UI Panels")]
         [SerializeField] private GameObject mainMenuPanel;
         [SerializeField] private GameObject inventoryPanel;
-        [SerializeField] private GameObject IngameUI;
-
+        [SerializeField] private GameObject ingameUI;
         [SerializeField] private GameObject radialPanel;
         [SerializeField] private GameObject settingsPanel;
 
+        [Header("Dependencies")]
         [SerializeField] private CameraController cameraController;
         [SerializeField] private SaveGameManager saveGameManager;
 
-        private CharacterSaveData data;
-
         private UltimateCharacterLocomotion characterLocomotion;
-        private GameObject Character;
+        private GameObject characterGameObject;
 
-        private bool isMainMenuOpen = false;
-        private bool isInventoryOpen = false;
+        private bool isMainMenuOpen;
+        private bool isInventoryOpen;
 
-        void Update()
+        private void Update()
         {
-            // Ensure characterLocomotion is assigned
+            EnsureCharacterLocomotionInitialized();
+
+            HandleEscapeKey();
+            HandleInventoryToggle();
+            HandleSettingsToggle();
+
+            if (!isMainMenuOpen && !isInventoryOpen && !settingsPanel.activeSelf)
+            {
+                LockCursor();
+            }
+        }
+
+        private void EnsureCharacterLocomotionInitialized()
+        {
             if (characterLocomotion == null)
             {
-                Character = GameObject.FindGameObjectWithTag("Player");
-                if (Character != null)
+                characterGameObject = GameObject.FindGameObjectWithTag("Player");
+                if (characterGameObject != null)
                 {
-                    characterLocomotion = Character.GetComponent<UltimateCharacterLocomotion>();
+                    characterLocomotion = characterGameObject.GetComponent<UltimateCharacterLocomotion>();
                 }
             }
+        }
 
-            // Toggle Main Menu with Escape key
+        private void HandleEscapeKey()
+        {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (!isMainMenuOpen)
-                {
-                    OpenMainMenu();
-                    UpdateCursorState();
-                }
-                else
-                {
+                if (isMainMenuOpen)
                     ResumeGame();
-                    UpdateCursorState();
-                }
-            }
+                else
+                    OpenMainMenu();
 
-            // Toggle Inventory with I key
+                UpdateCursorState();
+            }
+        }
+
+        private void HandleInventoryToggle()
+        {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                isInventoryOpen = !isInventoryOpen;
-                inventoryPanel.SetActive(isInventoryOpen);
-
-                if (characterLocomotion != null)
-                    characterLocomotion.enabled = !isInventoryOpen;
-
-                if (cameraController != null)
-                    cameraController.enabled = !isInventoryOpen;
-
-                Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
-                Cursor.visible = isInventoryOpen;
-
-                // Close main menu if inventory opened
-                if (isInventoryOpen && isMainMenuOpen)
-                {
-                    isMainMenuOpen = false;
-                    mainMenuPanel.SetActive(false);
-                    IngameUI.SetActive(false);
-                }
+                ToggleInventory();
             }
+        }
 
-            // Close Settings if open
+        private void ToggleInventory()
+        {
+            isInventoryOpen = !isInventoryOpen;
+            inventoryPanel.SetActive(isInventoryOpen);
 
+            SetCharacterControlActive(!isInventoryOpen);
+            UpdateCursorState();
+
+            // Close main menu if inventory opened
+            if (isInventoryOpen && isMainMenuOpen)
+            {
+                isMainMenuOpen = false;
+                mainMenuPanel.SetActive(false);
+                ingameUI.SetActive(false);
+            }
+        }
+
+        private void HandleSettingsToggle()
+        {
             if (settingsPanel.activeSelf && Input.GetKeyDown(KeyCode.Tab))
             {
-                Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
-                Cursor.visible = isInventoryOpen;
                 settingsPanel.SetActive(false);
                 radialPanel.SetActive(true);
+                UpdateCursorState();
             }
+        }
+
+        private void SetCharacterControlActive(bool isActive)
+        {
+            if (characterLocomotion != null)
+                characterLocomotion.enabled = isActive;
+
+            if (cameraController != null)
+                cameraController.enabled = isActive;
         }
 
         private void UpdateCursorState()
         {
             if (isMainMenuOpen || isInventoryOpen || settingsPanel.activeSelf)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
+                UnlockCursor();
             else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+                LockCursor();
         }
 
+        private void LockCursor()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+        private void UnlockCursor()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
         public void ResumeGame()
         {
@@ -107,28 +132,19 @@ namespace Unity.FantasyKingdom
             mainMenuPanel.SetActive(false);
             radialPanel.SetActive(true);
             settingsPanel.SetActive(false);
-            IngameUI.SetActive(true);
+            ingameUI.SetActive(true);
 
-            if (characterLocomotion != null)
-                characterLocomotion.enabled = true;
-
-            if (cameraController != null)
-                cameraController.enabled = true;
+            SetCharacterControlActive(true);
+            LockCursor();
         }
 
         private void OpenMainMenu()
         {
             isMainMenuOpen = true;
             mainMenuPanel.SetActive(true);
-            IngameUI.SetActive(false);
+            ingameUI.SetActive(false);
 
-            if (characterLocomotion != null)
-                characterLocomotion.enabled = false;
-
-            if (cameraController != null)
-                cameraController.enabled = false;
-
-            // Close inventory if open
+            SetCharacterControlActive(false);
             if (isInventoryOpen)
             {
                 isInventoryOpen = false;
@@ -139,7 +155,7 @@ namespace Unity.FantasyKingdom
         public void QuitGame()
         {
             saveGameManager.SaveCharacterData();
-            saveGameManager.SaveGameData("Start of the Journey", "Heimdal", SaveType.Manual, "00:00", Character.transform);
+            saveGameManager.SaveGameData("Start of the Journey", "Heimdal", SaveType.Manual, "00:00", characterGameObject.transform);
             PlayerPrefs.SetInt("ReturnToMainMenu", 1);
             UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
         }
@@ -148,12 +164,14 @@ namespace Unity.FantasyKingdom
         {
             settingsPanel.SetActive(true);
             radialPanel.SetActive(false);
+            UpdateCursorState();
         }
 
         public void CloseSettings()
         {
             settingsPanel.SetActive(false);
             radialPanel.SetActive(true);
+            UpdateCursorState();
         }
     }
 }
