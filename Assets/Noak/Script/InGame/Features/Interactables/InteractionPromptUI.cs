@@ -1,10 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InteractionPromptUI : MonoBehaviour
 {
     public GameObject promptRoot;
-    public Text promptText;
+    public TMP_Text promptText;
 
     public void Show(string prompt)
     {

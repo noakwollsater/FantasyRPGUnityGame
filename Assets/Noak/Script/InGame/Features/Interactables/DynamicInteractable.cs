@@ -1,15 +1,19 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DynamicInteractable : MonoBehaviour, IInteractable
 {
-    public string interactionText = "Press F to interact";
+    public string interactionText;
     public InteractionAction[] actions;
 
+    public bool allowMultipleInteractions = true; // ✅ NYTT
     private bool hasInteracted = false;
 
     public string GetInteractionPrompt()
     {
-        return hasInteracted ? "" : interactionText;
+        if (!allowMultipleInteractions && hasInteracted)
+            return "";
+
+        return interactionText;
     }
 
     public void Interact()
@@ -19,6 +23,7 @@ public class DynamicInteractable : MonoBehaviour, IInteractable
             action.Execute();
         }
 
-        hasInteracted = true; // om du vill att det bara sker en g�ng
+        if (!allowMultipleInteractions)
+            hasInteracted = true;
     }
 }

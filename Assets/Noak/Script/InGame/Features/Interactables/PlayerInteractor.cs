@@ -8,6 +8,19 @@ public class PlayerInteractor : MonoBehaviour
 
     private IInteractable currentInteractable;
 
+    void Start()
+    {
+        if (cam == null)
+        {
+            cam = Camera.main;
+        }
+
+        if (promptUI == null)
+        {
+            promptUI = FindObjectOfType<InteractionPromptUI>();
+        }
+    }
+
     void Update()
     {
         CheckForInteractable();
