@@ -22,7 +22,7 @@ namespace Opsive.UltimateCharacterController.UI
         [Tooltip("The name of the attribute that the UI should monitor.")]
         [SerializeField] protected string m_AttributeName = "Health";
         [Tooltip("A reference used to the slider used to show the attribute value.")]
-        [SerializeField] protected Slider m_Slider;
+        [SerializeField] protected Image m_Slider;
 
         public AttributeManager AttributeManager { 
             set { 
@@ -42,7 +42,7 @@ namespace Opsive.UltimateCharacterController.UI
 
                 EventHandler.RegisterEvent<Attribute>(m_AttributeManager.gameObject, "OnAttributeUpdateValue", OnUpdateValue);
                 enabled = true;
-                m_Slider.value = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
+                m_Slider.fillAmount = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
                 gameObject.SetActive(CanShowUI());
             }
         }
@@ -55,7 +55,7 @@ namespace Opsive.UltimateCharacterController.UI
         protected override void Awake()
         {
             if (m_Slider == null) {
-                m_Slider = GetComponent<Slider>();
+                m_Slider = GetComponent<Image>();
             }
 
             // The monitor can't display if there is no slider.
@@ -101,7 +101,7 @@ namespace Opsive.UltimateCharacterController.UI
                 return;
             }
             enabled = true;
-            m_Slider.value = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
+            m_Slider.fillAmount = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
             gameObject.SetActive(CanShowUI());
             EventHandler.RegisterEvent<Attribute>(m_AttributeManager.gameObject, "OnAttributeUpdateValue", OnUpdateValue);
         }
@@ -116,7 +116,7 @@ namespace Opsive.UltimateCharacterController.UI
                 return;
             }
 
-            m_Slider.value = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
+            m_Slider.fillAmount = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
         }
 
         /// <summary>

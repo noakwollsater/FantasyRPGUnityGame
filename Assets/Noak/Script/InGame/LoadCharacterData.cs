@@ -49,6 +49,7 @@ namespace Unity.FantasyKingdom
         public ExtendedStats finalStats;
         public ExtendedStats currentStats;
 
+        public bool isDead;
 
         void Start()
         {
@@ -58,7 +59,7 @@ namespace Unity.FantasyKingdom
         }
 
         [ContextMenu("🔁 Load Character Data")]
-        private void LoadCharacterSaveData()
+        public void LoadCharacterSaveData()
         {
             string savedName = PlayerPrefs.GetString("SavedCharacterName", "Default");
             string folderName = $"PlayerSave_{savedName}"; 
@@ -114,12 +115,14 @@ namespace Unity.FantasyKingdom
             finalAttributes = data.finalAttributes;
             finalStats = data.finalStats;
             currentStats = data.currentStats;
+
+            isDead = data.isDead;
         }
 
         private void updateStats()
         {
             _levelManager.UpdateAllUI(force: true);
-            _hotbarStats.InitStats();
+            _hotbarStats.setAttributeManager();
         }
 
         private void SkillCheckers()

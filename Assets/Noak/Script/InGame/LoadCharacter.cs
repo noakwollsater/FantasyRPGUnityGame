@@ -8,6 +8,7 @@ using Synty.SidekickCharacters.Database.DTO;
 using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Enums;
 using System.Linq;
+using Opsive.UltimateCharacterController.Traits;
 
 namespace Unity.FantasyKingdom
 {
@@ -22,6 +23,7 @@ namespace Unity.FantasyKingdom
     {
         [SerializeField] SidekickConfigurator _sidekickConfigurator;
         private SidekickRuntime _sidekickRuntime;
+        [SerializeField] private Health _health;
 
         private readonly string saveKey = "MyCharacter";
         private const string encryptionPassword = "K00a03j23s50a25";
@@ -43,7 +45,7 @@ namespace Unity.FantasyKingdom
             LoadGameDataFromSave();
         }
 
-        private void LoadCharacterFromSave()
+        public void LoadCharacterFromSave()
         {
             string characterName = PlayerPrefs.GetString("SavedCharacterName", "Default");
             string folderName = $"PlayerSave_{characterName}";
@@ -120,6 +122,10 @@ namespace Unity.FantasyKingdom
             ApplySavedPartsToSidekickConfigurator();
             SetBlendShapes();
             ApplySavedColors();
+            if (data.isDead == true)
+            {
+                _health.ImmediateDeath();
+            }
         }
         private void ApplySavedPartsToSidekickConfigurator()
         {

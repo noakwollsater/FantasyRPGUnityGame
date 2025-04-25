@@ -1,6 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Opsive.UltimateCharacterController.Traits;
 
 namespace Unity.FantasyKingdom
 {
@@ -8,7 +9,7 @@ namespace Unity.FantasyKingdom
     {
         public enum StatType
         {
-            HP,
+            Health,
             Stamina,
             Hunger,
             Thirst,
@@ -16,6 +17,9 @@ namespace Unity.FantasyKingdom
         }
 
         [SerializeField] private LoadCharacterData _loadCharacterData;
+        [SerializeField] private AttributeManager _attributeManager;
+        [SerializeField] private Health _health;
+        [SerializeField] private PlayerDeathHandler _playerDeathHandler;
 
         [SerializeField] private Image _healthFillBar, _staminaFillBar, _hungerFillBar, _thirstFillBar, _manaFillBar;
         [SerializeField] private Image _healthLowFillBar, _staminaLowFillBar, _hungerLowFillBar, _thirstLowFillBar, _manaLowFillBar;
@@ -44,10 +48,113 @@ namespace Unity.FantasyKingdom
 
         private Coroutine _statCoroutine;
 
+        private void OnEnable()
+        {
+            if (_attributeManager != null)
+            {
+                UpdateAllBars();
+            }
+            else
+            {
+                Debug.Log("HotbarStats: Skipped UpdateAllBars in OnEnable because _attributeManager is null.");
+            }
+        }
+
+
+        public void setAttributeManager()
+        {
+            GameObject character = GameObject.FindGameObjectWithTag("Player");
+
+            if (character == null)
+            {
+                Debug.LogError("HotbarStats: No GameObject with tag 'Player' found.");
+                return;
+            }
+
+            _attributeManager = character.GetComponent<CharacterAttributeManager>();
+
+            if (_attributeManager == null)
+            {
+                Debug.LogError("HotbarStats: Character does not have a CharacterAttributeManager component.");
+                return;
+            }
+
+            _health = character.GetComponent<Health>();
+
+            Opsive.Shared.Events.EventHandler.RegisterEvent<Attribute>(_attributeManager.gameObject, "OnAttributeUpdateValue", OnAttributeUpdated);
+
+            InitStats(); // Initialize stats after setting the attribute manager
+        }
+
         public void InitStats()
         {
+            if (_attributeManager == null || _loadCharacterData == null)
+            {
+                Debug.LogError("HotbarStats: Missing _attributeManager or _loadCharacterData.");
+                return;
+            }
+
+            SetAttributeValue(StatType.Stamina, _loadCharacterData.currentStats.Stamina, _loadCharacterData.finalStats.Stamina);
+            SetAttributeValue(StatType.Hunger, _loadCharacterData.currentStats.Hunger, _loadCharacterData.finalStats.Hunger);
+            SetAttributeValue(StatType.Thirst, _loadCharacterData.currentStats.Thirst, _loadCharacterData.finalStats.Thirst);
+            SetAttributeValue(StatType.Mana, _loadCharacterData.currentStats.Mana, _loadCharacterData.finalStats.Mana);
+            SetAttributeValue(StatType.Health, _loadCharacterData.currentStats.HP, _loadCharacterData.finalStats.HP);
+
+            StartCoroutine(DelayedUpdateBars()); // 🠖 this is the fix
+        }
+
+        private IEnumerator DelayedUpdateBars()
+        {
+            yield return null; // wait one frame
             UpdateAllBars();
         }
+
+        private void SetAttributeValue(StatType type, int value, int maxValue)
+        {
+            var attribute = _attributeManager.GetAttribute(GetAttributeName(type));
+            if (attribute != null)
+            {
+                attribute.MaxValue = maxValue;
+                attribute.Value = value;
+            }
+            else
+            {
+                Debug.LogWarning($"HotbarStats: Attribute {type} not found.");
+            }
+        }
+
+
+        private void OnAttributeUpdated(Attribute attribute)
+        {
+            if (attribute.Name == "Health")
+            {
+                _loadCharacterData.currentStats.HP = Mathf.RoundToInt(attribute.Value);
+                Debug.Log($"Health updated: {attribute.Value}/{attribute.MaxValue}");
+                UpdateStatBar(StatType.Health, attribute.Value, attribute.MaxValue);
+            }
+            else if (attribute.Name == "Stamina")
+            {
+                _loadCharacterData.currentStats.Stamina = Mathf.RoundToInt(attribute.Value);
+                UpdateStatBar(StatType.Stamina, attribute.Value, attribute.MaxValue);
+            }
+
+            else if (attribute.Name == "Hunger")
+            {
+                _loadCharacterData.currentStats.Hunger = Mathf.RoundToInt(attribute.Value);
+                UpdateStatBar(StatType.Hunger, attribute.Value, attribute.MaxValue);
+            }
+            else if (attribute.Name == "Thirst")
+            {
+                _loadCharacterData.currentStats.Thirst = Mathf.RoundToInt(attribute.Value);
+                UpdateStatBar(StatType.Thirst, attribute.Value, attribute.MaxValue);
+            }
+            else if (attribute.Name == "Mana")
+            {
+                _loadCharacterData.currentStats.Mana = Mathf.RoundToInt(attribute.Value);
+                UpdateStatBar(StatType.Mana, attribute.Value, attribute.MaxValue);
+            }
+        }
+
 
         private void UpdateAllBars()
         {
@@ -63,10 +170,16 @@ namespace Unity.FantasyKingdom
             float max = GetMaxStat(type);
             float newValue = Mathf.Clamp(current + amount, 0, max);
 
-            if (amount < 0)
+            if (amount < 0 && type == StatType.Health)
                 _damageFX.SetTrigger(DamageFXParam);
-            else if (amount > 0)
+            else if (amount > 0 && type == StatType.Health)
                 _healFX.SetTrigger(HealFXParam);
+
+            if (newValue <= 0 && type == StatType.Health)
+            {
+                _health.ImmediateDeath();
+                _playerDeathHandler.OnPlayerDeath();
+            }
 
             if (_statCoroutine != null)
                 StopCoroutine(_statCoroutine);
@@ -99,7 +212,7 @@ namespace Unity.FantasyKingdom
 
             switch (type)
             {
-                case StatType.HP:
+                case StatType.Health:
                     _healthLowFillBar.fillAmount = normalized;
                     if (_healthAnimator != null)
                         _healthAnimator.SetFloat(HealthParam, normalized);
@@ -145,49 +258,53 @@ namespace Unity.FantasyKingdom
 
         private float GetCurrentStat(StatType type)
         {
-            switch (type)
+            if (_attributeManager == null)
             {
-                case StatType.HP: return _loadCharacterData.currentStats.HP;
-                case StatType.Stamina: return _loadCharacterData.currentStats.Stamina;
-                case StatType.Hunger: return _loadCharacterData.currentStats.Hunger;
-                case StatType.Thirst: return _loadCharacterData.currentStats.Thirst;
-                case StatType.Mana: return _loadCharacterData.currentStats.Mana;
-                default: return 0;
+                Debug.LogError("HotbarStats: _attributeManager is null.");
+                return 0;
             }
+            var attr = _attributeManager.GetAttribute(GetAttributeName(type));
+            return attr != null ? attr.Value : 0;
         }
 
         private float GetMaxStat(StatType type)
         {
-            switch (type)
+            if (_attributeManager == null)
             {
-                case StatType.HP: return _loadCharacterData.finalStats.HP;
-                case StatType.Stamina: return _loadCharacterData.finalStats.Stamina;
-                case StatType.Hunger: return _loadCharacterData.finalStats.Hunger;
-                case StatType.Thirst: return _loadCharacterData.finalStats.Thirst;
-                case StatType.Mana: return _loadCharacterData.finalStats.Mana;
-                default: return 0;
+                Debug.LogError("HotbarStats: _attributeManager is null.");
+                return 0;
             }
+            var attr = _attributeManager.GetAttribute(GetAttributeName(type));
+            return attr != null ? attr.MaxValue : 0;
         }
 
         private void SetCurrentStat(StatType type, float value)
         {
-            int intValue = Mathf.RoundToInt(value); // Round to closest int
+            var attr = _attributeManager.GetAttribute(GetAttributeName(type));
+            if (attr != null)
+            {
+                attr.Value = Mathf.Clamp(value, attr.MinValue, attr.MaxValue);
+            }
+        }
 
+        private string GetAttributeName(StatType type)
+        {
             switch (type)
             {
-                case StatType.HP: _loadCharacterData.currentStats.HP = intValue; break;
-                case StatType.Stamina: _loadCharacterData.currentStats.Stamina = intValue; break;
-                case StatType.Hunger: _loadCharacterData.currentStats.Hunger = intValue; break;
-                case StatType.Thirst: _loadCharacterData.currentStats.Thirst = intValue; break;
-                case StatType.Mana: _loadCharacterData.currentStats.Mana = intValue; break;
+                case StatType.Health: return "Health";
+                case StatType.Stamina: return "Stamina";
+                case StatType.Hunger: return "Hunger";
+                case StatType.Thirst: return "Thirst";
+                case StatType.Mana: return "Mana";
+                default: return "";
             }
         }
 
         void Update()
         {
             // For testing: reduce stats with keys
-            if (Input.GetKeyDown(KeyCode.B)) ModifyStat(StatType.HP, -10);
-            if (Input.GetKeyDown(KeyCode.L)) ModifyStat(StatType.HP, +10);
+            if (Input.GetKeyDown(KeyCode.B)) ModifyStat(StatType.Health, -10);
+            if (Input.GetKeyDown(KeyCode.L)) ModifyStat(StatType.Health, +10);
             if (Input.GetKeyDown(KeyCode.N)) ModifyStat(StatType.Stamina, -10);
             if (Input.GetKeyDown(KeyCode.M)) ModifyStat(StatType.Hunger, -10);
             if (Input.GetKeyDown(KeyCode.Comma)) ModifyStat(StatType.Thirst, -10);
