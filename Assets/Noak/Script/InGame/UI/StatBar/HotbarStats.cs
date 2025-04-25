@@ -44,18 +44,7 @@ namespace Unity.FantasyKingdom
 
         private Coroutine _statCoroutine;
 
-        void Start()
-        {
-            if (_loadCharacterData == null)
-            {
-                Debug.LogError("LoadCharacterData is not assigned in HotbarStats.");
-                return;
-            }
-
-            InitStats();
-        }
-
-        private void InitStats()
+        public void InitStats()
         {
             UpdateAllBars();
         }
