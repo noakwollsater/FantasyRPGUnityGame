@@ -1,0 +1,60 @@
+✅ DynamicInteractable.cs
+Plats: /Scripts/Interactions
+Vad: Ligger på alla interagerbara objekt. Hanterar deras actions.
+
+Läggs på: Objekt som ska gå att interagera med (ex: dörrar, kistor, garderober)
+
+✅ InteractionAction.cs
+Plats: /Scripts/Interactions
+Vad: Abstrakt bas-klass. Alla actions (animation, UI, ljud) ärver från denna.
+Läggs på: Inte direkt – används som bas.
+
+✅ PlayAnimationAction.cs, ShowUIAction.cs, PlaySoundAction.cs
+Plats: /Scripts/Interactions
+Vad: Komponenter du lägger på interaktiva objekt. Kör animationer, visar UI, spelar ljud.
+
+Läggs på: Samma GameObject som DynamicInteractable, eller dess barnobjekt.
+
+✅ PlayerInteractor.cs
+Plats: /Scripts/Interactions
+Vad: Ligger på spelaren (eller spelarens kamera). Ansvarar för att kasta raycast och kalla på interaktioner.
+
+Läggs på: Spelaren eller spelarens kamera
+
+✅ InteractionPromptUI.cs
+Plats: /Scripts/UI
+Vad: UI-hantering för "Tryck F"-texten.
+
+Läggs på: Ett UI GameObject (Canvas → PromptPanel)
+
+🧍‍♂️ 3. SÅ HÄR SÄTTER DU IHOP ALLT I UNITY
+🎥 Spelaren:
+Skapa en Player eller FirstPersonCharacter
+
+Lägg på PlayerInteractor.cs
+
+Dra in kameran i cam-fältet
+
+Dra in InteractionPromptUI-scriptet
+
+🧾 UI:
+Skapa ett Canvas
+
+Inuti: skapa ett Panel och en Text (eller TextMeshPro).
+
+Lägg InteractionPromptUI.cs på Panel.
+
+Sätt promptRoot = panelobjektet, promptText = textkomponenten.
+
+🗃 Exempel: Kista
+Skapa en 3D-kista (med collider!)
+
+Lägg på:
+
+DynamicInteractable
+
+PlayAnimationAction (dra in animator och trigger)
+
+ShowUIAction (dra in loot-panel från UI)
+
+(valfritt) PlaySoundAction (dra in ljud)
