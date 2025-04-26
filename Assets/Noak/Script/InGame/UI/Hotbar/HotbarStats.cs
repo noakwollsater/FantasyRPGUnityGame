@@ -135,7 +135,6 @@ namespace Unity.FantasyKingdom
             }
         }
 
-
         private void OnAttributeUpdated(Attribute attribute)
         {
             if (attribute.Name == "Health")
@@ -166,7 +165,6 @@ namespace Unity.FantasyKingdom
                 UpdateStatBar(StatType.Mana, attribute.Value, attribute.MaxValue);
             }
         }
-
 
         private void UpdateAllBars()
         {
@@ -315,8 +313,8 @@ namespace Unity.FantasyKingdom
             if (Input.GetKeyDown(KeyCode.B)) ModifyStat(StatType.Health, -10);
             if (Input.GetKeyDown(KeyCode.L)) ModifyStat(StatType.Health, +10);
             if (Input.GetKeyDown(KeyCode.N)) ModifyStat(StatType.Stamina, -10);
-            if (Input.GetKeyDown(KeyCode.M)) ModifyStat(StatType.Hunger, -10);
-            if (Input.GetKeyDown(KeyCode.Comma)) ModifyStat(StatType.Thirst, -10);
+            if (Input.GetKeyDown(KeyCode.M)) ModifyStat(StatType.Hunger, +10);
+            if (Input.GetKeyDown(KeyCode.Comma)) ModifyStat(StatType.Thirst, +10);
             if (Input.GetKeyDown(KeyCode.Period)) ModifyStat(StatType.Mana, -10);
         }
     }

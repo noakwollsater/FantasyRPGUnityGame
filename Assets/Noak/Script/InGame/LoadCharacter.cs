@@ -355,7 +355,7 @@ namespace Unity.FantasyKingdom
             if (character != null && _cachedGameSaveData != null)
             {
                 character.transform.position = _cachedGameSaveData.characterPosition;
-                Debug.Log($"🚶‍♂️ (MoveCharacterAfterEverything) Flyttade karaktär till: {_cachedGameSaveData.characterPosition} (Frame {Time.frameCount})");
+                //Debug.Log($"🚶‍♂️ (MoveCharacterAfterEverything) Flyttade karaktär till: {_cachedGameSaveData.characterPosition} (Frame {Time.frameCount})");
             }
         }
 
