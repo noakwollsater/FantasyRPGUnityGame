@@ -359,18 +359,6 @@ namespace Unity.FantasyKingdom
             }
         }
 
-        void Update()
-        {
-            if (character != null)
-            {
-                if (character.transform.hasChanged)
-                {
-                    Debug.Log($"👀 Character moved! Position={character.transform.position}\n{System.Environment.StackTrace}");
-                    character.transform.hasChanged = false;
-                }
-            }
-        }
-
         [ContextMenu("🧪 Debug Färgdata")]
         private void DebugSavedColors()
         {

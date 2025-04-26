@@ -42,11 +42,6 @@ public class HungerAndThirst : MonoBehaviour
         if (_hungerAttribute.Value > 0)
         {
             _hungerAttribute.Value -= hungerDrainPerSecond * Time.deltaTime;
-            Debug.Log($"Hunger: {_hungerAttribute.Value:F2}/{_hungerAttribute.MaxValue}");
-        }
-        else
-        {
-            Debug.LogWarning("Character is starving!");
         }
     }
 
@@ -55,11 +50,6 @@ public class HungerAndThirst : MonoBehaviour
         if (_thirstAttribute.Value > 0)
         {
             _thirstAttribute.Value -= thirstDrainPerSecond * Time.deltaTime;
-            Debug.Log($"Thirst: {_thirstAttribute.Value:F2}/{_thirstAttribute.MaxValue}");
-        }
-        else
-        {
-            Debug.LogWarning("Character is dehydrating!");
         }
     }
 

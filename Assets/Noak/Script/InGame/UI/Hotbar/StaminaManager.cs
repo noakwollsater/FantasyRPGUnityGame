@@ -11,10 +11,12 @@ namespace Unity.FantasyKingdom
         private AttributeManager _attributeManager;
         private Attribute _staminaAttribute;
         private SpeedChange _speedChangeAbility;
+        private Jump _jumpAbility;
+        private float _lastJumpTime;
+        private const float JumpCooldown = 1f; // 2 seconds cooldown
 
-        private bool _jumpRequested = false;
-        private float _jumpTimer = 0f;
-        private const float JumpStaminaDelay = 2f; // 2 seconds delay after jump before draining stamina
+
+        private const float MinStaminaToJump = 2f; // Minimum stamina needed to jump
 
         private void Awake()
         {
@@ -24,7 +26,7 @@ namespace Unity.FantasyKingdom
             if (_locomotion != null)
             {
                 _speedChangeAbility = _locomotion.GetAbility<SpeedChange>();
-
+                _jumpAbility = _locomotion.GetAbility<Jump>();
             }
 
             if (_attributeManager != null)
@@ -39,6 +41,8 @@ namespace Unity.FantasyKingdom
 
             HandleRunning();
             HandleJumping();
+            HandleSpeedRecovery();
+            HandlingJumpingRecovery();
         }
 
         private void HandleRunning()
@@ -59,20 +63,41 @@ namespace Unity.FantasyKingdom
 
         private void HandleJumping()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !_jumpRequested)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                _jumpRequested = true;
-                _jumpTimer = 0f;
-            }
-
-            if (_jumpRequested)
-            {
-                _jumpTimer += Time.deltaTime;
-                if (_jumpTimer >= JumpStaminaDelay)
+                if (Time.time - _lastJumpTime >= JumpCooldown) // Check cooldown
                 {
-                    DrainStamina(10); // Drain stamina after delay
-                    _jumpRequested = false; // Reset jump request
+                    if (_staminaAttribute.Value >= MinStaminaToJump)
+                    {
+                        _jumpAbility.StartAbility(); // Actually jump
+                        DrainStaminaInstant(10); // Immediately drain stamina
+                        _lastJumpTime = Time.time; // Reset cooldown timer
+                    }
+                    else
+                    {
+                        _jumpAbility.Force = 0.05f; 
+                    }
                 }
+                else
+                {
+                    Debug.Log("Jump is on cooldown!");
+                }
+            }
+        }
+
+        private void HandleSpeedRecovery()
+        {
+            if (_staminaAttribute.Value > 2)
+            {
+                _speedChangeAbility.MaxSpeedChangeValue = 0.3f * _locomotion.MotorAcceleration.magnitude + 2f; // Restore running speed
+            }
+        }
+
+        private void HandlingJumpingRecovery()
+        {
+            if (_staminaAttribute.Value > 2)
+            {
+                _jumpAbility.Force = 0.2f; // Restore jump height
             }
         }
 
@@ -84,5 +109,15 @@ namespace Unity.FantasyKingdom
                 _staminaAttribute.Value = 0;
             }
         }
+
+        private void DrainStaminaInstant(int value)
+        {
+            _staminaAttribute.Value -= value;
+            if (_staminaAttribute.Value < 0)
+            {
+                _staminaAttribute.Value = 0;
+            }
+        }
+
     }
 }

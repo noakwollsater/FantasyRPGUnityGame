@@ -140,7 +140,6 @@ namespace Unity.FantasyKingdom
             if (attribute.Name == "Health")
             {
                 _loadCharacterData.currentStats.HP = Mathf.RoundToInt(attribute.Value);
-                Debug.Log($"Health updated: {attribute.Value}/{attribute.MaxValue}");
                 UpdateStatBar(StatType.Health, attribute.Value, attribute.MaxValue);
             }
             else if (attribute.Name == "Stamina")
