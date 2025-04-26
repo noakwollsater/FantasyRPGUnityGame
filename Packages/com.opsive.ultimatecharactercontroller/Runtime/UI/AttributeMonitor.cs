@@ -22,19 +22,24 @@ namespace Opsive.UltimateCharacterController.UI
         [Tooltip("The name of the attribute that the UI should monitor.")]
         [SerializeField] protected string m_AttributeName = "Health";
         [Tooltip("A reference used to the slider used to show the attribute value.")]
-        [SerializeField] protected Slider m_Slider;
+        [SerializeField] protected Image m_Slider;
 
-        public AttributeManager AttributeManager { 
-            set { 
-                if (m_AttributeManager != null) {
+        public AttributeManager AttributeManager
+        {
+            set
+            {
+                if (m_AttributeManager != null)
+                {
                     EventHandler.UnregisterEvent<Attribute>(m_AttributeManager.gameObject, "OnAttributeUpdateValue", OnUpdateValue);
                 }
                 m_AttributeManager = value;
-                if (m_AttributeManager == null) {
+                if (m_AttributeManager == null)
+                {
                     return;
                 }
                 m_Attribute = m_AttributeManager.GetAttribute(m_AttributeName);
-                if (m_Attribute == null) {
+                if (m_Attribute == null)
+                {
                     enabled = false;
                     gameObject.SetActive(false);
                     return;
@@ -42,7 +47,7 @@ namespace Opsive.UltimateCharacterController.UI
 
                 EventHandler.RegisterEvent<Attribute>(m_AttributeManager.gameObject, "OnAttributeUpdateValue", OnUpdateValue);
                 enabled = true;
-                m_Slider.value = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
+                m_Slider.fillAmount = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
                 gameObject.SetActive(CanShowUI());
             }
         }
@@ -54,14 +59,18 @@ namespace Opsive.UltimateCharacterController.UI
         /// </summary>
         protected override void Awake()
         {
-            if (m_Slider == null) {
-                m_Slider = GetComponent<Slider>();
+            if (m_Slider == null)
+            {
+                m_Slider = GetComponent<Image>();
             }
 
             // The monitor can't display if there is no slider.
-            if (m_Slider != null) {
+            if (m_Slider != null)
+            {
                 base.Awake();
-            } else {
+            }
+            else
+            {
                 enabled = false;
             }
         }
@@ -72,8 +81,10 @@ namespace Opsive.UltimateCharacterController.UI
         /// <param name="character">The character to attach the monitor to.</param>
         protected override void OnAttachCharacter(GameObject character)
         {
-            if (m_Character != null) {
-                if (m_AttributeManager != null && m_AttributeManager.gameObject != character) {
+            if (m_Character != null)
+            {
+                if (m_AttributeManager != null && m_AttributeManager.gameObject != character)
+                {
                     EventHandler.UnregisterEvent<Attribute>(m_AttributeManager.gameObject, "OnAttributeUpdateValue", OnUpdateValue);
                     m_AttributeManager = null;
                 }
@@ -81,27 +92,31 @@ namespace Opsive.UltimateCharacterController.UI
 
             base.OnAttachCharacter(character);
 
-            if (m_Character == null) {
+            if (m_Character == null)
+            {
                 return;
             }
 
-            if (m_AttributeManager == null) {
+            if (m_AttributeManager == null)
+            {
                 m_AttributeManager = m_Character.GetCachedComponent<AttributeManager>();
             }
-            if (m_AttributeManager == null) {
+            if (m_AttributeManager == null)
+            {
                 enabled = false;
                 gameObject.SetActive(false);
                 return;
             }
 
             m_Attribute = m_AttributeManager.GetAttribute(m_AttributeName);
-            if (m_Attribute == null) {
+            if (m_Attribute == null)
+            {
                 enabled = false;
                 gameObject.SetActive(false);
                 return;
             }
             enabled = true;
-            m_Slider.value = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
+            m_Slider.fillAmount = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
             gameObject.SetActive(CanShowUI());
             EventHandler.RegisterEvent<Attribute>(m_AttributeManager.gameObject, "OnAttributeUpdateValue", OnUpdateValue);
         }
@@ -112,11 +127,12 @@ namespace Opsive.UltimateCharacterController.UI
         /// <param name="attribute">The attribute that was updated.</param>
         protected virtual void OnUpdateValue(Attribute attribute)
         {
-            if (attribute != m_Attribute) {
+            if (attribute != m_Attribute)
+            {
                 return;
             }
 
-            m_Slider.value = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
+            m_Slider.fillAmount = (m_Attribute.Value - m_Attribute.MinValue) / (m_Attribute.MaxValue - m_Attribute.MinValue);
         }
 
         /// <summary>
@@ -126,7 +142,8 @@ namespace Opsive.UltimateCharacterController.UI
         {
             base.OnDestroy();
 
-            if (m_AttributeManager != null) {
+            if (m_AttributeManager != null)
+            {
                 EventHandler.UnregisterEvent<Attribute>(m_AttributeManager.gameObject, "OnAttributeUpdateValue", OnUpdateValue);
             }
         }

@@ -1,3 +1,4 @@
+using Opsive.UltimateCharacterController.Camera;
 using UnityEngine;
 
 public class PlayerInteractor : MonoBehaviour
@@ -6,6 +7,8 @@ public class PlayerInteractor : MonoBehaviour
     public Camera cam;
     public InteractionPromptUI promptUI;
 
+    private CameraController cameraController;
+
     private IInteractable currentInteractable;
 
     void Start()
@@ -13,6 +16,7 @@ public class PlayerInteractor : MonoBehaviour
         if (cam == null)
         {
             cam = Camera.main;
+            cameraController = cam.GetComponent<CameraController>();
         }
 
         if (promptUI == null)
@@ -35,6 +39,14 @@ public class PlayerInteractor : MonoBehaviour
     {
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         RaycastHit hit;
+        if (cameraController.ActiveViewType.FirstPersonPerspective)
+        {
+            interactionRange = 3f;
+        }
+        else
+        {
+            interactionRange = 5f;
+        }
 
         if (Physics.Raycast(ray, out hit, interactionRange))
         {

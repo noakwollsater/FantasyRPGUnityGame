@@ -59,7 +59,9 @@ namespace Unity.FantasyKingdom
 
                 selectedParts = getActiveParts.selectedParts,
 
-                selectedColors = new Dictionary<string, string>(getActiveColors.selectedColors)
+                selectedColors = new Dictionary<string, string>(getActiveColors.selectedColors),
+
+                isDead = characterData.isDead
         };
 
             string characterName = characterData.characterName;

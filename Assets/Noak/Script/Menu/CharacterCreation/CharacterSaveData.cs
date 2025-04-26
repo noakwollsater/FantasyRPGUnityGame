@@ -38,4 +38,6 @@ public class CharacterSaveData
     public string background;
     public List<string> backgroundSkills = new();
     public Dictionary<string, string> selectedColors = new();
+
+    public bool isDead;
 }
