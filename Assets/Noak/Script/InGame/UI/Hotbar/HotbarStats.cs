@@ -21,6 +21,8 @@ namespace Unity.FantasyKingdom
         [SerializeField] private Health _health;
         [SerializeField] private DeathUIManager _deathUIManager;
 
+        private Attribute _healthAttribute;
+
         [SerializeField] private Image _healthFillBar, _staminaFillBar, _hungerFillBar, _thirstFillBar, _manaFillBar;
         [SerializeField] private Image _healthLowFillBar, _staminaLowFillBar, _hungerLowFillBar, _thirstLowFillBar, _manaLowFillBar;
 
@@ -60,6 +62,28 @@ namespace Unity.FantasyKingdom
             }
         }
 
+        public void DamageHealthOverTime(float damagePerSecond)
+        {
+            if (_health == null || _healthAttribute == null)
+            {
+                Debug.LogWarning("HotbarStats: Health component or Attribute is null. Cannot damage health.");
+                return;
+            }
+
+            float damage = damagePerSecond * Time.deltaTime;
+            _healthAttribute.Value -= damage;
+
+            if (_damageFX != null)
+            {
+                _damageFX.SetTrigger(DamageFXParam); // Play damage animation
+            }
+
+            if (_healthAttribute.Value <= 0)
+            {
+                _health.ImmediateDeath();
+            }
+        }
+
 
         public void setAttributeManager()
         {
@@ -72,6 +96,7 @@ namespace Unity.FantasyKingdom
             }
 
             _attributeManager = character.GetComponent<CharacterAttributeManager>();
+            _healthAttribute = _attributeManager.GetAttribute("Health");
 
             if (_attributeManager == null)
             {

@@ -1,4 +1,5 @@
 using Opsive.UltimateCharacterController.Traits;
+using Unity.FantasyKingdom;
 using UnityEngine;
 
 public class HungerAndThirst : MonoBehaviour
@@ -10,6 +11,9 @@ public class HungerAndThirst : MonoBehaviour
     private AttributeManager _attributeManager;
     private Attribute _hungerAttribute;
     private Attribute _thirstAttribute;
+    private Attribute _healthAttribute;
+
+    private HotbarStats _hotbarStats;
 
     private void Awake()
     {
@@ -19,13 +23,28 @@ public class HungerAndThirst : MonoBehaviour
         {
             _hungerAttribute = _attributeManager.GetAttribute("Hunger");
             _thirstAttribute = _attributeManager.GetAttribute("Thirst");
+            _healthAttribute = _attributeManager.GetAttribute("Health");
+
 
             if (_hungerAttribute == null) Debug.LogError("Hunger attribute not found!");
             if (_thirstAttribute == null) Debug.LogError("Thirst attribute not found!");
+            if (_healthAttribute == null) Debug.LogError("Health attribute not found!");
         }
         else
         {
             Debug.LogError("No AttributeManager found on player!");
+        }
+
+        GameObject UI = GameObject.Find("UI");
+        if (UI == null)
+        {
+            Debug.LogError("No UI found in the scene!");
+            return;
+        }
+        _hotbarStats = UI.GetComponentInChildren<HotbarStats>();
+        if (_hotbarStats == null)
+        {
+            Debug.LogError("No HotbarStats found on player!");
         }
     }
 
@@ -43,6 +62,13 @@ public class HungerAndThirst : MonoBehaviour
         {
             _hungerAttribute.Value -= hungerDrainPerSecond * Time.deltaTime;
         }
+        else
+        {
+            if (_hotbarStats != null)
+            {
+                _hotbarStats.DamageHealthOverTime(0.1f);
+            }
+        }
     }
 
     private void DrainThirst()
@@ -50,6 +76,13 @@ public class HungerAndThirst : MonoBehaviour
         if (_thirstAttribute.Value > 0)
         {
             _thirstAttribute.Value -= thirstDrainPerSecond * Time.deltaTime;
+        }
+        else
+        {
+            if (_hotbarStats != null)
+            {
+                _hotbarStats.DamageHealthOverTime(0.1f);
+            }
         }
     }
 

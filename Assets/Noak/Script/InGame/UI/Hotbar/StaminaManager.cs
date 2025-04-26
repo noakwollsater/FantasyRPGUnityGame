@@ -14,9 +14,10 @@ namespace Unity.FantasyKingdom
         private Jump _jumpAbility;
         private float _lastJumpTime;
         private const float JumpCooldown = 1f; // 2 seconds cooldown
-
-
         private const float MinStaminaToJump = 2f; // Minimum stamina needed to jump
+
+        private Attribute _hungerAttribute;
+        private Attribute _thirstAttribute;
 
         private void Awake()
         {
@@ -32,6 +33,8 @@ namespace Unity.FantasyKingdom
             if (_attributeManager != null)
             {
                 _staminaAttribute = _attributeManager.GetAttribute("Stamina");
+                _hungerAttribute = _attributeManager.GetAttribute("Hunger");
+                _thirstAttribute = _attributeManager.GetAttribute("Thirst");
             }
         }
 
@@ -53,6 +56,7 @@ namespace Unity.FantasyKingdom
             if (isMoving && isRunning)
             {
                 DrainStamina(10);
+                HandleHungerAndThirst(); // Drain hunger and thirst when running
 
                 if (_staminaAttribute.Value <= 2)
                 {
@@ -70,6 +74,7 @@ namespace Unity.FantasyKingdom
                     if (_staminaAttribute.Value >= MinStaminaToJump)
                     {
                         _jumpAbility.StartAbility(); // Actually jump
+                        HandleHungerAndThirst(); // Drain hunger and thirst when jumping
                         DrainStaminaInstant(10); // Immediately drain stamina
                         _lastJumpTime = Time.time; // Reset cooldown timer
                     }
@@ -82,6 +87,31 @@ namespace Unity.FantasyKingdom
                 {
                     Debug.Log("Jump is on cooldown!");
                 }
+            }
+        }
+
+        private void HandleHungerAndThirst()
+        {
+            if (_hungerAttribute != null && _thirstAttribute != null)
+            {
+                DrainHunger();
+                DrainThirst();
+            }
+        }
+
+        private void DrainHunger()
+        {
+            if (_hungerAttribute.Value > 0)
+            {
+                _hungerAttribute.Value -= 0.5f * Time.deltaTime;
+            }
+        }
+
+        private void DrainThirst()
+        {
+            if (_thirstAttribute.Value > 0)
+            {
+                _thirstAttribute.Value -= 0.5f * Time.deltaTime;
             }
         }
 
