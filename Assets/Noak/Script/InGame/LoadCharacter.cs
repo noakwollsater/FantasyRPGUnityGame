@@ -8,6 +8,8 @@ using Synty.SidekickCharacters.Database.DTO;
 using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Enums;
 using System.Linq;
+using System.Collections;
+using Opsive.UltimateCharacterController.Traits;
 
 namespace Unity.FantasyKingdom
 {
@@ -29,13 +31,14 @@ namespace Unity.FantasyKingdom
         private DictionaryLibrary _dictionaryLibrary;
         [SerializeField] private CameraController _cameraController;
         private CharacterSaveData data;
+        [SerializeField] private LoadCharacterData _loadCharacterData;
         private GameObject character;
 
         [SerializeField] private GameObject characterPrefab;
         private Transform root;
 
-
         private readonly string outputModelName = "Player";
+        private GameSaveData _cachedGameSaveData; // <-- ny variabel
 
         void Start()
         {
@@ -71,7 +74,6 @@ namespace Unity.FantasyKingdom
                 character = Instantiate(characterPrefab, transform);
                 character.name = outputModelName;
                 _cameraController.Character = character;
-
                 Transform player = character.transform.Find("Player");
                 root = player.transform.Find("root");
                 if (root != null)
@@ -95,7 +97,7 @@ namespace Unity.FantasyKingdom
 
                 DatabaseManager db = new DatabaseManager();
                 _sidekickRuntime = new SidekickRuntime(model, material, null, db);
-
+                StartCoroutine(MoveCharacterAfterEverything());
             }
 
             // Build library data
@@ -205,8 +207,6 @@ namespace Unity.FantasyKingdom
                         {
                             ConfigureTailAnimator(tailAnimator, TailType.Default);
                         }
-
-                        Debug.Log($"TailAnimator2 added to {child.name}");
                     }
                 }
             }
@@ -329,7 +329,7 @@ namespace Unity.FantasyKingdom
             var settings = new ES3Settings(fileName)
             {
                 encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = encryptionPassword // Use the const if you've centralized it
+                encryptionPassword = encryptionPassword
             };
 
             if (!ES3.KeyExists("GameSave", settings))
@@ -338,19 +338,36 @@ namespace Unity.FantasyKingdom
                 return;
             }
 
-            GameSaveData gameData = ES3.Load<GameSaveData>("GameSave", settings);
+            _cachedGameSaveData = ES3.Load<GameSaveData>("GameSave", settings);
 
             if (TimeManager.Instance != null)
             {
-                TimeManager.Instance.LoadTimeFromData(gameData);
+                TimeManager.Instance.LoadTimeFromData(_cachedGameSaveData);
             }
 
-            Debug.Log($"✅ Game loaded! Kapitel: {gameData.chapterName}, Tid: {gameData.inGameTimeMinutes}");
+            Debug.Log($"✅ Game loaded! Kapitel: {_cachedGameSaveData.chapterName}, Tid: {_cachedGameSaveData.inGameTimeMinutes}");
+        }
+        private IEnumerator MoveCharacterAfterEverything()
+        {
+            yield return null;
+            yield return null;
 
+            if (character != null && _cachedGameSaveData != null)
+            {
+                character.transform.position = _cachedGameSaveData.characterPosition;
+                Debug.Log($"🚶‍♂️ (MoveCharacterAfterEverything) Flyttade karaktär till: {_cachedGameSaveData.characterPosition} (Frame {Time.frameCount})");
+            }
+        }
+
+        void Update()
+        {
             if (character != null)
             {
-                character.transform.position = gameData.characterPosition;
-                Debug.Log($"🚶‍♂️ Flyttade karaktär till sparad position: {gameData.characterPosition}");
+                if (character.transform.hasChanged)
+                {
+                    Debug.Log($"👀 Character moved! Position={character.transform.position}\n{System.Environment.StackTrace}");
+                    character.transform.hasChanged = false;
+                }
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -158,7 +159,7 @@ public class RaceDatabase : MonoBehaviour
             "Humans are adaptable and resilient, thriving in any environment. They are well-rounded with no major weaknesses or strengths.",
             new AttributeSet(8, 8, 8, 8, 8, 8),
             new AttributeSet(2, 2, 2, 2, 2, 2),
-            new ExtendedStats(100, 100, 100, 100, 10, 5, 50)
+            new ExtendedStats(100, 100, 100, 100, 10, 5, 20)
         ));
 
         Races.Add(new Race(
@@ -166,7 +167,7 @@ public class RaceDatabase : MonoBehaviour
             "Goblins are small, nimble, and cunning. While physically weaker, they compensate with intelligence and agility, excelling in trickery and ambush tactics.",
             new AttributeSet(6, 10, 6, 10, 6, 8),
             new AttributeSet(0, 2, -1, 1, 0, 0),
-            new ExtendedStats(70, 80, 90, 90, 12, 3, 60)
+            new ExtendedStats(70, 80, 90, 90, 12, 3, 30)
         ));
 
         Races.Add(new Race(
@@ -174,7 +175,7 @@ public class RaceDatabase : MonoBehaviour
             "Orcs are powerful warriors with immense strength but often lack finesse and intelligence. They thrive in battle and have a strong warrior culture.",
             new AttributeSet(10, 6, 9, 5, 6, 6),
             new AttributeSet(2, -1, 1, -2, 0, 0),
-            new ExtendedStats(130, 120, 110, 110, 9, 7, 30)
+            new ExtendedStats(130, 120, 110, 110, 9, 7, 15)
         ));
 
         Races.Add(new Race(
@@ -182,7 +183,7 @@ public class RaceDatabase : MonoBehaviour
             "Apefolk are strong and agile, known for their primal instincts and raw power. Their intelligence is slightly lower, but they have excellent survival skills.",
             new AttributeSet(9, 7, 9, 6, 7, 6),
             new AttributeSet(2, 1, 2, -2, 1, -1),
-            new ExtendedStats(120, 110, 100, 100, 10, 6, 35)
+            new ExtendedStats(120, 110, 100, 100, 10, 6, 20)
         ));
 
         Races.Add(new Race(
@@ -190,7 +191,7 @@ public class RaceDatabase : MonoBehaviour
             "Dark Elves, or Drow, are mysterious and cunning, often living underground or in hidden cities. They possess high dexterity and intelligence, but their arrogance can be a weakness.",
             new AttributeSet(7, 10, 7, 9, 9, 8),
             new AttributeSet(-1, 2, 0, 1, 1, 0),
-            new ExtendedStats(90, 90, 95, 95, 11, 4, 70)
+            new ExtendedStats(90, 90, 95, 95, 11, 4, 35)
         ));
 
         Races.Add(new Race(
@@ -198,7 +199,7 @@ public class RaceDatabase : MonoBehaviour
             "Drakonites are descendants of dragons, boasting incredible strength and resilience. They lack some agility but make up for it with their intimidating presence.",
             new AttributeSet(10, 6, 9, 8, 7, 6),
             new AttributeSet(2, -1, 1, 0, 0, 0),
-            new ExtendedStats(140, 110, 120, 110, 8, 8, 60)
+            new ExtendedStats(140, 110, 120, 110, 8, 8, 30)
         ));
 
         Races.Add(new Race(
@@ -206,7 +207,7 @@ public class RaceDatabase : MonoBehaviour
             "Dwarves are stout, durable, and skilled craftsmen. They possess strong constitution and wisdom, but their lack of agility makes them less nimble in combat.",
             new AttributeSet(9, 6, 10, 7, 9, 5),
             new AttributeSet(2, -1, 2, 0, 2, -2),
-            new ExtendedStats(120, 100, 110, 100, 8, 7, 40)
+            new ExtendedStats(120, 100, 110, 100, 8, 7, 20)
         ));
 
         Races.Add(new Race(
@@ -214,7 +215,7 @@ public class RaceDatabase : MonoBehaviour
             "Elves are elegant and intelligent beings with a deep connection to nature and magic. They are highly agile but lack the physical durability of other races.",
             new AttributeSet(6, 10, 7, 9, 9, 8),
             new AttributeSet(-1, 2, 0, 2, 1, 0),
-            new ExtendedStats(85, 90, 95, 95, 12, 3, 80)
+            new ExtendedStats(85, 90, 95, 95, 12, 3, 40)
         ));
 
         Races.Add(new Race(
@@ -222,7 +223,7 @@ public class RaceDatabase : MonoBehaviour
             "Hobbits are small, clever, and charismatic. They may not be the strongest, but their agility and charm make them excellent diplomats and thieves.",
             new AttributeSet(6, 10, 7, 8, 8, 10),
             new AttributeSet(0, 2, 0, 0, 0, 2),
-            new ExtendedStats(80, 85, 90, 90, 11, 3, 60)
+            new ExtendedStats(80, 85, 90, 90, 11, 3, 30)
         ));
 
         Races.Add(new Race(
@@ -230,7 +231,7 @@ public class RaceDatabase : MonoBehaviour
             "Lynxfolk are quick, dexterous, and instinctual hunters. They excel in speed and agility but lack physical endurance.",
             new AttributeSet(7, 12, 6, 9, 8, 8),
             new AttributeSet(0, 2, -1, 1, 0, 0),
-            new ExtendedStats(75, 95, 85, 85, 13, 2, 65)
+            new ExtendedStats(75, 95, 85, 85, 13, 2, 35)
         ));
 
         Debug.Log("Races initialized!");

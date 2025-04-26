@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Unity.FantasyKingdom
@@ -8,6 +9,7 @@ namespace Unity.FantasyKingdom
         [SerializeField] private ZoomFunction _zoomFunction;
         [SerializeField] private LevelManager _levelManager;
         [SerializeField] private HotbarStats _hotbarStats;
+        [SerializeField] private DeathUIManager _deathUIManager;
 
         private CharacterSaveData data;
 
@@ -49,6 +51,8 @@ namespace Unity.FantasyKingdom
         public ExtendedStats finalStats;
         public ExtendedStats currentStats;
 
+        public bool isDead;
+
 
         void Start()
         {
@@ -58,7 +62,7 @@ namespace Unity.FantasyKingdom
         }
 
         [ContextMenu("🔁 Load Character Data")]
-        private void LoadCharacterSaveData()
+        public void LoadCharacterSaveData()
         {
             string savedName = PlayerPrefs.GetString("SavedCharacterName", "Default");
             string folderName = $"PlayerSave_{savedName}"; 
@@ -114,12 +118,33 @@ namespace Unity.FantasyKingdom
             finalAttributes = data.finalAttributes;
             finalStats = data.finalStats;
             currentStats = data.currentStats;
+
+            isDead = data.isDead;
         }
 
-        private void updateStats()
+        public void updateStats()
         {
+            if (isDead == true)
+            {
+                _hotbarStats.Death(); // <- Kanske denna sätter hp till 0 och disable grejer
+                _deathUIManager.Init();
+                StartCoroutine(ShowDeathPanelAfterDelay()); // Vänta 1 sek och visa död-panel
+                return;
+            }
+
             _levelManager.UpdateAllUI(force: true);
-            _hotbarStats.InitStats();
+            _hotbarStats.setAttributeManager();
+            _deathUIManager.Init();
+        }
+
+        private IEnumerator ShowDeathPanelAfterDelay()
+        {
+            yield return new WaitForSeconds(1f);
+
+            _deathUIManager.ingameUI.SetActive(false);
+            _deathUIManager.deathPanel.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         private void SkillCheckers()

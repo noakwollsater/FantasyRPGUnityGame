@@ -30,11 +30,6 @@ namespace Unity.FantasyKingdom
             HandleEscapeKey();
             HandleInventoryToggle();
             HandleSettingsToggle();
-
-            if (!isMainMenuOpen && !isInventoryOpen && !settingsPanel.activeSelf)
-            {
-                LockCursor();
-            }
         }
 
         private void EnsureCharacterLocomotionInitialized()
