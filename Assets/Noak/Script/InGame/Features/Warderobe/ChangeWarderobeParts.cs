@@ -71,7 +71,12 @@ public class ChangeWarderobeParts : MonoBehaviour
         sidekickConfigurator.ApplyBlendShapes();
     }
 
+    //All keywords for the parts
+    //"ABAC", "AEBL", "AEBR", "AFAC", "AHED", "AHPF", "AHPL", "AHPR", 
+    //"AKNL", "AKNR", "ALWL", "ALWR", "APHB", "ASHL", "ASHR", "AUPL", "AUPR",
+    //"EARL", "EARR", "EBRL", "EBRR", "EYEL", "EYER", "FCHR", "FOTL", "FOTR",
+    //"Hair", "Head", "HIPS", "HNDL", "HNDR", "LEGL", "LEGR", "NOSE", "TETH", "TONG", "TORS"
+
     // Example functions for UI buttons
-    public void ForwardFacialHair() => ForwardPart("ABAC"); 
-    public void BackwardFacialHair() => BackwardPart("ABAC");
+    public void ChangeBackAttachForward() => ForwardPart("ABAC");
 }
