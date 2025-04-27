@@ -72,6 +72,6 @@ public class ChangeWarderobeParts : MonoBehaviour
     }
 
     // Example functions for UI buttons
-    public void ForwardFacialHair() => ForwardPart("ABAC");  // you pass partGroup name here ("FAC", "HED", etc.)
+    public void ForwardFacialHair() => ForwardPart("ABAC"); 
     public void BackwardFacialHair() => BackwardPart("ABAC");
 }
