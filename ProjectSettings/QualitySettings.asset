@@ -47,7 +47,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 893446622527330438e1018d38685640, type: 2}
+    customRenderPipeline: {fileID: 11400000, guid: 49b5c9fa1cc1f804bbfee5399635efa5, type: 2}
     terrainQualityOverrides: 3
     terrainPixelError: 32
     terrainDetailDensityScale: 1
@@ -103,7 +103,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 3e2969210965c9e4f93dfe53aa60e518, type: 2}
+    customRenderPipeline: {fileID: 11400000, guid: 6a46d11f446e65647b67f6140911e464, type: 2}
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -159,7 +159,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 5259606ec6ce04c41bc18fb87f217f4b, type: 2}
+    customRenderPipeline: {fileID: 11400000, guid: 24e04cb166586494ba56cb3fc3ea3f41, type: 2}
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -215,7 +215,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 0ef3b100f2972d9478f52cab9e88ce22, type: 2}
+    customRenderPipeline: {fileID: 11400000, guid: 7bd3547b5d9b3da4bb172417c4890d62, type: 2}
     terrainQualityOverrides: 3
     terrainPixelError: 12
     terrainDetailDensityScale: 1
@@ -274,7 +274,7 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 24e04cb166586494ba56cb3fc3ea3f41, type: 2}
+    customRenderPipeline: {fileID: 11400000, guid: 49b5c9fa1cc1f804bbfee5399635efa5, type: 2}
     terrainQualityOverrides: 3
     terrainPixelError: 4
     terrainDetailDensityScale: 1
