@@ -21,6 +21,8 @@ namespace Unity.FantasyKingdom
         [SerializeField] private Health _health;
         [SerializeField] private DeathUIManager _deathUIManager;
 
+        private Attribute _healthAttribute;
+
         [SerializeField] private Image _healthFillBar, _staminaFillBar, _hungerFillBar, _thirstFillBar, _manaFillBar;
         [SerializeField] private Image _healthLowFillBar, _staminaLowFillBar, _hungerLowFillBar, _thirstLowFillBar, _manaLowFillBar;
 
@@ -60,6 +62,10 @@ namespace Unity.FantasyKingdom
             }
         }
 
+        public void DamageHealthOverTime(float damagePerSecond)
+        {
+            ModifyStat(StatType.Health, -damagePerSecond);
+        }
 
         public void setAttributeManager()
         {
@@ -72,6 +78,7 @@ namespace Unity.FantasyKingdom
             }
 
             _attributeManager = character.GetComponent<CharacterAttributeManager>();
+            _healthAttribute = _attributeManager.GetAttribute("Health");
 
             if (_attributeManager == null)
             {
@@ -135,13 +142,11 @@ namespace Unity.FantasyKingdom
             }
         }
 
-
         private void OnAttributeUpdated(Attribute attribute)
         {
             if (attribute.Name == "Health")
             {
                 _loadCharacterData.currentStats.HP = Mathf.RoundToInt(attribute.Value);
-                Debug.Log($"Health updated: {attribute.Value}/{attribute.MaxValue}");
                 UpdateStatBar(StatType.Health, attribute.Value, attribute.MaxValue);
             }
             else if (attribute.Name == "Stamina")
@@ -167,7 +172,6 @@ namespace Unity.FantasyKingdom
             }
         }
 
-
         private void UpdateAllBars()
         {
             foreach (StatType stat in System.Enum.GetValues(typeof(StatType)))
@@ -176,7 +180,7 @@ namespace Unity.FantasyKingdom
             }
         }
 
-        private void ModifyStat(StatType type, int amount)
+        private void ModifyStat(StatType type, float amount)
         {
             float current = GetCurrentStat(type);
             float max = GetMaxStat(type);
@@ -312,11 +316,11 @@ namespace Unity.FantasyKingdom
         void Update()
         {
             // For testing: reduce stats with keys
-            if (Input.GetKeyDown(KeyCode.B)) ModifyStat(StatType.Health, -10);
-            if (Input.GetKeyDown(KeyCode.L)) ModifyStat(StatType.Health, +10);
-            if (Input.GetKeyDown(KeyCode.N)) ModifyStat(StatType.Stamina, -10);
-            if (Input.GetKeyDown(KeyCode.M)) ModifyStat(StatType.Hunger, -10);
-            if (Input.GetKeyDown(KeyCode.Comma)) ModifyStat(StatType.Thirst, -10);
+            if (Input.GetKeyDown(KeyCode.B)) ModifyStat(StatType.Health, -10f);
+            if (Input.GetKeyDown(KeyCode.L)) ModifyStat(StatType.Health, +10f);
+            if (Input.GetKeyDown(KeyCode.N)) ModifyStat(StatType.Stamina, -10f);
+            if (Input.GetKeyDown(KeyCode.M)) ModifyStat(StatType.Hunger, +10f);
+            if (Input.GetKeyDown(KeyCode.Comma)) ModifyStat(StatType.Thirst, +10f);
             if (Input.GetKeyDown(KeyCode.Period)) ModifyStat(StatType.Mana, -10);
         }
     }

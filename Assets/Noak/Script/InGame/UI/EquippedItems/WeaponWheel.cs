@@ -1,3 +1,4 @@
+using Opsive.UltimateCharacterController.Camera;
 using UnityEngine;
 
 namespace Unity.FantasyKingdom
@@ -5,6 +6,7 @@ namespace Unity.FantasyKingdom
     public class WeaponWheel : MonoBehaviour
     {
         [SerializeField] private GameObject weaponWheelPanel;
+        [SerializeField] private CameraControllerHandler cameraController;
 
         private void Start()
         {
@@ -32,6 +34,7 @@ namespace Unity.FantasyKingdom
         {
             if (weaponWheelPanel != null && !weaponWheelPanel.activeSelf)
             {
+                cameraController.m_BlockLookInput = true;
                 weaponWheelPanel.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -42,6 +45,7 @@ namespace Unity.FantasyKingdom
         {
             if (weaponWheelPanel != null && weaponWheelPanel.activeSelf)
             {
+                cameraController.m_BlockLookInput = false;
                 weaponWheelPanel.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
