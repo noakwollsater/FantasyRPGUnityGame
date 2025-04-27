@@ -27,7 +27,28 @@ namespace Unity.FantasyKingdom
         [SerializeField] private Toggle vSyncToggle;
 
         private readonly string[] displayModes = { "Fullscreen", "Windowed", "Borderless" };
-        private readonly string[] resolutions = { "1920x1080", "1280x720", "2560x1440", "2560x1080", "3840x2160", "1024x768" };
+        private readonly string[] resolutions = {
+            "640x480",
+            "800x600",
+            "1024x768",
+            "1280x720",
+            "1280x800",
+            "1360x768",
+            "1366x768",
+            "1440x900",
+            "1600x900",
+            "1680x1050",
+            "1920x1080",
+            "1920x1200",
+            "2560x1080",
+            "2560x1440",
+            "3440x1440",
+            "3840x2160",
+            "5120x1440",
+            "5120x2160",
+            "7680x4320"
+        };
+
         private readonly string[] refreshRates = { "60Hz", "75Hz", "120Hz", "144Hz", "165Hz", "240Hz" };
 
         private int currentDisplayModeIndex = 0;
