@@ -69,7 +69,6 @@ public class ChangeWarderobeParts : MonoBehaviour
         sidekickConfigurator.meshPartsActive[partIndex] = activeIndex;
 
         sidekickConfigurator.ApplyBlendShapes();
-        sidekickConfigurator.RebindBonesForPart(partIndex);
     }
 
     // Example functions for UI buttons
