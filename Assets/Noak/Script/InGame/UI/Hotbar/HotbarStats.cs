@@ -64,26 +64,8 @@ namespace Unity.FantasyKingdom
 
         public void DamageHealthOverTime(float damagePerSecond)
         {
-            if (_health == null || _healthAttribute == null)
-            {
-                Debug.LogWarning("HotbarStats: Health component or Attribute is null. Cannot damage health.");
-                return;
-            }
-
-            float damage = damagePerSecond * Time.deltaTime;
-            _healthAttribute.Value -= damage;
-
-            if (_damageFX != null)
-            {
-                _damageFX.SetTrigger(DamageFXParam); // Play damage animation
-            }
-
-            if (_healthAttribute.Value <= 0)
-            {
-                _health.ImmediateDeath();
-            }
+            ModifyStat(StatType.Health, -damagePerSecond);
         }
-
 
         public void setAttributeManager()
         {
@@ -198,7 +180,7 @@ namespace Unity.FantasyKingdom
             }
         }
 
-        private void ModifyStat(StatType type, int amount)
+        private void ModifyStat(StatType type, float amount)
         {
             float current = GetCurrentStat(type);
             float max = GetMaxStat(type);
@@ -334,11 +316,11 @@ namespace Unity.FantasyKingdom
         void Update()
         {
             // For testing: reduce stats with keys
-            if (Input.GetKeyDown(KeyCode.B)) ModifyStat(StatType.Health, -10);
-            if (Input.GetKeyDown(KeyCode.L)) ModifyStat(StatType.Health, +10);
-            if (Input.GetKeyDown(KeyCode.N)) ModifyStat(StatType.Stamina, -10);
-            if (Input.GetKeyDown(KeyCode.M)) ModifyStat(StatType.Hunger, +10);
-            if (Input.GetKeyDown(KeyCode.Comma)) ModifyStat(StatType.Thirst, +10);
+            if (Input.GetKeyDown(KeyCode.B)) ModifyStat(StatType.Health, -10f);
+            if (Input.GetKeyDown(KeyCode.L)) ModifyStat(StatType.Health, +10f);
+            if (Input.GetKeyDown(KeyCode.N)) ModifyStat(StatType.Stamina, -10f);
+            if (Input.GetKeyDown(KeyCode.M)) ModifyStat(StatType.Hunger, +10f);
+            if (Input.GetKeyDown(KeyCode.Comma)) ModifyStat(StatType.Thirst, +10f);
             if (Input.GetKeyDown(KeyCode.Period)) ModifyStat(StatType.Mana, -10);
         }
     }
