@@ -79,4 +79,6 @@ public class ChangeWarderobeParts : MonoBehaviour
 
     // Example functions for UI buttons
     public void ChangeBackAttachForward() => ForwardPart("ABAC");
+    public void ChangeBackAttachBackward() => BackwardPart("ABAC");
+
 }
