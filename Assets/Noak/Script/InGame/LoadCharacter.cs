@@ -225,19 +225,19 @@ namespace Unity.FantasyKingdom
                 case TailType.Torso:
                     tail.MotionInfluence = 0f;
                     tail.ReactionSpeed = 0.7f;
-                    tail.MaxStretching = 0.15f;
+                    tail.MaxStretching = 0f;
                     break;
 
                 case TailType.Hips:
-                    tail.MotionInfluence = 0.25f;
+                    tail.MotionInfluence = 0.15f;
                     tail.ReactionSpeed = 0.7f;
-                    tail.MaxStretching = 0.15f;
+                    tail.MaxStretching = 0f;
                     break;
 
                 default:
                     tail.MotionInfluence = 0.7f;
                     tail.ReactionSpeed = 0.7f;
-                    tail.MaxStretching = 0.15f;
+                    tail.MaxStretching = 0f;
                     break;
             }
         }
