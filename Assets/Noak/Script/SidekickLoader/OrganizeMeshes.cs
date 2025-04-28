@@ -18,7 +18,7 @@ namespace Unity.FantasyKingdom.EditorTools
             "AHPR", "ASHL", "ASHR", "AEBL", "AEBR", "AKNL", "AKNR", "WRAP"
         };
 
-        [MenuItem("Tools/Fantasy Kingdom/Organize Meshes")]
+        [MenuItem("Tools/Vinterkyla: SideKick Editor/Organize Meshes")]
         public static void ShowWindow()
         {
             GetWindow<OrganizeMeshes>("Organize Meshes");

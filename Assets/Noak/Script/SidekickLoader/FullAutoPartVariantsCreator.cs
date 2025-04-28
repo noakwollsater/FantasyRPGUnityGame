@@ -11,7 +11,7 @@ public class FullAutoPartVariantsCreator : EditorWindow
     private string partNameRight = "";
     private bool isDualPath = false;
 
-    [MenuItem("Tools/Full Auto PartVariants Creator")]
+    [MenuItem("Tools/Vinterkyla: SideKick Editor/Full Auto PartVariants Creator")]
     public static void ShowWindow()
     {
         GetWindow<FullAutoPartVariantsCreator>("Full Auto PartVariants");
