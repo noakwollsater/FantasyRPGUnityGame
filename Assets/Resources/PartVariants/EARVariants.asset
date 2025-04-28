@@ -1,0 +1,256 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 096c938d0fdcb7942bb403f4fa14b5b8, type: 3}
+  m_Name: EARVariants
+  m_EditorClassIdentifier: 
+  partName: EAR
+  variants:
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_APOC_OUTL_01_07EARL_HU01
+    rightPath: Parts/EARR/SK_APOC_OUTL_01_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_APOC_OUTL_02_07EARL_HU01
+    rightPath: Parts/EARR/SK_APOC_OUTL_02_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_APOC_OUTL_03_07EARL_HU01
+    rightPath: Parts/EARR/SK_APOC_OUTL_03_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_APOC_OUTL_04_07EARL_HU01
+    rightPath: Parts/EARR/SK_APOC_OUTL_04_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_APOC_OUTL_05_07EARL_HU01
+    rightPath: Parts/EARR/SK_APOC_OUTL_05_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_APOC_OUTL_06_07EARL_HU01
+    rightPath: Parts/EARR/SK_APOC_OUTL_06_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_APOC_OUTL_07_07EARL_HU01
+    rightPath: Parts/EARR/SK_APOC_OUTL_07_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_APOC_OUTL_08_07EARL_HU01
+    rightPath: Parts/EARR/SK_APOC_OUTL_08_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_APOC_OUTL_09_07EARL_HU01
+    rightPath: Parts/EARR/SK_APOC_OUTL_09_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_APOC_OUTL_10_07EARL_HU01
+    rightPath: Parts/EARR/SK_APOC_OUTL_10_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_BASE_01_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_BASE_01_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_BASE_02_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_BASE_02_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_BASE_03_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_BASE_03_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_BASE_04_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_BASE_04_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_BASE_05_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_BASE_05_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_BASE_06_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_BASE_06_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_BASE_07_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_BASE_07_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_BASE_08_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_BASE_08_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_BASE_09_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_BASE_09_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_BASE_10_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_BASE_10_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_FIGT_01_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_FIGT_01_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_FIGT_02_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_FIGT_02_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_FIGT_03_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_FIGT_03_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_FIGT_04_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_FIGT_04_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_FIGT_05_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_FIGT_05_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_FIGT_06_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_FIGT_06_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_FIGT_07_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_FIGT_07_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_FIGT_08_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_FIGT_08_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_FIGT_09_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_FIGT_09_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_GOBL_FIGT_10_07EARL_GO01
+    rightPath: Parts/EARR/SK_GOBL_FIGT_10_08EARR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_HUMN_BASE_01_07EARL_HU01
+    rightPath: Parts/EARR/SK_HUMN_BASE_01_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_HUMN_BASE_02_07EARL_HU01
+    rightPath: Parts/EARR/SK_HUMN_BASE_02_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_HUMN_BASE_03_07EARL_HU01
+    rightPath: Parts/EARR/SK_HUMN_BASE_03_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_HUMN_BASE_04_07EARL_HU01
+    rightPath: Parts/EARR/SK_HUMN_BASE_04_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_HUMN_BASE_05_07EARL_HU01
+    rightPath: Parts/EARR/SK_HUMN_BASE_05_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_HUMN_BASE_06_07EARL_HU01
+    rightPath: Parts/EARR/SK_HUMN_BASE_06_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_HUMN_BASE_07_07EARL_HU01
+    rightPath: Parts/EARR/SK_HUMN_BASE_07_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_HUMN_BASE_08_07EARL_HU01
+    rightPath: Parts/EARR/SK_HUMN_BASE_08_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_HUMN_BASE_09_07EARL_HU01
+    rightPath: Parts/EARR/SK_HUMN_BASE_09_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_HUMN_BASE_10_07EARL_HU01
+    rightPath: Parts/EARR/SK_HUMN_BASE_10_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_PIRT_CAPT_01_07EARL_HU01
+    rightPath: Parts/EARR/SK_PIRT_CAPT_01_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_PIRT_CAPT_02_07EARL_HU01
+    rightPath: Parts/EARR/SK_PIRT_CAPT_02_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_PIRT_CAPT_03_07EARL_HU01
+    rightPath: Parts/EARR/SK_PIRT_CAPT_03_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_PIRT_CAPT_04_07EARL_HU01
+    rightPath: Parts/EARR/SK_PIRT_CAPT_04_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_PIRT_CAPT_05_07EARL_HU01
+    rightPath: Parts/EARR/SK_PIRT_CAPT_05_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_PIRT_CAPT_06_07EARL_HU01
+    rightPath: Parts/EARR/SK_PIRT_CAPT_06_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_PIRT_CAPT_07_07EARL_HU01
+    rightPath: Parts/EARR/SK_PIRT_CAPT_07_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_PIRT_CAPT_08_07EARL_HU01
+    rightPath: Parts/EARR/SK_PIRT_CAPT_08_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_PIRT_CAPT_09_07EARL_HU01
+    rightPath: Parts/EARR/SK_PIRT_CAPT_09_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_PIRT_CAPT_10_07EARL_HU01
+    rightPath: Parts/EARR/SK_PIRT_CAPT_10_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_SCFI_SOLD_01_07EARL_HU01
+    rightPath: Parts/EARR/SK_SCFI_SOLD_01_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_SCFI_SOLD_02_07EARL_HU01
+    rightPath: Parts/EARR/SK_SCFI_SOLD_02_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_SCFI_SOLD_03_07EARL_HU01
+    rightPath: Parts/EARR/SK_SCFI_SOLD_03_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_SCFI_SOLD_04_07EARL_HU01
+    rightPath: Parts/EARR/SK_SCFI_SOLD_04_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_SCFI_SOLD_05_07EARL_HU01
+    rightPath: Parts/EARR/SK_SCFI_SOLD_05_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_SCFI_SOLD_06_07EARL_HU01
+    rightPath: Parts/EARR/SK_SCFI_SOLD_06_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_SCFI_SOLD_07_07EARL_HU01
+    rightPath: Parts/EARR/SK_SCFI_SOLD_07_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_SCFI_SOLD_08_07EARL_HU01
+    rightPath: Parts/EARR/SK_SCFI_SOLD_08_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_SCFI_SOLD_09_07EARL_HU01
+    rightPath: Parts/EARR/SK_SCFI_SOLD_09_08EARR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EARL/SK_SCFI_SOLD_10_07EARL_HU01
+    rightPath: Parts/EARR/SK_SCFI_SOLD_10_08EARR_HU01

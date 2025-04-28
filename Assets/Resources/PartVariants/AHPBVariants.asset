@@ -1,0 +1,216 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 096c938d0fdcb7942bb403f4fa14b5b8, type: 3}
+  m_Name: AHPBVariants
+  m_EditorClassIdentifier: 
+  partName: AHPB
+  variants:
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_APOC_OUTL_01_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_APOC_OUTL_02_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_APOC_OUTL_03_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_APOC_OUTL_04_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_APOC_OUTL_05_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_APOC_OUTL_06_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_APOC_OUTL_07_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_APOC_OUTL_08_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_APOC_OUTL_09_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_APOC_OUTL_10_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_FANT_KNGT_01_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_FANT_KNGT_02_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_GOBL_FIGT_01_26AHPB_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_GOBL_FIGT_02_26AHPB_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_GOBL_FIGT_03_26AHPB_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_GOBL_FIGT_04_26AHPB_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_GOBL_FIGT_05_26AHPB_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_GOBL_FIGT_06_26AHPB_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_GOBL_FIGT_07_26AHPB_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_GOBL_FIGT_08_26AHPB_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_GOBL_FIGT_09_26AHPB_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_GOBL_FIGT_10_26AHPB_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_PIRT_CAPT_01_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_PIRT_CAPT_02_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_PIRT_CAPT_03_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_PIRT_CAPT_04_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_PIRT_CAPT_05_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_PIRT_CAPT_06_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_PIRT_CAPT_07_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_PIRT_CAPT_08_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_PIRT_CAPT_09_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_PIRT_CAPT_10_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_CIVL_01_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_CIVL_02_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_CIVL_03_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_CIVL_04_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_SOLD_01_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_SOLD_02_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_SOLD_03_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_SOLD_04_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_SOLD_05_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_SOLD_06_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_SOLD_07_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_SOLD_08_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_SOLD_09_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_SCFI_SOLD_10_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_VIKG_WARR_01_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_VIKG_WARR_02_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_VIKG_WARR_03_26AHPB_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/AHPB/SK_VIKG_WARR_04_26AHPB_HU01
+    leftPath: 
+    rightPath: 

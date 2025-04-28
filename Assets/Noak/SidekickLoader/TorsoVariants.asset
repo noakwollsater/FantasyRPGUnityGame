@@ -1,0 +1,260 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 096c938d0fdcb7942bb403f4fa14b5b8, type: 3}
+  m_Name: TorsoVariants
+  m_EditorClassIdentifier: 
+  partName: TORS
+  variants:
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_APOC_OUTL_01_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_APOC_OUTL_02_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_APOC_OUTL_03_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_APOC_OUTL_04_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_APOC_OUTL_05_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_APOC_OUTL_06_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_APOC_OUTL_07_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_APOC_OUTL_08_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_APOC_OUTL_09_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_APOC_OUTL_10_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_FANT_KNGT_01_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_FANT_KNGT_02_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_FANT_KNGT_03_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_FANT_KNGT_04_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_FANT_KNGT_05_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_FANT_KNGT_06_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_GOBL_BASE_01_10TORS_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_GOBL_FIGT_01_10TORS_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_GOBL_FIGT_02_10TORS_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_GOBL_FIGT_03_10TORS_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_GOBL_FIGT_04_10TORS_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_GOBL_FIGT_05_10TORS_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_GOBL_FIGT_06_10TORS_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_GOBL_FIGT_07_10TORS_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_GOBL_FIGT_08_10TORS_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_GOBL_FIGT_09_10TORS_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_GOBL_FIGT_10_10TORS_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_HUMN_BASE_01_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_PIRT_CAPT_01_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_PIRT_CAPT_02_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_PIRT_CAPT_03_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_PIRT_CAPT_04_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_PIRT_CAPT_05_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_PIRT_CAPT_06_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_PIRT_CAPT_07_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_PIRT_CAPT_08_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_PIRT_CAPT_09_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_PIRT_CAPT_10_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_CIVL_01_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_CIVL_02_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_CIVL_03_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_CIVL_04_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_CIVL_05_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_CIVL_06_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_CIVL_07_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_SOLD_01_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_SOLD_02_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_SOLD_03_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_SOLD_04_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_SOLD_05_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_SOLD_06_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_SOLD_07_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_SOLD_08_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_SOLD_09_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_SCFI_SOLD_10_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_VIKG_WARR_01_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_VIKG_WARR_02_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_VIKG_WARR_03_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_VIKG_WARR_04_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_VIKG_WARR_05_10TORS_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TORS/SK_VIKG_WARR_06_10TORS_HU01
+    leftPath: 
+    rightPath: 

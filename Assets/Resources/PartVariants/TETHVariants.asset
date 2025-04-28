@@ -1,0 +1,256 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 096c938d0fdcb7942bb403f4fa14b5b8, type: 3}
+  m_Name: TETHVariants
+  m_EditorClassIdentifier: 
+  partName: TETH
+  variants:
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_APOC_OUTL_01_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_APOC_OUTL_02_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_APOC_OUTL_03_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_APOC_OUTL_04_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_APOC_OUTL_05_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_APOC_OUTL_06_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_APOC_OUTL_07_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_APOC_OUTL_08_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_APOC_OUTL_09_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_APOC_OUTL_10_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_BASE_01_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_BASE_02_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_BASE_03_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_BASE_04_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_BASE_05_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_BASE_06_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_BASE_07_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_BASE_08_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_BASE_09_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_BASE_10_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_FIGT_01_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_FIGT_02_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_FIGT_03_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_FIGT_04_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_FIGT_05_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_FIGT_06_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_FIGT_07_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_FIGT_08_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_FIGT_09_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_GOBL_FIGT_10_36TETH_GO01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_HUMN_BASE_01_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_HUMN_BASE_02_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_HUMN_BASE_03_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_HUMN_BASE_04_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_HUMN_BASE_05_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_HUMN_BASE_06_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_HUMN_BASE_07_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_HUMN_BASE_08_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_HUMN_BASE_09_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_HUMN_BASE_10_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_PIRT_CAPT_01_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_PIRT_CAPT_02_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_PIRT_CAPT_03_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_PIRT_CAPT_04_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_PIRT_CAPT_05_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_PIRT_CAPT_06_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_PIRT_CAPT_07_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_PIRT_CAPT_08_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_PIRT_CAPT_09_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_PIRT_CAPT_10_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_SCFI_SOLD_01_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_SCFI_SOLD_02_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_SCFI_SOLD_03_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_SCFI_SOLD_04_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_SCFI_SOLD_05_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_SCFI_SOLD_06_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_SCFI_SOLD_07_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_SCFI_SOLD_08_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_SCFI_SOLD_09_36TETH_HU01
+    leftPath: 
+    rightPath: 
+  - isDualPath: 0
+    singlePath: Parts/TETH/SK_SCFI_SOLD_10_36TETH_HU01
+    leftPath: 
+    rightPath: 
