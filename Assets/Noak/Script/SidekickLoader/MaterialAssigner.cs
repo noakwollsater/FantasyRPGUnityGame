@@ -6,7 +6,7 @@ public class MultiFolderMaterialAssigner : EditorWindow
     private Material materialToAssign;
     [SerializeField] private string[] targetFolders;
 
-    [MenuItem("Tools/Assign Material To Multiple Prefabs")]
+    [MenuItem("Tools/Vinterkyla: SideKick Editor/Assign Material To Multiple Prefabs")]
     public static void ShowWindow()
     {
         GetWindow<MultiFolderMaterialAssigner>("Assign Material To Prefabs");

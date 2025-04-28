@@ -10,7 +10,6 @@ public class PartVariantsImporter : EditorWindow
     private string folderPathRight = "Assets/";
     private bool isDualPath = false;
 
-    [MenuItem("Tools/PartVariants Importer")]
     public static void ShowWindow()
     {
         GetWindow<PartVariantsImporter>("PartVariants Importer");
