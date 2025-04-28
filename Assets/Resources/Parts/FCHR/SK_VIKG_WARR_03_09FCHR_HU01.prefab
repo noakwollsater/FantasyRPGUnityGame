@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3414582058969036403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4660024766094695252}
+  - component: {fileID: 904859815439416377}
+  m_Layer: 0
+  m_Name: SK_VIKG_WARR_03_09FCHR_HU01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4660024766094695252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414582058969036403}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &904859815439416377
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414582058969036403}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: -3130407567397530419, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  m_Bones:
+  - {fileID: -8496879035693090889, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: 6855267054193146121, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: 414455556217447494, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: 495971578286170041, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: -5138036450212175119, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: -1246532637246031051, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: 1723998464193293675, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: 7231636527393703841, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: 3389347738141834037, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: -8492193205356738378, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: -1767302063196569170, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: 2304244481032835489, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: 4698950735507088050, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: -6736273642479729562, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: 4325436833983905973, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: -8013909246233647550, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: -2707054796494011859, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  - {fileID: -6394934201113919074, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: -8013909246233647550, guid: 8e50ac5e9f1d7cf4c810bc649c1a96a0, type: 3}
+  m_AABB:
+    m_Center: {x: -0.43068388, y: -0.08898032, z: 0.0016859621}
+    m_Extent: {x: 0.16419366, y: 0.0813245, z: 0.10780628}
+  m_DirtyAABB: 0

@@ -171,8 +171,8 @@ namespace Unity.FantasyKingdom
                     }
                 }
             }
-
             _sidekickConfigurator.ApplyBlendShapes();
+
             Debug.Log("✅ Sparade mesh-delar tillämpade!");
         }
         public void AttachTailAnimators(Transform root)

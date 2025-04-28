@@ -21,12 +21,10 @@ public class OrganizeCharacterParts : MonoBehaviour
 
     private readonly List<string> categoryFolderName = new()
     {
-        "Head", "Hair", "Eyebrow_Left", "Eyebrow_Right", "Eye_Left", "Eye_Right", "Ear_Left", "Ear_Right",
-        "FacialHair", "Torso", "Upper_Arm_Left", "Upper_Arm_Right", "Lower_Arm_Left", "Lower_Arm_Right", "Hand_Left", "Hand_Right",
-        "Hips", "Leg_Left", "Leg_Right", "Foot_Left", "Foot_Right", "Nose", "Teeth", "Tongue", "Attachment_Head", "Attachment_Face",
-        "Attachment_Back", "Attachment_Hip_Front", "Attachment_Hip_Back", "Attachment_Hip_Left", "Attachment_Hip_Right",
-        "Attachment_Shoulder_Left", "Attachment_Shoulder_Right", "Attachment_Elbow_Left", "Attachment_Elbow_Right",
-        "Attachment_Knee_Left", "Attachment_Knee_Right"
+        "HEAD", "HAIR", "EBRL", "EBRR", "EYEL", "EYER", "EARL", "EARR", "FCHR", "TORS",
+        "AUPL", "AUPR", "ALWL", "ALWR", "HNDL", "HNDR", "HIPS", "LEGL", "LEGR", "FOTL",
+        "FOTR", "NOSE", "TETH", "TONG", "AHED", "AFAC", "ABAC", "AHPF", "AHPB", "AHPL",
+        "AHPR", "ASHL", "ASHR", "AEBL", "AEBR", "AKNL", "AKNR"
     };
 
     [ContextMenu("Organize Parts")]
