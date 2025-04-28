@@ -15,7 +15,7 @@ namespace Unity.FantasyKingdom.EditorTools
             "HEAD", "HAIR", "EBRL", "EBRR", "EYEL", "EYER", "EARL", "EARR", "FCHR", "TORS",
             "AUPL", "AUPR", "ALWL", "ALWR", "HNDL", "HNDR", "HIPS", "LEGL", "LEGR", "FOTL",
             "FOTR", "NOSE", "TETH", "TONG", "AHED", "AFAC", "ABAC", "AHPF", "AHPB", "AHPL",
-            "AHPR", "ASHL", "ASHR", "AEBL", "AEBR", "AKNL", "AKNR"
+            "AHPR", "ASHL", "ASHR", "AEBL", "AEBR", "AKNL", "AKNR", "WRAP"
         };
 
         [MenuItem("Tools/Fantasy Kingdom/Organize Meshes")]
