@@ -1,5 +1,0 @@
-1. Få nya FBX från Sidekick
-2. Tilldela material på alla nya delar - MultiFolderMaterialAssigner - Sätter rätt material på alla importerade modeller.
-3. Organisera delar i rätt mappar - OrganizeMeshes - Plockar ut skinned mesh-delar från FBX och sparar dem som prefabs i rätt Parts-kategori.
-4. Om nya delar dykt upp - PartVariantsUpdater - Uppdaterar redan existerande PartVariants utan att skapa nytt.
-5. Om ny kategori/del behövs - FullAutoPartVariantsCreator - Skapar nytt PartVariants för nya delar (med stöd för single eller dual path).
