@@ -1,0 +1,232 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 096c938d0fdcb7942bb403f4fa14b5b8, type: 3}
+  m_Name: AUPRVariants
+  m_EditorClassIdentifier: 
+  partName: AUPR
+  variants:
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_APOC_OUTL_01_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_APOC_OUTL_01_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_APOC_OUTL_02_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_APOC_OUTL_02_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_APOC_OUTL_03_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_APOC_OUTL_03_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_APOC_OUTL_04_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_APOC_OUTL_04_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_APOC_OUTL_05_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_APOC_OUTL_05_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_APOC_OUTL_06_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_APOC_OUTL_06_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_APOC_OUTL_07_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_APOC_OUTL_07_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_APOC_OUTL_08_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_APOC_OUTL_08_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_APOC_OUTL_09_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_APOC_OUTL_09_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_APOC_OUTL_10_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_APOC_OUTL_10_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_FANT_KNGT_01_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_FANT_KNGT_01_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_FANT_KNGT_02_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_FANT_KNGT_02_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_FANT_KNGT_03_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_FANT_KNGT_03_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_GOBL_BASE_01_12AUPR_GO01
+    rightPath: Parts/AUPL/SK_GOBL_BASE_01_11AUPL_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_GOBL_FIGT_01_12AUPR_GO01
+    rightPath: Parts/AUPL/SK_GOBL_FIGT_01_11AUPL_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_GOBL_FIGT_02_12AUPR_GO01
+    rightPath: Parts/AUPL/SK_GOBL_FIGT_02_11AUPL_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_GOBL_FIGT_03_12AUPR_GO01
+    rightPath: Parts/AUPL/SK_GOBL_FIGT_03_11AUPL_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_GOBL_FIGT_04_12AUPR_GO01
+    rightPath: Parts/AUPL/SK_GOBL_FIGT_04_11AUPL_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_GOBL_FIGT_05_12AUPR_GO01
+    rightPath: Parts/AUPL/SK_GOBL_FIGT_05_11AUPL_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_GOBL_FIGT_06_12AUPR_GO01
+    rightPath: Parts/AUPL/SK_GOBL_FIGT_06_11AUPL_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_GOBL_FIGT_07_12AUPR_GO01
+    rightPath: Parts/AUPL/SK_GOBL_FIGT_07_11AUPL_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_GOBL_FIGT_08_12AUPR_GO01
+    rightPath: Parts/AUPL/SK_GOBL_FIGT_08_11AUPL_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_GOBL_FIGT_09_12AUPR_GO01
+    rightPath: Parts/AUPL/SK_GOBL_FIGT_09_11AUPL_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_GOBL_FIGT_10_12AUPR_GO01
+    rightPath: Parts/AUPL/SK_GOBL_FIGT_10_11AUPL_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_HUMN_BASE_01_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_HUMN_BASE_01_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_PIRT_CAPT_01_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_PIRT_CAPT_01_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_PIRT_CAPT_02_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_PIRT_CAPT_02_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_PIRT_CAPT_03_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_PIRT_CAPT_03_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_PIRT_CAPT_04_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_PIRT_CAPT_04_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_PIRT_CAPT_05_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_PIRT_CAPT_05_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_PIRT_CAPT_06_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_PIRT_CAPT_06_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_PIRT_CAPT_07_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_PIRT_CAPT_07_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_PIRT_CAPT_08_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_PIRT_CAPT_08_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_PIRT_CAPT_09_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_PIRT_CAPT_09_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_PIRT_CAPT_10_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_PIRT_CAPT_10_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_CIVL_01_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_CIVL_01_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_CIVL_02_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_CIVL_02_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_CIVL_03_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_CIVL_03_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_SOLD_01_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_SOLD_01_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_SOLD_02_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_SOLD_02_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_SOLD_03_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_SOLD_03_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_SOLD_04_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_SOLD_04_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_SOLD_05_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_SOLD_05_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_SOLD_06_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_SOLD_06_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_SOLD_07_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_SOLD_07_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_SOLD_08_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_SOLD_08_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_SOLD_09_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_SOLD_09_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_SCFI_SOLD_10_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_SCFI_SOLD_10_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_VIKG_WARR_01_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_VIKG_WARR_01_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_VIKG_WARR_02_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_VIKG_WARR_02_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_VIKG_WARR_03_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_VIKG_WARR_03_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_VIKG_WARR_04_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_VIKG_WARR_04_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_VIKG_WARR_05_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_VIKG_WARR_05_11AUPL_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AUPR/SK_VIKG_WARR_06_12AUPR_HU01
+    rightPath: Parts/AUPL/SK_VIKG_WARR_06_11AUPL_HU01

@@ -10,6 +10,7 @@ public class SidekickCustomizerUI : MonoBehaviour
     public TMP_Dropdown partDropdown;
     public Button leftButton;
     public Button rightButton;
+    public Button randomizeButton;
     public TMP_Text variantText;
 
     private string currentPart;
@@ -21,11 +22,12 @@ public class SidekickCustomizerUI : MonoBehaviour
         partDropdown.onValueChanged.AddListener(OnPartChanged);
         leftButton.onClick.AddListener(OnLeftClicked);
         rightButton.onClick.AddListener(OnRightClicked);
+        randomizeButton.onClick.AddListener(Randomize);
 
         if (partDropdown.options.Count > 0)
         {
             currentPart = partDropdown.options[0].text;
-            UpdateVariantDisplay();
+            EquipCurrentPart();
         }
     }
 
@@ -39,6 +41,11 @@ public class SidekickCustomizerUI : MonoBehaviour
         {
             OnRightClicked();
         }
+    }
+
+    private void Randomize()
+    {
+        sidekickLoader.RandomizeCharacter();
     }
 
     private void PopulateDropdown()
@@ -58,8 +65,7 @@ public class SidekickCustomizerUI : MonoBehaviour
     {
         currentPart = partDropdown.options[index].text;
         currentVariantIndex = 0;
-        sidekickLoader.EquipPart(currentPart, currentVariantIndex);
-        UpdateVariantDisplay();
+        EquipCurrentPart();
     }
 
     private void OnLeftClicked()
@@ -69,10 +75,9 @@ public class SidekickCustomizerUI : MonoBehaviour
         var part = sidekickLoader.partsCatalog[currentPart];
         currentVariantIndex--;
         if (currentVariantIndex < 0)
-            currentVariantIndex = part.prefabPaths.Count - 1;
+            currentVariantIndex = part.variants.Count - 1;
 
-        sidekickLoader.EquipPart(currentPart, currentVariantIndex);
-        UpdateVariantDisplay();
+        EquipCurrentPart();
     }
 
     private void OnRightClicked()
@@ -81,8 +86,15 @@ public class SidekickCustomizerUI : MonoBehaviour
 
         var part = sidekickLoader.partsCatalog[currentPart];
         currentVariantIndex++;
-        if (currentVariantIndex >= part.prefabPaths.Count)
+        if (currentVariantIndex >= part.variants.Count)
             currentVariantIndex = 0;
+
+        EquipCurrentPart();
+    }
+
+    private void EquipCurrentPart()
+    {
+        if (string.IsNullOrEmpty(currentPart)) return;
 
         sidekickLoader.EquipPart(currentPart, currentVariantIndex);
         UpdateVariantDisplay();

@@ -1,0 +1,256 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 096c938d0fdcb7942bb403f4fa14b5b8, type: 3}
+  m_Name: EBRVariants
+  m_EditorClassIdentifier: 
+  partName: EBR
+  variants:
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_APOC_OUTL_01_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_APOC_OUTL_01_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_APOC_OUTL_02_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_APOC_OUTL_02_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_APOC_OUTL_03_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_APOC_OUTL_03_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_APOC_OUTL_04_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_APOC_OUTL_04_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_APOC_OUTL_05_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_APOC_OUTL_05_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_APOC_OUTL_06_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_APOC_OUTL_06_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_APOC_OUTL_07_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_APOC_OUTL_07_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_APOC_OUTL_08_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_APOC_OUTL_08_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_APOC_OUTL_09_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_APOC_OUTL_09_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_APOC_OUTL_10_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_APOC_OUTL_10_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_BASE_01_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_BASE_01_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_BASE_02_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_BASE_02_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_BASE_03_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_BASE_03_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_BASE_04_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_BASE_04_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_BASE_05_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_BASE_05_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_BASE_06_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_BASE_06_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_BASE_07_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_BASE_07_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_BASE_08_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_BASE_08_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_BASE_09_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_BASE_09_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_BASE_10_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_BASE_10_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_FIGT_01_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_FIGT_01_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_FIGT_02_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_FIGT_02_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_FIGT_03_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_FIGT_03_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_FIGT_04_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_FIGT_04_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_FIGT_05_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_FIGT_05_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_FIGT_06_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_FIGT_06_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_FIGT_07_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_FIGT_07_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_FIGT_08_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_FIGT_08_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_FIGT_09_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_FIGT_09_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_GOBL_FIGT_10_03EBRL_GO01
+    rightPath: Parts/EBRR/SK_GOBL_FIGT_10_04EBRR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_HUMN_BASE_01_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_HUMN_BASE_01_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_HUMN_BASE_02_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_HUMN_BASE_02_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_HUMN_BASE_03_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_HUMN_BASE_03_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_HUMN_BASE_04_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_HUMN_BASE_04_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_HUMN_BASE_05_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_HUMN_BASE_05_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_HUMN_BASE_06_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_HUMN_BASE_06_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_HUMN_BASE_07_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_HUMN_BASE_07_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_HUMN_BASE_08_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_HUMN_BASE_08_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_HUMN_BASE_09_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_HUMN_BASE_09_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_HUMN_BASE_10_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_HUMN_BASE_10_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_PIRT_CAPT_01_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_PIRT_CAPT_01_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_PIRT_CAPT_02_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_PIRT_CAPT_02_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_PIRT_CAPT_03_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_PIRT_CAPT_03_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_PIRT_CAPT_04_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_PIRT_CAPT_04_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_PIRT_CAPT_05_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_PIRT_CAPT_05_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_PIRT_CAPT_06_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_PIRT_CAPT_06_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_PIRT_CAPT_07_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_PIRT_CAPT_07_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_PIRT_CAPT_08_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_PIRT_CAPT_08_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_PIRT_CAPT_09_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_PIRT_CAPT_09_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_PIRT_CAPT_10_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_PIRT_CAPT_10_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_SCFI_SOLD_01_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_SCFI_SOLD_01_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_SCFI_SOLD_02_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_SCFI_SOLD_02_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_SCFI_SOLD_03_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_SCFI_SOLD_03_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_SCFI_SOLD_04_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_SCFI_SOLD_04_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_SCFI_SOLD_05_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_SCFI_SOLD_05_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_SCFI_SOLD_06_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_SCFI_SOLD_06_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_SCFI_SOLD_07_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_SCFI_SOLD_07_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_SCFI_SOLD_08_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_SCFI_SOLD_08_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_SCFI_SOLD_09_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_SCFI_SOLD_09_04EBRR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/EBRL/SK_SCFI_SOLD_10_03EBRL_HU01
+    rightPath: Parts/EBRR/SK_SCFI_SOLD_10_04EBRR_HU01

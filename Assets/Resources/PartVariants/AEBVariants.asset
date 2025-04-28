@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 096c938d0fdcb7942bb403f4fa14b5b8, type: 3}
+  m_Name: AEBVariants
+  m_EditorClassIdentifier: 
+  partName: AEB
+  variants:
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_APOC_OUTL_01_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_APOC_OUTL_01_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_APOC_OUTL_02_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_APOC_OUTL_02_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_APOC_OUTL_03_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_APOC_OUTL_03_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_APOC_OUTL_04_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_APOC_OUTL_04_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_APOC_OUTL_05_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_APOC_OUTL_05_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_APOC_OUTL_06_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_APOC_OUTL_06_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_APOC_OUTL_07_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_APOC_OUTL_07_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_APOC_OUTL_08_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_APOC_OUTL_08_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_APOC_OUTL_09_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_APOC_OUTL_09_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_APOC_OUTL_10_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_APOC_OUTL_10_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_FANT_KNGT_01_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_FANT_KNGT_01_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_FANT_KNGT_02_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_FANT_KNGT_02_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_FANT_KNGT_03_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_FANT_KNGT_03_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_GOBL_FIGT_01_31AEBL_GO01
+    rightPath: Parts/AEBR/SK_GOBL_FIGT_01_32AEBR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_GOBL_FIGT_02_31AEBL_GO01
+    rightPath: Parts/AEBR/SK_GOBL_FIGT_02_32AEBR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_GOBL_FIGT_03_31AEBL_GO01
+    rightPath: Parts/AEBR/SK_GOBL_FIGT_03_32AEBR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_GOBL_FIGT_04_31AEBL_GO01
+    rightPath: Parts/AEBR/SK_GOBL_FIGT_04_32AEBR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_GOBL_FIGT_05_31AEBL_GO01
+    rightPath: Parts/AEBR/SK_GOBL_FIGT_05_32AEBR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_GOBL_FIGT_06_31AEBL_GO01
+    rightPath: Parts/AEBR/SK_GOBL_FIGT_06_32AEBR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_GOBL_FIGT_07_31AEBL_GO01
+    rightPath: Parts/AEBR/SK_GOBL_FIGT_07_32AEBR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_GOBL_FIGT_08_31AEBL_GO01
+    rightPath: Parts/AEBR/SK_GOBL_FIGT_08_32AEBR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_GOBL_FIGT_09_31AEBL_GO01
+    rightPath: Parts/AEBR/SK_GOBL_FIGT_09_32AEBR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_GOBL_FIGT_10_31AEBL_GO01
+    rightPath: Parts/AEBR/SK_GOBL_FIGT_10_32AEBR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_SCFI_SOLD_01_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_SCFI_SOLD_01_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_SCFI_SOLD_02_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_SCFI_SOLD_02_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_SCFI_SOLD_03_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_SCFI_SOLD_03_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_SCFI_SOLD_04_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_SCFI_SOLD_04_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_SCFI_SOLD_05_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_SCFI_SOLD_05_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_SCFI_SOLD_06_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_SCFI_SOLD_06_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_SCFI_SOLD_07_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_SCFI_SOLD_07_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_SCFI_SOLD_08_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_SCFI_SOLD_08_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_SCFI_SOLD_09_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_SCFI_SOLD_09_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_SCFI_SOLD_10_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_SCFI_SOLD_10_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_VIKG_WARR_01_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_VIKG_WARR_01_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_VIKG_WARR_02_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_VIKG_WARR_02_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_VIKG_WARR_03_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_VIKG_WARR_03_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_VIKG_WARR_04_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_VIKG_WARR_04_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_VIKG_WARR_05_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_VIKG_WARR_05_32AEBR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AEBL/SK_VIKG_WARR_06_31AEBL_HU01
+    rightPath: Parts/AEBR/SK_VIKG_WARR_06_32AEBR_HU01

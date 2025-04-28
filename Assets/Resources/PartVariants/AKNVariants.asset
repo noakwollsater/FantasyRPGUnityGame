@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 096c938d0fdcb7942bb403f4fa14b5b8, type: 3}
+  m_Name: AKNVariants
+  m_EditorClassIdentifier: 
+  partName: AKN
+  variants:
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_APOC_OUTL_01_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_APOC_OUTL_01_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_APOC_OUTL_02_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_APOC_OUTL_02_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_APOC_OUTL_03_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_APOC_OUTL_03_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_APOC_OUTL_04_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_APOC_OUTL_04_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_APOC_OUTL_05_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_APOC_OUTL_05_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_APOC_OUTL_06_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_APOC_OUTL_06_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_APOC_OUTL_07_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_APOC_OUTL_07_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_APOC_OUTL_08_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_APOC_OUTL_08_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_APOC_OUTL_09_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_APOC_OUTL_09_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_APOC_OUTL_10_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_APOC_OUTL_10_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_FANT_KNGT_01_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_FANT_KNGT_01_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_FANT_KNGT_02_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_FANT_KNGT_02_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_FANT_KNGT_03_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_FANT_KNGT_03_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_FANT_KNGT_04_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_FANT_KNGT_04_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_GOBL_FIGT_01_33AKNL_GO01
+    rightPath: Parts/AKNR/SK_GOBL_FIGT_01_34AKNR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_GOBL_FIGT_02_33AKNL_GO01
+    rightPath: Parts/AKNR/SK_GOBL_FIGT_02_34AKNR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_GOBL_FIGT_03_33AKNL_GO01
+    rightPath: Parts/AKNR/SK_GOBL_FIGT_03_34AKNR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_GOBL_FIGT_04_33AKNL_GO01
+    rightPath: Parts/AKNR/SK_GOBL_FIGT_04_34AKNR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_GOBL_FIGT_05_33AKNL_GO01
+    rightPath: Parts/AKNR/SK_GOBL_FIGT_05_34AKNR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_GOBL_FIGT_06_33AKNL_GO01
+    rightPath: Parts/AKNR/SK_GOBL_FIGT_06_34AKNR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_GOBL_FIGT_07_33AKNL_GO01
+    rightPath: Parts/AKNR/SK_GOBL_FIGT_07_34AKNR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_GOBL_FIGT_08_33AKNL_GO01
+    rightPath: Parts/AKNR/SK_GOBL_FIGT_08_34AKNR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_GOBL_FIGT_09_33AKNL_GO01
+    rightPath: Parts/AKNR/SK_GOBL_FIGT_09_34AKNR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_GOBL_FIGT_10_33AKNL_GO01
+    rightPath: Parts/AKNR/SK_GOBL_FIGT_10_34AKNR_GO01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_CIVL_01_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_CIVL_01_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_CIVL_02_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_CIVL_02_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_CIVL_03_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_CIVL_03_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_SOLD_01_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_SOLD_01_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_SOLD_02_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_SOLD_02_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_SOLD_03_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_SOLD_03_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_SOLD_04_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_SOLD_04_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_SOLD_05_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_SOLD_05_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_SOLD_06_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_SOLD_06_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_SOLD_07_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_SOLD_07_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_SOLD_08_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_SOLD_08_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_SOLD_09_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_SOLD_09_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_SCFI_SOLD_10_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_SCFI_SOLD_10_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_VIKG_WARR_01_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_VIKG_WARR_01_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_VIKG_WARR_02_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_VIKG_WARR_02_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_VIKG_WARR_03_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_VIKG_WARR_03_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_VIKG_WARR_04_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_VIKG_WARR_04_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_VIKG_WARR_05_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_VIKG_WARR_05_34AKNR_HU01
+  - isDualPath: 1
+    singlePath: 
+    leftPath: Parts/AKNL/SK_VIKG_WARR_06_33AKNL_HU01
+    rightPath: Parts/AKNR/SK_VIKG_WARR_06_34AKNR_HU01
