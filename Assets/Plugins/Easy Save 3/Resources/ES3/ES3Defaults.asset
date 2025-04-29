@@ -48,6 +48,7 @@ MonoBehaviour:
     - Sirenix.OdinInspector.Modules.Unity.Addressables
     - SqlCipher4Unity3D
     - UnityUIExtensions
+    - VeugelJame.BuildUploader
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

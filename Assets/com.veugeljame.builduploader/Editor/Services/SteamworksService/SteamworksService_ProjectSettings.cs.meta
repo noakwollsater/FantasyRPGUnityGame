@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 4deded6988595f948af249c2aa9496d1
+timeCreated: 1740304732
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Editor/Services/SteamworksService/SteamworksService_ProjectSettings.cs
+  uploadId: 744804

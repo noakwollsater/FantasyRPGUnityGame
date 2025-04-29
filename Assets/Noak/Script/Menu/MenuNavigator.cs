@@ -26,6 +26,11 @@ namespace Unity.FantasyKingdom
         [SerializeField] private GameObject LicensAgreementMenu;
         [SerializeField] private GameObject QuitGameMenu;
 
+        [SerializeField] private Button btn1;
+        [SerializeField] private Button btn2;
+        [SerializeField] private Button btn3;
+        [SerializeField] private Button btn4;
+
         [Header("Loading Screen")]
         [SerializeField] private Slider loadingSlider;
 
@@ -179,11 +184,19 @@ namespace Unity.FantasyKingdom
         public void GoToAreYouSureYouWantToQuit()
         {
             ShowMenu(QuitGameMenu);
+            btn1.interactable = false;
+            btn2.interactable = false;
+            btn3.interactable = false;
+            btn4.interactable = false;
         }
 
         public void CloseQuitPanel()
         {
             HideMenu(QuitGameMenu);
+            btn1.interactable = true;
+            btn2.interactable = true;
+            btn3.interactable = true;
+            btn4.interactable = true;
         }
 
         private void HideAllMenus()
@@ -200,6 +213,11 @@ namespace Unity.FantasyKingdom
             QuitGameMenu.SetActive(false);
         }
 
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
+
         void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
@@ -207,7 +225,7 @@ namespace Unity.FantasyKingdom
                 if (StartMenu.activeSelf)
                     OnContinueFromStart();
                 else if (QuitGameMenu.activeSelf)
-                    Application.Quit();
+                    QuitGame();
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))

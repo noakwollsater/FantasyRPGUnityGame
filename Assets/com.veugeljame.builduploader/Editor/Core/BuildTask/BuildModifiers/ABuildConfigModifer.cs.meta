@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 68d03d23f8224c24b9e43b7b53e07dc3
+timeCreated: 1741206762
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Editor/Core/BuildTask/BuildModifiers/ABuildConfigModifer.cs
+  uploadId: 744804

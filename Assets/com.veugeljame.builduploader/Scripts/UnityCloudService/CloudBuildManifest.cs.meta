@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f4a1bd6514f5b9e47a2c3d0421c3c3e4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Scripts/UnityCloudService/CloudBuildManifest.cs
+  uploadId: 744804

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7e0c45fe44103ee40b894cfba62863e0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Editor/Services/SteamworksService/SteamUploadDestination/SteamUploadDestination.cs
+  uploadId: 744804

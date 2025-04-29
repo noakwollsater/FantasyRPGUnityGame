@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: d2521ffffdcf9a143a7b1aba5943d17b
+timeCreated: 1740598242
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Editor/Core/Utils/SerializedPropertyExtensions.cs
+  uploadId: 744804

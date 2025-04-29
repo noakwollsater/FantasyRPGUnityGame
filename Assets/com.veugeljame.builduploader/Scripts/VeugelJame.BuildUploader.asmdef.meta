@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ba81606e068d6e94eb0cca7f31a000ee
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Scripts/VeugelJame.BuildUploader.asmdef
+  uploadId: 744804

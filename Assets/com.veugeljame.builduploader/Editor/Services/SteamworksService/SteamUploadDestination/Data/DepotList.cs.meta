@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 18555693de88bb244b26f617d1ad8971
+timeCreated: 1740295096
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Editor/Services/SteamworksService/SteamUploadDestination/Data/DepotList.cs
+  uploadId: 744804

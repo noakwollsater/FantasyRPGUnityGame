@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ad23bbd061628014c97e4b36cc7e15ae
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Editor/Services/SteamworksService/Data/Steam/SteamSDK.cs
+  uploadId: 744804

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d862479b0526b5c4da7cdc4449020dd1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Editor/Core/BuildTask/Steps/BuildTaskStep_GetSources.cs
+  uploadId: 744804

@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: ddac26c6aa474c240908df1d0acdfe34
+timeCreated: 1740295089
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Editor/Services/SteamworksService/SteamUploadDestination/Data/IVdfMap.cs
+  uploadId: 744804

@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: a098c30da8431404fad2ea24d8957767
+timeCreated: 1741471941
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Editor/Core/Utils/EncodedValue.cs
+  uploadId: 744804

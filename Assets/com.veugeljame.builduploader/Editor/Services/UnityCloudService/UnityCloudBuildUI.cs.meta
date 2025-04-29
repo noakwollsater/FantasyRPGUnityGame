@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 30f74a6c42a70df4ea7722e241d6f43b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Editor/Services/UnityCloudService/UnityCloudBuildUI.cs
+  uploadId: 744804

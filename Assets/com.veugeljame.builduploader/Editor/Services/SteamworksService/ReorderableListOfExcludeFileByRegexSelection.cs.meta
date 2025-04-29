@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: a4d5f0d9ee15ad845a04b738259e719a
+timeCreated: 1741207626
+AssetOrigin:
+  serializedVersion: 1
+  productId: 306907
+  packageName: Build Uploader
+  packageVersion: 2.1.1
+  assetPath: Assets/com.veugeljame.builduploader/Editor/Services/SteamworksService/ReorderableListOfExcludeFileByRegexSelection.cs
+  uploadId: 744804
