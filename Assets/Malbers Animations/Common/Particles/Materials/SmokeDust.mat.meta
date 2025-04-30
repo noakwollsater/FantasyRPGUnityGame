@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 46319f30e522c52409d93be59bdff8d7
+timeCreated: 1472824610
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 148877
+  packageName: Animal Controller (Malbers Character Controller)
+  packageVersion: 1.4.9
+  assetPath: Assets/Malbers Animations/Common/Particles/Materials/SmokeDust.mat
+  uploadId: 752018

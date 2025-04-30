@@ -1,9 +1,0 @@
-1. Get new FBX files from Sidekick
-
-2. Assign materials to all new parts – Use MultiFolderMaterialAssigner to apply the correct materials to all imported models.
-
-3. Organize parts into the correct folders – Use OrganizeMeshes to extract skinned mesh parts from the FBX files and save them as prefabs in the correct Parts category.
-
-4. If new parts have appeared – Use PartVariantsUpdater to update existing PartVariants without creating new ones.
-
-5. If a new category/part is needed – Use FullAutoPartVariantsCreator to create new PartVariants for new parts (with support for single or dual path).
