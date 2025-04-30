@@ -1,0 +1,40 @@
+{
+    "Configs": [
+        {
+            "ID": 1,
+            "Name": "Vinterkyla: Shattered Realms Content",
+            "App": {
+                "appid": 3711040,
+                "desc": "",
+                "buildoutput": "..\\output\\",
+                "contentroot": "..\\content\\",
+                "setlive": "Test",
+                "preview": false,
+                "local": "",
+                "depots": {}
+            },
+            "Depots": [
+                {
+                    "ID": 1,
+                    "Name": "All",
+                    "Depot": {
+                        "DepotID": 3709931,
+                        "FileMapping": {
+                            "LocalPath": "",
+                            "DepotPath": "",
+                            "recursive": false
+                        },
+                        "FileExclusion": ""
+                    }
+                }
+            ],
+            "ConfigBranches": [
+                {
+                    "id": 1,
+                    "name": "Test"
+                }
+            ],
+            "Branches": []
+        }
+    ]
+}
