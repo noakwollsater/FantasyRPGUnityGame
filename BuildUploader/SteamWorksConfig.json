@@ -8,7 +8,7 @@
                 "desc": "",
                 "buildoutput": "..\\output\\",
                 "contentroot": "..\\content\\",
-                "setlive": "",
+                "setlive": "Test",
                 "preview": false,
                 "local": "",
                 "depots": {}
