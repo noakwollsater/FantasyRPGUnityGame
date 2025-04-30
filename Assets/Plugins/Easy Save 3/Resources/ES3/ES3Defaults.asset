@@ -38,6 +38,10 @@ MonoBehaviour:
     - Autodesk.Fbx
     - Autodesk.Fbx.BuildTestAssets
     - Kamgam.MeshExtractor
+    - MalbersAnimations
+    - MalbersAnimations.Cinemachine
+    - MalbersAnimations.Editor
+    - MalbersAnimations.InputSystem
     - Opsive.Shared.Runtime
     - Opsive.UltimateCharacterController
     - Opsive.UltimateCharacterController.Demo

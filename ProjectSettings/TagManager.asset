@@ -4,6 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Stair
+  - WallRun
+  - Climb
+  - Fly
   - CinemachineTarget
   - Targets
   - Camera
@@ -12,6 +16,8 @@ TagManager:
   - CameraLevel2
   - Volumes
   - FreeCamVolume
+  - Animal
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -28,7 +34,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - BodyPart
   - 
   - 
   - 
