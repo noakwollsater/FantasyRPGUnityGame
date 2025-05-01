@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cf1dab834d4ec34195b920ea7bbf9ec, type: 3}
-  m_Name: HDRPAsset_High
+  m_Name: New HDRenderPipelineAsset
   m_EditorClassIdentifier: 
   m_RenderPipelineSettings:
     supportShadowMask: 1
@@ -32,7 +32,7 @@ MonoBehaviour:
     supportLightLayers: 0
     renderingLayerMaskBuffer: 0
     supportWater: 1
-    waterSimulationResolution: 256
+    waterSimulationResolution: 128
     supportWaterExclusion: 1
     supportWaterDecals: 1
     waterDecalAtlasSize: 1024
@@ -50,7 +50,7 @@ MonoBehaviour:
     supportTransparentDepthPostpass: 1
     colorBufferFormat: 48
     supportCustomPass: 1
-    customBufferFormat: 48
+    customBufferFormat: 8
     supportedLitShaderMode: 3
     planarReflectionResolution:
       m_Values: 000100000004000000080000
@@ -100,11 +100,11 @@ MonoBehaviour:
       reflectionProbeTexLastValidCubeMip: 3
       reflectionProbeTexLastValidPlanarMip: 0
       reflectionProbeDecreaseResToFit: 1
-      skyReflectionSize: 4096
+      skyReflectionSize: 256
       skyLightingOverrideLayerMask:
         serializedVersion: 2
         m_Bits: 0
-      supportFabricConvolution: 1
+      supportFabricConvolution: 0
       maxDirectionalLightsOnScreen: 16
       maxPunctualLightsOnScreen: 512
       maxAreaLightsOnScreen: 64
@@ -115,11 +115,11 @@ MonoBehaviour:
       maxLocalVolumetricFogSize: 0
       maxLocalVolumetricFogOnScreen: 256
     hdShadowInitParams:
-      maxShadowRequests: 308
+      maxShadowRequests: 128
       directionalShadowsDepthBits: 32
-      punctualShadowFilteringQuality: 2
-      directionalShadowFilteringQuality: 2
-      areaShadowFilteringQuality: 1
+      punctualShadowFilteringQuality: 1
+      directionalShadowFilteringQuality: 1
+      areaShadowFilteringQuality: 0
       punctualLightShadowAtlas:
         shadowAtlasResolution: 4096
         shadowAtlasDepthBits: 32
@@ -130,7 +130,7 @@ MonoBehaviour:
         useDynamicViewportRescale: 1
       cachedPunctualLightShadowAtlas: 2048
       cachedAreaLightShadowAtlas: 1024
-      allowDirectionalMixedCachedShadows: 1
+      allowDirectionalMixedCachedShadows: 0
       shadowResolutionDirectional:
         m_Values: 00010000000200000004000000080000
         m_SchemaId:
@@ -163,7 +163,7 @@ MonoBehaviour:
       lutFormat: 48
       bufferFormat: 74
     dynamicResolutionSettings:
-      enabled: 1
+      enabled: 0
       useMipBias: 0
       advancedUpscalersByPriority: 02
       DLSSPerfQualitySetting: 0
@@ -235,9 +235,9 @@ MonoBehaviour:
         m_Id: With3Levels
     lodBias:
       m_Values:
-      - 2
-      - 2
-      - 2
+      - 1
+      - 1
+      - 1
       m_SchemaId:
         m_Id: With3Levels
     lightingQualitySettings:
@@ -312,7 +312,7 @@ MonoBehaviour:
       - 0.666
       - 0.5
     gpuResidentDrawerSettings:
-      mode: 1
+      mode: 0
       smallMeshScreenPercentage: 4.6
       enableOcclusionCullingInCameras: 0
       useDepthPrepassForOccluders: 1
@@ -543,4 +543,4 @@ MonoBehaviour:
   m_ObsoleteShaderVariantLogLevel: 0
   m_ObsoleteLensAttenuation: 0
   m_ObsoleteDiffusionProfileSettingsList: []
-  m_PrefilterUseLegacyLightmaps: 1
+  m_PrefilterUseLegacyLightmaps: 0
