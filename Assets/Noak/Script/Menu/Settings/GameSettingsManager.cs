@@ -6,9 +6,6 @@ namespace Unity.FantasyKingdom
 {
     public class GameSettingsManager : MonoBehaviour
     {
-        [Header("Brightness")]
-        [SerializeField] private Slider brightnessSlider;
-
         [Header("Misc")]
         [SerializeField] private Button[] DynamicRangeBtns;
         [SerializeField] private Button[] MusicFrequencyBtns;
@@ -38,7 +35,6 @@ namespace Unity.FantasyKingdom
         [SerializeField] private TMP_Text GraphicsQuality;
 
         [Header("Graphics Settings")]
-        [SerializeField] private Slider Brightnessslider;
         [SerializeField] private Slider ContrastSlider;
         [SerializeField] private Button[] AmbientOcclusion;
         [SerializeField] private TMP_Text AmbientOcclusionText;
@@ -79,19 +75,6 @@ namespace Unity.FantasyKingdom
 
         void OnEnable()
         {
-            // Brightness
-            brightnessSlider.onValueChanged.AddListener(value =>
-            {
-                gameSettings.screenBrightness = value;
-                SaveSettings();
-            });
-
-            Brightnessslider.onValueChanged.AddListener(value =>
-            {
-                gameSettings.screenBrightness = value;
-                SaveSettings();
-            });
-
             ContrastSlider.onValueChanged.AddListener(value =>
             {
                 gameSettings.contrast = value;
@@ -320,8 +303,6 @@ namespace Unity.FantasyKingdom
 
         void ApplySettingsToUI()
         {
-            brightnessSlider.value = gameSettings.screenBrightness;
-
             DynamicRange.text = gameSettings.dynamicRange;
             MusicFrequency.text = gameSettings.musicFrequency;
 
@@ -340,7 +321,6 @@ namespace Unity.FantasyKingdom
 
             GraphicsQuality.text = gameSettings.graphicsQuality;
 
-            Brightnessslider.value = gameSettings.screenBrightness;
             ContrastSlider.value = gameSettings.contrast;
             AmbientOcclusionText.text = gameSettings.ambientOcclusion;
             TextureQualityText.text = gameSettings.textureQuality;
