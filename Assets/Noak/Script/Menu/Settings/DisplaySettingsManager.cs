@@ -2,7 +2,8 @@
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.HighDefinition;
+using Synty.Interface.FantasyMenus.Samples;
+using ColorAdjustments = UnityEngine.Rendering.HighDefinition.ColorAdjustments;
 
 namespace Unity.FantasyKingdom
 {
@@ -10,6 +11,12 @@ namespace Unity.FantasyKingdom
     {
         private const string settingsKey = "GameSettings";
         private GameSettingsData gameSettings;
+
+        [Header("Settings Array")]
+        [SerializeField] private SampleSettingsArray graphicModeSelector;
+        [SerializeField] private SampleSettingsArray displayModeSelector;
+        [SerializeField] private SampleSettingsArray resolutionSelector;
+        [SerializeField] private SampleSettingsArray refreshRateSelector;
 
         [Header("Graphic Mode Settings")]
         [SerializeField] private Button graphicModeLeftButton;
@@ -38,7 +45,7 @@ namespace Unity.FantasyKingdom
 
         [SerializeField] private Toggle vSyncToggle;
 
-        private Exposure exposure;
+        private ColorAdjustments colorAdjustments;
 
         private readonly string[] graphicModes = { "Low", "Medium", "High" };
         private readonly string[] displayModes = { "Fullscreen", "Windowed", "Borderless" };
@@ -74,30 +81,43 @@ namespace Unity.FantasyKingdom
             currentRefreshRateIndex = System.Array.IndexOf(refreshRates, gameSettings.refreshRate);
             if (currentRefreshRateIndex < 0) currentRefreshRateIndex = 0;
 
-            if (postProcessingVolume != null && postProcessingVolume.profile.TryGet(out exposure))
-            {
-                exposure.fixedExposure.value = gameSettings.screenBrightness;
-
-                if (brightnessSlider != null)
-                {
-                    brightnessSlider.value = gameSettings.screenBrightness;
-                    brightnessSlider.onValueChanged.AddListener(SetBrightness);
-                }
-
-                if (initialBrightnessSlider != null)
-                {
-                    initialBrightnessSlider.value = gameSettings.screenBrightness;
-                    initialBrightnessSlider.onValueChanged.AddListener(SetBrightness);
-                }
-            }
-
             SetupUI();
             ApplyDisplaySettings();
             ApplyGraphicSettings();
         }
 
+        private void SetUIValues()
+        {
+            if (refreshRateSelector != null)
+            {
+                refreshRateSelector.options = refreshRates;
+                refreshRateSelector.defaultOption = currentRefreshRateIndex;
+                refreshRateSelector.SetDefaultOption();
+            }
+            if (graphicModeSelector != null)
+            {
+                graphicModeSelector.options = graphicModes;
+                graphicModeSelector.defaultOption = currentGraphicModeIndex;
+                graphicModeSelector.SetDefaultOption();
+            }
+            if (displayModeSelector != null)
+            {
+                displayModeSelector.options = displayModes;
+                displayModeSelector.defaultOption = currentDisplayModeIndex;
+                displayModeSelector.SetDefaultOption();
+            }
+            if (resolutionSelector != null)
+            {
+                resolutionSelector.options = resolutions;
+                resolutionSelector.defaultOption = currentResolutionIndex;
+                resolutionSelector.SetDefaultOption();
+            }
+        }
+
         private void SetupUI()
         {
+            SetUIValues();
+
             graphicModeLeftButton.onClick.AddListener(() =>
             {
                 currentGraphicModeIndex = (currentGraphicModeIndex - 1 + graphicModes.Length) % graphicModes.Length;
@@ -145,6 +165,23 @@ namespace Unity.FantasyKingdom
                 currentRefreshRateIndex = (currentRefreshRateIndex + 1) % refreshRates.Length;
                 UpdateRefreshRate();
             });
+
+            if (postProcessingVolume != null && postProcessingVolume.profile != null)
+            {
+                if (postProcessingVolume.profile.TryGet<ColorAdjustments>(out var ca))
+                {
+                    colorAdjustments = ca;
+                    // Optionally set the slider's value to match saved brightness
+                    float normalized = Mathf.InverseLerp(-5f, 5f, gameSettings.screenBrightness);
+                    brightnessSlider.value = normalized * 100f;
+                    colorAdjustments.postExposure.value = gameSettings.screenBrightness;
+                }
+                else
+                {
+                    Debug.LogWarning("ColorAdjustments not found in Post Processing Volume profile.");
+                }
+            }
+
 
             if (vSyncToggle != null)
             {
@@ -260,15 +297,47 @@ namespace Unity.FantasyKingdom
             QualitySettings.vSyncCount = gameSettings.vsync ? 1 : 0;
             Debug.Log($"[ApplyVSync] VSync: {(gameSettings.vsync ? "On" : "Off")}");
         }
-
-        private void SetBrightness(float value)
+        public void SetBrightness(float uiValue)
         {
-            if (exposure != null)
+            // Step 1: Validate the Volume
+            if (postProcessingVolume == null)
             {
-                exposure.fixedExposure.value = value;
-                gameSettings.screenBrightness = value;
-                ES3.Save(settingsKey, gameSettings);
+                Debug.LogWarning("PostProcessingVolume is not assigned.");
+                return;
             }
+
+            // Step 2: Validate the Volume Profile
+            if (postProcessingVolume.profile == null)
+            {
+                Debug.LogWarning("PostProcessingVolume.profile is null.");
+                return;
+            }
+
+            // Step 3: Try to get ColorAdjustments if not cached
+            if (colorAdjustments == null)
+            {
+                if (!postProcessingVolume.profile.TryGet(out colorAdjustments))
+                {
+                    Debug.LogWarning("ColorAdjustments not found in the Volume Profile.");
+                    return;
+                }
+            }
+
+            // Step 4: Safely set exposure
+            float mappedValue = Mathf.Lerp(-5f, 5f, uiValue / 100f);
+            colorAdjustments.postExposure.value = mappedValue;
+            gameSettings.screenBrightness = mappedValue;
+            ES3.Save(settingsKey, gameSettings);
+
+            OnBrightnessSliderChanged(uiValue); // <-- detta uppdaterar direkt
+
+            Debug.Log($"[Brightness] UI Value: {uiValue} → Exposure: {mappedValue}");
         }
+        // In DisplaySettingsManager.cs
+        public void OnBrightnessSliderChanged(float uiValue)
+        {
+            DisplayManager.Instance?.SetBrightness(uiValue); // <-- detta uppdaterar direkt
+        }
+
     }
 }
