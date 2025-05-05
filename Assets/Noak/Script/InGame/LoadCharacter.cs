@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Opsive.UltimateCharacterController.Camera;
 using Mightland.Scripts.SK;
 using FIMSpace.FTail;
 using Synty.SidekickCharacters.API;
@@ -9,7 +8,7 @@ using Synty.SidekickCharacters.Database;
 using Synty.SidekickCharacters.Enums;
 using System.Linq;
 using System.Collections;
-using Opsive.UltimateCharacterController.Traits;
+using Opsive.UltimateCharacterController;
 
 namespace Unity.FantasyKingdom
 {
@@ -29,13 +28,14 @@ namespace Unity.FantasyKingdom
         private const string encryptionPassword = "K00a03j23s50a25";
 
         private DictionaryLibrary _dictionaryLibrary;
-        [SerializeField] private CameraController _cameraController;
         private CharacterSaveData data;
         [SerializeField] private LoadCharacterData _loadCharacterData;
+        [SerializeField] private SimulationManager _simulationManager;
         private GameObject character;
 
         [SerializeField] private GameObject characterPrefab;
-        private Transform root;
+        public Transform player;
+        public Transform root;
 
         private readonly string outputModelName = "Player";
         private GameSaveData _cachedGameSaveData; // <-- ny variabel
@@ -72,10 +72,11 @@ namespace Unity.FantasyKingdom
             {
                 Debug.Log("📦 Instantiating character prefab...");
                 character = Instantiate(characterPrefab, transform);
+                _simulationManager.enabled = false;
                 character.name = outputModelName;
-                _cameraController.Character = character;
-                Transform player = character.transform.Find("Player");
-                root = player.transform.Find("root");
+                player = character.transform.Find("Rotator");
+                Transform offset = player.transform.Find("Offset");
+                root = offset.transform.Find("root");
                 if (root != null)
                 {
                     AttachTailAnimators(root);
