@@ -1,34 +1,22 @@
 ﻿using UnityEngine;
-using Opsive.UltimateCharacterController.Character;
 using Opsive.UltimateCharacterController.Traits;
-using Opsive.UltimateCharacterController.Character.Abilities;
+using MalbersAnimations;
 
 namespace Unity.FantasyKingdom
 {
     public class StaminaManager : MonoBehaviour
     {
-        private UltimateCharacterLocomotion _locomotion;
         private AttributeManager _attributeManager;
         private Attribute _staminaAttribute;
-        private SpeedChange _speedChangeAbility;
-        private Jump _jumpAbility;
-        private float _lastJumpTime;
-        private const float JumpCooldown = 1f; // 2 seconds cooldown
-        private const float MinStaminaToJump = 2f; // Minimum stamina needed to jump
-
         private Attribute _hungerAttribute;
         private Attribute _thirstAttribute;
+        private Stats _malbersStats;
+        private Stat _malbersStamina;
 
         private void Awake()
         {
-            _locomotion = GetComponent<UltimateCharacterLocomotion>();
             _attributeManager = GetComponent<AttributeManager>();
-
-            if (_locomotion != null)
-            {
-                _speedChangeAbility = _locomotion.GetAbility<SpeedChange>();
-                _jumpAbility = _locomotion.GetAbility<Jump>();
-            }
+            _malbersStats = GetComponent<Stats>();
 
             if (_attributeManager != null)
             {
@@ -36,16 +24,26 @@ namespace Unity.FantasyKingdom
                 _hungerAttribute = _attributeManager.GetAttribute("Hunger");
                 _thirstAttribute = _attributeManager.GetAttribute("Thirst");
             }
+
+            if (_malbersStats != null)
+            {
+                _malbersStamina = _malbersStats.stats.Find(x => x.Name == "Stamina");
+                if (_staminaAttribute != null && _malbersStamina != null)
+                {
+                    _malbersStamina.Value = _staminaAttribute.Value;
+                    _malbersStamina.MaxValue = _staminaAttribute.MaxValue;
+                }
+            }
         }
 
         private void Update()
         {
-            if (_staminaAttribute == null || _speedChangeAbility == null) return;
+            if (_staminaAttribute == null || _malbersStamina == null) return;
 
             HandleRunning();
-            HandleJumping();
-            HandleSpeedRecovery();
-            HandlingJumpingRecovery();
+
+            // Synka Malbers stamina efter eventuell förändring
+            SyncStaminaToMalbers();
         }
 
         private void HandleRunning()
@@ -56,37 +54,7 @@ namespace Unity.FantasyKingdom
             if (isMoving && isRunning)
             {
                 DrainStamina(10);
-                HandleHungerAndThirst(); // Drain hunger and thirst when running
-
-                if (_staminaAttribute.Value <= 2)
-                {
-                    _speedChangeAbility.MaxSpeedChangeValue = 1f; // Slow down when out of stamina
-                }
-            }
-        }
-
-        private void HandleJumping()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (Time.time - _lastJumpTime >= JumpCooldown) // Check cooldown
-                {
-                    if (_staminaAttribute.Value >= MinStaminaToJump)
-                    {
-                        _jumpAbility.StartAbility(); // Actually jump
-                        HandleHungerAndThirst(); // Drain hunger and thirst when jumping
-                        DrainStaminaInstant(10); // Immediately drain stamina
-                        _lastJumpTime = Time.time; // Reset cooldown timer
-                    }
-                    else
-                    {
-                        _jumpAbility.Force = 0.05f; 
-                    }
-                }
-                else
-                {
-                    Debug.Log("Jump is on cooldown!");
-                }
+                HandleHungerAndThirst();
             }
         }
 
@@ -94,60 +62,36 @@ namespace Unity.FantasyKingdom
         {
             if (_hungerAttribute != null && _thirstAttribute != null)
             {
-                DrainHunger();
-                DrainThirst();
+                _hungerAttribute.Value = Mathf.Max(0, _hungerAttribute.Value - 0.5f * Time.deltaTime);
+                _thirstAttribute.Value = Mathf.Max(0, _thirstAttribute.Value - 0.5f * Time.deltaTime);
             }
         }
 
-        private void DrainHunger()
+        private void DrainStamina(float ratePerSecond)
         {
-            if (_hungerAttribute.Value > 0)
-            {
-                _hungerAttribute.Value -= 0.5f * Time.deltaTime;
-            }
+            float drainAmount = ratePerSecond * Time.deltaTime;
+            _staminaAttribute.Value = Mathf.Max(0, _staminaAttribute.Value - drainAmount);
         }
 
-        private void DrainThirst()
+        private void SyncStaminaToMalbers()
         {
-            if (_thirstAttribute.Value > 0)
+            // Enkelsynkning: Opsive styr, Malbers följer
+            if (_staminaAttribute != null && _malbersStamina != null)
             {
-                _thirstAttribute.Value -= 0.5f * Time.deltaTime;
+                _malbersStamina.Value = _staminaAttribute.Value;
             }
         }
 
-        private void HandleSpeedRecovery()
+        // ➕ Vill du göra tvåvägssynk (ex. AI påverkar stamina) så kan du:
+        private void SyncStaminaBidirectional()
         {
-            if (_staminaAttribute.Value > 2)
-            {
-                _speedChangeAbility.MaxSpeedChangeValue = 0.3f * _locomotion.MotorAcceleration.magnitude + 2f; // Restore running speed
-            }
-        }
+            float opsive = _staminaAttribute.Value;
+            float malbers = _malbersStamina.Value;
 
-        private void HandlingJumpingRecovery()
-        {
-            if (_staminaAttribute.Value > 2)
-            {
-                _jumpAbility.Force = 0.2f; // Restore jump height
-            }
-        }
+            float average = (opsive + malbers) / 2f;
 
-        private void DrainStamina(int value)
-        {
-            _staminaAttribute.Value -= value * Time.deltaTime;
-            if (_staminaAttribute.Value < 0)
-            {
-                _staminaAttribute.Value = 0;
-            }
+            _staminaAttribute.Value = average;
+            _malbersStamina.Value = average;
         }
-
-        private void DrainStaminaInstant(int value)
-        {
-            _staminaAttribute.Value -= value;
-            if (_staminaAttribute.Value < 0)
-            {
-                _staminaAttribute.Value = 0;
-            }
-        }
-
     }
 }

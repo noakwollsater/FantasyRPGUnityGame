@@ -42,6 +42,7 @@ Material:
     - _Opacity1: -0.1
     - _Opacity2: 1.49
     - _Power: 1.05
+    - _QueueControl: 1
     - _RenderQueueType: 1
     - _Rough: -0.36
     - _StencilRefDepth: 8
