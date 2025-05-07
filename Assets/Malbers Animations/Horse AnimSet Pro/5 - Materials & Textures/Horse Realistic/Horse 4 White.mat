@@ -83,6 +83,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO: 1
+    - _QueueControl: 1
     m_Colors:
     - _Tint: {r: 0.77254903, g: 0.77254903, b: 0.77254903, a: 1}
   m_BuildTextureStacks: []

@@ -17,9 +17,9 @@ PrefabInstance:
       value: CM Third Person Main (Mobile)
       objectReference: {fileID: 0}
     - target: {fileID: 4119520939028466837, guid: 720829b02a1ccb84a8307ef4b36695d3, type: 3}
-      propertyPath: cameraSide
-      value: 0.5
-      objectReference: {fileID: 0}
+      propertyPath: upVector.Variable
+      value: 
+      objectReference: {fileID: 11400000, guid: e759cb94eee3fcd4bb2f749b1dbda0a8, type: 2}
     - target: {fileID: 4119520939028466837, guid: 720829b02a1ccb84a8307ef4b36695d3, type: 3}
       propertyPath: upVector.UseConstant
       value: 0
@@ -35,10 +35,6 @@ PrefabInstance:
     - target: {fileID: 4119520939028466837, guid: 720829b02a1ccb84a8307ef4b36695d3, type: 3}
       propertyPath: OnActiveCamera.m_PersistentCalls.m_Calls.Array.size
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4119520939028466837, guid: 720829b02a1ccb84a8307ef4b36695d3, type: 3}
-      propertyPath: OnActiveCamera.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4119520939028466838, guid: 720829b02a1ccb84a8307ef4b36695d3, type: 3}
       propertyPath: m_RootOrder
@@ -84,15 +80,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7355414786248832003, guid: 720829b02a1ccb84a8307ef4b36695d3, type: 3}
-      propertyPath: OnZoomValue.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1530111104, guid: 720829b02a1ccb84a8307ef4b36695d3, type: 3}
-    - {fileID: 8695976954058303972, guid: 720829b02a1ccb84a8307ef4b36695d3, type: 3}
     - {fileID: 5133752284967792349, guid: 720829b02a1ccb84a8307ef4b36695d3, type: 3}
-    - {fileID: 5693856051126509458, guid: 720829b02a1ccb84a8307ef4b36695d3, type: 3}
+    - {fileID: 8695976954058303972, guid: 720829b02a1ccb84a8307ef4b36695d3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

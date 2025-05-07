@@ -191,7 +191,31 @@ MonoBehaviour:
       - rid: 6526373561830473968
       - rid: 6526373561830473969
     m_RuntimeSettings:
-      m_List: []
+      m_List:
+      - rid: 7007364193008222300
+      - rid: 6526373561830473938
+      - rid: 6526373561830473940
+      - rid: 6526373561830473942
+      - rid: 6526373561830473943
+      - rid: 6526373561830473945
+      - rid: 6526373561830473946
+      - rid: 6526373561830473947
+      - rid: 6526373561830473949
+      - rid: 6526373561830473950
+      - rid: 6526373561830473951
+      - rid: 6526373561830473952
+      - rid: 6526373561830473953
+      - rid: 6526373561830473955
+      - rid: 7007364193008222306
+      - rid: 6526373561830473957
+      - rid: 45326953588195346
+      - rid: 6526373561830473961
+      - rid: 6526373561830473962
+      - rid: 6526373561830473965
+      - rid: 45326953588195349
+      - rid: 6526373561830473967
+      - rid: 6526373561830473968
+      - rid: 6526373561830473969
   renderingLayerNames:
   - Default
   lightLayerName0: 
@@ -754,8 +778,8 @@ MonoBehaviour:
       data:
         m_Version: 0
         m_ExportShaderVariants: 1
-        m_ShaderVariantLogLevel: 0
-        m_StripRuntimeDebugShaders: 1
+        m_ShaderVariantLogLevel: 2
+        m_StripRuntimeDebugShaders: 0
     - rid: 6526373561830473969
       type: {class: STP/RuntimeResources, ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.Core.Runtime}
       data:

@@ -1,4 +1,5 @@
-using Opsive.UltimateCharacterController.Camera;
+using MalbersAnimations;
+using MalbersAnimations.Scriptables;
 using UnityEngine;
 
 namespace Unity.FantasyKingdom
@@ -6,7 +7,7 @@ namespace Unity.FantasyKingdom
     public class WeaponWheel : MonoBehaviour
     {
         [SerializeField] private GameObject weaponWheelPanel;
-        [SerializeField] private CameraControllerHandler cameraController;
+        [SerializeField] private ThirdPersonFollowTarget camera;
 
         private void Start()
         {
@@ -20,7 +21,7 @@ namespace Unity.FantasyKingdom
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Q))
+            if (Input.GetKey(KeyCode.Tab))
             {
                 ShowWeaponWheel();
             }
@@ -34,7 +35,8 @@ namespace Unity.FantasyKingdom
         {
             if (weaponWheelPanel != null && !weaponWheelPanel.activeSelf)
             {
-                cameraController.m_BlockLookInput = true;
+                camera.YMultiplier = 0;
+                camera.XMultiplier = 0;
                 weaponWheelPanel.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -45,7 +47,8 @@ namespace Unity.FantasyKingdom
         {
             if (weaponWheelPanel != null && weaponWheelPanel.activeSelf)
             {
-                cameraController.m_BlockLookInput = false;
+                camera.YMultiplier = 1;
+                camera.XMultiplier = 1;
                 weaponWheelPanel.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;

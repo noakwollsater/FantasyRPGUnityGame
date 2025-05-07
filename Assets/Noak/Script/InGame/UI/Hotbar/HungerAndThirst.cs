@@ -8,7 +8,7 @@ public class HungerAndThirst : MonoBehaviour
     [SerializeField] private float hungerDrainPerSecond = 0.1f;
     [SerializeField] private float thirstDrainPerSecond = 0.1f;
 
-    private AttributeManager _attributeManager;
+    public AttributeManager _attributeManager;
     private Attribute _hungerAttribute;
     private Attribute _thirstAttribute;
     private Attribute _healthAttribute;

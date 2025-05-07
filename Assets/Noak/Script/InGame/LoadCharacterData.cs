@@ -161,11 +161,11 @@ namespace Unity.FantasyKingdom
                 }
                 else if (skill == "Survival")
                 {
-                    _zoomFunction.EnableZoom();
+                    //_zoomFunction.EnableZoom();
                 }
                 else if (skill == "Investigation")
                 {
-                    _zoomFunction.EnableZoom();
+                    //_zoomFunction.EnableZoom();
                 }
                 else if (skill == "Arcana")
                 {
