@@ -121,6 +121,12 @@ namespace Unity.FantasyKingdom
             Cursor.visible = true;
         }
 
+        public void OnSaveBtn()
+        {
+            saveGameManager.SaveCharacterData();
+            saveGameManager.SaveGameData("Start of the Journey", "Heimdal", SaveType.Manual, "00:00", characterGameObject.transform);
+        }
+
         public void ResumeGame()
         {
             isMainMenuOpen = false;
