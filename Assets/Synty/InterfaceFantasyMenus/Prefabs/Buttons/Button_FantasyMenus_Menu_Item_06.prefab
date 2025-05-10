@@ -4928,7 +4928,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 754781438496899008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f85388e938d9e4599afc6d9441ed57, type: 3}
+  m_Script: {fileID: 11500000, guid: 444df69c6ea9d6346b9bf74b5c5b8451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 784777b43828ea740b305aa856c0b19d, type: 2}
@@ -10364,7 +10364,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8771728903529361965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f85388e938d9e4599afc6d9441ed57, type: 3}
+  m_Script: {fileID: 11500000, guid: 444df69c6ea9d6346b9bf74b5c5b8451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 784777b43828ea740b305aa856c0b19d, type: 2}
@@ -10431,7 +10431,7 @@ PrefabInstance:
       objectReference: {fileID: -4496944052092485891, guid: a22d951180719b04d8a44cece769d37a, type: 2}
     - target: {fileID: 1990594193549166204, guid: b69886e01265efe4b94fec2d3d7949a3, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4287156474
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 1990594193549166204, guid: b69886e01265efe4b94fec2d3d7949a3, type: 3}
       propertyPath: m_HorizontalAlignment

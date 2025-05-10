@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -104,7 +103,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +116,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -128,6 +127,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 1384280946776679044, guid: 2ef460c56885b414ca66d9fda9303248, type: 3}
@@ -216,7 +216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1833205063244138202, guid: 2ef460c56885b414ca66d9fda9303248, type: 3}
       propertyPath: m_Name
-      value: HUD_Event_BossBar01
+      value: HUD_Event_BossBar_01
       objectReference: {fileID: 0}
     - target: {fileID: 2971862343577199805, guid: 2ef460c56885b414ca66d9fda9303248, type: 3}
       propertyPath: m_AnchorMax.x
@@ -227,6 +227,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ef460c56885b414ca66d9fda9303248, type: 3}
 --- !u!224 &7771056 stripped
 RectTransform:
@@ -277,6 +280,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 175175724983342716, guid: 7c5a4f45b84b97b49afeba568d636962, type: 3}
@@ -377,7 +381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1833205063244138202, guid: 7c5a4f45b84b97b49afeba568d636962, type: 3}
       propertyPath: m_Name
-      value: HUD_HealthBar01
+      value: HUD_HealthBar_01
       objectReference: {fileID: 0}
     - target: {fileID: 5400690622487782688, guid: 7c5a4f45b84b97b49afeba568d636962, type: 3}
       propertyPath: m_AnchorMax.x
@@ -388,6 +392,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c5a4f45b84b97b49afeba568d636962, type: 3}
 --- !u!224 &257806223 stripped
 RectTransform:
@@ -428,6 +435,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 174817791557220841, guid: e2b0fa335a3700f4cb5d8ca140a7205c, type: 3}
@@ -488,7 +496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1814300462957936311, guid: e2b0fa335a3700f4cb5d8ca140a7205c, type: 3}
       propertyPath: m_Name
-      value: HUD_CurrentWeapon03
+      value: HUD_CurrentWeapon_03
       objectReference: {fileID: 0}
     - target: {fileID: 1814300462957936311, guid: e2b0fa335a3700f4cb5d8ca140a7205c, type: 3}
       propertyPath: m_IsActive
@@ -979,6 +987,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2b0fa335a3700f4cb5d8ca140a7205c, type: 3}
 --- !u!224 &395997466 stripped
 RectTransform:
@@ -990,6 +1001,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 223360230204297417, guid: 386ae86113233b646b1bc4c240e9e9d6, type: 3}
@@ -1002,7 +1014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2276080319036011048, guid: 386ae86113233b646b1bc4c240e9e9d6, type: 3}
       propertyPath: m_Name
-      value: HUD_HealthContainer01
+      value: HUD_HealthContainer_01
       objectReference: {fileID: 0}
     - target: {fileID: 5578146319888603630, guid: 386ae86113233b646b1bc4c240e9e9d6, type: 3}
       propertyPath: m_Pivot.x
@@ -1089,6 +1101,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386ae86113233b646b1bc4c240e9e9d6, type: 3}
 --- !u!224 &483094372 stripped
 RectTransform:
@@ -1100,11 +1115,12 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 1814300462957936311, guid: ac090bf58075771429dddaead52d78bd, type: 3}
       propertyPath: m_Name
-      value: HUD_CurrentWeapon01
+      value: HUD_CurrentWeapon_01
       objectReference: {fileID: 0}
     - target: {fileID: 2036867484838730770, guid: ac090bf58075771429dddaead52d78bd, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1219,6 +1235,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac090bf58075771429dddaead52d78bd, type: 3}
 --- !u!224 &501492287 stripped
 RectTransform:
@@ -1256,9 +1275,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -1292,12 +1319,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &576449589 stripped
 GameObject:
@@ -1333,6 +1361,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 6472290283983945, guid: b3613aacee732b74681b4c4ffa54ecce, type: 3}
@@ -1545,7 +1574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1715044154725505704, guid: b3613aacee732b74681b4c4ffa54ecce, type: 3}
       propertyPath: m_Name
-      value: HUD_CurrentWeapon05
+      value: HUD_CurrentWeapon_05
       objectReference: {fileID: 0}
     - target: {fileID: 1953740226692112449, guid: b3613aacee732b74681b4c4ffa54ecce, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2444,6 +2473,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3613aacee732b74681b4c4ffa54ecce, type: 3}
 --- !u!224 &595773825 stripped
 RectTransform:
@@ -2478,9 +2510,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1273158580}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -2570,6 +2602,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 936841241884767599, guid: 3c7cfe1d2d244c0418e78b010a654c8c, type: 3}
@@ -2894,7 +2927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6342398797031982160, guid: 3c7cfe1d2d244c0418e78b010a654c8c, type: 3}
       propertyPath: m_Name
-      value: HUD_HeartsBar03
+      value: HUD_HeartsBar_03
       objectReference: {fileID: 0}
     - target: {fileID: 6342398797031982161, guid: 3c7cfe1d2d244c0418e78b010a654c8c, type: 3}
       propertyPath: m_Pivot.x
@@ -3081,6 +3114,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c7cfe1d2d244c0418e78b010a654c8c, type: 3}
 --- !u!224 &684072980 stripped
 RectTransform:
@@ -3121,6 +3157,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 305738408788039891, guid: 51b069e69aeaebe41885091761ce0ab2, type: 3}
@@ -3417,7 +3454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7631856804230176141, guid: 51b069e69aeaebe41885091761ce0ab2, type: 3}
       propertyPath: m_Name
-      value: HUD_StatsList03
+      value: HUD_StatsList_03
       objectReference: {fileID: 0}
     - target: {fileID: 7635842663558793499, guid: 51b069e69aeaebe41885091761ce0ab2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3484,6 +3521,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51b069e69aeaebe41885091761ce0ab2, type: 3}
 --- !u!224 &744941799 stripped
 RectTransform:
@@ -3495,6 +3535,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 555490365682939712, guid: a000a987150f1a24dabc083833f66b34, type: 3}
@@ -3887,7 +3928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7631856804230176141, guid: a000a987150f1a24dabc083833f66b34, type: 3}
       propertyPath: m_Name
-      value: HUD_StatsList01
+      value: HUD_StatsList_01
       objectReference: {fileID: 0}
     - target: {fileID: 7977982718669991607, guid: a000a987150f1a24dabc083833f66b34, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3922,6 +3963,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a000a987150f1a24dabc083833f66b34, type: 3}
 --- !u!224 &765381025 stripped
 RectTransform:
@@ -3954,6 +3998,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1649022044}
   - {fileID: 1758570208}
@@ -3979,7 +4024,6 @@ RectTransform:
   - {fileID: 744941799}
   - {fileID: 3693528765092271487}
   m_Father: {fileID: 2134743781}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3991,6 +4035,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 936841241884767599, guid: 5c8e0c58144a46341ada6faa46dc7867, type: 3}
@@ -4167,7 +4212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6342398797031982160, guid: 5c8e0c58144a46341ada6faa46dc7867, type: 3}
       propertyPath: m_Name
-      value: HUD_HeartsBar02
+      value: HUD_HeartsBar_02
       objectReference: {fileID: 0}
     - target: {fileID: 6342398797031982161, guid: 5c8e0c58144a46341ada6faa46dc7867, type: 3}
       propertyPath: m_Pivot.x
@@ -4302,6 +4347,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c8e0c58144a46341ada6faa46dc7867, type: 3}
 --- !u!224 &1082780704 stripped
 RectTransform:
@@ -4313,6 +4361,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 853222677426515276, guid: 8251acda2a2973e448100b34a4633d71, type: 3}
@@ -4385,7 +4434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1814300462957936311, guid: 8251acda2a2973e448100b34a4633d71, type: 3}
       propertyPath: m_Name
-      value: HUD_CurrentWeapon04
+      value: HUD_CurrentWeapon_04
       objectReference: {fileID: 0}
     - target: {fileID: 1814300462957936311, guid: 8251acda2a2973e448100b34a4633d71, type: 3}
       propertyPath: m_IsActive
@@ -4804,6 +4853,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8251acda2a2973e448100b34a4633d71, type: 3}
 --- !u!224 &1256591979 stripped
 RectTransform:
@@ -4815,6 +4867,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 1743192827334947460, guid: 8107ec8e05990234e9a60add2cb10535, type: 3}
@@ -4835,7 +4888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1814300462957936311, guid: 8107ec8e05990234e9a60add2cb10535, type: 3}
       propertyPath: m_Name
-      value: HUD_CurrentWeapon02
+      value: HUD_CurrentWeapon_02
       objectReference: {fileID: 0}
     - target: {fileID: 5003685823495866520, guid: 8107ec8e05990234e9a60add2cb10535, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4938,6 +4991,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8107ec8e05990234e9a60add2cb10535, type: 3}
 --- !u!224 &1269203250 stripped
 RectTransform:
@@ -4949,11 +5005,12 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 2276080319036011048, guid: 8ff68d88f46711841804b89a8deb22ea, type: 3}
       propertyPath: m_Name
-      value: HUD_HealthContainer02
+      value: HUD_HealthContainer_02
       objectReference: {fileID: 0}
     - target: {fileID: 5578146319888603630, guid: 8ff68d88f46711841804b89a8deb22ea, type: 3}
       propertyPath: m_Pivot.x
@@ -5048,6 +5105,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ff68d88f46711841804b89a8deb22ea, type: 3}
 --- !u!1 &1273158575
 GameObject:
@@ -5084,7 +5144,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 375
+    m_Bits: 4294967295
 --- !u!114 &1273158577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5125,7 +5185,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -5139,13 +5201,13 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 604802073}
   - {fileID: 2134743781}
   - {fileID: 1523472262}
   - {fileID: 1333140583}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5157,6 +5219,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 1380919195441348153, guid: f1d42cf581c690443a6b68f68d54fe69, type: 3}
@@ -5241,7 +5304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6342398797031982160, guid: f1d42cf581c690443a6b68f68d54fe69, type: 3}
       propertyPath: m_Name
-      value: HUD_HeartsBar04
+      value: HUD_HeartsBar_04
       objectReference: {fileID: 0}
     - target: {fileID: 6342398797031982161, guid: f1d42cf581c690443a6b68f68d54fe69, type: 3}
       propertyPath: m_Pivot.x
@@ -5328,6 +5391,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1d42cf581c690443a6b68f68d54fe69, type: 3}
 --- !u!224 &1275028359 stripped
 RectTransform:
@@ -5339,11 +5405,12 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 1814300462957936311, guid: bfbd6d82ca794824bace519dea3ef154, type: 3}
       propertyPath: m_Name
-      value: HUD_CurrentWeapon06
+      value: HUD_CurrentWeapon_06
       objectReference: {fileID: 0}
     - target: {fileID: 5922700628121238953, guid: bfbd6d82ca794824bace519dea3ef154, type: 3}
       propertyPath: m_Pivot.x
@@ -5430,6 +5497,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfbd6d82ca794824bace519dea3ef154, type: 3}
 --- !u!224 &1291601163 stripped
 RectTransform:
@@ -5441,6 +5511,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1273158580}
     m_Modifications:
     - target: {fileID: 290260064199665292, guid: 2debe6f834403d941a966e81f3a277ea, type: 3}
@@ -5968,6 +6039,9 @@ PrefabInstance:
       value: Navigation_Overlay
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2debe6f834403d941a966e81f3a277ea, type: 3}
 --- !u!224 &1333140583 stripped
 RectTransform:
@@ -6003,12 +6077,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523472261}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1273158580}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1523472263
 MonoBehaviour:
@@ -6033,6 +6108,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 451183748718519018, guid: 8ef44ec1cd7044b4fa538cdcf11f7ea4, type: 3}
@@ -6153,7 +6229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6624335633593049928, guid: 8ef44ec1cd7044b4fa538cdcf11f7ea4, type: 3}
       propertyPath: m_Name
-      value: HUD_HealthStats01
+      value: HUD_HealthStats_01
       objectReference: {fileID: 0}
     - target: {fileID: 6850370780090377214, guid: 8ef44ec1cd7044b4fa538cdcf11f7ea4, type: 3}
       propertyPath: m_SizeDelta.x
@@ -6292,6 +6368,27 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1381461507998347207, guid: 8ef44ec1cd7044b4fa538cdcf11f7ea4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1946318054}
+    - targetCorrespondingSourceObject: {fileID: 4285731599152022481, guid: 8ef44ec1cd7044b4fa538cdcf11f7ea4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 576449590}
+    - targetCorrespondingSourceObject: {fileID: 2535440858925926950, guid: 8ef44ec1cd7044b4fa538cdcf11f7ea4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 648947166}
+    - targetCorrespondingSourceObject: {fileID: 2968620356493193450, guid: 8ef44ec1cd7044b4fa538cdcf11f7ea4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 713304444}
+    - targetCorrespondingSourceObject: {fileID: 1099809128071453223, guid: 8ef44ec1cd7044b4fa538cdcf11f7ea4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 219524810}
+    - targetCorrespondingSourceObject: {fileID: 5526512888090420764, guid: 8ef44ec1cd7044b4fa538cdcf11f7ea4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 372138257}
   m_SourcePrefab: {fileID: 100100000, guid: 8ef44ec1cd7044b4fa538cdcf11f7ea4, type: 3}
 --- !u!224 &1649022044 stripped
 RectTransform:
@@ -6303,6 +6400,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 2381890537185767184, guid: da3b7c78fe369f94596ad904921b8694, type: 3}
@@ -6315,7 +6413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6921840808371906256, guid: da3b7c78fe369f94596ad904921b8694, type: 3}
       propertyPath: m_Name
-      value: HUD_StatsList_Item04
+      value: HUD_StatsList_Item_04
       objectReference: {fileID: 0}
     - target: {fileID: 8381845816909374723, guid: da3b7c78fe369f94596ad904921b8694, type: 3}
       propertyPath: m_Pivot.x
@@ -6402,6 +6500,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da3b7c78fe369f94596ad904921b8694, type: 3}
 --- !u!114 &1728273810 stripped
 MonoBehaviour:
@@ -6419,6 +6520,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 174542083823705397, guid: 8020c24ce1fe237419ce8be598f40db0, type: 3}
@@ -6455,7 +6557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 811881926925718507, guid: 8020c24ce1fe237419ce8be598f40db0, type: 3}
       propertyPath: m_Name
-      value: HUD_HealthBar04
+      value: HUD_HealthBar_04
       objectReference: {fileID: 0}
     - target: {fileID: 811881926925718507, guid: 8020c24ce1fe237419ce8be598f40db0, type: 3}
       propertyPath: m_IsActive
@@ -7046,6 +7148,9 @@ PrefabInstance:
       value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8020c24ce1fe237419ce8be598f40db0, type: 3}
 --- !u!224 &1740363448 stripped
 RectTransform:
@@ -7057,6 +7162,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 126919582513051908, guid: 60d6256c9d7369f40821c8d1ab9f6ff6, type: 3}
@@ -7449,7 +7555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8915921189917098955, guid: 60d6256c9d7369f40821c8d1ab9f6ff6, type: 3}
       propertyPath: m_Name
-      value: HUD_HealthStats02
+      value: HUD_HealthStats_02
       objectReference: {fileID: 0}
     - target: {fileID: 8915921189917098955, guid: 60d6256c9d7369f40821c8d1ab9f6ff6, type: 3}
       propertyPath: m_IsActive
@@ -7472,6 +7578,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60d6256c9d7369f40821c8d1ab9f6ff6, type: 3}
 --- !u!224 &1758570208 stripped
 RectTransform:
@@ -7547,12 +7656,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030909723}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2030909727
 MonoBehaviour:
@@ -7566,6 +7676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -7578,6 +7689,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 1384280946776679044, guid: a219bdf5663543646923deb816d87c9c, type: 3}
@@ -7666,7 +7778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1833205063244138202, guid: a219bdf5663543646923deb816d87c9c, type: 3}
       propertyPath: m_Name
-      value: HUD_Event_BossBar02
+      value: HUD_Event_BossBar_02
       objectReference: {fileID: 0}
     - target: {fileID: 2971862343577199805, guid: a219bdf5663543646923deb816d87c9c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7677,6 +7789,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a219bdf5663543646923deb816d87c9c, type: 3}
 --- !u!224 &2041030486 stripped
 RectTransform:
@@ -7688,6 +7803,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 501478251152614208, guid: 10b409e1a0757a84082de713112d32fe, type: 3}
@@ -7872,7 +7988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7631856804230176141, guid: 10b409e1a0757a84082de713112d32fe, type: 3}
       propertyPath: m_Name
-      value: HUD_StatsList02
+      value: HUD_StatsList_02
       objectReference: {fileID: 0}
     - target: {fileID: 8502365683607222676, guid: 10b409e1a0757a84082de713112d32fe, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7903,6 +8019,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10b409e1a0757a84082de713112d32fe, type: 3}
 --- !u!224 &2103293144 stripped
 RectTransform:
@@ -7935,10 +8054,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1034540791}
   m_Father: {fileID: 1273158580}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7950,6 +8069,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 417415238612229423, guid: cfb6a9a98d9b49747ad6309115d3d5c9, type: 3}
@@ -8146,7 +8266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5166951011581402997, guid: cfb6a9a98d9b49747ad6309115d3d5c9, type: 3}
       propertyPath: m_Name
-      value: HUD_HealthStats03
+      value: HUD_HealthStats_03
       objectReference: {fileID: 0}
     - target: {fileID: 5943864235983366787, guid: cfb6a9a98d9b49747ad6309115d3d5c9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -8201,6 +8321,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfb6a9a98d9b49747ad6309115d3d5c9, type: 3}
 --- !u!224 &3693528765092271487 stripped
 RectTransform:
@@ -8212,6 +8335,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1034540791}
     m_Modifications:
     - target: {fileID: 936841241884767599, guid: d5d0dd078f03c8d46918eced2ab2a071, type: 3}
@@ -8312,7 +8436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6342398797031982160, guid: d5d0dd078f03c8d46918eced2ab2a071, type: 3}
       propertyPath: m_Name
-      value: HUD_HeartsBar01
+      value: HUD_HeartsBar_01
       objectReference: {fileID: 0}
     - target: {fileID: 6342398797031982161, guid: d5d0dd078f03c8d46918eced2ab2a071, type: 3}
       propertyPath: m_Pivot.x
@@ -8543,4 +8667,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d0dd078f03c8d46918eced2ab2a071, type: 3}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 1273158580}
+  - {fileID: 519420032}
+  - {fileID: 2030909726}

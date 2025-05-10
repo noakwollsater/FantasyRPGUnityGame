@@ -122,7 +122,7 @@ namespace Opsive.UltimateCharacterController.Character.Abilities
         [Tooltip("A reference to the AnimatorMotion that the ability uses.")]
         [HideInInspector] [SerializeField] protected AnimatorMotion m_AnimatorMotion;
         [Tooltip("The effect that should be started when the ability starts.")]
-        [HideInInspector] [Utility.DropdownEffect] [SerializeField] protected string m_StartEffectName;
+        [HideInInspector] [Utility.DropdownSelection(typeof(Effect))] [SerializeField] protected string m_StartEffectName;
         [Tooltip("The index of the effect that should be started when the ability starts.")]
         [HideInInspector] [SerializeField] protected int m_StartEffectIndex = -1;
         [Tooltip("A mask specifying which slots can have the item equipped when the ability is active.")]

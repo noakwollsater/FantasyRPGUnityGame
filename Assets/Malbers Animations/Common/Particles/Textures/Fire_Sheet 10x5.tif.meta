@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6a68a17d704ed7c40bb3a1da847d69c0
+guid: aa0907451008d784b8ef5b1c0900465d
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
@@ -110,8 +110,8 @@ TextureImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 148877
-  packageName: Animal Controller (Malbers Character Controller)
-  packageVersion: 1.4.9
+  productId: 79902
+  packageName: Horse Animset Pro (Riding System)
+  packageVersion: 4.4.9
   assetPath: Assets/Malbers Animations/Common/Particles/Textures/Fire_Sheet 10x5.tif
-  uploadId: 752018
+  uploadId: 752673

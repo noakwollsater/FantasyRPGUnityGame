@@ -58,6 +58,7 @@ namespace Opsive.UltimateCharacterController.Character.Abilities
 
         public Rideable Rideable { get { return m_Rideable; } }
         private Rideable m_Rideable;
+        private Transform m_RideableTransform;
 #if ULTIMATE_CHARACTER_CONTROLLER_MULTIPLAYER
         private INetworkInfo m_NetworkInfo;
         private bool m_NetworkRide;
@@ -68,8 +69,6 @@ namespace Opsive.UltimateCharacterController.Character.Abilities
         private bool m_LeftMount;
         private ScheduledEventBase m_MountDismountEvent;
         private RideState m_RideState = RideState.DismountComplete;
-        private Vector3 m_RideLocationOffset;
-        private Quaternion m_RideLocationRotationOffset;
         private float m_Epsilon = 0.99999f;
 
         public override int AbilityIntData
@@ -131,6 +130,7 @@ namespace Opsive.UltimateCharacterController.Character.Abilities
             if (!m_NetworkRide) {
 #endif
                 m_Rideable = rideable;
+                m_RideableTransform = m_Rideable.GameObject.transform;
 #if ULTIMATE_CHARACTER_CONTROLLER_MULTIPLAYER
             }
 #endif
@@ -228,8 +228,6 @@ namespace Opsive.UltimateCharacterController.Character.Abilities
             m_Rideable.Mount(this);
             m_CharacterLocomotion.SetMovingPlatform(m_Rideable.GameObject.transform);
             m_CharacterLocomotion.AlignToUpDirection = true;
-            m_RideLocationOffset = m_Rideable.CharacterLocomotion.InverseTransformPoint(m_Rideable.RideLocation.position);
-            m_RideLocationRotationOffset = MathUtility.InverseTransformQuaternion(m_Rideable.CharacterLocomotion.Rotation, m_Rideable.RideLocation.rotation);
 
             // The character will look independently of the rotation.
             EventHandler.ExecuteEvent(m_GameObject, "OnCharacterForceIndependentLook", true);
@@ -343,28 +341,26 @@ namespace Opsive.UltimateCharacterController.Character.Abilities
         /// <summary>
         /// Update the controller's rotation values.
         /// </summary>
-        public override void UpdateRotation()
+        public override void ApplyRotation()
         {
             if (m_RideState != RideState.Ride && m_RideState != RideState.WaitForItemUnequip) {
                 return;
             }
 
-            var targetRotation = MathUtility.TransformQuaternion(m_Rideable.CharacterLocomotion.Rotation, m_RideLocationRotationOffset);
-            m_CharacterLocomotion.DesiredRotation = Quaternion.Inverse(m_CharacterLocomotion.Rotation) * targetRotation;
+            m_CharacterLocomotion.DesiredRotation = Quaternion.Inverse(m_Transform.rotation) * m_Rideable.RideLocation.rotation;
         }
 
         /// <summary>
         /// Update the controller's position values.
         /// </summary>
-        public override void UpdatePosition()
+        public override void ApplyPosition()
         {
             if (m_RideState != RideState.Ride && m_RideState != RideState.WaitForItemUnequip) {
                 return;
             }
 
-            var targetRotation = MathUtility.TransformQuaternion(m_Rideable.CharacterLocomotion.Rotation, m_RideLocationRotationOffset);
-            var targetPosition = MathUtility.TransformPoint(m_Rideable.CharacterLocomotion.Position, targetRotation, m_RideLocationOffset);
-            m_CharacterLocomotion.DesiredMovement = targetPosition - m_CharacterLocomotion.Position;
+            // The rideable character can move independently of the rideable location.
+            m_CharacterLocomotion.DesiredMovement = m_Rideable.RideLocation.position - m_Transform.position;
         }
 
         /// <summary>

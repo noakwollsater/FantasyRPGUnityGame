@@ -461,6 +461,7 @@ namespace Opsive.UltimateCharacterController.Character.Abilities
             base.AbilityStopped(force);
 
             m_Jumping = false;
+            m_CharacterLocomotion.GravityAccumulation = 0;
 
             // Unregister for the ability input events.
             if (m_HoldInput != null) {

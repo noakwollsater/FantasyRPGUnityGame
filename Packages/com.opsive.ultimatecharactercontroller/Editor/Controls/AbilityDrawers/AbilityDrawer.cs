@@ -9,7 +9,6 @@ namespace Opsive.UltimateCharacterController.Editor.Controls.Types.AbilityDrawer
     using Opsive.Shared.Editor.UIElements;
     using Opsive.Shared.Editor.UIElements.Controls;
     using Opsive.UltimateCharacterController.Character.Abilities;
-    using Opsive.UltimateCharacterController.Editor.Utility;
     using System;
     using System.Reflection;
     using System.Collections.Generic;

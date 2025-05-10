@@ -30,9 +30,9 @@ namespace Synty.Interface.FantasyMenus.Samples
 
         private Selectable GetLastSelectedObject()
         {
-            for (int i = selectedObjectHistory.Count-1; i >= 0; --i)
+            for (int i = selectedObjectHistory.Count - 1; i >= 0; --i)
             {
-                if(selectedObjectHistory[i] != null && selectedObjectHistory[i].gameObject.activeInHierarchy)
+                if (selectedObjectHistory[i] != null && selectedObjectHistory[i].gameObject.activeInHierarchy)
                 {
                     return selectedObjectHistory[i];
                 }
@@ -56,7 +56,7 @@ namespace Synty.Interface.FantasyMenus.Samples
                 }
                 selectedObjectHistory.Add(currentSelectedObject);
 
-                if ( selectedObjectHistory.Count > maxHistorySize )
+                if (selectedObjectHistory.Count > maxHistorySize)
                 {
                     selectedObjectHistory.RemoveAt(0);
                 }

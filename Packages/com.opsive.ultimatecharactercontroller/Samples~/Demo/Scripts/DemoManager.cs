@@ -8,7 +8,6 @@ namespace Opsive.UltimateCharacterController.Demo
 {
     using Opsive.Shared.Events;
     using Opsive.Shared.Game;
-    using Opsive.Shared.StateSystem;
     using Opsive.UltimateCharacterController.Character;
     using Opsive.UltimateCharacterController.Demo.UI;
     using Opsive.UltimateCharacterController.Game;
@@ -562,7 +561,7 @@ namespace Opsive.UltimateCharacterController.Demo
         /// <param name="value">The new value of the perspective toggle.</param>
         public void PerspectiveChanged(bool value)
         {
-            m_DefaultFirstPersonStart = value;
+            m_DefaultFirstPersonStart = m_PerspectiveToggle.isOn;
         }
 #endif
 

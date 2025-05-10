@@ -1,4 +1,4 @@
-// Made with Amplify Shader Editor v1.9.8.1
+// Made with Amplify Shader Editor v1.9.1.8
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow Caster HDRP"
 {
@@ -6,7 +6,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 	{
 		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
 
-		[HideInInspector] _RenderQueueType("Render Queue Type", Float) = 1
+		[HideInInspector] _RenderQueueType("Render Queue Type", Float) = 5
 		[HideInInspector][ToggleUI] _AddPrecomputedVelocity("Add Precomputed Velocity", Float) = 1
 		//[HideInInspector] _ShadowMatteFilter("Shadow Matte Filter", Float) = 2.006836
 		[HideInInspector] _StencilRef("Stencil Ref", Int) = 0 // StencilUsage.Clear
@@ -34,7 +34,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 		[HideInInspector] _TransparentSortPriority("Transparent Sort Priority", Float) = 0
 		[HideInInspector][ToggleUI] _EnableFogOnTransparent("Enable Fog", Float) = 1
 		[HideInInspector] _CullModeForward("Cull Mode Forward", Float) = 2 // This mode is dedicated to Forward to correctly handle backface then front face rendering thin transparent
-		[HideInInspector][Enum(UnityEngine.Rendering.HighDefinition.TransparentCullMode)] _TransparentCullMode("_TransparentCullMode", Int) = 2// Back culling by default
+		[HideInInspector][Enum(UnityEditor.Rendering.HighDefinition.TransparentCullMode)] _TransparentCullMode("Transparent Cull Mode", Int) = 2// Back culling by default
 		[HideInInspector] _ZTestDepthEqualForOpaque("ZTest Depth Equal For Opaque", Int) = 4 // Less equal
 		[HideInInspector][Enum(UnityEngine.Rendering.CompareFunction)] _ZTestTransparent("ZTest Transparent", Int) = 4// Less equal
 		[HideInInspector][ToggleUI] _TransparentBackfaceEnable("Transparent Backface Enable", Float) = 0
@@ -54,7 +54,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 		//_TessMaxDisp( "Tess Max Displacement", Float ) = 25
 
 		[HideInInspector][ToggleUI] _TransparentWritingMotionVec("Transparent Writing MotionVec", Float) = 0
-		[HideInInspector][Enum(UnityEngine.Rendering.HighDefinition.OpaqueCullMode)] _OpaqueCullMode("_OpaqueCullMode", Int) = 2 // Back culling by default
+		[HideInInspector][Enum(UnityEditor.Rendering.HighDefinition.OpaqueCullMode)] _OpaqueCullMode("Opaque Cull Mode", Int) = 2 // Back culling by default
 		[HideInInspector][ToggleUI] _SupportDecals("Support Decals", Float) = 1
 		[HideInInspector][ToggleUI] _ReceivesSSRTransparent("Receives SSR Transparent", Float) = 0
 		[HideInInspector] _EmissionColor("Color", Color) = (1, 1, 1)
@@ -75,11 +75,8 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 		#pragma target 4.5
 		#pragma exclude_renderers glcore gles gles3 ps4 ps5 
 
-        #define SUPPORT_GLOBAL_MIP_BIAS 1
-
 		#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
 		#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Filtering.hlsl"
-		#include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderVariables.hlsl"
 
 		#ifndef ASE_TESS_FUNCS
 		#define ASE_TESS_FUNCS
@@ -191,10 +188,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			Tags { "LightMode"="ForwardOnly" }
 
 			Blend [_SrcBlend] [_DstBlend], [_AlphaSrcBlend] [_AlphaDstBlend]
-			Blend 1 One OneMinusSrcAlpha
-			Blend 2 One [_DstBlend2]
-			Blend 3 One [_DstBlend2]
-			Blend 4 One OneMinusSrcAlpha
 
 			Cull [_CullMode]
 			ZTest [_ZTestTransparent]
@@ -218,26 +211,22 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			#pragma shader_feature_local_fragment _ENABLE_FOG_ON_TRANSPARENT
 			#pragma multi_compile_instancing
 			#pragma instancing_options renderinglayer
-			#define ASE_VERSION 19801
-			#define ASE_SRP_VERSION 170003
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma shader_feature _SURFACE_TYPE_TRANSPARENT
 			#pragma shader_feature_local _ALPHATEST_ON
 
 			#pragma multi_compile _ DEBUG_DISPLAY
-			#pragma multi_compile _ DOTS_INSTANCING_ON
 
 			#pragma vertex Vert
 			#pragma fragment Frag
 
-	        #if (defined(_TRANSPARENT_WRITES_MOTION_VEC) || defined(_TRANSPARENT_REFRACTIVE_SORT)) && defined(_SURFACE_TYPE_TRANSPARENT)
+	        #if defined(_TRANSPARENT_WRITES_MOTION_VEC) && defined(_SURFACE_TYPE_TRANSPARENT)
 	        #define _WRITE_TRANSPARENT_MOTION_VECTOR
 	        #endif
 
 			#define SHADERPASS SHADERPASS_FORWARD_UNLIT
-            #define SUPPORT_GLOBAL_MIP_BIAS 1
-
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/GeometricTools.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Tessellation.hlsl"
@@ -246,7 +235,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-            #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/Functions.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphHeader.hlsl"
 
 			#if defined(_ENABLE_SHADOW_MATTE) && SHADERPASS == SHADERPASS_FORWARD_UNLIT
 				#define LIGHTLOOP_DISABLE_TILE_AND_CLUSTER
@@ -260,6 +249,25 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/PunctualLightCommon.hlsl"
 				#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/LightLoop/HDShadowLoop.hlsl"
 			#endif
+
+			
+
+			struct VertexInput
+			{
+				float3 positionOS : POSITION;
+				float3 normalOS : NORMAL;
+				
+				UNITY_VERTEX_INPUT_INSTANCE_ID
+			};
+
+			struct VertexOutput
+			{
+				float4 positionCS : SV_Position;
+				float3 positionRWS : TEXCOORD0;
+				
+				UNITY_VERTEX_INPUT_INSTANCE_ID
+				UNITY_VERTEX_OUTPUT_STEREO
+			};
 
 			CBUFFER_START( UnityPerMaterial )
 						float4 _EmissionColor;
@@ -287,7 +295,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			float _BlendMode;
 			float _SrcBlend;
 			float _DstBlend;
-			float _DstBlend2;
 			float _AlphaSrcBlend;
 			float _AlphaDstBlend;
 			float _ZWrite;
@@ -324,26 +331,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/BuiltinUtilities.hlsl"
 			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/MaterialUtilities.hlsl"
 			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphFunctions.hlsl"
-
-			
-
-			struct VertexInput
-			{
-				float3 positionOS : POSITION;
-				float3 normalOS : NORMAL;
-				
-				UNITY_VERTEX_INPUT_INSTANCE_ID
-			};
-
-			struct VertexOutput
-			{
-				float4 positionCS : SV_Position;
-				float4 clipPosV : TEXCOORD0;
-				float3 positionRWS : TEXCOORD1;
-				
-				UNITY_VERTEX_INPUT_INSTANCE_ID
-				UNITY_VERTEX_OUTPUT_STEREO
-			};
 
 			
 			struct SurfaceDescription
@@ -388,7 +375,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 					float3 shadow3;
 					posInput = GetPositionInput(fragInputs.positionSS.xy, _ScreenSize.zw, fragInputs.positionSS.z, UNITY_MATRIX_I_VP, UNITY_MATRIX_V);
 					float3 normalWS = normalize(fragInputs.tangentToWorld[1]);
-					uint renderingLayers = GetMeshRenderingLayerMask();
+					uint renderingLayers = _EnableLightLayers ? asuint(unity_RenderingLayer.x) : DEFAULT_LIGHT_LAYERS;
 					ShadowLoopMin(shadowContext, posInput, normalWS, asuint(_ShadowMatteFilter), renderingLayers, shadow3);
 					shadow = dot(shadow3, float3(1.0f/3.0f, 1.0f/3.0f, 1.0f/3.0f));
 
@@ -408,7 +395,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				builtinData.opacity = surfaceDescription.Alpha;
 
 				#if defined(DEBUG_DISPLAY)
-					builtinData.renderingLayers = GetMeshRenderingLayerMask();
+					builtinData.renderingLayers = GetMeshRenderingLightLayer();
 				#endif
 
                 #ifdef _ALPHATEST_ON
@@ -461,7 +448,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 
 				float3 positionRWS = TransformObjectToWorld(inputMesh.positionOS);
 				o.positionCS = TransformWorldToHClip(positionRWS);
-				o.clipPosV = o.positionCS;
 				o.positionRWS = positionRWS;
 				return o;
 			}
@@ -570,19 +556,17 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			{
 				UNITY_SETUP_INSTANCE_ID( packedInput );
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX( packedInput );
-				
-				float3 PositionRWS = packedInput.positionRWS;
-				float3 V = GetWorldSpaceNormalizeViewDir( packedInput.positionRWS );
-				float4 ClipPos = packedInput.clipPosV;
-				float4 ScreenPos = ComputeScreenPos( packedInput.clipPosV, _ProjectionParams.x );
-		
 				FragInputs input;
 				ZERO_INITIALIZE(FragInputs, input);
 				input.tangentToWorld = k_identity3x3;
+				float3 positionRWS = packedInput.positionRWS;
+
 				input.positionSS = packedInput.positionCS;
-				input.positionRWS = PositionRWS;
+				input.positionRWS = positionRWS;
 
 				PositionInputs posInput = GetPositionInput(input.positionSS.xy, _ScreenSize.zw, input.positionSS.z, input.positionSS.w, input.positionRWS);
+
+				float3 V = GetWorldSpaceNormalizeViewDir( input.positionRWS );
 
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
 				float4 color8 = IsGammaSpace() ? float4(0,0,0,0) : float4(0,0,0,0);
@@ -685,25 +669,20 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			#pragma shader_feature_local_fragment _ENABLE_FOG_ON_TRANSPARENT
 			#pragma multi_compile_instancing
 			#pragma instancing_options renderinglayer
-			#define ASE_VERSION 19801
-			#define ASE_SRP_VERSION 170003
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma shader_feature _SURFACE_TYPE_TRANSPARENT
 			#pragma shader_feature_local _ALPHATEST_ON
 
-			#pragma multi_compile _ DOTS_INSTANCING_ON
-
 			#pragma vertex Vert
 			#pragma fragment Frag
 
-			#if (defined(_TRANSPARENT_WRITES_MOTION_VEC) || defined(_TRANSPARENT_REFRACTIVE_SORT)) && defined(_SURFACE_TYPE_TRANSPARENT)
+			#if defined(_TRANSPARENT_WRITES_MOTION_VEC) && defined(_SURFACE_TYPE_TRANSPARENT)
 			#define _WRITE_TRANSPARENT_MOTION_VECTOR
 			#endif
 
 			#define SHADERPASS SHADERPASS_SHADOWS
-            #define SUPPORT_GLOBAL_MIP_BIAS 1
-
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/GeometricTools.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Tessellation.hlsl"
@@ -712,7 +691,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-            #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/Functions.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphHeader.hlsl"
 
 			
 
@@ -727,8 +706,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			struct VertexOutput
 			{
 				float4 positionCS : SV_Position;
-				float4 clipPosV : TEXCOORD0;
-				float3 positionRWS : TEXCOORD1;
 				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
@@ -760,7 +737,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			float _BlendMode;
 			float _SrcBlend;
 			float _DstBlend;
-			float _DstBlend2;
 			float _AlphaSrcBlend;
 			float _AlphaDstBlend;
 			float _ZWrite;
@@ -834,7 +810,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				builtinData.opacity = surfaceDescription.Alpha;
 
 				#if defined(DEBUG_DISPLAY)
-					builtinData.renderingLayers = GetMeshRenderingLayerMask();
+					builtinData.renderingLayers = GetMeshRenderingLightLayer();
 				#endif
 
 				#ifdef _ALPHATEST_ON
@@ -872,8 +848,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 
 				float3 positionRWS = TransformObjectToWorld(inputMesh.positionOS);
 				o.positionCS = TransformWorldToHClip(positionRWS);
-				o.clipPosV = o.positionCS;
-				o.positionRWS = positionRWS;
 				return o;
 			}
 
@@ -980,19 +954,16 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			{
 				UNITY_SETUP_INSTANCE_ID( packedInput );
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX( packedInput );
-		
-				float3 PositionRWS = packedInput.positionRWS;
-				float3 V = GetWorldSpaceNormalizeViewDir( packedInput.positionRWS );
-				float4 ClipPos = packedInput.clipPosV;
-				float4 ScreenPos = ComputeScreenPos( packedInput.clipPosV, _ProjectionParams.x );
 
 				FragInputs input;
 				ZERO_INITIALIZE(FragInputs, input);
+
 				input.tangentToWorld = k_identity3x3;
 				input.positionSS = packedInput.positionCS;
-				input.positionRWS = PositionRWS;
 
 				PositionInputs posInput = GetPositionInput(input.positionSS.xy, _ScreenSize.zw, input.positionSS.z, input.positionSS.w, input.positionRWS);
+
+				float3 V = float3( 1.0, 1.0, 1.0 );
 
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
 				float4 color8 = IsGammaSpace() ? float4(0,0,0,0) : float4(0,0,0,0);
@@ -1011,23 +982,22 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				#endif
 
 				#ifdef WRITE_MSAA_DEPTH
-					depthColor = packedInput.vmesh.positionCS.z;
-					depthColor.a = SharpenAlpha(builtinData.opacity, builtinData.alphaClipTreshold);
+				depthColor = packedInput.vmesh.positionCS.z;
+
+				#ifdef _ALPHATOMASK_ON
+				depthColor.a = SharpenAlpha(builtinData.opacity, builtinData.alphaClipTreshold);
+				#endif
 				#endif
 
 				#if defined(WRITE_NORMAL_BUFFER)
 				EncodeIntoNormalBuffer(ConvertSurfaceDataToNormalData(surfaceData), outNormalBuffer);
 				#endif
 
-				#if (defined(WRITE_DECAL_BUFFER) && !defined(_DISABLE_DECALS)) || defined(WRITE_RENDERING_LAYER)
-					DecalPrepassData decalPrepassData;
-					#ifdef _DISABLE_DECALS
-					ZERO_INITIALIZE(DecalPrepassData, decalPrepassData);
-					#else
-					decalPrepassData.geomNormalWS = surfaceData.geomNormalWS;
-					#endif
-					decalPrepassData.renderingLayerMask = GetMeshRenderingLayerMask();
-					EncodeIntoDecalPrepassBuffer(decalPrepassData, outDecalBuffer);
+				#if defined(WRITE_DECAL_BUFFER) && !defined(_DISABLE_DECALS)
+				DecalPrepassData decalPrepassData;
+				decalPrepassData.geomNormalWS = surfaceData.geomNormalWS;
+				decalPrepassData.decalLayerMask = GetMeshRenderingDecalLayer();
+				EncodeIntoDecalPrepassBuffer(decalPrepassData, outDecalBuffer);
 				#endif
 			}
 			ENDHLSL
@@ -1047,8 +1017,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			#pragma shader_feature_local_fragment _ENABLE_FOG_ON_TRANSPARENT
 			#pragma multi_compile_instancing
 			#pragma instancing_options renderinglayer
-			#define ASE_VERSION 19801
-			#define ASE_SRP_VERSION 170003
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma shader_feature _SURFACE_TYPE_TRANSPARENT
@@ -1056,17 +1025,14 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 
 			#pragma shader_feature EDITOR_VISUALIZATION
 
-			#pragma multi_compile _ DOTS_INSTANCING_ON
-
 			#pragma vertex Vert
 			#pragma fragment Frag
 
+			#if defined(_TRANSPARENT_WRITES_MOTION_VEC) && defined(_SURFACE_TYPE_TRANSPARENT)
+			#define _WRITE_TRANSPARENT_MOTION_VECTOR
+			#endif
+
 			#define SHADERPASS SHADERPASS_LIGHT_TRANSPORT
-            #define SCENEPICKINGPASS
-            #define SUPPORT_GLOBAL_MIP_BIAS 1
-
-			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/PickingSpaceTransforms.hlsl"
-
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/GeometricTools.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Tessellation.hlsl"
@@ -1075,7 +1041,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-            #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/Functions.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphHeader.hlsl"
 
 			CBUFFER_START( UnityPerMaterial )
 						float4 _EmissionColor;
@@ -1103,7 +1069,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			float _BlendMode;
 			float _SrcBlend;
 			float _DstBlend;
-			float _DstBlend2;
 			float _AlphaSrcBlend;
 			float _AlphaDstBlend;
 			float _ZWrite;
@@ -1205,7 +1170,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				ZERO_INITIALIZE( BuiltinData, builtinData );
 				builtinData.opacity = surfaceDescription.Alpha;
 				#if defined(DEBUG_DISPLAY)
-					builtinData.renderingLayers = GetMeshRenderingLayerMask();
+					builtinData.renderingLayers = GetMeshRenderingLightLayer();
 				#endif
 
 				#ifdef _ALPHATEST_ON
@@ -1425,8 +1390,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			#pragma shader_feature_local_fragment _ENABLE_FOG_ON_TRANSPARENT
 			#pragma multi_compile_instancing
 			#pragma instancing_options renderinglayer
-			#define ASE_VERSION 19801
-			#define ASE_SRP_VERSION 170003
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma shader_feature _SURFACE_TYPE_TRANSPARENT
@@ -1434,15 +1398,11 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 
 			#pragma editor_sync_compilation
 
-			#pragma multi_compile _ DOTS_INSTANCING_ON
-
 			#pragma vertex Vert
 			#pragma fragment Frag
 
 			#define SHADERPASS SHADERPASS_DEPTH_ONLY
 			#define SCENESELECTIONPASS 1
-            #define SUPPORT_GLOBAL_MIP_BIAS 1
-
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/GeometricTools.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Tessellation.hlsl"
@@ -1451,7 +1411,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-            #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/Functions.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphHeader.hlsl"
 
 			int _ObjectId;
 			int _PassValue;
@@ -1482,7 +1442,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			float _BlendMode;
 			float _SrcBlend;
 			float _DstBlend;
-			float _DstBlend2;
 			float _AlphaSrcBlend;
 			float _AlphaDstBlend;
 			float _ZWrite;
@@ -1760,8 +1719,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			#pragma shader_feature_local_fragment _ENABLE_FOG_ON_TRANSPARENT
 			#pragma multi_compile_instancing
 			#pragma instancing_options renderinglayer
-			#define ASE_VERSION 19801
-			#define ASE_SRP_VERSION 170003
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma shader_feature _SURFACE_TYPE_TRANSPARENT
@@ -1769,14 +1727,10 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 
 			#pragma multi_compile _ WRITE_MSAA_DEPTH
 
-			#pragma multi_compile _ DOTS_INSTANCING_ON
-
 			#pragma vertex Vert
 			#pragma fragment Frag
 
 			#define SHADERPASS SHADERPASS_DEPTH_ONLY
-            #define SUPPORT_GLOBAL_MIP_BIAS 1
-
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/GeometricTools.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Tessellation.hlsl"
@@ -1785,7 +1739,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-            #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/Functions.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphHeader.hlsl"
 
 			CBUFFER_START( UnityPerMaterial )
 						float4 _EmissionColor;
@@ -1813,7 +1767,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			float _BlendMode;
 			float _SrcBlend;
 			float _DstBlend;
-			float _DstBlend2;
 			float _AlphaSrcBlend;
 			float _AlphaDstBlend;
 			float _ZWrite;
@@ -1865,8 +1818,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			struct VertexOutput
 			{
 				float4 positionCS : SV_Position;
-				float4 clipPosV : TEXCOORD0;
-				float3 positionRWS : TEXCOORD1;
 				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
@@ -1906,7 +1857,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				builtinData.opacity =  surfaceDescription.Alpha;
 
 				#if defined(DEBUG_DISPLAY)
-					builtinData.renderingLayers = GetMeshRenderingLayerMask();
+					builtinData.renderingLayers = GetMeshRenderingLightLayer();
 				#endif
 
                 #ifdef _ALPHATEST_ON
@@ -1944,8 +1895,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 
 				float3 positionRWS = TransformObjectToWorld(inputMesh.positionOS);
 				o.positionCS = TransformWorldToHClip(positionRWS);
-				o.clipPosV = o.positionCS;
-				o.positionRWS = positionRWS;
 				return o;
 			}
 
@@ -2052,19 +2001,15 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			{
 				UNITY_SETUP_INSTANCE_ID( packedInput );
 				UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX( packedInput );
-		
-				float3 PositionRWS = packedInput.positionRWS;
-				float3 V = GetWorldSpaceNormalizeViewDir( packedInput.positionRWS );
-				float4 ClipPos = packedInput.clipPosV;
-				float4 ScreenPos = ComputeScreenPos( packedInput.clipPosV, _ProjectionParams.x );
-		
 				FragInputs input;
 				ZERO_INITIALIZE(FragInputs, input);
+
 				input.tangentToWorld = k_identity3x3;
 				input.positionSS = packedInput.positionCS;
-				input.positionRWS = PositionRWS;
 
 				PositionInputs posInput = GetPositionInput(input.positionSS.xy, _ScreenSize.zw, input.positionSS.z, input.positionSS.w, input.positionRWS);
+
+				float3 V = float3( 1.0, 1.0, 1.0 );
 
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
 				float4 color8 = IsGammaSpace() ? float4(0,0,0,0) : float4(0,0,0,0);
@@ -2120,8 +2065,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			#pragma shader_feature_local_fragment _ENABLE_FOG_ON_TRANSPARENT
 			#pragma multi_compile_instancing
 			#pragma instancing_options renderinglayer
-			#define ASE_VERSION 19801
-			#define ASE_SRP_VERSION 170003
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma shader_feature _SURFACE_TYPE_TRANSPARENT
@@ -2129,18 +2073,14 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 
 			#pragma multi_compile _ WRITE_MSAA_DEPTH
 
-			#pragma multi_compile _ DOTS_INSTANCING_ON
-
 			#pragma vertex Vert
 			#pragma fragment Frag
 
-			#if (defined(_TRANSPARENT_WRITES_MOTION_VEC) || defined(_TRANSPARENT_REFRACTIVE_SORT)) && defined(_SURFACE_TYPE_TRANSPARENT)
+			#if defined(_TRANSPARENT_WRITES_MOTION_VEC) && defined(_SURFACE_TYPE_TRANSPARENT)
 			#define _WRITE_TRANSPARENT_MOTION_VECTOR
 			#endif
 
 			#define SHADERPASS SHADERPASS_MOTION_VECTORS
-            #define SUPPORT_GLOBAL_MIP_BIAS 1
-
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/GeometricTools.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Tessellation.hlsl"
@@ -2149,7 +2089,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-            #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/Functions.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphHeader.hlsl"
 
 			CBUFFER_START( UnityPerMaterial )
 						float4 _EmissionColor;
@@ -2177,7 +2117,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			float _BlendMode;
 			float _SrcBlend;
 			float _DstBlend;
-			float _DstBlend2;
 			float _AlphaSrcBlend;
 			float _AlphaDstBlend;
 			float _ZWrite;
@@ -2273,7 +2212,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				builtinData.opacity =  surfaceDescription.Alpha;
 
 				#if defined(DEBUG_DISPLAY)
-                    builtinData.renderingLayers = GetMeshRenderingLayerMask();
+                    builtinData.renderingLayers = GetMeshRenderingLightLayer();
                 #endif
 
 
@@ -2476,14 +2415,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			}
 			#endif
 
-			#if defined(WRITE_DECAL_BUFFER) && defined(WRITE_MSAA_DEPTH)
-			#define SV_TARGET_NORMAL SV_Target3
-			#elif defined(WRITE_DECAL_BUFFER) || defined(WRITE_MSAA_DEPTH)
-			#define SV_TARGET_NORMAL SV_Target2
-			#else
-			#define SV_TARGET_NORMAL SV_Target1
-			#endif
-
 			void Frag( VertexOutput packedInput
 						#ifdef WRITE_MSAA_DEPTH
 						, out float4 depthColor : SV_Target0
@@ -2521,9 +2452,8 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				float3 V = GetWorldSpaceNormalizeViewDir(input.positionRWS);
 
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
-				float4 color8 = IsGammaSpace() ? float4(0,0,0,0) : float4(0,0,0,0);
 				
-				surfaceDescription.Alpha = color8.a;
+				surfaceDescription.Alpha = 1;
 				surfaceDescription.AlphaClipThreshold = _AlphaCutoff;
 
 				SurfaceData surfaceData;
@@ -2545,11 +2475,16 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				if( forceNoMotion )
 					outMotionVector = float4( 2.0, 0.0, 0.0, 0.0 );
 
+				// Depth and Alpha to coverage
 				#ifdef WRITE_MSAA_DEPTH
+					// In case we are rendering in MSAA, reading the an MSAA depth buffer is way too expensive. To avoid that, we export the depth to a color buffer
 					depthColor = packedInput.vmeshPositionCS.z;
+
+					// Alpha channel is used for alpha to coverage
 					depthColor.a = SharpenAlpha(builtinData.opacity, builtinData.alphaClipTreshold);
 				#endif
 
+				// Normal Buffer Processing
 				#ifdef WRITE_NORMAL_BUFFER
 					EncodeIntoNormalBuffer(ConvertSurfaceDataToNormalData(surfaceData), outNormalBuffer);
 				#endif
@@ -2560,9 +2495,12 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 					ZERO_INITIALIZE(DecalPrepassData, decalPrepassData);
 					#else
 					decalPrepassData.geomNormalWS = surfaceData.geomNormalWS;
+					decalPrepassData.decalLayerMask = GetMeshRenderingDecalLayer();
 					#endif
-					decalPrepassData.renderingLayerMask = GetMeshRenderingLayerMask();
 					EncodeIntoDecalPrepassBuffer(decalPrepassData, outDecalBuffer);
+
+					// make sure we don't overwrite light layers
+					outDecalBuffer.w = (GetMeshRenderingLightLayer() & 0x000000FF) / 255.0;
 				#endif
 
 				#ifdef _DEPTHOFFSET_ON
@@ -2587,27 +2525,20 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			#pragma shader_feature_local_fragment _ENABLE_FOG_ON_TRANSPARENT
 			#pragma multi_compile_instancing
 			#pragma instancing_options renderinglayer
-			#define ASE_VERSION 19801
-			#define ASE_SRP_VERSION 170003
+			#define ASE_SRP_VERSION 140008
 
 
 			#pragma shader_feature _SURFACE_TYPE_TRANSPARENT
-			#pragma shader_feature_local _ _TRANSPARENT_WRITES_MOTION_VEC _TRANSPARENT_REFRACTIVE_SORT
+			#pragma shader_feature_local _TRANSPARENT_WRITES_MOTION_VEC
 
 			#pragma editor_sync_compilation
-
-			#pragma multi_compile _ DOTS_INSTANCING_ON
 
 			#pragma vertex Vert
 			#pragma fragment Frag
 
-			#if (defined(_TRANSPARENT_WRITES_MOTION_VEC) || defined(_TRANSPARENT_REFRACTIVE_SORT)) && defined(_SURFACE_TYPE_TRANSPARENT)
+			#if defined(_TRANSPARENT_WRITES_MOTION_VEC) && defined(_SURFACE_TYPE_TRANSPARENT)
 			#define _WRITE_TRANSPARENT_MOTION_VECTOR
 			#endif
-
-			#define SHADERPASS SHADERPASS_DEPTH_ONLY
-			#define SCENEPICKINGPASS 1
-            #define SUPPORT_GLOBAL_MIP_BIAS 1
 
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
         	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/GeometricTools.hlsl"
@@ -2617,11 +2548,14 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-            #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/Functions.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphHeader.hlsl"
 
             #define ATTRIBUTES_NEED_NORMAL
             #define ATTRIBUTES_NEED_TANGENT
             #define VARYINGS_NEED_TANGENT_TO_WORLD
+
+			#define SHADERPASS SHADERPASS_DEPTH_ONLY
+			#define SCENEPICKINGPASS 1
 
 			#define SHADER_UNLIT
 
@@ -2653,7 +2587,6 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			float _BlendMode;
 			float _SrcBlend;
 			float _DstBlend;
-			float _DstBlend2;
 			float _AlphaSrcBlend;
 			float _AlphaDstBlend;
 			float _ZWrite;
@@ -2744,7 +2677,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				builtinData.opacity = surfaceDescription.Alpha;
 
 				#if defined(DEBUG_DISPLAY)
-					builtinData.renderingLayers = GetMeshRenderingLayerMask();
+					builtinData.renderingLayers = GetMeshRenderingLightLayer();
 				#endif
 
                 #ifdef _ALPHATEST_ON
@@ -2902,9 +2835,8 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				PositionInputs posInput = GetPositionInput(input.positionSS.xy, _ScreenSize.zw, input.positionSS.z, input.positionSS.w, input.positionRWS);
 
 				SurfaceDescription surfaceDescription = (SurfaceDescription)0;
-				float4 color8 = IsGammaSpace() ? float4(0,0,0,0) : float4(0,0,0,0);
 				
-				surfaceDescription.Alpha = color8.a;
+				surfaceDescription.Alpha = 1;
 				surfaceDescription.AlphaClipThreshold =  _AlphaCutoff;
 
 
@@ -2921,13 +2853,14 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 
 		Pass
 		{
-			Name "FullScreenDebug"
-			Tags 
+
+            Name "FullScreenDebug"
+            Tags 
 			{ 
 				"LightMode" = "FullScreenDebug" 
 			}
 
-			Cull [_CullMode]
+            Cull [_CullMode]
 			ZTest LEqual
 			ZWrite Off
 
@@ -2935,22 +2868,50 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 
 			/*ase_pragma_before*/
 
+			#pragma multi_compile_instancing
+			#pragma instancing_options renderinglayer
+
+			#pragma shader_feature _SURFACE_TYPE_TRANSPARENT
+			#pragma shader_feature_local _TRANSPARENT_WRITES_MOTION_VEC
+
 			#pragma vertex Vert
 			#pragma fragment Frag
 
-			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderVariables.hlsl"
-			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
-	
-			#define SHADERPASS SHADERPASS_FULL_SCREEN_DEBUG
-            #define SUPPORT_GLOBAL_MIP_BIAS 1
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
+        	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/GeometricTools.hlsl"
+        	#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Tessellation.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderVariables.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/FragInputs.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/ShaderPass/ShaderPass.cs.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphHeader.hlsl"
 
-			struct AttributesMesh
+            #define ATTRIBUTES_NEED_NORMAL
+            #define ATTRIBUTES_NEED_TANGENT
+
+            #define SHADERPASS SHADERPASS_FULL_SCREEN_DEBUG
+			#define SHADER_UNLIT
+
+            #if defined(_TRANSPARENT_WRITES_MOTION_VEC) && defined(_SURFACE_TYPE_TRANSPARENT)
+            #define _WRITE_TRANSPARENT_MOTION_VECTOR
+            #endif
+
+            #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Debug/DebugDisplay.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Material.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/NormalSurfaceGradient.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Unlit/Unlit.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/BuiltinUtilities.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/MaterialUtilities.hlsl"
+			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/ShaderLibrary/ShaderGraphFunctions.hlsl"
+
+            struct AttributesMesh
 			{
-				float3 positionOS : POSITION;
-				float3 normalOS : NORMAL;
-				float4 tangentOS : TANGENT;
+				 float3 positionOS : POSITION;
+				 float3 normalOS : NORMAL;
+				 float4 tangentOS : TANGENT;
 				#if UNITY_ANY_INSTANCING_ENABLED
-					uint instanceID : INSTANCEID_SEMANTIC;
+				 uint instanceID : INSTANCEID_SEMANTIC;
 				#endif
 			};
 
@@ -2958,17 +2919,39 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			{
 				SV_POSITION_QUALIFIERS float4 positionCS : SV_POSITION;
 				#if UNITY_ANY_INSTANCING_ENABLED
-					uint instanceID : CUSTOM_INSTANCE_ID;
+				 uint instanceID : CUSTOM_INSTANCE_ID;
 				#endif
+			};
+
+			struct VertexDescriptionInputs
+			{
+				 float3 ObjectSpaceNormal;
+				 float3 ObjectSpaceTangent;
+				 float3 ObjectSpacePosition;
+			};
+
+			struct SurfaceDescriptionInputs
+			{
 			};
 
 			struct PackedVaryingsMeshToPS
 			{
 				SV_POSITION_QUALIFIERS float4 positionCS : SV_POSITION;
 				#if UNITY_ANY_INSTANCING_ENABLED
-					uint instanceID : CUSTOM_INSTANCE_ID;
+				 uint instanceID : CUSTOM_INSTANCE_ID;
 				#endif
 			};
+
+			PackedVaryingsMeshToPS PackVaryingsMeshToPS (VaryingsMeshToPS input)
+			{
+				PackedVaryingsMeshToPS output;
+				ZERO_INITIALIZE(PackedVaryingsMeshToPS, output);
+				output.positionCS = input.positionCS;
+				#if UNITY_ANY_INSTANCING_ENABLED
+				output.instanceID = input.instanceID;
+				#endif
+				return output;
+			}
 
 			VaryingsMeshToPS UnpackVaryingsMeshToPS (PackedVaryingsMeshToPS input)
 			{
@@ -2980,15 +2963,59 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				return output;
 			}
 
-			PackedVaryingsMeshToPS PackVaryingsMeshToPS (VaryingsMeshToPS input)
+            struct VertexDescription
 			{
-				PackedVaryingsMeshToPS output;
-				ZERO_INITIALIZE(PackedVaryingsMeshToPS, output);
-				output.positionCS = input.positionCS;
-				#if UNITY_ANY_INSTANCING_ENABLED
-				output.instanceID = input.instanceID;
-				#endif
+				float3 Position;
+				float3 Normal;
+				float3 Tangent;
+			};
+
+			VertexDescription VertexDescriptionFunction(VertexDescriptionInputs IN)
+			{
+				VertexDescription description = (VertexDescription)0;
+				description.Position = IN.ObjectSpacePosition;
+				description.Normal = IN.ObjectSpaceNormal;
+				description.Tangent = IN.ObjectSpaceTangent;
+				return description;
+			}
+
+
+            struct SurfaceDescription
+			{
+				float3 BaseColor;
+				float3 Emission;
+				float Alpha;
+			};
+
+			SurfaceDescription SurfaceDescriptionFunction(SurfaceDescriptionInputs IN)
+			{
+				SurfaceDescription surface = (SurfaceDescription)0;
+				surface.BaseColor = IsGammaSpace() ? float3(0.5, 0.5, 0.5) : SRGBToLinear(float3(0.5, 0.5, 0.5));
+				surface.Emission = float3(0, 0, 0);
+				surface.Alpha = 1;
+				return surface;
+			}
+
+
+
+			VertexDescriptionInputs AttributesMeshToVertexDescriptionInputs(AttributesMesh input)
+			{
+				VertexDescriptionInputs output;
+				ZERO_INITIALIZE(VertexDescriptionInputs, output);
+				output.ObjectSpaceNormal =                          input.normalOS;
+				output.ObjectSpaceTangent =                         input.tangentOS.xyz;
+				output.ObjectSpacePosition =                        input.positionOS;
 				return output;
+			}
+
+			AttributesMesh ApplyMeshModification(AttributesMesh input, float3 timeParameters )
+			{
+				VertexDescriptionInputs vertexDescriptionInputs = AttributesMeshToVertexDescriptionInputs(input);
+				VertexDescription vertexDescription = VertexDescriptionFunction(vertexDescriptionInputs);
+				input.positionOS = vertexDescription.Position;
+				input.normalOS = vertexDescription.Normal;
+				input.tangentOS.xyz = vertexDescription.Tangent;
+				return input;
 			}
 
 			FragInputs BuildFragInputs(VaryingsMeshToPS input)
@@ -3002,11 +3029,20 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 				return output;
 			}
 
+
 			FragInputs UnpackVaryingsMeshToFragInputs(PackedVaryingsMeshToPS input)
 			{
 				UNITY_SETUP_INSTANCE_ID(input);
 				VaryingsMeshToPS unpacked = UnpackVaryingsMeshToPS(input);
 				return BuildFragInputs(unpacked);
+			}
+				SurfaceDescriptionInputs FragInputsToSurfaceDescriptionInputs(FragInputs input, float3 viewWS)
+			{
+				SurfaceDescriptionInputs output;
+				ZERO_INITIALIZE(SurfaceDescriptionInputs, output);
+
+
+        		return output;
 			}
 
 			#define DEBUG_DISPLAY
@@ -3023,7 +3059,7 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			}
 
 			#if !defined(_DEPTHOFFSET_ON)
-			[earlydepthstencil] // quad overshading debug mode writes to UAV
+			[earlydepthstencil]
 			#endif
 			void Frag(PackedVaryingsToPS packedInput)
 			{
@@ -3040,8 +3076,8 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 			#endif
 			}
 
-			ENDHLSL
-		}
+            ENDHLSL
+        }
 		
 	}
 	
@@ -3050,8 +3086,9 @@ Shader "Ultimate Character Controller/First Person Controller/Invisible Shadow C
 	
 }
 /*ASEBEGIN
-Version=19801
-Node;AmplifyShaderEditor.ColorNode;8;-299,-123.5;Inherit;False;Constant;_Color0;Color 0;0;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;True;True;0;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Version=19108
+Node;AmplifyShaderEditor.ColorNode;8;-299,-123.5;Inherit;False;Constant;_Color0;Color 0;0;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;True;-1;2;Rendering.HighDefinition.HDUnlitGUI;0;13;Ultimate Character Controller/First Person Controller/Invisible Shadow Caster HDRP;7f5cb9c3ea6481f469fdd856555439ef;True;Forward Unlit;0;0;Forward Unlit;9;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;True;1;5;True;_SrcBlend;0;True;_DstBlend;1;0;True;_AlphaSrcBlend;0;True;_AlphaDstBlend;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;False;False;True;True;True;True;True;0;True;_ColorMaskTransparentVel;False;False;False;False;False;True;True;0;True;_StencilRef;255;False;;255;True;_StencilWriteMask;7;False;;3;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;0;True;_ZWrite;True;0;True;_ZTestTransparent;False;True;1;LightMode=ForwardOnly;False;False;0;Hidden/InternalErrorShader;0;0;Standard;30;Surface Type;1;0;  Rendering Pass ;0;0;  Rendering Pass;1;0;  Blending Mode;0;0;  Receive Fog;1;0;  Distortion;0;0;    Distortion Mode;0;0;    Distortion Only;1;0;  Depth Write;1;0;  Cull Mode;0;0;  Depth Test;4;0;Double-Sided;0;0;Alpha Clipping;0;0;Motion Vectors;1;0;  Add Precomputed Velocity;0;0;Shadow Matte;0;0;Cast Shadows;1;0;DOTS Instancing;0;0;GPU Instancing;1;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position,InvertActionOnDeselection;1;0;LOD CrossFade;0;0;0;8;True;True;True;True;True;True;False;True;False;;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;Rendering.HighDefinition.HDUnlitGUI;0;13;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;ShadowCaster;0;1;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;False;False;True;1;LightMode=ShadowCaster;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;Rendering.HighDefinition.HDUnlitGUI;0;13;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;META;0;2;META;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;4;0,0;Float;False;False;-1;2;Rendering.HighDefinition.HDUnlitGUI;0;13;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;SceneSelectionPass;0;3;SceneSelectionPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=SceneSelectionPass;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
@@ -3059,8 +3096,7 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;5;0,0;Float;False;False;-1;
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;7;0,0;Float;False;False;-1;2;Rendering.HighDefinition.HDUnlitGUI;0;13;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;DistortionVectors;0;6;DistortionVectors;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;True;4;1;False;;1;False;;4;1;False;;1;False;;True;1;False;;1;False;;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;False;False;False;False;False;False;False;False;True;True;0;True;_StencilRefDistortionVec;255;False;;255;True;_StencilWriteMaskDistortionVec;7;False;;3;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;2;False;;True;3;False;;False;True;1;LightMode=DistortionVectors;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;9;0,50;Float;False;False;-1;2;Rendering.HighDefinition.HDUnlitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;MotionVectors;0;5;MotionVectors;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;False;False;False;False;False;False;False;False;True;True;0;True;_StencilRefMV;255;False;;255;True;_StencilWriteMaskMV;7;False;;3;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;False;False;True;1;LightMode=MotionVectors;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;10;0,60;Float;False;False;-1;2;Rendering.HighDefinition.HDUnlitGUI;0;1;New Amplify Shader;7f5cb9c3ea6481f469fdd856555439ef;True;ScenePickingPass;0;7;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_CullMode;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;True;3;False;;False;True;1;LightMode=Picking;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;16,-96;Float;False;True;-1;2;Rendering.HighDefinition.HDUnlitGUI;0;15;Ultimate Character Controller/First Person Controller/Invisible Shadow Caster HDRP;7f5cb9c3ea6481f469fdd856555439ef;True;Forward Unlit;0;0;Forward Unlit;9;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=HDRenderPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;5;True;7;d3d11;metal;vulkan;xboxone;xboxseries;playstation;switch;0;False;False;False;False;True;3;1;False;;10;False;;0;1;False;;0;False;;False;False;True;1;1;False;;0;True;_DstBlend2;0;1;False;;0;False;;False;False;True;1;1;False;;0;True;_DstBlend2;0;1;False;;0;False;;False;False;False;True;0;True;_CullMode;False;False;False;True;True;True;True;True;0;True;_ColorMaskTransparentVel;False;False;False;False;False;True;True;0;True;_StencilRef;255;False;;255;True;_StencilWriteMask;7;False;;3;False;;1;False;;1;False;;7;False;;1;False;;1;False;;1;False;;False;True;0;True;_ZWrite;True;0;True;_ZTestTransparent;False;True;1;LightMode=ForwardOnly;False;False;0;Hidden/InternalErrorShader;0;0;Standard;30;Surface Type;1;0;  Rendering Pass ;0;0;  Rendering Pass;1;0;  Blending Mode;0;0;  Receive Fog;1;0;  Distortion;0;0;    Distortion Mode;0;0;    Distortion Only;1;0;  Depth Write;1;0;  Cull Mode;0;0;  Depth Test;4;0;Double-Sided;0;0;Alpha Clipping;0;0;Receive Decals;1;0;Motion Vectors;1;0;  Add Precomputed Velocity;0;0;Shadow Matte;0;0;Cast Shadows;1;0;GPU Instancing;1;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position,InvertActionOnDeselection;1;0;LOD CrossFade;0;0;0;8;True;True;True;True;True;True;False;True;False;;False;0
 WireConnection;1;0;8;0
 WireConnection;1;2;8;4
 ASEEND*/
-//CHKSM=C4100BDBE172AFF1CFD86E664738CD94858B2267
+//CHKSM=7BD9334147C59D767DCADDF975B9C11118C1DCCA

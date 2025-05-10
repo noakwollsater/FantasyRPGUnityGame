@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -104,7 +103,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +116,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -128,6 +127,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -216,7 +216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Currency01
+      value: ICON_FantasyWarrior_Inventory_Currency_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -231,6 +231,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &7526409 stripped
 RectTransform:
@@ -242,6 +245,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -330,7 +334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Element_Ice01
+      value: ICON_FantasyWarrior_Element_Ice_01
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_IsActive
@@ -361,6 +365,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &34676702 stripped
 RectTransform:
@@ -372,6 +379,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -460,7 +468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Percentage01
+      value: ICON_FantasyWarrior_Stat_Percentage_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -475,6 +483,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &65341672 stripped
 RectTransform:
@@ -486,6 +497,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -574,7 +586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Shocked01
+      value: ICON_FantasyWarrior_Status_Shocked_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -589,6 +601,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &93928610 stripped
 RectTransform:
@@ -600,6 +615,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -688,7 +704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Strength03
+      value: ICON_FantasyWarrior_Stat_Strength_03
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -703,6 +719,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &157691536 stripped
 RectTransform:
@@ -714,6 +733,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -806,7 +826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Element_Earth02
+      value: ICON_FantasyWarrior_Element_Earth_02
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_IsActive
@@ -841,6 +861,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &212221777 stripped
 RectTransform:
@@ -852,6 +875,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -940,7 +964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Element_Air01
+      value: ICON_FantasyWarrior_Element_Air_01
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_IsActive
@@ -971,6 +995,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &268189814 stripped
 RectTransform:
@@ -982,6 +1009,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -1070,7 +1098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_DefenseUp01
+      value: ICON_FantasyWarrior_Status_DefenseUp_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1085,6 +1113,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &272472770 stripped
 RectTransform:
@@ -1096,6 +1127,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -1184,7 +1216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Spirit01
+      value: ICON_FantasyWarrior_Stat_Spirit_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1199,6 +1231,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &288063883 stripped
 RectTransform:
@@ -1210,6 +1245,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -1298,7 +1334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_DefenseDown01
+      value: ICON_FantasyWarrior_Status_DefenseDown_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1313,6 +1349,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &294114875 stripped
 RectTransform:
@@ -1324,6 +1363,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -1412,7 +1452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Magic03
+      value: ICON_FantasyWarrior_Stat_Magic_03
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1427,6 +1467,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &315593148 stripped
 RectTransform:
@@ -1438,6 +1481,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -1526,7 +1570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Food01
+      value: ICON_FantasyWarrior_Inventory_Food_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1541,6 +1585,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &335152366 stripped
 RectTransform:
@@ -1552,6 +1599,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -1640,7 +1688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Notes02
+      value: ICON_FantasyWarrior_Inventory_Notes_02
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1655,6 +1703,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &336837864 stripped
 RectTransform:
@@ -1666,6 +1717,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -1754,7 +1806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Flag01
+      value: ICON_FantasyWarrior_Map_Flag_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1769,6 +1821,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &362928674 stripped
 RectTransform:
@@ -1780,6 +1835,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -1868,7 +1924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Up01
+      value: ICON_FantasyWarrior_Status_Up_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1883,6 +1939,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &363470916 stripped
 RectTransform:
@@ -1894,6 +1953,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -1982,7 +2042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Horse01
+      value: ICON_FantasyWarrior_Map_Horse_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1997,6 +2057,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &366793663 stripped
 RectTransform:
@@ -2008,6 +2071,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -2096,7 +2160,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Arrows02
+      value: ICON_FantasyWarrior_Inventory_Arrows_02
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2111,6 +2175,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &396553356 stripped
 RectTransform:
@@ -2122,6 +2189,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -2210,7 +2278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Mind01
+      value: ICON_FantasyWarrior_Stat_Mind_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2225,6 +2293,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &398068010 stripped
 RectTransform:
@@ -2236,6 +2307,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -2324,7 +2396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Magic01
+      value: ICON_FantasyWarrior_Stat_Magic_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2339,6 +2411,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &400761284 stripped
 RectTransform:
@@ -2350,6 +2425,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -2438,7 +2514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_AttackUp01
+      value: ICON_FantasyWarrior_Status_AttackUp_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2453,6 +2529,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &416004804 stripped
 RectTransform:
@@ -2464,6 +2543,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -2552,7 +2632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Speed01
+      value: ICON_FantasyWarrior_Stat_Speed_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2567,6 +2647,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &424186411 stripped
 RectTransform:
@@ -2578,6 +2661,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -2666,7 +2750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Plants01
+      value: ICON_FantasyWarrior_Inventory_Plants_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2681,6 +2765,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &436775914 stripped
 RectTransform:
@@ -2692,6 +2779,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -2780,7 +2868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Spellbooks01
+      value: ICON_FantasyWarrior_Inventory_Spellbooks_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2795,6 +2883,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &458206457 stripped
 RectTransform:
@@ -2806,6 +2897,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -2894,7 +2986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Magic01
+      value: ICON_FantasyWarrior_Inventory_Magic_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2909,6 +3001,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &460283431 stripped
 RectTransform:
@@ -2920,6 +3015,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -3008,7 +3104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Items01
+      value: ICON_FantasyWarrior_Inventory_Items_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3023,6 +3119,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &484120338 stripped
 RectTransform:
@@ -3034,6 +3133,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -3122,7 +3222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Currency02
+      value: ICON_FantasyWarrior_Inventory_Currency_02
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3137,6 +3237,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &486408024 stripped
 RectTransform:
@@ -3148,6 +3251,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -3236,7 +3340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Wet01
+      value: ICON_FantasyWarrior_Status_Wet_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3251,6 +3355,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &500651820 stripped
 RectTransform:
@@ -3262,6 +3369,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -3350,7 +3458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Dead01
+      value: ICON_FantasyWarrior_Status_Dead_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3365,6 +3473,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &504377743 stripped
 RectTransform:
@@ -3402,9 +3513,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -3438,18 +3557,20 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &526878447
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -3538,7 +3659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Lightning01
+      value: ICON_FantasyWarrior_Map_Lightning_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3553,6 +3674,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &526878448 stripped
 RectTransform:
@@ -3564,6 +3688,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -3652,7 +3777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Lock01
+      value: ICON_FantasyWarrior_Map_Lock_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3667,6 +3792,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &563276569 stripped
 RectTransform:
@@ -3678,6 +3806,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -3766,7 +3895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Speed02
+      value: ICON_FantasyWarrior_Stat_Speed_02
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3781,6 +3910,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &577847399 stripped
 RectTransform:
@@ -3792,6 +3924,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -3880,7 +4013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Unknown
+      value: ICON_FantasyWarrior_Map_Unknown_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3895,6 +4028,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &594843193 stripped
 RectTransform:
@@ -3906,6 +4042,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -3994,7 +4131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Daggers01
+      value: ICON_FantasyWarrior_Inventory_Daggers_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4009,6 +4146,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &604346780 stripped
 RectTransform:
@@ -4020,6 +4160,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -4108,7 +4249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Treasure01
+      value: ICON_FantasyWarrior_Map_Treasure_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4123,6 +4264,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &641018128 stripped
 RectTransform:
@@ -4134,6 +4278,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -4222,7 +4367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Dragon01
+      value: ICON_FantasyWarrior_Map_Dragon_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4237,6 +4382,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &678481648 stripped
 RectTransform:
@@ -4248,6 +4396,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -4336,7 +4485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Strength01
+      value: ICON_FantasyWarrior_Stat_Strength_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4351,6 +4500,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &715677518 stripped
 RectTransform:
@@ -4362,6 +4514,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -4450,7 +4603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Element_Earth01
+      value: ICON_FantasyWarrior_Element_Earth_01
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_IsActive
@@ -4481,6 +4634,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &761739277 stripped
 RectTransform:
@@ -4492,6 +4648,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -4580,7 +4737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_AttackDown01
+      value: ICON_FantasyWarrior_Status_AttackDown_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4595,6 +4752,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &765632666 stripped
 RectTransform:
@@ -4606,6 +4766,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -4694,7 +4855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Critical01
+      value: ICON_FantasyWarrior_Status_Critical_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4709,6 +4870,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &774685180 stripped
 RectTransform:
@@ -4720,6 +4884,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -4808,7 +4973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_FortifiedAttack01
+      value: ICON_FantasyWarrior_Status_FortifiedAttack_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4823,6 +4988,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &786789412 stripped
 RectTransform:
@@ -4834,6 +5002,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -4922,7 +5091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Health01
+      value: ICON_FantasyWarrior_Status_Health_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4937,6 +5106,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &799733240 stripped
 RectTransform:
@@ -4948,6 +5120,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -5036,7 +5209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Cold01
+      value: ICON_FantasyWarrior_Status_Cold_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5051,6 +5224,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &803597273 stripped
 RectTransform:
@@ -5062,6 +5238,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -5150,7 +5327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Element_Fire01
+      value: ICON_FantasyWarrior_Element_Fire_01
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_IsActive
@@ -5181,6 +5358,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &823322086 stripped
 RectTransform:
@@ -5192,6 +5372,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -5280,7 +5461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Bows01
+      value: ICON_FantasyWarrior_Inventory_Bows_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5295,6 +5476,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &839007079 stripped
 RectTransform:
@@ -5306,6 +5490,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -5394,7 +5579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Accuracy01
+      value: ICON_FantasyWarrior_Stat_Accuracy_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5409,6 +5594,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &857186590 stripped
 RectTransform:
@@ -5420,6 +5608,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -5508,7 +5697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Crafting01
+      value: ICON_FantasyWarrior_Inventory_Crafting_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5523,6 +5712,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &906612487 stripped
 RectTransform:
@@ -5534,6 +5726,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -5622,7 +5815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Luck01
+      value: ICON_FantasyWarrior_Stat_Luck_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5637,6 +5830,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &925343665 stripped
 RectTransform:
@@ -5648,6 +5844,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -5736,7 +5933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Time01
+      value: ICON_FantasyWarrior_Status_Time_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5751,6 +5948,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &939854115 stripped
 RectTransform:
@@ -5762,6 +5962,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -5850,7 +6051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Health01
+      value: ICON_FantasyWarrior_Stat_Health_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5865,6 +6066,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &967002540 stripped
 RectTransform:
@@ -5876,6 +6080,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -5964,7 +6169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Cursed01
+      value: ICON_FantasyWarrior_Status_Cursed_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5979,6 +6184,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &987514748 stripped
 RectTransform:
@@ -5990,6 +6198,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -6078,7 +6287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Thirst01
+      value: ICON_FantasyWarrior_Status_Thirst_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6093,6 +6302,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &995787366 stripped
 RectTransform:
@@ -6104,6 +6316,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -6192,7 +6405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_FortifiedDefense01
+      value: ICON_FantasyWarrior_Status_FortifiedDefense_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6207,6 +6420,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1012361233 stripped
 RectTransform:
@@ -6218,6 +6434,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -6306,7 +6523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Swords01
+      value: ICON_FantasyWarrior_Inventory_Swords_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6317,6 +6534,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1022447173 stripped
 RectTransform:
@@ -6328,6 +6548,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -6416,7 +6637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Hammers01
+      value: ICON_FantasyWarrior_Inventory_Hammers_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6431,6 +6652,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1028410357 stripped
 RectTransform:
@@ -6442,6 +6666,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -6530,7 +6755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Key01
+      value: ICON_FantasyWarrior_Map_Key_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6545,6 +6770,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1065854614 stripped
 RectTransform:
@@ -6556,6 +6784,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1273158580}
     m_Modifications:
     - target: {fileID: 290260064199665292, guid: 2debe6f834403d941a966e81f3a277ea, type: 3}
@@ -7097,6 +7326,9 @@ PrefabInstance:
       value: Navigation_Overlay
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2debe6f834403d941a966e81f3a277ea, type: 3}
 --- !u!224 &1085932059 stripped
 RectTransform:
@@ -7130,6 +7362,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 268189814}
   - {fileID: 1623229407}
@@ -7242,7 +7475,6 @@ RectTransform:
   - {fileID: 363470916}
   - {fileID: 500651820}
   m_Father: {fileID: 1987947183}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7278,6 +7510,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -7366,7 +7599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Home01
+      value: ICON_FantasyWarrior_Map_Home_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7381,6 +7614,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1156658514 stripped
 RectTransform:
@@ -7392,6 +7628,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -7480,7 +7717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Bleeding01
+      value: ICON_FantasyWarrior_Status_Bleeding_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7495,6 +7732,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1157537124 stripped
 RectTransform:
@@ -7506,6 +7746,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -7594,7 +7835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_DefenseBroken01
+      value: ICON_FantasyWarrior_Status_DefenseBroken_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7609,6 +7850,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1165948485 stripped
 RectTransform:
@@ -7620,6 +7864,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -7708,7 +7953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Guns01
+      value: ICON_FantasyWarrior_Inventory_Guns_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7723,6 +7968,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1182525517 stripped
 RectTransform:
@@ -7734,6 +7982,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -7822,7 +8071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Arrows01
+      value: ICON_FantasyWarrior_Inventory_Arrows_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7837,6 +8086,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1187675980 stripped
 RectTransform:
@@ -7848,6 +8100,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -7936,7 +8189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Attack01
+      value: ICON_FantasyWarrior_Status_Attack_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7951,6 +8204,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1199804799 stripped
 RectTransform:
@@ -7962,6 +8218,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -8050,7 +8307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Armor01
+      value: ICON_FantasyWarrior_Status_Armor_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8065,6 +8322,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1203665790 stripped
 RectTransform:
@@ -8076,6 +8336,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -8164,7 +8425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_ShopWeapons01
+      value: ICON_FantasyWarrior_Map_ShopWeapons_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8179,6 +8440,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1250673470 stripped
 RectTransform:
@@ -8190,6 +8454,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -8278,7 +8543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Fortified01
+      value: ICON_FantasyWarrior_Status_Fortified_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8293,6 +8558,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1254653211 stripped
 RectTransform:
@@ -8304,6 +8572,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -8392,7 +8661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Healing01
+      value: ICON_FantasyWarrior_Inventory_Healing_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8407,6 +8676,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1262761136 stripped
 RectTransform:
@@ -8448,7 +8720,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 375
+    m_Bits: 4294967295
 --- !u!114 &1273158577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8489,7 +8761,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 31
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -8503,11 +8777,11 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1987947183}
   - {fileID: 1085932059}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8519,6 +8793,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -8607,7 +8882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Quest01
+      value: ICON_FantasyWarrior_Map_Quest_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8622,6 +8897,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1312232397 stripped
 RectTransform:
@@ -8633,6 +8911,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -8721,7 +9000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Potions01
+      value: ICON_FantasyWarrior_Inventory_Potions_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8736,6 +9015,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1337063802 stripped
 RectTransform:
@@ -8747,6 +9029,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -8835,7 +9118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_FortifiedHealth02
+      value: ICON_FantasyWarrior_Status_FortifiedHealth_02
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8850,6 +9133,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1357860225 stripped
 RectTransform:
@@ -8861,6 +9147,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -8949,7 +9236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Axes01
+      value: ICON_FantasyWarrior_Inventory_Axes_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8964,6 +9251,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1409382366 stripped
 RectTransform:
@@ -8975,6 +9265,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -9063,7 +9354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Helmets01
+      value: ICON_FantasyWarrior_Inventory_Helmets_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9078,6 +9369,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1431969932 stripped
 RectTransform:
@@ -9089,6 +9383,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -9177,7 +9472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Burninating01
+      value: ICON_FantasyWarrior_Status_Burninating_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9192,6 +9487,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1433245623 stripped
 RectTransform:
@@ -9203,6 +9501,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -9291,7 +9590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Down01
+      value: ICON_FantasyWarrior_Status_Down_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9306,6 +9605,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1441578277 stripped
 RectTransform:
@@ -9317,6 +9619,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -9405,7 +9708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Targeted01
+      value: ICON_FantasyWarrior_Status_Targeted_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9420,6 +9723,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1474910272 stripped
 RectTransform:
@@ -9431,6 +9737,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -9519,7 +9826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Entangled01
+      value: ICON_FantasyWarrior_Status_Entangled_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9534,6 +9841,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1495083884 stripped
 RectTransform:
@@ -9545,6 +9855,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -9633,7 +9944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Defense01
+      value: ICON_FantasyWarrior_Status_Defense_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9648,6 +9959,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1496569286 stripped
 RectTransform:
@@ -9659,6 +9973,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -9747,7 +10062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Encumbered01
+      value: ICON_FantasyWarrior_Status_Encumbered_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9762,6 +10077,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1505752824 stripped
 RectTransform:
@@ -9773,6 +10091,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -9861,7 +10180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_AttackBroken
+      value: ICON_FantasyWarrior_Status_AttackBroken_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9876,6 +10195,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1537247517 stripped
 RectTransform:
@@ -9887,6 +10209,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -9975,7 +10298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Poisoned01
+      value: ICON_FantasyWarrior_Status_Poisoned_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -9990,6 +10313,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1575084245 stripped
 RectTransform:
@@ -10001,6 +10327,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -10089,7 +10416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Element_Air02
+      value: ICON_FantasyWarrior_Element_Air_02
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_IsActive
@@ -10120,6 +10447,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1623229407 stripped
 RectTransform:
@@ -10131,6 +10461,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -10219,7 +10550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_FortifiedHealth01
+      value: ICON_FantasyWarrior_Status_FortifiedHealth_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -10234,6 +10565,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1623817898 stripped
 RectTransform:
@@ -10245,6 +10579,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -10333,7 +10668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Health02
+      value: ICON_FantasyWarrior_Status_Health_02
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -10348,6 +10683,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1638940803 stripped
 RectTransform:
@@ -10359,6 +10697,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -10447,7 +10786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Shields01
+      value: ICON_FantasyWarrior_Inventory_Shields_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -10462,6 +10801,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1639140780 stripped
 RectTransform:
@@ -10473,6 +10815,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -10561,7 +10904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Necklaces01
+      value: ICON_FantasyWarrior_Inventory_Necklaces_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -10576,6 +10919,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1661272915 stripped
 RectTransform:
@@ -10587,6 +10933,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -10675,7 +11022,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Skull01
+      value: ICON_FantasyWarrior_Map_Skull_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -10690,6 +11037,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1661866994 stripped
 RectTransform:
@@ -10701,6 +11051,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -10789,7 +11140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Backpack01
+      value: ICON_FantasyWarrior_Inventory_Backpack_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -10804,6 +11155,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1675800405 stripped
 RectTransform:
@@ -10815,6 +11169,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -10903,7 +11258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Armor01
+      value: ICON_FantasyWarrior_Inventory_Armor_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -10918,6 +11273,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1737896923 stripped
 RectTransform:
@@ -10929,6 +11287,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -11017,7 +11376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Strength02
+      value: ICON_FantasyWarrior_Stat_Strength_02
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11032,6 +11391,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1780589100 stripped
 RectTransform:
@@ -11043,6 +11405,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -11131,7 +11494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Tavern01
+      value: ICON_FantasyWarrior_Map_Tavern_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11146,6 +11509,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1791563587 stripped
 RectTransform:
@@ -11157,6 +11523,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -11245,7 +11612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Hunger01
+      value: ICON_FantasyWarrior_Status_Hunger_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11260,6 +11627,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1824120121 stripped
 RectTransform:
@@ -11271,6 +11641,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -11359,7 +11730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Target01
+      value: ICON_FantasyWarrior_Map_Target_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11374,6 +11745,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1850134191 stripped
 RectTransform:
@@ -11385,6 +11759,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -11473,7 +11848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Magic04
+      value: ICON_FantasyWarrior_Stat_Magic_04
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11488,6 +11863,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1864596902 stripped
 RectTransform:
@@ -11499,6 +11877,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -11587,7 +11966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Rings01
+      value: ICON_FantasyWarrior_Inventory_Rings_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11602,6 +11981,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1864915352 stripped
 RectTransform:
@@ -11613,6 +11995,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -11701,7 +12084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Fishing01
+      value: ICON_FantasyWarrior_Map_Fishing_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11716,6 +12099,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1874994662 stripped
 RectTransform:
@@ -11727,6 +12113,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -11815,7 +12202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Notes01
+      value: ICON_FantasyWarrior_Inventory_Notes_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11830,6 +12217,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1906515278 stripped
 RectTransform:
@@ -11841,6 +12231,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -11929,7 +12320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Maces01
+      value: ICON_FantasyWarrior_Inventory_Maces_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11944,6 +12335,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1943425600 stripped
 RectTransform:
@@ -11955,6 +12349,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -12043,7 +12438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Magic02
+      value: ICON_FantasyWarrior_Stat_Magic_02
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12058,6 +12453,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1970520724 stripped
 RectTransform:
@@ -12069,6 +12467,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -12157,7 +12556,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Forage01
+      value: ICON_FantasyWarrior_Map_Forage_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12172,6 +12571,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1978580869 stripped
 RectTransform:
@@ -12204,10 +12606,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1099153816}
   m_Father: {fileID: 1273158580}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -12219,6 +12621,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -12307,7 +12710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Charmed01
+      value: ICON_FantasyWarrior_Status_Charmed_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12322,6 +12725,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &1992393302 stripped
 RectTransform:
@@ -12333,6 +12739,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -12421,7 +12828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_SpeedUp01
+      value: ICON_FantasyWarrior_Status_SpeedUp_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12436,6 +12843,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2002331176 stripped
 RectTransform:
@@ -12447,6 +12857,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -12535,7 +12946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Britneys01
+      value: ICON_FantasyWarrior_Inventory_Spears_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12550,6 +12961,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2019255051 stripped
 RectTransform:
@@ -12561,6 +12975,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -12649,7 +13064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Status_Cursed02
+      value: ICON_FantasyWarrior_Status_Cursed_02
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12664,6 +13079,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2023271740 stripped
 RectTransform:
@@ -12710,12 +13128,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030909723}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2030909727
 MonoBehaviour:
@@ -12729,6 +13148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -12741,6 +13161,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -12829,7 +13250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Minerals01
+      value: ICON_FantasyWarrior_Inventory_Minerals_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12844,6 +13265,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2031698596 stripped
 RectTransform:
@@ -12855,6 +13279,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -12943,7 +13368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Message01
+      value: ICON_FantasyWarrior_Map_Message_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -12958,6 +13383,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2046368577 stripped
 RectTransform:
@@ -12969,6 +13397,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -13057,7 +13486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Healing01
+      value: ICON_FantasyWarrior_Map_Healing_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13072,6 +13501,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2054848827 stripped
 RectTransform:
@@ -13083,6 +13515,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -13171,7 +13604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Magic01
+      value: ICON_FantasyWarrior_Map_Magic_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13186,6 +13619,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2061714272 stripped
 RectTransform:
@@ -13197,6 +13633,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -13285,7 +13722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Staves01
+      value: ICON_FantasyWarrior_Inventory_Staves_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13300,6 +13737,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2063087845 stripped
 RectTransform:
@@ -13311,6 +13751,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -13399,7 +13840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Monster01
+      value: ICON_FantasyWarrior_Map_Monster_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13414,6 +13855,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2073803741 stripped
 RectTransform:
@@ -13425,6 +13869,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -13513,7 +13958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Inventory_Scepters01
+      value: ICON_FantasyWarrior_Inventory_Scepters_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13528,6 +13973,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2077340956 stripped
 RectTransform:
@@ -13539,6 +13987,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -13627,7 +14076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Stat_Speed03
+      value: ICON_FantasyWarrior_Stat_Speed_03
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13642,6 +14091,9 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2078216661 stripped
 RectTransform:
@@ -13653,6 +14105,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1099153816}
     m_Modifications:
     - target: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
@@ -13741,7 +14194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693880008858035797, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_Name
-      value: ICON_FantasyWarrior_Map_Star01
+      value: ICON_FantasyWarrior_Map_Star_01
       objectReference: {fileID: 0}
     - target: {fileID: 8206176921936930926, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -13756,9 +14209,19 @@ PrefabInstance:
       value: 1.2000122
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
 --- !u!224 &2111937210 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 661324707704175916, guid: 12f28f6fbe9fd6b48aeb0d5770d1bfe3, type: 3}
   m_PrefabInstance: {fileID: 2111937209}
   m_PrefabAsset: {fileID: 0}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 1273158580}
+  - {fileID: 519420032}
+  - {fileID: 2030909726}

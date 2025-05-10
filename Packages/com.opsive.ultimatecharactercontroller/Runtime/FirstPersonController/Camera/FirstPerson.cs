@@ -12,6 +12,8 @@ namespace Opsive.UltimateCharacterController.FirstPersonController.Camera.ViewTy
     using Opsive.Shared.Utility;
     using Opsive.UltimateCharacterController.Camera;
     using Opsive.UltimateCharacterController.Camera.ViewTypes;
+    using Opsive.UltimateCharacterController.Character;
+    using Opsive.UltimateCharacterController.Character.Abilities;
     using Opsive.UltimateCharacterController.Game;
     using Opsive.UltimateCharacterController.Motion;
     using Opsive.UltimateCharacterController.Utility;
@@ -252,6 +254,7 @@ namespace Opsive.UltimateCharacterController.FirstPersonController.Camera.ViewTy
 
         private Transform m_CharacterAnchor;
         private Vector3 m_CharacterAnchorOffset;
+        private Vector3[] m_CharacterModelsAnchorOffset;
         private Quaternion m_CharacterAnchorRotation;
         private Vector3[] m_SmoothHeadOffsetBuffer;
         private int m_SmoothHeadBufferIndex;
@@ -362,12 +365,13 @@ namespace Opsive.UltimateCharacterController.FirstPersonController.Camera.ViewTy
                 EventHandler.UnregisterEvent<float>(m_Character, "OnCharacterLand", OnCharacterLand);
                 EventHandler.UnregisterEvent<float, float, float>(m_Character, "OnCharacterLean", OnCharacterLean);
                 EventHandler.UnregisterEvent<float>(m_Character, "OnHeightChangeAdjustHeight", AdjustVerticalOffset);
-                EventHandler.UnregisterEvent<GameObject>(m_GameObject, "OnCharacterSwitchModels", OnSwitchModels);
+                EventHandler.UnregisterEvent<GameObject>(m_Character, "OnCharacterSwitchModels", OnSwitchModels);
                 if (m_SmoothHeadBufferEvent != null) {
                     Scheduler.Cancel(m_SmoothHeadBufferEvent);
                     m_SmoothHeadBufferEvent = null;
                 }
                 m_CharacterAnchor = null;
+                m_CharacterModelsAnchorOffset = null;
             }
 
             base.AttachCharacter(character);
@@ -395,7 +399,7 @@ namespace Opsive.UltimateCharacterController.FirstPersonController.Camera.ViewTy
                 EventHandler.RegisterEvent<bool>(m_Character, "OnCameraChangePerspectives", UpdateFirstPersonCamera);
                 EventHandler.RegisterEvent<float>(m_Character, "OnCharacterLand", OnCharacterLand);
                 EventHandler.RegisterEvent<float, float, float>(m_Character, "OnCharacterLean", OnCharacterLean);
-                EventHandler.RegisterEvent<GameObject>(m_GameObject, "OnCharacterSwitchModels", OnSwitchModels);
+                EventHandler.RegisterEvent<GameObject>(m_Character, "OnCharacterSwitchModels", OnSwitchModels);
             }
         }
 
@@ -409,11 +413,7 @@ namespace Opsive.UltimateCharacterController.FirstPersonController.Camera.ViewTy
                 return;
             }
 
-            m_CharacterAnchor = characterAnimator.GetBoneTransform(HumanBodyBones.Neck);
-            // If the neck doesn't exist then try to get the head.
-            if (m_CharacterAnchor == null) {
-                m_CharacterAnchor = characterAnimator.GetBoneTransform(HumanBodyBones.Head);
-            }
+            m_CharacterAnchor = GetAnchor(characterAnimator);
             if (m_CharacterAnchor != null && m_SmoothHeadOffsetBuffer != null) {
                 if (m_SmoothHeadBufferEvent != null) {
                     Scheduler.Cancel(m_SmoothHeadBufferEvent);
@@ -421,6 +421,21 @@ namespace Opsive.UltimateCharacterController.FirstPersonController.Camera.ViewTy
                 }
                 InitializeSmoothHeadBuffer();
             }
+        }
+
+        /// <summary>
+        /// Returns the anchor belonging to the specified Animator.
+        /// </summary>
+        /// <param name="characterAnimator">A reference to the character's Animator component.</param>
+        /// <returns></returns>
+        private Transform GetAnchor(Animator characterAnimator)
+        {
+            var anchor = characterAnimator.GetBoneTransform(HumanBodyBones.Neck);
+            // If the neck doesn't exist then try to get the head.
+            if (anchor == null) {
+                anchor = characterAnimator.GetBoneTransform(HumanBodyBones.Head);
+            }
+            return anchor;
         }
 
         /// <summary>
@@ -433,7 +448,29 @@ namespace Opsive.UltimateCharacterController.FirstPersonController.Camera.ViewTy
                 return;
             }
 
-            m_CharacterAnchorOffset = m_CharacterTransform.InverseTransformPoint(m_CharacterAnchor.position);
+            var modelManager = m_Character.GetCachedComponent<ModelManager>();
+            if (m_CharacterModelsAnchorOffset == null) {
+                if (modelManager != null) {
+                    // Store the offset for all of the models when the bones are initialized.
+                    m_CharacterModelsAnchorOffset = new Vector3[modelManager.AvailableModels.Length];
+                    for (int i = 0; i < modelManager.AvailableModels.Length; i++) {
+                        var modelAnimator = modelManager.AvailableModels[i].GetComponent<Animator>();
+                        if (modelAnimator != null) {
+                            var anchor = GetAnchor(modelAnimator);
+                            m_CharacterModelsAnchorOffset[i] = m_CharacterTransform.InverseTransformPoint(anchor.position);
+                        }
+                    }
+                } else {
+                    m_CharacterModelsAnchorOffset = new Vector3[1];
+                    m_CharacterModelsAnchorOffset[0] = m_CharacterTransform.InverseTransformPoint(m_CharacterAnchor.position);
+                }
+            }
+            if (modelManager != null) {
+                m_CharacterAnchorOffset = m_CharacterModelsAnchorOffset[modelManager.ActiveModelIndex];
+            } else {
+                m_CharacterAnchorOffset = m_CharacterModelsAnchorOffset[0];
+            }
+
             m_SmoothHeadBufferEvent = null;
         }
 

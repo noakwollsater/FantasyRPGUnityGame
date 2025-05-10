@@ -58,7 +58,7 @@ namespace Opsive.UltimateCharacterController.Editor.Managers
         public static MainManagerWindow ShowWindow()
         {
             var window = EditorWindow.GetWindow<CharacterMainWindow>(false, "Character Manager");
-            window.minSize = new Vector2(680, 625);
+            window.minSize = new Vector2(680, 650);
             return window;
         }
 

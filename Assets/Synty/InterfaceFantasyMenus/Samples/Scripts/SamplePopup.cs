@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2024 Synty Studios Limited. All rights reserved.
+// Copyright (c) 2024 Synty Studios Limited. All rights reserved.
 //
 // Use of this software is subject to the terms and conditions of the End User Licence Agreement (EULA) 
 // of the store at which you purchased this asset. 
@@ -55,7 +55,7 @@ namespace Synty.Interface.FantasyMenus.Samples
             }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (cancelObject != null) 
+                if (cancelObject != null)
                 {
                     cancelObject.ShowMe();
                 }
@@ -74,7 +74,7 @@ namespace Synty.Interface.FantasyMenus.Samples
         {
             CancelInvoke();
             dismissed = false;
-            if (inputBlocker != null ) 
+            if (inputBlocker != null)
             {
                 inputBlocker.gameObject.SetActive(true);
                 inputBlocker.Select();
@@ -82,6 +82,7 @@ namespace Synty.Interface.FantasyMenus.Samples
             gameObject.SetActive(false);
             gameObject.SetActive(true);
             animator.SetBool("Active", true);
+            Debug.Log("Popup is active");
             if (selfDismiss)
             {
                 Invoke("DisableMe", dismissTime);
@@ -92,7 +93,7 @@ namespace Synty.Interface.FantasyMenus.Samples
         {
             animator.SetBool("Active", false);
             Invoke("DisableMe", dismissTime);
-            if (inputBlocker != null ) 
+            if (inputBlocker != null)
             {
                 inputBlocker.gameObject.SetActive(false);
             }

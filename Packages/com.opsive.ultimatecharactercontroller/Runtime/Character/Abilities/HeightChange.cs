@@ -96,13 +96,20 @@ namespace Opsive.UltimateCharacterController.Character.Abilities
             for (int i = 0; i < m_CharacterLocomotion.ColliderCount; ++i) {
                 if (m_CharacterLocomotion.Colliders[i] is CapsuleCollider) {
                     var capsuleCollider = (m_CharacterLocomotion.Colliders[i] as CapsuleCollider);
+                    // If the collider isn't enabled when the ability started then the value isn't correct. Ignore the value.
+                    if (!capsuleCollider.gameObject.activeInHierarchy) {
+                        m_StartColliderCenter[i].y = float.MaxValue;
+                        continue;
+                    }
                     m_CapsuleColliderHeight[capsuleColliderCount] = capsuleCollider.height;
                     m_StartColliderCenter[i] = capsuleCollider.center;
                     capsuleColliderCount++;
-                } else if (m_CharacterLocomotion.Colliders[i] is SphereCollider) {
-                    m_StartColliderCenter[i] = (m_CharacterLocomotion.Colliders[i] as SphereCollider).center;
-                } else { // BoxCollider.
-                    m_StartColliderCenter[i] = (m_CharacterLocomotion.Colliders[i] as BoxCollider).center;
+                } else {
+                    if (m_CharacterLocomotion.Colliders[i] is SphereCollider) {
+                        m_StartColliderCenter[i] = (m_CharacterLocomotion.Colliders[i] as SphereCollider).center;
+                    } else { // BoxCollider.
+                        m_StartColliderCenter[i] = (m_CharacterLocomotion.Colliders[i] as BoxCollider).center;
+                    }
                 }
             }
 
@@ -132,12 +139,11 @@ namespace Opsive.UltimateCharacterController.Character.Abilities
             // The ability can't stop if there isn't enough room for the character to occupy their original height.
             var capsuleColliderCount = 0;
             for (int i = 0; i < m_CharacterLocomotion.ColliderCount; ++i) {
-                if (!m_CharacterLocomotion.Colliders[i].gameObject.activeInHierarchy) {
-                    continue;
-                }
-
                 // Determine if the collider would intersect any objects.
                 if (m_CharacterLocomotion.Colliders[i] is CapsuleCollider) {
+                    if (m_StartColliderCenter[i].y == float.MaxValue) {
+                        continue;
+                    }
                     var capsuleCollider = m_CharacterLocomotion.Colliders[i] as CapsuleCollider;
                     var radiusMultiplier = MathUtility.ColliderScaleMultiplier(capsuleCollider);
                     Vector3 startEndCap, endEndCap;
@@ -150,21 +156,27 @@ namespace Opsive.UltimateCharacterController.Character.Abilities
                         break;
                     }
                     capsuleColliderCount++;
-                } else if (m_CharacterLocomotion.Colliders[i] is SphereCollider) {
-                    var sphereCollider = m_CharacterLocomotion.Colliders[i] as SphereCollider;
-                    // If there is overlap then the ability can't stop.
-                    if (Physics.OverlapSphereNonAlloc(sphereCollider.transform.TransformPoint(m_StartColliderCenter[i]), (sphereCollider.radius - m_CharacterLocomotion.ColliderSpacing * 2) * MathUtility.ColliderScaleMultiplier(sphereCollider),
-                                                                    m_OverlapColliders, m_CharacterLayerManager.SolidObjectLayers, QueryTriggerInteraction.Ignore) > 0) {
-                        keepActive = true;
-                        break;
+                } else {
+                    if (!m_CharacterLocomotion.Colliders[i].gameObject.activeInHierarchy) {
+                        continue;
                     }
-                } else { // BoxCollider.
-                    var boxCollider = m_CharacterLocomotion.Colliders[i] as BoxCollider;
-                    // If there is overlap then the ability can't stop.
-                    if (Physics.OverlapBoxNonAlloc(boxCollider.transform.TransformPoint(m_StartColliderCenter[i]), boxCollider.size / 2 * MathUtility.ColliderScaleMultiplier(boxCollider),
-                                                                    m_OverlapColliders, boxCollider.transform.rotation, m_CharacterLayerManager.SolidObjectLayers, QueryTriggerInteraction.Ignore) > 0) {
-                        keepActive = true;
-                        break;
+
+                    if (m_CharacterLocomotion.Colliders[i] is SphereCollider) {
+                        var sphereCollider = m_CharacterLocomotion.Colliders[i] as SphereCollider;
+                        // If there is overlap then the ability can't stop.
+                        if (Physics.OverlapSphereNonAlloc(sphereCollider.transform.TransformPoint(m_StartColliderCenter[i]), (sphereCollider.radius - m_CharacterLocomotion.ColliderSpacing * 2) * MathUtility.ColliderScaleMultiplier(sphereCollider),
+                                                                        m_OverlapColliders, m_CharacterLayerManager.SolidObjectLayers, QueryTriggerInteraction.Ignore) > 0) {
+                            keepActive = true;
+                            break;
+                        }
+                    } else { // BoxCollider.
+                        var boxCollider = m_CharacterLocomotion.Colliders[i] as BoxCollider;
+                        // If there is overlap then the ability can't stop.
+                        if (Physics.OverlapBoxNonAlloc(boxCollider.transform.TransformPoint(m_StartColliderCenter[i]), boxCollider.size / 2 * MathUtility.ColliderScaleMultiplier(boxCollider),
+                                                                        m_OverlapColliders, boxCollider.transform.rotation, m_CharacterLayerManager.SolidObjectLayers, QueryTriggerInteraction.Ignore) > 0) {
+                            keepActive = true;
+                            break;
+                        }
                     }
                 }
             }

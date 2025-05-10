@@ -87,6 +87,11 @@ namespace Opsive.UltimateCharacterController.Demo.UI
             m_ZoneScrollRect.content.sizeDelta = new Vector2(m_ZoneScrollRect.content.sizeDelta.x, demoZones.Length * m_ZoneElementPrefab.GetComponent<RectTransform>().sizeDelta.y);
             m_ScrollRectHeight = m_ZoneScrollRect.GetComponent<RectTransform>().rect.height;
             m_ResumeButton?.SetActive(false);
+#if ULTIMATE_CHARACTER_CONTROLLER_UNIVERSALRP
+            if (!m_DemoManager.FreeRoam) {
+                m_PostProcessingVolume.profile = m_MenuPostProcessingProfile;
+            }
+#endif
         }
 
         /// <summary>

@@ -498,7 +498,7 @@ namespace Opsive.UltimateCharacterController.Editor.Managers
             // Add the singletons.
             var surfaceManager = Shared.Editor.Inspectors.Utility.InspectorUtility.AddComponent<SurfaceSystem.SurfaceManager>(gameGameObject);
             if (UnityEngineUtility.GetActiveRenderPipeline() != UnityEngineUtility.RenderPipeline.BuiltIn) {
-                surfaceManager.MainTexturePropertyName = "_Control";
+                surfaceManager.MainTexturePropertyName = "_BaseMap";
             }
 
             Shared.Editor.Inspectors.Utility.InspectorUtility.AddComponent<SurfaceSystem.DecalManager>(gameGameObject);

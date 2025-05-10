@@ -34,6 +34,8 @@ namespace Opsive.UltimateCharacterController.UI
         [SerializeField] protected QueryTriggerInteraction m_TriggerInteraction = QueryTriggerInteraction.Ignore;
         [Tooltip("Should the crosshairs move with the crosshairs?")]
         [SerializeField] protected bool m_MoveWithCursor;
+        [Tooltip("Specifies the sensitivity if the controller is moving the crosshairs.")]
+        [SerializeField] protected Vector2 m_MoveWithCursorControllerSensitivity = new Vector2(1, 1);
         [Tooltip("The amount of spread to add based on the character's movement speed.")]
         [Range(0, 360)] [SerializeField] protected float m_MovementSpread;
         [Tooltip("The maximum squared magnitude of the character. The spread will be at the max value when the character is moving at this magnitude.")]
@@ -72,6 +74,7 @@ namespace Opsive.UltimateCharacterController.UI
                 }
             } 
         }
+        public Vector2 MoveWithCursorControllerSensitivity { get { return m_MoveWithCursorControllerSensitivity; } set { m_MoveWithCursorControllerSensitivity = value; } }
         public float MovementSpread { get { return m_MovementSpread; } set { m_MovementSpread = value; } }
         public float MaxSpreadVelocitySqrMagnitude { get { return m_MaxSpreadVelocitySqrMagnitude; } set { m_MaxSpreadVelocitySqrMagnitude = value; } }
         public float MovementSpreadSpeed { get { return m_MovementSpreadSpeed; } set { m_MovementSpreadSpeed = value; } }
@@ -244,8 +247,18 @@ namespace Opsive.UltimateCharacterController.UI
             }
 
             // The crosshairs can move with the cursor position.
-            if (m_MoveWithCursor && Cursor.visible) {
-                m_RectTransform.position = new Vector3(m_PlayerInput.GetMousePosition().x, m_PlayerInput.GetMousePosition().y, 0);
+            if (m_MoveWithCursor) {
+                if (Cursor.visible) {
+                    m_RectTransform.position = new Vector3(m_PlayerInput.GetMousePosition().x, m_PlayerInput.GetMousePosition().y, 0);
+                } else if (m_PlayerInput.IsControllerConnected()) {
+                    var lookVector = Vector3.Scale(m_PlayerInput.GetLookVector(false), m_MoveWithCursorControllerSensitivity);
+                    var targetPosition = m_RectTransform.position + new Vector3(lookVector.x, lookVector.y);
+                    // Ensure the target position is visible on the screen.
+                    var screenBounds = new Rect(0, 0, Screen.width, Screen.height);
+                    if (screenBounds.Contains(targetPosition)) {
+                        m_RectTransform.position = targetPosition;
+                    }
+                }
             }
 
             // The spread of the crosshairs can change based on how quickly the character is moving.

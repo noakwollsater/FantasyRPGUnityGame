@@ -38,7 +38,6 @@ namespace Opsive.UltimateCharacterController.Camera
         private IPlayerInput m_PlayerInput;
         private bool m_AllowGameplayInput;
         private List<ActiveInputEvent> m_ActiveInputList;
-        public bool m_BlockLookInput = false;
 
         /// <summary>
         /// Initializes the handler.
@@ -124,13 +123,6 @@ namespace Opsive.UltimateCharacterController.Camera
         /// <param name="verticalMovement">-1 to 1 value specifying the amount of vertical movement.</param>
         public void GetMoveInput(out float horizontalMovement, out float forwardMovement)
         {
-            if (m_BlockLookInput)
-            {
-                horizontalMovement = 0;
-                forwardMovement = 0;
-                return;
-            }
-
             var lookVector = m_PlayerInput.GetLookVector(true);
             horizontalMovement = lookVector.x;
             forwardMovement = lookVector.y;

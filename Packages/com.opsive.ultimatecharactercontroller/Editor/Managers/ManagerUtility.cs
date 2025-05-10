@@ -176,12 +176,6 @@ namespace Opsive.UltimateCharacterController.Editor.Managers
                 }
             }
 
-            // The item collection doesn't have the expected guid. Try to find the asset based on the path.
-            itemCollectionPath = System.IO.Path.GetDirectoryName(AssetDatabase.GetAssetPath(MonoScript.FromScriptableObject(editorWindow))).Replace("\\", "/").Replace("Editor/Managers", "Demo/Inventory/DemoItemCollection.asset");
-            if (System.IO.File.Exists(Application.dataPath + "/" + itemCollectionPath.Substring(7))) {
-                return AssetDatabase.LoadAssetAtPath(itemCollectionPath, typeof(Inventory.ItemCollection)) as Inventory.ItemCollection;
-            }
-
             // Last chance: use resources to try to find the ItemCollection.
             var itemCollections = Resources.FindObjectsOfTypeAll<Inventory.ItemCollection>();
             if (itemCollections != null && itemCollections.Length > 0) {
@@ -230,14 +224,6 @@ namespace Opsive.UltimateCharacterController.Editor.Managers
                 var itemSetRule = AssetDatabase.LoadAssetAtPath(itemSetRulePath, typeof(Inventory.ItemSetRuleBase)) as Inventory.ItemSetRuleBase;
                 if (itemSetRule != null) {
                     return itemSetRule;
-                }
-            }
-
-            // The item set rule doesn't have the expected guid. Try to find the asset based on the path.
-            if (editorWindow != null) {
-                itemSetRulePath = System.IO.Path.GetDirectoryName(AssetDatabase.GetAssetPath(MonoScript.FromScriptableObject(editorWindow))).Replace("\\", "/").Replace("Editor/Managers", "Demo/Inventory/DemoIndividualItemSetRule.asset");
-                if (System.IO.File.Exists(Application.dataPath + "/" + itemSetRulePath.Substring(7))) {
-                    return AssetDatabase.LoadAssetAtPath(itemSetRulePath, typeof(Inventory.ItemSetRuleBase)) as Inventory.ItemSetRuleBase;
                 }
             }
 

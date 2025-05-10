@@ -137,7 +137,7 @@ namespace Opsive.UltimateCharacterController.Items.Actions.Modules.Magic
         [SerializeField] protected AnimationSlotEventTrigger m_StartCastEventTrigger = new AnimationSlotEventTrigger(false, 0);
         [Tooltip("Repeat Cast Event Trigger defines the time between repeating the casting effects when continuous.")]
         [SerializeField] protected AnimationSlotEventTrigger m_RepeatCastEventTrigger = new AnimationSlotEventTrigger(false, 0);
-        [Tooltip("End Cast Event Trigger defines the time between the last cast effect and the End cast.")]
+        [Tooltip("End Cast Event Trigger defines the time between the last cast effect and the end cast.")]
         [SerializeField] protected AnimationSlotEventTrigger m_EndCastEventTrigger = new AnimationSlotEventTrigger(false, 0);
         [Tooltip("Use the Character Transform as the Cast Origin?")]
         [SerializeField] protected bool m_CharacterAsCastOrigin = false;

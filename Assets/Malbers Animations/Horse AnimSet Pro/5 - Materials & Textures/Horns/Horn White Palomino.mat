@@ -24,7 +24,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Horn White Palomino
-  m_Shader: {fileID: -6465566751694194690, guid: 38fbdfc05eb118b439cadf4899477678, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 38fbdfc05eb118b439cadf4899477678,
+    type: 3}
   m_Parent: {fileID: 2100000, guid: 8a5f66b5b0d8b294685184337afc88c7, type: 2}
   m_ModifiedSerializedProperties: 18
   m_ValidKeywords:
@@ -68,7 +69,6 @@ Material:
     - _Soft_Light_Tint: {r: 1, g: 1, b: 1, a: 0}
     - _Tint: {r: 0.7372549, g: 0.59607846, b: 0.30980393, a: 1}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &3311082580729119325
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -94,4 +94,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 9
+  version: 7

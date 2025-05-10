@@ -137,7 +137,7 @@ MonoBehaviour:
   ID: {fileID: 11400000, guid: 7370df9c769c2764381ad7c76eb3d949, type: 2}
   EnterConditions:
     conditions: []
-  ExitConditions:
+  AllowExitConditions:
     conditions: []
   noRMRot: 1
   references:

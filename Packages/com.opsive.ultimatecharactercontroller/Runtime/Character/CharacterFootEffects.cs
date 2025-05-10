@@ -113,8 +113,8 @@ namespace Opsive.UltimateCharacterController.Character
         private float[] m_LastVerticalOffset;
         private int[] m_UpCount;
         private int[] m_DownCount;
-        private Transform m_LastFootDown;
-        private float m_LastFootstepTime = float.MinValue;
+        protected Transform m_LastFootDown;
+        protected float m_LastFootstepTime = float.MinValue;
         private int m_FootstepGroupIndex;
         private float m_TeleportTime;
 
@@ -349,7 +349,7 @@ namespace Opsive.UltimateCharacterController.Character
         /// <summary>
         /// A body step is detected when the foot touches the ground.
         /// </summary>
-        private void DetectBodyStep()
+        protected virtual void DetectBodyStep()
         {
             for (int i = 0; i < m_Feet.Length; ++i) {
                 var verticalOffset = m_Transform.InverseTransformPoint(m_Feet[i].Object.position).y;
@@ -377,7 +377,7 @@ namespace Opsive.UltimateCharacterController.Character
         /// <summary>
         /// Places a group footstep at a fixed interval.
         /// </summary>
-        private void UpdateFixedInterval()
+        protected virtual void UpdateFixedInterval()
         {
             // Don't place a footstep if there was recently a footstep.
             if (m_LastFootstepTime + m_FixedInterval * m_CharacterLocomotion.TimeScale > Time.time) {
@@ -392,7 +392,7 @@ namespace Opsive.UltimateCharacterController.Character
         /// <summary>
         /// A camera bob is detected when the look source point is at its lowest point relative to the character's transform.
         /// </summary>
-        private void DetectCameraBob()
+        protected virtual void DetectCameraBob()
         {
             // In order for the lowest point to be detected the look source position must be decreasing. When the look source position
             // starts to increase again then it was at the lowest point.
@@ -408,7 +408,7 @@ namespace Opsive.UltimateCharacterController.Character
         /// <summary>
         /// The active group index caused a footstep.
         /// </summary>
-        private void GroupFootStep()
+        protected void GroupFootStep()
         {
             var grouping = m_FeetGrouping[m_FootstepGroupIndex];
             for (int i = 0; i < grouping.Count; ++i) {

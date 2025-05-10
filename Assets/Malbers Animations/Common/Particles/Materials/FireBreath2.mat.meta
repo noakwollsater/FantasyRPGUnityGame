@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 83d2068e889f32e438ebff646648da1f
+guid: b5387d3c2ba98fc44a0f5744f94ce48c
 timeCreated: 1473155171
 licenseType: Store
 NativeFormatImporter:
@@ -8,8 +8,8 @@ NativeFormatImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 148877
-  packageName: Animal Controller (Malbers Character Controller)
-  packageVersion: 1.4.9
+  productId: 79902
+  packageName: Horse Animset Pro (Riding System)
+  packageVersion: 4.4.9
   assetPath: Assets/Malbers Animations/Common/Particles/Materials/FireBreath2.mat
-  uploadId: 752018
+  uploadId: 752673

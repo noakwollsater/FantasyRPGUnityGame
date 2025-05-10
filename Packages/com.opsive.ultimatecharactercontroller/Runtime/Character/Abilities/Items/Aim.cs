@@ -245,8 +245,7 @@ namespace Opsive.UltimateCharacterController.Character.Abilities.Items
             }
 
             // The look source may be null if a remote player is still being initialized.
-            if (m_LookSource == null || !m_RotateTowardsLookSourceTarget || (m_AssistAim != null && m_AssistAim.IsActive && m_AssistAim.RotateCharacterTowardsTarget) ||
-                (m_PathfindingMovement != null && m_PathfindingMovement.IsActive)) {
+            if (m_LookSource == null || !m_RotateTowardsLookSourceTarget || (m_AssistAim != null && m_AssistAim.IsActive && m_AssistAim.RotateCharacterTowardsTarget)) {
                 return;
             }
 

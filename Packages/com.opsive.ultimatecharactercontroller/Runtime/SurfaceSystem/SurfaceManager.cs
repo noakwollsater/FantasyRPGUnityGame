@@ -24,6 +24,9 @@ namespace Opsive.UltimateCharacterController.SurfaceSystem
                 if (!s_Initialized) {
                     s_Instance = new GameObject("SurfaceManager").AddComponent<SurfaceManager>();
                     s_Initialized = true;
+
+                    s_MaskID = Shader.PropertyToID("_Mask");
+                    s_SecondaryTextureID = Shader.PropertyToID("_MainTex2");
                 }
                 return s_Instance;
             }
@@ -35,7 +38,7 @@ namespace Opsive.UltimateCharacterController.SurfaceSystem
         [Tooltip("An array of SurfaceTypes which are paired to a UV position within a texture.")]
         [SerializeField] protected ObjectSurface[] m_ObjectSurfaces;
         [Tooltip("The name of the main texture property that should be retrieved.")]
-        [SerializeField] protected string m_MainTexturePropertyName = "_MainTex";
+        [SerializeField] protected string m_MainTexturePropertyName = "_BaseMap";
         [Tooltip("Should the textures from trees on the terrain be detected? Note that this is a CPU-intensive operation.")]
         [SerializeField] protected bool m_DetectTerrainTreeTextures;
         [Tooltip("The fallback SurfaceImpact if no SurfaceImpacts can be found.")]
@@ -94,9 +97,6 @@ namespace Opsive.UltimateCharacterController.SurfaceSystem
 
             InitObjectSurfaces();
 
-            s_MaskID = Shader.PropertyToID("_Mask");
-            s_SecondaryTextureID = Shader.PropertyToID("_MainTex2");
-
 #if UNITY_2023_1_OR_NEWER
             m_HasTerrain = FindObjectsByType<Terrain>(FindObjectsSortMode.None) != null;
 #else
@@ -116,7 +116,7 @@ namespace Opsive.UltimateCharacterController.SurfaceSystem
 
             for (int i = 0; i < m_ObjectSurfaces.Length; ++i) {
                 for (int j = 0; j < m_ObjectSurfaces[i].UVTextures.Length; ++j) {
-                    if (ObjectSurfaces[i].UVTextures[j].Texture == null) {
+                    if (m_ObjectSurfaces[i].UVTextures[j].Texture == null) {
                         continue;
                     }
 
@@ -139,7 +139,7 @@ namespace Opsive.UltimateCharacterController.SurfaceSystem
                             uvTextures.Add(m_ObjectSurfaces[i].UVTextures[j]);
                             m_TextureUVTextureMap.Add(m_ObjectSurfaces[i].UVTextures[j].Texture, uvTextures);
                         } else {
-                            uvTextures.Add(ObjectSurfaces[i].UVTextures[j]);
+                            uvTextures.Add(m_ObjectSurfaces[i].UVTextures[j]);
                         }
                     }
                 }

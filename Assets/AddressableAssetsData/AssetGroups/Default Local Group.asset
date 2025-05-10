@@ -13,21 +13,33 @@ MonoBehaviour:
   m_Name: Default Local Group
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
-  m_GUID: f73966eaa9f294a47bf83319cdc76437
+  m_GUID: 618147aee0789034fa0f8433b5a46526
   m_SerializeEntries:
   - m_GUID: 20a27c653f1c30441ab8fd3d08564f9f
     m_Address: SK_BaseModel
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4ea9b29909d2f59439fc86be5a268eae
     m_Address: SK_BaseModel
     m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6dd363a8a7d7500499ecc677839d743a
+    m_Address: Outfits
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b9e6d057ad062243a089fdec1e54bf9
+    m_Address: Species
+    m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: 245cb653702895c4aaadd4f819f2fa50, type: 2}
+  m_Settings: {fileID: 11400000, guid: 7f7763557f28c6449886ac3c8565f68a, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 6626cf5fa13cb4a429f0db89cdf3da20, type: 2}
-    - {fileID: 11400000, guid: 8880fc6727757b649bbbe635d8c73e30, type: 2}
+    - {fileID: 11400000, guid: 0cb5fa406f895984aa8d35070afb34c8, type: 2}
+    - {fileID: 11400000, guid: ae25f136f6211f24e80eace01f84604c, type: 2}

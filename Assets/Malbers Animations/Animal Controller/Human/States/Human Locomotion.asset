@@ -172,7 +172,7 @@ MonoBehaviour:
   ID: {fileID: 11400000, guid: 3787b6d94d5454740bf36d57436185b0, type: 2}
   EnterConditions:
     conditions: []
-  ExitConditions:
+  AllowExitConditions:
     conditions: []
   FallRayBackwards:
     UseConstant: 1

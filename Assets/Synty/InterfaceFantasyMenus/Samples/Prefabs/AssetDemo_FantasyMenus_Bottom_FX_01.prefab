@@ -4857,7 +4857,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 493508962938232727}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f85388e938d9e4599afc6d9441ed57, type: 3}
+  m_Script: {fileID: 11500000, guid: 444df69c6ea9d6346b9bf74b5c5b8451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: d3f30156f4d7e9d4d909fdc527516ad2, type: 2}
@@ -4884,7 +4884,7 @@ GameObject:
   - component: {fileID: 1870231623322429747}
   - component: {fileID: 243482859965718373}
   m_Layer: 5
-  m_Name: PFX_Glow_Wide
+  m_Name: ParticleFX_Glow_Wide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9732,7 +9732,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3261197770221032874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f85388e938d9e4599afc6d9441ed57, type: 3}
+  m_Script: {fileID: 11500000, guid: 444df69c6ea9d6346b9bf74b5c5b8451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 5813ca9093e4e42478785ef03c5fffe1, type: 2}
@@ -15166,7 +15166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9095749808833610208}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f85388e938d9e4599afc6d9441ed57, type: 3}
+  m_Script: {fileID: 11500000, guid: 444df69c6ea9d6346b9bf74b5c5b8451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 784777b43828ea740b305aa856c0b19d, type: 2}

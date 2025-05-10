@@ -449,12 +449,23 @@ namespace Opsive.UltimateCharacterController.Utility
     }
 
     /// <summary>
-    /// Attribute which specifies the field should be drawn with the DropdownEffectAttributeControl.
+    /// Attribute which specifies the field should be drawn with the DropdownSelectionAttributeControl.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class DropdownEffectAttribute : Attribute
+    public class DropdownSelectionAttribute : Attribute
     {
-        // Intentionally left blank.
+        private Type m_BaseType;
+
+        public Type BaseType { get => m_BaseType; }
+
+        /// <summary>
+        /// DropdownSelectionAttribute constructor.
+        /// </summary>
+        /// <param name="baseType">The type that the attribute represents.</param>
+        public DropdownSelectionAttribute(Type baseType)
+        {
+            m_BaseType = baseType;
+        }
     }
 
     /// <summary>

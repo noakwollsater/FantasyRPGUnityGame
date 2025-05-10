@@ -116,6 +116,10 @@ MonoBehaviour:
   Editor_Tabs1: 1
   SpeedSets: []
   ID: {fileID: 11400000, guid: 3787b6d94d5454740bf36d57436185b0, type: 2}
+  EnterConditions:
+    conditions: []
+  ExitConditions:
+    conditions: []
   FallRayBackwards:
     UseConstant: 1
     ConstantValue: 0.3
@@ -128,6 +132,7 @@ MonoBehaviour:
   StopLayer:
     serializedVersion: 2
     m_Bits: 1
+  RootRotation: 1
   wallStopProfiles: []
   AntiFall: 0
   frontDistance: 0.5
@@ -136,6 +141,7 @@ MonoBehaviour:
   BackSpace: 0.2
   FallMultiplier: 1
   DebugColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  noRMRotation: 1
   references:
     version: 2
     RefIds: []

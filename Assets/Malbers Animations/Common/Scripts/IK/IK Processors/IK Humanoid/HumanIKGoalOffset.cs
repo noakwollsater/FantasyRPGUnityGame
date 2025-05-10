@@ -122,6 +122,7 @@ namespace MalbersAnimations.IK
         }
 
 
+
         private Transform GetGoal(Animator ani)
         {
             return goal switch
@@ -134,8 +135,8 @@ namespace MalbersAnimations.IK
             };
         }
 
-#if UNITY_EDITOR
 
+#if UNITY_EDITOR
         internal override void OnSceneGUI(IKSet set, Animator animator, UnityEngine.Object Target, int index)
         {
             if (gizmos)

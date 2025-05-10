@@ -26,7 +26,7 @@ namespace Opsive.UltimateCharacterController.Camera
     public class CameraController : StateBehavior, ILookSource, Shared.Camera.ICamera
     {
         [Tooltip("Should the character be initialized on awake?")]
-        [SerializeField] protected bool m_InitCharacterOnAwake = false;
+        [SerializeField] protected bool m_InitCharacterOnAwake = true;
         [Tooltip("The character that the camera should follow.")]
         [SerializeField] protected GameObject m_Character;
         [Tooltip("The transform of the object to attach the camera relative to.")]
@@ -204,10 +204,6 @@ namespace Opsive.UltimateCharacterController.Camera
                     Debug.LogWarning("Warning: No character has been assigned to the Camera Controller. It will automatically be assigned to the GameObject with the Player tag.");
                     m_Character = GameObject.FindGameObjectWithTag("Player");
                     if (m_Character == null) {
-                        m_Character = GameObject.FindGameObjectWithTag("Player");
-                    }
-                    else
-                    {
                         Debug.LogError("Error: Unable to find the character with the Player tag. The camera will be disabled.");
                     }
                 }

@@ -133,7 +133,7 @@ namespace Opsive.UltimateCharacterController.Items.Actions.Modules.Throwable
         public bool DisableVisibleObject { get { return m_DisableVisibleObject; } set {
                 m_DisableVisibleObject = value;
                 if (CharacterItem != null) {
-                    CharacterItem.SetVisibleObjectActive(CharacterItem.VisibleObjectActive, Inventory.GetItemIdentifierAmount(CharacterItem.ItemIdentifier) > 0);
+                    CharacterItem.SetVisibleObjectActive(!m_DisableVisibleObject, Inventory.GetItemIdentifierAmount(CharacterItem.ItemIdentifier) > 0);
                     EnableObjectMeshRenderers(CanActivateVisibleObject());
                 }
             }

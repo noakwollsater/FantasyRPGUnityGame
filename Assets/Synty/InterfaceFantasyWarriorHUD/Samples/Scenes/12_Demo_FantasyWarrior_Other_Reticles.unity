@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -104,7 +103,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +116,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -128,11 +127,12 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1987947183}
     m_Modifications:
     - target: {fileID: 1783416391197043684, guid: b3f8d48549f7ac94787e8571f5faf13c, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Spyglass
+      value: HUD_Reticle_Spyglass_01
       objectReference: {fileID: 0}
     - target: {fileID: 1783416391197043684, guid: b3f8d48549f7ac94787e8571f5faf13c, type: 3}
       propertyPath: m_IsActive
@@ -223,6 +223,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3f8d48549f7ac94787e8571f5faf13c, type: 3}
 --- !u!1 &18752618 stripped
 GameObject:
@@ -239,6 +242,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 5750824224444702422, guid: 7da0115a75c7e1644ab618e860da1835, type: 3}
@@ -327,20 +331,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222361650583066844, guid: 7da0115a75c7e1644ab618e860da1835, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_RingTriangular01
+      value: HUD_Reticle_RingTriangular_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9222361650583066844, guid: 7da0115a75c7e1644ab618e860da1835, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1968131278}
   m_SourcePrefab: {fileID: 100100000, guid: 7da0115a75c7e1644ab618e860da1835, type: 3}
 --- !u!1001 &189130677
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 3474088457067470586, guid: c90100117864c0b42a964c5847032ab3, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Bracket02
+      value: HUD_Reticle_Bracket_02
       objectReference: {fileID: 0}
     - target: {fileID: 9011269521777409131, guid: c90100117864c0b42a964c5847032ab3, type: 3}
       propertyPath: m_Pivot.x
@@ -427,6 +438,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3474088457067470586, guid: c90100117864c0b42a964c5847032ab3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2122267082}
   m_SourcePrefab: {fileID: 100100000, guid: c90100117864c0b42a964c5847032ab3, type: 3}
 --- !u!1 &195513009 stripped
 GameObject:
@@ -489,10 +506,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1681976329}
   m_Father: {fileID: 1273158580}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -530,6 +547,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 5750824224444702422, guid: a16255443f02f7640b519bddb4b872c8, type: 3}
@@ -618,15 +636,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222361650583066844, guid: a16255443f02f7640b519bddb4b872c8, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Crosshair01
+      value: HUD_Reticle_Crosshair_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9222361650583066844, guid: a16255443f02f7640b519bddb4b872c8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 912622163}
   m_SourcePrefab: {fileID: 100100000, guid: a16255443f02f7640b519bddb4b872c8, type: 3}
 --- !u!1001 &389588762
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 5750824224444702422, guid: f4958004a36d50b4a9abbac3d05735b4, type: 3}
@@ -715,9 +740,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222361650583066844, guid: f4958004a36d50b4a9abbac3d05735b4, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Crosshair03
+      value: HUD_Reticle_Crosshair_03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9222361650583066844, guid: f4958004a36d50b4a9abbac3d05735b4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1276267292}
   m_SourcePrefab: {fileID: 100100000, guid: f4958004a36d50b4a9abbac3d05735b4, type: 3}
 --- !u!1 &493905354
 GameObject:
@@ -757,12 +788,12 @@ MonoBehaviour:
   - 03_Demo_FantasyWarrior_Components_Compass-Minimap-CharacterPortraits
   - 04_Demo_FantasyWarrior_Components_WeaponWheels
   - 05_Demo_FantasyWarrior_Components_Dialogue
-  - 06_Demo_FantasyWarrior_HUD_Adventure01
-  - 07_Demo_FantasyWarrior_HUD_Adventure02
-  - 08_Demo_FantasyWarrior_HUD_ActionRPG01
-  - 09_Demo_FantasyWarrior_HUD_Survival01
-  - 10_Demo_FantasyWarrior_Components_Misc01
-  - 11_Demo_FantasyWarrior_Components_Misc02
+  - 06_Demo_FantasyWarrior_HUD_Adventure_01
+  - 07_Demo_FantasyWarrior_HUD_Adventure_02
+  - 08_Demo_FantasyWarrior_HUD_ActionRPG_01
+  - 09_Demo_FantasyWarrior_HUD_Survival_01
+  - 10_Demo_FantasyWarrior_Components_Misc_01
+  - 11_Demo_FantasyWarrior_Components_Misc_02
   - 12_Demo_FantasyWarrior_Other_Reticles
   - 13_Demo_FantasyWarrior_Other_MasterSprites
   - 14_Demo_FantasyWarrior_Icons_Misc
@@ -772,14 +803,14 @@ MonoBehaviour:
   - 18_Demo_FantasyWarrior_Input_NintendoSwitch
   - 19_Demo_FantasyWarrior_Input_Keyboard&Mouse
   - 20_Demo_FantasyWarrior_Input_SteamDeck
-  - 21_Demo_FantasyWarrior_Icons_Weapons01
-  - 22_Demo_FantasyWarrior_Icons_Weapons02
-  - 23_Demo_FantasyWarrior_Icons_WeaponsSide01
-  - 24_Demo_FantasyWarrior_Icons_WeaponsSide02
-  - 25_Demo_FantasyWarrior_Icons_WeaponsSide03
-  - 26_Demo_FantasyWarrior_Icons_Resources01
-  - 27_Demo_FantasyWarrior_Icons_Resources02
-  - 28_Demo_FantasyWarrior_Icons_Resources03
+  - 21_Demo_FantasyWarrior_Icons_Weapons_01
+  - 22_Demo_FantasyWarrior_Icons_Weapons_02
+  - 23_Demo_FantasyWarrior_Icons_WeaponsSide_01
+  - 24_Demo_FantasyWarrior_Icons_WeaponsSide_02
+  - 25_Demo_FantasyWarrior_Icons_WeaponsSide_03
+  - 26_Demo_FantasyWarrior_Icons_Resources_01
+  - 27_Demo_FantasyWarrior_Icons_Resources_02
+  - 28_Demo_FantasyWarrior_Icons_Resources_03
 --- !u!4 &493905356
 Transform:
   m_ObjectHideFlags: 0
@@ -787,12 +818,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493905354}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -825,9 +857,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -861,18 +901,20 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &585445053
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 5750824224444702422, guid: 84cd4049a7616cb44a848e7d1f7de46f, type: 3}
@@ -961,9 +1003,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222361650583066844, guid: 84cd4049a7616cb44a848e7d1f7de46f, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Crosshair05
+      value: HUD_Reticle_Crosshair_05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9222361650583066844, guid: 84cd4049a7616cb44a848e7d1f7de46f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1652194260}
   m_SourcePrefab: {fileID: 100100000, guid: 84cd4049a7616cb44a848e7d1f7de46f, type: 3}
 --- !u!114 &638437895 stripped
 MonoBehaviour:
@@ -981,6 +1029,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 1599762566840240561, guid: a95731ba50d2dff4e855c59cf10236d5, type: 3}
@@ -1069,15 +1118,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6803166035073855754, guid: a95731ba50d2dff4e855c59cf10236d5, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Bow01
+      value: HUD_Reticle_Bow_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6803166035073855754, guid: a95731ba50d2dff4e855c59cf10236d5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1047336160}
   m_SourcePrefab: {fileID: 100100000, guid: a95731ba50d2dff4e855c59cf10236d5, type: 3}
 --- !u!1001 &803527368
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 5750824224444702422, guid: a95e6e82f6c03f64099304c878a43303, type: 3}
@@ -1166,9 +1222,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222361650583066844, guid: a95e6e82f6c03f64099304c878a43303, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_RingTriangular02
+      value: HUD_Reticle_RingTriangular_02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9222361650583066844, guid: a95e6e82f6c03f64099304c878a43303, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1916625315}
   m_SourcePrefab: {fileID: 100100000, guid: a95e6e82f6c03f64099304c878a43303, type: 3}
 --- !u!1 &805022751 stripped
 GameObject:
@@ -1238,6 +1300,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 1714587872366038196, guid: 59f2cd09df743324fb1622ff8609b2d2, type: 3}
@@ -1326,20 +1389,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8196283902520775207, guid: 59f2cd09df743324fb1622ff8609b2d2, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Dot01
+      value: HUD_Reticle_Dot_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8196283902520775207, guid: 59f2cd09df743324fb1622ff8609b2d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 830388145}
   m_SourcePrefab: {fileID: 100100000, guid: 59f2cd09df743324fb1622ff8609b2d2, type: 3}
 --- !u!1001 &898743518
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 3474088457067470586, guid: af00b86a26d373e469b04e612fadb6d3, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Bracket01
+      value: HUD_Reticle_Bracket_01
       objectReference: {fileID: 0}
     - target: {fileID: 9011269521777409131, guid: af00b86a26d373e469b04e612fadb6d3, type: 3}
       propertyPath: m_Pivot.x
@@ -1426,6 +1496,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3474088457067470586, guid: af00b86a26d373e469b04e612fadb6d3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 805022753}
   m_SourcePrefab: {fileID: 100100000, guid: af00b86a26d373e469b04e612fadb6d3, type: 3}
 --- !u!1 &912622161 stripped
 GameObject:
@@ -1534,11 +1610,12 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 1092193115719812555, guid: b77d8c301354d56408f2dcb78f0e6c3a, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Blunderbuss01
+      value: HUD_Reticle_Blunderbuss_01
       objectReference: {fileID: 0}
     - target: {fileID: 1092193115719812564, guid: b77d8c301354d56408f2dcb78f0e6c3a, type: 3}
       propertyPath: m_Pivot.x
@@ -1625,12 +1702,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1092193115719812555, guid: b77d8c301354d56408f2dcb78f0e6c3a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1269744162}
   m_SourcePrefab: {fileID: 100100000, guid: b77d8c301354d56408f2dcb78f0e6c3a, type: 3}
 --- !u!1001 &1206020084
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 5750824224444702422, guid: b19d0645d2b0e2840a0e621022bd1a1e, type: 3}
@@ -1719,9 +1803,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222361650583066844, guid: b19d0645d2b0e2840a0e621022bd1a1e, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Crosshair02
+      value: HUD_Reticle_Crosshair_02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9222361650583066844, guid: b19d0645d2b0e2840a0e621022bd1a1e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1214864735}
   m_SourcePrefab: {fileID: 100100000, guid: b19d0645d2b0e2840a0e621022bd1a1e, type: 3}
 --- !u!1 &1214864733 stripped
 GameObject:
@@ -1762,6 +1852,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1273158580}
     m_Modifications:
     - target: {fileID: 290260064199665292, guid: 2debe6f834403d941a966e81f3a277ea, type: 3}
@@ -2261,6 +2352,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 102900000, guid: 02a616780eb674d47884c10932472f13, type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2debe6f834403d941a966e81f3a277ea, type: 3}
 --- !u!224 &1224643064 stripped
 RectTransform:
@@ -2332,6 +2426,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2091244808}
   - {fileID: 912622162}
@@ -2349,7 +2444,6 @@ RectTransform:
   - {fileID: 805022752}
   - {fileID: 2122267081}
   m_Father: {fileID: 1987947183}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2425,7 +2519,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 375
+    m_Bits: 4294967295
 --- !u!114 &1273158577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2466,7 +2560,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -2480,13 +2576,13 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2020781501}
   - {fileID: 1987947183}
   - {fileID: 360468667}
   - {fileID: 1224643064}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2532,6 +2628,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 5750824224444702422, guid: ffb004131799bd34cbf529acff51e23e, type: 3}
@@ -2620,9 +2717,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222361650583066844, guid: ffb004131799bd34cbf529acff51e23e, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Ring02
+      value: HUD_Reticle_Ring_02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9222361650583066844, guid: ffb004131799bd34cbf529acff51e23e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1350011090}
   m_SourcePrefab: {fileID: 100100000, guid: ffb004131799bd34cbf529acff51e23e, type: 3}
 --- !u!1 &1350011088 stripped
 GameObject:
@@ -2658,36 +2761,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5952750238597871532, guid: ffb004131799bd34cbf529acff51e23e, type: 3}
   m_PrefabInstance: {fileID: 1292869640}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1359053982
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1359053984}
-  m_Layer: 0
-  m_Name: Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1359053984
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359053982}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1652194258 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9222361650583066844, guid: 84cd4049a7616cb44a848e7d1f7de46f, type: 3}
@@ -2795,6 +2868,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 5750824224444702422, guid: de862bd69466fd341b5392b68dd6fc4b, type: 3}
@@ -2883,15 +2957,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222361650583066844, guid: de862bd69466fd341b5392b68dd6fc4b, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Ring01
+      value: HUD_Reticle_Ring_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9222361650583066844, guid: de862bd69466fd341b5392b68dd6fc4b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 195513011}
   m_SourcePrefab: {fileID: 100100000, guid: de862bd69466fd341b5392b68dd6fc4b, type: 3}
 --- !u!1001 &1844879319
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 5750824224444702422, guid: f0242f025047e464bbdc82e84b38eef0, type: 3}
@@ -2980,9 +3061,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222361650583066844, guid: f0242f025047e464bbdc82e84b38eef0, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Crosshair06
+      value: HUD_Reticle_Crosshair_06
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9222361650583066844, guid: f0242f025047e464bbdc82e84b38eef0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1227577749}
   m_SourcePrefab: {fileID: 100100000, guid: f0242f025047e464bbdc82e84b38eef0, type: 3}
 --- !u!1 &1916625312 stripped
 GameObject:
@@ -3023,6 +3110,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 360468667}
     m_Modifications:
     - target: {fileID: 1508758403866968506, guid: 72f0ec0ac8b931c498594e189c6f6d64, type: 3}
@@ -3366,6 +3454,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1508758403866968506, guid: 72f0ec0ac8b931c498594e189c6f6d64, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1681976330}
+    - targetCorrespondingSourceObject: {fileID: 1508758403866968506, guid: 72f0ec0ac8b931c498594e189c6f6d64, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1681976331}
   m_SourcePrefab: {fileID: 100100000, guid: 72f0ec0ac8b931c498594e189c6f6d64, type: 3}
 --- !u!1 &1968131275 stripped
 GameObject:
@@ -3427,11 +3524,11 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1267011163}
   - {fileID: 18752619}
   m_Father: {fileID: 1273158580}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3466,9 +3563,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1273158580}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -3553,12 +3650,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030909723}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2030909727
 MonoBehaviour:
@@ -3572,6 +3670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -3589,6 +3688,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1267011163}
     m_Modifications:
     - target: {fileID: 5750824224444702422, guid: f1ea360d781c8ad44b1e9141135b1c25, type: 3}
@@ -3677,9 +3777,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222361650583066844, guid: f1ea360d781c8ad44b1e9141135b1c25, type: 3}
       propertyPath: m_Name
-      value: HUD_Reticle_Crosshair04
+      value: HUD_Reticle_Crosshair_04
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9222361650583066844, guid: f1ea360d781c8ad44b1e9141135b1c25, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 990004362}
   m_SourcePrefab: {fileID: 100100000, guid: f1ea360d781c8ad44b1e9141135b1c25, type: 3}
 --- !u!1 &2122267080 stripped
 GameObject:
@@ -3715,3 +3821,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 9064892653942606053, guid: c90100117864c0b42a964c5847032ab3, type: 3}
   m_PrefabInstance: {fileID: 189130677}
   m_PrefabAsset: {fileID: 0}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 1273158580}
+  - {fileID: 519420032}
+  - {fileID: 2030909726}
+  - {fileID: 493905356}

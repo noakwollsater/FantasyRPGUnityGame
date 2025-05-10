@@ -257,8 +257,6 @@ namespace Opsive.UltimateCharacterController.Items.Actions.Modules.Shootable
         {
             base.UpdateRegisteredEventsInternal(register);
 
-            UnityEngine.Debug.Log(register);
-            
             m_StartVisibleProjectileEvent.RegisterUnregisterAnimationEvent(register, Character, "OnAnimatorStartVisibleProjectile", OnStartVisibleProjectile);
             m_ReloadShowProjectileEvent.RegisterUnregisterAnimationEvent(register, Character, "OnAnimatorItemReloadShowProjectile", OnShowReloadProjectile);
             m_ReloadAttachProjectileEvent.RegisterUnregisterAnimationEvent(register, Character, "OnAnimatorItemReloadAttachProjectile", OnAttachReloadProjectile);

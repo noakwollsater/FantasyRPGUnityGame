@@ -250,12 +250,11 @@ namespace Opsive.UltimateCharacterController.Items.Actions.Modules
         public virtual void StartUnequip() { }
 
         /// <summary>
-        /// The Item was unequipped.
+        /// The item was unequipped.
         /// </summary>
         public virtual void Unequip()
         {
             UpdateRegisteredEvents();
-            ResetModule(false);
         }
 
         /// <summary>

@@ -114,8 +114,10 @@ namespace Opsive.UltimateCharacterController.Character
             m_ActiveModel.SetActive(true);
             Shared.StateSystem.StateManager.SetState(m_GameObject, m_ActiveModel.name, true);
 
-            targetAnimationMonitor.CopyParameters(originalAnimationMonitor);
+            EventHandler.ExecuteEvent(m_GameObject, "OnCharacterSwitchModels", m_ActiveModel);
 
+            // Copy the animation parameters after all of the objects have been initialized.
+            targetAnimationMonitor.CopyParameters(originalAnimationMonitor);
 #if FIRST_PERSON_CONTROLLER
             if (targetFirstPersonObjects != null) {
                 var targetChildAnimationMonitors = targetFirstPersonObjects.GetComponentsInChildren<ChildAnimatorMonitor>();
@@ -124,7 +126,6 @@ namespace Opsive.UltimateCharacterController.Character
                 }
             }
 #endif
-            EventHandler.ExecuteEvent(m_GameObject, "OnCharacterSwitchModels", m_ActiveModel);
         }
 
 #if FIRST_PERSON_CONTROLLER

@@ -29,8 +29,8 @@ namespace Opsive.UltimateCharacterController.Demo
         /// </summary>
         private void Start()
         {
-            if(m_DisableOnStart == false){ return; } 
-            
+            if (!m_DisableOnStart){ return; }
+
             for (int i = 0; i < m_Objects.Length; ++i) {
                 m_Objects[i].SetActive(false);
             }

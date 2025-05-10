@@ -1000,9 +1000,10 @@ namespace Opsive.UltimateCharacterController.Character
                         // Do not stop on a step.
                         if (Vector3.Dot(closestRaycastHit.normal, m_Up) > 0) {
                             var closestHitPoint = Vector3.ProjectOnPlane(closestRaycastHit.point, m_Up);
-                            if ((Physics.Raycast(MathUtility.TransformPoint(closestHitPoint, m_Rotation, Vector3.forward * m_SkinWidth) + m_Up * m_MaxStepHeight,
-                                                        -m_Up, out var raycastHit, m_MaxStepHeight + m_SkinWidth, m_CharacterLayerManager.SolidObjectLayers, QueryTriggerInteraction.Ignore) &&
-                                                        Vector3.Dot(raycastHit.normal, m_Up) > 0.99f)) {
+                            if (closestRaycastHit.collider.Raycast(new Ray(MathUtility.TransformPoint(closestHitPoint, m_Rotation, Vector3.forward * c_ColliderSpacing) + m_Up * m_MaxStepHeight,
+                                                        -m_Up), out var raycastHit, m_MaxStepHeight + m_SkinWidth) &&
+                                Vector3.Dot(raycastHit.normal, m_Up) > 0.99f &&
+                                !Physics.Raycast(m_Position + m_Up * (m_MaxStepHeight + m_SkinWidth), normalizedTargetMovement, movementMagnitude, m_CharacterLayerManager.SolidObjectLayers, QueryTriggerInteraction.Ignore)) {
                                 continue;
                             }
                         }
@@ -1027,8 +1028,11 @@ namespace Opsive.UltimateCharacterController.Character
                                     continue;
                                 }
                             } else if (slopeAngle <= m_SlopeLimit) {
-                                m_SlopedGround = true;
-                                continue;
+                                // The character has to have space in order to move up the slope.
+                                if (!Physics.Raycast(m_Position + m_Up * (m_MaxStepHeight + m_SkinWidth), normalizedTargetMovement, movementMagnitude, m_CharacterLayerManager.SolidObjectLayers, QueryTriggerInteraction.Ignore)) {
+                                    m_SlopedGround = true;
+                                    continue;
+                                }
                             }
                         }
 
@@ -1049,7 +1053,7 @@ namespace Opsive.UltimateCharacterController.Character
                                 var bouncinessValue = MathUtility.BouncinessValue(activeCollider.material, closestRaycastHit.collider.material);
                                 if (bouncinessValue > 0.0f) {
                                     var magnitude = m_DesiredMovement.magnitude * bouncinessValue * m_WallBounceModifier / Time.deltaTime;
-                                    AddForce(Vector3.Reflect(normalizedTargetMovement, closestRaycastHit.normal).normalized * magnitude, 1, false);
+                                    AddForce(Vector3.ProjectOnPlane(Vector3.Reflect(normalizedTargetMovement, closestRaycastHit.normal), m_Up).normalized * magnitude, 1, false);
                                 }
                             }
 
@@ -2035,6 +2039,7 @@ namespace Opsive.UltimateCharacterController.Character
         {
             m_Transform.rotation = m_Rigidbody.rotation = m_PrevMotorRotation = m_Rotation = rotation;
             m_Up = rotation * Vector3.up;
+            m_GravityDirection = -m_Up;
             m_SlopedGround = m_ApplyMovingPlatformDisconnectMovement = false;
 
             SimulationManager.SetCharacterRotation(m_SimulationIndex, rotation);

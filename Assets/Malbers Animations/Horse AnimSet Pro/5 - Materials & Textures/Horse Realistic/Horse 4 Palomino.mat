@@ -28,7 +28,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 9
+  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -39,7 +39,7 @@ Material:
   m_Name: Horse 4 Palomino
   m_Shader: {fileID: -6465566751694194690, guid: 38fbdfc05eb118b439cadf4899477678, type: 3}
   m_Parent: {fileID: 2100000, guid: 48a3ff7d81b735a47aaa910a8a1df49f, type: 2}
-  m_ModifiedSerializedProperties: 16
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _BUILTIN_ALPHATEST_ON
   - _BUILTIN_AlphaClip

@@ -259,11 +259,11 @@ namespace Synty.SidekickCharacters.API
                 Transform[] newBones = new Transform[part.bones.Length];
                 for (int j = 0; j < oldBones.Length; j++)
                 {
-                    newBones[j] = (Transform) boneNameMap[oldBones[j].name];
+                    newBones[j] = (Transform)boneNameMap[oldBones[j].name];
                 }
 
                 renderer.sharedMesh = MeshUtils.CopyMesh(part.sharedMesh);
-                renderer.rootBone = (Transform) boneNameMap[part.rootBone.name];
+                renderer.rootBone = (Transform)boneNameMap[part.rootBone.name];
 
                 Combiner.MergeAndGetAllBlendShapeDataOfSkinnedMeshRenderers(
                     new[]
@@ -300,8 +300,8 @@ namespace Synty.SidekickCharacters.API
                 List<Vector2> partUVs = _currentUVDictionary[type];
                 foreach (Vector2 uv in skinnedMesh.sharedMesh.uv)
                 {
-                    int scaledU = (int) Math.Floor(uv.x * 16);
-                    int scaledV = (int) Math.Floor(uv.y * 16);
+                    int scaledU = (int)Math.Floor(uv.x * 16);
+                    int scaledV = (int)Math.Floor(uv.y * 16);
 
                     if (scaledU == 16)
                     {
@@ -400,6 +400,7 @@ namespace Synty.SidekickCharacters.API
             allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/GoblinFighters"));
             allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/ScifiSoldiers"));
             allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/ScifiCivilians"));
+            allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/FantasyKnights"));
             // Add more folders as needed
 
             foreach (CharacterPartType partType in Enum.GetValues(typeof(CharacterPartType)))
@@ -459,7 +460,8 @@ namespace Synty.SidekickCharacters.API
                 "Meshes/Outfits/ApocalypseOutlaws",
                 "Meshes/Outfits/GoblinFighters",
                 "Meshes/Outfits/ScifiSoldiers",
-                "Meshes/Outfits/ScifiCivilians"
+                "Meshes/Outfits/ScifiCivilians",
+                "Meshes/Outfits/FantasyKnights",
                 // Add any other folders your game uses
             };
 
@@ -509,7 +511,7 @@ namespace Synty.SidekickCharacters.API
             }
 
             bool valueParsed = int.TryParse(partIndexString, out int index);
-            return valueParsed ? (CharacterPartType) index : 0;
+            return valueParsed ? (CharacterPartType)index : 0;
         }
 
         /// <summary>
@@ -525,7 +527,7 @@ namespace Synty.SidekickCharacters.API
 
             foreach (KeyValuePair<CharacterPartType, string> entry in BlendshapeJointAdjustment.PART_TYPE_JOINT_MAP)
             {
-                Transform bone = (Transform) boneNameMap[entry.Value];
+                Transform bone = (Transform)boneNameMap[entry.Value];
 
                 float feminineBlendValue = (_bodyTypeBlendValue + 100) / 2 / 100;
 
@@ -607,33 +609,33 @@ namespace Synty.SidekickCharacters.API
             switch (colorType)
             {
                 case ColorType.Metallic:
-                    Texture2D metallic = (Texture2D) _currentMaterial.GetTexture(_METALLIC_MAP);
+                    Texture2D metallic = (Texture2D)_currentMaterial.GetTexture(_METALLIC_MAP);
                     UpdateTexture(metallic, colorRow.NiceMetallic, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
                     _currentMaterial.SetTexture(_METALLIC_MAP, metallic);
                     break;
                 case ColorType.Smoothness:
-                    Texture2D smoothness = (Texture2D) _currentMaterial.GetTexture(_SMOOTHNESS_MAP);
+                    Texture2D smoothness = (Texture2D)_currentMaterial.GetTexture(_SMOOTHNESS_MAP);
                     UpdateTexture(smoothness, colorRow.NiceSmoothness, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
                     _currentMaterial.SetTexture(_SMOOTHNESS_MAP, smoothness);
                     break;
                 case ColorType.Reflection:
-                    Texture2D reflection = (Texture2D) _currentMaterial.GetTexture(_REFLECTION_MAP);
+                    Texture2D reflection = (Texture2D)_currentMaterial.GetTexture(_REFLECTION_MAP);
                     UpdateTexture(reflection, colorRow.NiceReflection, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
                     _currentMaterial.SetTexture(_REFLECTION_MAP, reflection);
                     break;
                 case ColorType.Emission:
-                    Texture2D emission = (Texture2D) _currentMaterial.GetTexture(_EMISSION_MAP);
+                    Texture2D emission = (Texture2D)_currentMaterial.GetTexture(_EMISSION_MAP);
                     UpdateTexture(emission, colorRow.NiceEmission, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
                     _currentMaterial.SetTexture(_EMISSION_MAP, emission);
                     break;
                 case ColorType.Opacity:
-                    Texture2D opacity = (Texture2D) _currentMaterial.GetTexture(_OPACITY_MAP);
+                    Texture2D opacity = (Texture2D)_currentMaterial.GetTexture(_OPACITY_MAP);
                     UpdateTexture(opacity, colorRow.NiceOpacity, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
                     _currentMaterial.SetTexture(_OPACITY_MAP, opacity);
                     break;
                 case ColorType.MainColor:
                 default:
-                    Texture2D color = (Texture2D) _currentMaterial.GetTexture(_COLOR_MAP);
+                    Texture2D color = (Texture2D)_currentMaterial.GetTexture(_COLOR_MAP);
                     UpdateTexture(color, colorRow.NiceColor, colorRow.ColorProperty.U, colorRow.ColorProperty.V);
                     _currentMaterial.SetTexture(_COLOR_MAP, color);
                     break;

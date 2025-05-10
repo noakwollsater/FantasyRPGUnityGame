@@ -186,7 +186,7 @@ namespace Opsive.UltimateCharacterController.Character.Abilities.Items
 
             // Determine if the item should be auto equipped. There are a variety of circumstances which will allow the item to be equipped.
             if (!ShouldEquip(characterItem.ItemIdentifier, characterItem.SlotID, amount)) { return; }
-            
+
             // The ItemSetManager will manage which items are equipped.
             var itemSetIndex = m_ItemSetManager.GetItemSetIndex(characterItem, m_ItemSetGroupIndex, true);
             // The itemSet may not be valid for the item yet. 

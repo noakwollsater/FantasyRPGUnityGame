@@ -42,7 +42,6 @@ Material:
     - _Opacity1: -0.1
     - _Opacity2: 1.49
     - _Power: 1.05
-    - _QueueControl: 1
     - _RenderQueueType: 1
     - _Rough: -0.36
     - _StencilRefDepth: 8
@@ -85,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 9
+  version: 7
 --- !u!114 &3154410633762591037
 MonoBehaviour:
   m_ObjectHideFlags: 11

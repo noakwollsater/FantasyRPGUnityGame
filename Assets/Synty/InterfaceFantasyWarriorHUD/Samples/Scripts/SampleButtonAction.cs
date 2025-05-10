@@ -19,12 +19,14 @@ namespace Synty.Interface.FantasyWarriorHUD.Samples
     {
         [Header("References")]
         public Button button;
+        public List<GameObject> deactivateObjects;
         public List<GameObject> toggleObjects;
         public GameObject activateObject;
 
         [Header("Parameters")]
         public List<SampleAnimatorActionData> animatorActions;
         public float activeTime = 1f;
+        public bool diableButtonWhenActive = false;
         public bool runOnEnable;
         public bool applyRandomRotationToActivateObject;
 
@@ -58,11 +60,23 @@ namespace Synty.Interface.FantasyWarriorHUD.Samples
 
         private void OnClick()
         {
+            foreach (GameObject deactivateObject in deactivateObjects)
+            {
+                if (deactivateObject != null)
+                {
+                    deactivateObject.SetActive(false);
+                }
+            }
+
+            StopAllCoroutines();
             StartCoroutine(C_ActivateObject());
 
             foreach (GameObject toggleObject in toggleObjects)
             {
-                toggleObject.SetActive(!toggleObject.activeSelf);
+                if (toggleObject != null)
+                {
+                    toggleObject.SetActive(!toggleObject.activeSelf);
+                }
             }
 
             foreach (SampleAnimatorActionData action in animatorActions)
@@ -73,7 +87,7 @@ namespace Synty.Interface.FantasyWarriorHUD.Samples
 
         private IEnumerator C_ActivateObject()
         {
-            if (button != null)
+            if (diableButtonWhenActive && button != null)
             {
                 button.interactable = false;
             }
@@ -89,7 +103,7 @@ namespace Synty.Interface.FantasyWarriorHUD.Samples
 
             yield return new WaitForSeconds(activeTime);
 
-            if (button != null)
+            if (diableButtonWhenActive && button != null)
             {
                 button.interactable = true;
             }

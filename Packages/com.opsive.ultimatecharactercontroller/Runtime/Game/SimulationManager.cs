@@ -10,7 +10,6 @@ namespace Opsive.UltimateCharacterController
     using Opsive.UltimateCharacterController.Camera;
     using Opsive.UltimateCharacterController.Character;
     using Opsive.UltimateCharacterController.Game;
-    using Opsive.UltimateCharacterController.Objects;
     using Opsive.UltimateCharacterController.Utility;
     using UnityEngine;
     using UnityEngine.SceneManagement;

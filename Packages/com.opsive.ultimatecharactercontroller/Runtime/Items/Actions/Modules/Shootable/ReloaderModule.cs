@@ -439,7 +439,7 @@ namespace Opsive.UltimateCharacterController.Items.Actions.Modules.Shootable
             
             if (fromPickup) {
                 // The Ammo Item Definition has to match.
-                if ( !(ammoItemIdentifier == null && ShootableAction.MainAmmoModule.AmmoItemDefinition == null )
+                if (!(ammoItemIdentifier == null && ShootableAction.MainAmmoModule.AmmoItemDefinition == null)
                      && ShootableAction.MainAmmoModule.AmmoItemDefinition != ammoItemIdentifier?.GetItemDefinition()) {
                     return false;
                 }

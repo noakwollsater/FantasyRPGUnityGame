@@ -9,7 +9,6 @@ namespace Opsive.UltimateCharacterController.Character.Abilities
 #if ULTIMATE_CHARACTER_CONTROLLER_MULTIPLAYER
     using Opsive.Shared.Networking;
 #endif
-    using Opsive.Shared.Game;
     using Opsive.Shared.Utility;
     using Opsive.Shared.Events;
     using Opsive.UltimateCharacterController.Character;

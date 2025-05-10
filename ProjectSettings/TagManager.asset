@@ -4,20 +4,15 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Stair
-  - WallRun
-  - Climb
-  - Fly
-  - CinemachineTarget
-  - Targets
-  - Camera
-  - CameraLevel0
-  - CameraLevel1
-  - CameraLevel2
-  - Volumes
-  - FreeCamVolume
   - Animal
   - Water
+  - Fly
+  - Climb
+  - Stair
+  - WallRun
+  - IngameUI
+  - InventoryPanel
+  - HUD
   layers:
   - Default
   - TransparentFX
@@ -25,11 +20,11 @@ TagManager:
   - 
   - Water
   - UI
-  - NPC
-  - Ground
   - 
   - 
-  - RaycastOnly
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -39,29 +34,36 @@ TagManager:
   - 
   - 
   - 
-  - Size0
-  - Size1
-  - Size2
-  - Size3
-  - Size4
-  - Size5
-  - SmallVFX
-  - MedVFX
-  - LargeVFX
+  - Animal
+  - 
+  - 
+  - Enemy
+  - 
+  - 
+  - Enemy
+  - MovingPlatform
+  - VisualEffect
   - Overlay
-  - SubCharacter
-  - Temp
+  - Item
+  - Character
   m_SortingLayers:
   - name: Default
     uniqueID: 0
     locked: 0
   m_RenderingLayers:
   - Default
-  - NoDecal
-  - Layer 2
-  - Layer 3
-  - Layer 4
-  - Layer 5
-  - Layer 6
-  - Layer 7
-  - Layer 8
+  - Light Layer 1
+  - Light Layer 2
+  - Light Layer 3
+  - Light Layer 4
+  - Light Layer 5
+  - Light Layer 6
+  - Light Layer 7
+  - Decal Layer default
+  - Decal Layer 1
+  - Decal Layer 2
+  - Decal Layer 3
+  - Decal Layer 4
+  - Decal Layer 5
+  - Decal Layer 6
+  - Decal Layer 7

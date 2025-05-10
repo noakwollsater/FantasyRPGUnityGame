@@ -163,50 +163,50 @@ namespace Synty.SidekickCharacters
         }
 
 #if UNITY_EDITOR
-         /// <inheritdoc cref="OnEnable" />
-         private void OnEnable()
-         {
-             EditorApplication.playModeStateChanged += StateChange;
-         }
+        /// <inheritdoc cref="OnEnable" />
+        private void OnEnable()
+        {
+            EditorApplication.playModeStateChanged += StateChange;
+        }
 
-         /// <summary>
-         ///     Processes the callback from the play mode state change.
-         /// </summary>
-         /// <param name="stateChange">The current PlayModeStateChange</param>
-         private void StateChange(PlayModeStateChange stateChange)
-         {
-             if (_useAutoSaveAndLoad && stateChange == PlayModeStateChange.ExitingEditMode
-                 || _useAutoSaveAndLoad && stateChange == PlayModeStateChange.ExitingPlayMode)
-             {
-                 SerializedCharacter savedCharacter = CreateSerializedCharacter(_OUTPUT_MODEL_NAME);
-                 Serializer serializer = new Serializer();
-                 string serializedCharacter = serializer.Serialize(savedCharacter);
-                 EditorPrefs.SetString(_AUTOSAVE_KEY, serializedCharacter);
-             }
+        /// <summary>
+        ///     Processes the callback from the play mode state change.
+        /// </summary>
+        /// <param name="stateChange">The current PlayModeStateChange</param>
+        private void StateChange(PlayModeStateChange stateChange)
+        {
+            if (_useAutoSaveAndLoad && stateChange == PlayModeStateChange.ExitingEditMode
+                || _useAutoSaveAndLoad && stateChange == PlayModeStateChange.ExitingPlayMode)
+            {
+                SerializedCharacter savedCharacter = CreateSerializedCharacter(_OUTPUT_MODEL_NAME);
+                Serializer serializer = new Serializer();
+                string serializedCharacter = serializer.Serialize(savedCharacter);
+                EditorPrefs.SetString(_AUTOSAVE_KEY, serializedCharacter);
+            }
 
-             if (_useAutoSaveAndLoad && stateChange == PlayModeStateChange.EnteredEditMode
-                 || _useAutoSaveAndLoad && stateChange == PlayModeStateChange.EnteredPlayMode)
-             {
-                 if (stateChange == PlayModeStateChange.EnteredEditMode)
-                 {
-                     GameObject existingModel = GameObject.Find(_OUTPUT_MODEL_NAME);
-                     while (existingModel != null)
-                     {
-                         GameObject.DestroyImmediate(existingModel);
-                         existingModel = GameObject.Find(_OUTPUT_MODEL_NAME);
-                     }
-                 }
+            if (_useAutoSaveAndLoad && stateChange == PlayModeStateChange.EnteredEditMode
+                || _useAutoSaveAndLoad && stateChange == PlayModeStateChange.EnteredPlayMode)
+            {
+                if (stateChange == PlayModeStateChange.EnteredEditMode)
+                {
+                    GameObject existingModel = GameObject.Find(_OUTPUT_MODEL_NAME);
+                    while (existingModel != null)
+                    {
+                        GameObject.DestroyImmediate(existingModel);
+                        existingModel = GameObject.Find(_OUTPUT_MODEL_NAME);
+                    }
+                }
 
-                 string serializedCharacterString = EditorPrefs.GetString(_AUTOSAVE_KEY, null);
+                string serializedCharacterString = EditorPrefs.GetString(_AUTOSAVE_KEY, null);
 
-                 if (!string.IsNullOrEmpty(serializedCharacterString))
-                 {
-                     Deserializer deserializer = new Deserializer();
-                     SerializedCharacter serializedCharacter = deserializer.Deserialize<SerializedCharacter>(serializedCharacterString);
-                     LoadSerializedCharacter(serializedCharacter, _showAllColourProperties);
-                 }
-             }
-         }
+                if (!string.IsNullOrEmpty(serializedCharacterString))
+                {
+                    Deserializer deserializer = new Deserializer();
+                    SerializedCharacter serializedCharacter = deserializer.Deserialize<SerializedCharacter>(serializedCharacterString);
+                    LoadSerializedCharacter(serializedCharacter, _showAllColourProperties);
+                }
+            }
+        }
 #endif
 
         /// <inheritdoc cref="CreateGUI" />
@@ -248,7 +248,7 @@ namespace Synty.SidekickCharacters
 
             Image bannerImage = new Image
             {
-                image = (Texture2D) Resources.Load("UI/T_SidekickTitle"),
+                image = (Texture2D)Resources.Load("UI/T_SidekickTitle"),
                 scaleMode = ScaleMode.ScaleToFit,
             };
             VisualElement bannerLayout = new VisualElement
@@ -458,7 +458,7 @@ namespace Synty.SidekickCharacters
             _partDictionary = new Dictionary<CharacterPartType, SkinnedMeshRenderer>();
             _currentCharacter = new Dictionary<CharacterPartType, SidekickPart>();
 
-            _sidekickRuntime = new SidekickRuntime((GameObject) _baseModelField.value, (Material) _materialField.value, _currentAnimationController, _dbManager);
+            _sidekickRuntime = new SidekickRuntime((GameObject)_baseModelField.value, (Material)_materialField.value, _currentAnimationController, _dbManager);
 
             _partLibrary = _sidekickRuntime.PopulatePartLibrary();
             _allParts = SidekickPart.GetAll(_dbManager);
@@ -826,7 +826,7 @@ namespace Synty.SidekickCharacters
                 {
                     if (Enum.TryParse(typeof(ColorPartType), evt.newValue.Replace(" ", ""), out object newType))
                     {
-                        _currentPartType = (ColorPartType) newType;
+                        _currentPartType = (ColorPartType)newType;
                         _colorSetsDropdown.value = "Custom";
                     }
 
@@ -1202,7 +1202,7 @@ namespace Synty.SidekickCharacters
             _animationField.RegisterValueChangedCallback(
                 evt =>
                 {
-                    _currentAnimationController = (AnimatorController) evt.newValue;
+                    _currentAnimationController = (AnimatorController)evt.newValue;
                 }
             );
 
@@ -1541,7 +1541,7 @@ namespace Synty.SidekickCharacters
             // if no parts are selected, don't try and save a non-existent material, instead create one
             if (_currentMaterial == null)
             {
-                _currentMaterial = (Material) _materialField.value;
+                _currentMaterial = (Material)_materialField.value;
             }
 
             string filename = _TEXTURE_PREFIX;
@@ -1552,7 +1552,7 @@ namespace Synty.SidekickCharacters
             }
 
             string filePath = Path.Combine(path, filename + _TEXTURE_COLOR_NAME);
-            Texture2D texture = (Texture2D) _currentMaterial.GetTexture(_COLOR_MAP);
+            Texture2D texture = (Texture2D)_currentMaterial.GetTexture(_COLOR_MAP);
             File.WriteAllBytes(filePath, texture.EncodeToPNG());
             _currentColorSet.SourceColorPath = filePath;
             // TODO: Hidden due to early access, enable when feature complete
@@ -1873,7 +1873,7 @@ namespace Synty.SidekickCharacters
                 mainColor.filterMode = FilterMode.Point;
                 if (!mainColor.isReadable)
                 {
-                    textureImporter = (TextureImporter) AssetImporter.GetAtPath(_currentColorSet.SourceColorPath);
+                    textureImporter = (TextureImporter)AssetImporter.GetAtPath(_currentColorSet.SourceColorPath);
                     textureImporter.isReadable = true;
                     textureImporter.SaveAndReimport();
                 }
@@ -1885,7 +1885,7 @@ namespace Synty.SidekickCharacters
                 metallic.filterMode = FilterMode.Point;
                 if (!metallic.isReadable)
                 {
-                    textureImporter = (TextureImporter) AssetImporter.GetAtPath(_currentColorSet.SourceMetallicPath);
+                    textureImporter = (TextureImporter)AssetImporter.GetAtPath(_currentColorSet.SourceMetallicPath);
                     textureImporter.isReadable = true;
                     textureImporter.SaveAndReimport();
                 }
@@ -1897,7 +1897,7 @@ namespace Synty.SidekickCharacters
                 smoothness.filterMode = FilterMode.Point;
                 if (!smoothness.isReadable)
                 {
-                    textureImporter = (TextureImporter) AssetImporter.GetAtPath(_currentColorSet.SourceSmoothnessPath);
+                    textureImporter = (TextureImporter)AssetImporter.GetAtPath(_currentColorSet.SourceSmoothnessPath);
                     textureImporter.isReadable = true;
                     textureImporter.SaveAndReimport();
                 }
@@ -1909,7 +1909,7 @@ namespace Synty.SidekickCharacters
                 reflection.filterMode = FilterMode.Point;
                 if (!reflection.isReadable)
                 {
-                    textureImporter = (TextureImporter) AssetImporter.GetAtPath(_currentColorSet.SourceReflectionPath);
+                    textureImporter = (TextureImporter)AssetImporter.GetAtPath(_currentColorSet.SourceReflectionPath);
                     textureImporter.isReadable = true;
                     textureImporter.SaveAndReimport();
                 }
@@ -1921,7 +1921,7 @@ namespace Synty.SidekickCharacters
                 emission.filterMode = FilterMode.Point;
                 if (!emission.isReadable)
                 {
-                    textureImporter = (TextureImporter) AssetImporter.GetAtPath(_currentColorSet.SourceEmissionPath);
+                    textureImporter = (TextureImporter)AssetImporter.GetAtPath(_currentColorSet.SourceEmissionPath);
                     textureImporter.isReadable = true;
                     textureImporter.SaveAndReimport();
                 }
@@ -1933,7 +1933,7 @@ namespace Synty.SidekickCharacters
                 opacity.filterMode = FilterMode.Point;
                 if (!opacity.isReadable)
                 {
-                    textureImporter = (TextureImporter) AssetImporter.GetAtPath(_currentColorSet.SourceOpacityPath);
+                    textureImporter = (TextureImporter)AssetImporter.GetAtPath(_currentColorSet.SourceOpacityPath);
                     textureImporter.isReadable = true;
                     textureImporter.SaveAndReimport();
                 }
@@ -3263,7 +3263,7 @@ namespace Synty.SidekickCharacters
             string currentSelection = selectedPart?.Name ?? "None";
             if (_processingSpeciesChange && PartUtils.IsBaseSpeciesPart(currentSelection))
             {
-                currentSelection = popupValues.Find(n => n.Contains("BASE"))?? "None";
+                currentSelection = popupValues.Find(n => n.Contains("BASE")) ?? "None";
             }
 
             PopupField<string> partSelection = new PopupField<string>(popupValues, 0)
@@ -3392,7 +3392,7 @@ namespace Synty.SidekickCharacters
                 }
             }
 
-            GameObject newModel = _sidekickRuntime.CreateCharacter( _OUTPUT_MODEL_NAME, parts, combineMesh, processBoneMovement);
+            GameObject newModel = _sidekickRuntime.CreateCharacter(_OUTPUT_MODEL_NAME, parts, combineMesh, processBoneMovement);
 
             return newModel;
         }
@@ -3719,7 +3719,7 @@ namespace Synty.SidekickCharacters
             }
 
             string baseFilename = Path.GetFileNameWithoutExtension(savePath);
-            string directoryBase = Path.GetDirectoryName(savePath)?? string.Empty;
+            string directoryBase = Path.GetDirectoryName(savePath) ?? string.Empty;
             string directory = Path.Combine(directoryBase, baseFilename);
             savePath = Path.Combine(directory, Path.GetFileName(savePath));
             string textureDirectory = Path.Combine(directory, "Textures");
@@ -3888,7 +3888,7 @@ namespace Synty.SidekickCharacters
                     textureImporter.SaveAndReimport();
                 }
 
-                material.SetTexture(textureID, (Texture2D) AssetDatabase.LoadAssetAtPath(filePath, typeof(Texture2D)));
+                material.SetTexture(textureID, (Texture2D)AssetDatabase.LoadAssetAtPath(filePath, typeof(Texture2D)));
             }
         }
 

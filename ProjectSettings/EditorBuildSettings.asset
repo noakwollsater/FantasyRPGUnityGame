@@ -5,26 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Noak/Editor/Scene/SidekickTester.unity
-    guid: a2bcfd0088dab57498427eb47330d215
-  - enabled: 0
-    path: Assets/Scenes/Demo.unity
-    guid: 23d8661265deed742959416ea58475f7
-  - enabled: 0
-    path: Assets/Synty/SidekickCharacters/_Demos/_Scenes/Sidekick_RuntimePartsDemo.unity
-    guid: 8bd797eaa781c9f40a9584f012eb5d56
   - enabled: 1
-    path: Assets/Noak/Scene/Menu.unity
-    guid: 150bde1d0f687714f9865390181ae745
+    path: Assets/Scenes/MainMenu/MainMenu.unity
+    guid: 80e1833d9e13d404da5f05a9084d8bed
   - enabled: 1
-    path: Assets/Noak/Scene/CharacterCreation.unity
-    guid: 219d173bbbcae6e449166e9ed6b6e32c
+    path: Assets/Scenes/MainMenu/CharacterCreation.unity
+    guid: 7bc6ce31b696c474eb605f96432ea61e
   - enabled: 1
-    path: Assets/Noak/Scene/Gameplay.unity
-    guid: 6aab5447133ab7d43ad079cb087aea9c
+    path: Assets/Scenes/Gameplay/UI/Menu.unity
+    guid: 2fe0e8097779f6a4cabc6e34f799eaa3
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/UI/HUD.unity
+    guid: cc4e3f13c6a1bef4290de9e9efbbe7ac
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/GamePlay.unity
+    guid: 8237320b24a5cf2488be0dd417e196ae
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/Map/OutdoorsScene.unity
+    guid: 8124e5870f4fd4c779e7a5f994e84ad1
   m_configObjects:
-    com.unity.addressableassets: {fileID: 11400000, guid: d079b25e09a01334784fc01ca80fef1f, type: 2}
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 57aa1a4c82454616bed26f7b365eb456, type: 3}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: edc1d34b6f340c54dbb170d06a6d201f, type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: 2402f76c722398b489eac0987f3d994d, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
   m_UseUCBPForAssetBundles: 0

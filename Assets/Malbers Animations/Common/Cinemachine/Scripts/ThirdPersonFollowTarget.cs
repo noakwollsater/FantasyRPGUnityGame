@@ -504,7 +504,9 @@ namespace MalbersAnimations
             }
         }
 
+
         [SerializeField, HideInInspector] bool showUPVector;
+
 #if UNITY_EDITOR
         private void OnValidate()
         {
