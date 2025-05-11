@@ -451,8 +451,8 @@ public class CharacterCreation : MonoBehaviour
         UpdateModel();
     }
 
-    public void ForwardAttachmentHips() => ChangePairedParts(CharacterPartType.AttachmentHipsLeft, CharacterPartType.AttachmentHipsRight, true);
-    public void BackwardAttachmentHips() => ChangePairedParts(CharacterPartType.AttachmentHipsLeft, CharacterPartType.AttachmentHipsRight, false);
+    public void ForwardAttachmentHips() => ChangePart(CharacterPartType.AttachmentHipsLeft, true);
+    public void BackwardAttachmentHips() => ChangePart(CharacterPartType.AttachmentHipsLeft, false);
     public void RemoveHipAttachment()
     {
         if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentHipsLeft))
@@ -460,10 +460,17 @@ public class CharacterCreation : MonoBehaviour
             _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentHipsLeft);
             _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentHipsLeft);
         }
-        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentHipsRight))
+        UpdateModel();
+    }
+
+    public void ForwardAttachmentHipLeft() => ChangePart(CharacterPartType.AttachmentHipsLeft, true);
+    public void BackwardAttachmentHipLeft() => ChangePart(CharacterPartType.AttachmentHipsLeft, false);
+    public void RemoveHipAttachmentLeft()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentHipsLeft))
         {
-            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentHipsRight);
-            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentHipsRight);
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentHipsLeft);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentHipsLeft);
         }
         UpdateModel();
     }
