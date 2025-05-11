@@ -24,6 +24,7 @@ public class ClassSelectionUI : CharacterCreation
         UpdateClassInfo(className);
         _dictionaryLibrary.selectedClass = className;
         ApplyClassBonuses();
+        AddClassSkills();
         summaryCreation.UpdateSummary();
     }
 
@@ -96,4 +97,24 @@ public class ClassSelectionUI : CharacterCreation
 
     }
 
+    private void AddClassSkills()
+    {
+        _dictionaryLibrary.classSkills.Clear(); // ✅ Rensa innan du lägger till nya
+
+        Class selectedClass = ClassDatabase.Instance.GetClass(SelectedClass);
+
+        if (selectedClass == null)
+        {
+            Debug.LogError($"Class '{SelectedClass}' not found!");
+            return;
+        }
+
+        foreach (var skill in selectedClass.UniqueAbilities)
+        {
+            if (!_dictionaryLibrary.classSkills.Contains(skill))
+            {
+                _dictionaryLibrary.classSkills.Add(skill);
+            }
+        }
+    }
 }
