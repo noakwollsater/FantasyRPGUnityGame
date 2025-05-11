@@ -314,6 +314,39 @@ public class CharacterCreation : MonoBehaviour
         }
     }
 
+    public void RemoveHair()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.Hair))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.Hair);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.Hair);
+        }
+        UpdateModel();
+    }
+    public void RemoveEyebrows()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.EyebrowLeft))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.EyebrowLeft);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.EyebrowLeft);
+        }
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.EyebrowRight))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.EyebrowRight);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.EyebrowRight);
+        }
+        UpdateModel();
+    }
+    public void RemoveFacialHair()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.FacialHair))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.FacialHair);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.FacialHair);
+        }
+        UpdateModel();
+    }
+
 
     //Head Parts
     public void ForwardHair() => ChangePart(CharacterPartType.Hair, true);
@@ -346,4 +379,133 @@ public class CharacterCreation : MonoBehaviour
     public void BackwardLeg() => ChangePairedParts(CharacterPartType.LegLeft, CharacterPartType.LegRight, false);
     public void ForwardFoot() => ChangePairedParts(CharacterPartType.FootLeft, CharacterPartType.FootRight, true);
     public void BackwardFoot() => ChangePairedParts(CharacterPartType.FootLeft, CharacterPartType.FootRight, false);
+
+    // Attachments
+    public void ForwardAttachmentBack() => ChangePart(CharacterPartType.AttachmentBack, true);
+    public void BackwardAttachmentBack() => ChangePart(CharacterPartType.AttachmentBack, false);
+    public void RemoveBackAttachment()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentBack))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentBack);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentBack);
+        }
+        UpdateModel();
+    }
+
+    public void ForwardAttachmentHelmet() => ChangePart(CharacterPartType.AttachmentHead, true);
+    public void BackwardAttachmentHelmet() => ChangePart(CharacterPartType.AttachmentHead, false);
+    public void RemoveHeadAttachment()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentHead))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentHead);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentHead);
+        }
+        UpdateModel();
+    }
+
+    public void ForwardAttachmentFace() => ChangePart(CharacterPartType.AttachmentFace, true);
+    public void BackwardAttachmentFace() => ChangePart(CharacterPartType.AttachmentFace, false);
+    public void RemoveFaceAttachment()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentFace))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentFace);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentFace);
+        }
+        UpdateModel();
+    }
+
+    public void ForwardAttachmentShoulder() => ChangePairedParts(CharacterPartType.AttachmentShoulderLeft, CharacterPartType.AttachmentShoulderRight, true);
+    public void BackwardAttachmentShoulder() => ChangePairedParts(CharacterPartType.AttachmentShoulderLeft, CharacterPartType.AttachmentShoulderRight, false);
+    public void RemoveShoulderAttachment()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentShoulderLeft))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentShoulderLeft);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentShoulderLeft);
+        }
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentShoulderRight))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentShoulderRight);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentShoulderRight);
+        }
+        UpdateModel();
+    }
+
+    public void ForwardAttachmentElbow() => ChangePairedParts(CharacterPartType.AttachmentElbowLeft, CharacterPartType.AttachmentElbowRight, true);
+    public void BackwardAttachmentElbow() => ChangePairedParts(CharacterPartType.AttachmentElbowLeft, CharacterPartType.AttachmentElbowRight, false);
+    public void RemoveElbowAttachment()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentElbowLeft))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentElbowLeft);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentElbowLeft);
+        }
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentElbowRight))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentElbowRight);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentElbowRight);
+        }
+        UpdateModel();
+    }
+
+    public void ForwardAttachmentHips() => ChangePairedParts(CharacterPartType.AttachmentHipsLeft, CharacterPartType.AttachmentHipsRight, true);
+    public void BackwardAttachmentHips() => ChangePairedParts(CharacterPartType.AttachmentHipsLeft, CharacterPartType.AttachmentHipsRight, false);
+    public void RemoveHipAttachment()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentHipsLeft))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentHipsLeft);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentHipsLeft);
+        }
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentHipsRight))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentHipsRight);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentHipsRight);
+        }
+        UpdateModel();
+    }
+
+    public void ForwardAttachmentHipFront() => ChangePart(CharacterPartType.AttachmentHipsFront, true);
+    public void BackwardAttachmentHipFront() => ChangePart(CharacterPartType.AttachmentHipsFront, false);
+    public void RemoveHipAttachmentFront()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentHipsFront))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentHipsFront);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentHipsFront);
+        }
+        UpdateModel();
+    }
+
+    public void ForwardAttachmentHipBack() => ChangePart(CharacterPartType.AttachmentHipsBack, true);
+    public void BackwardAttachmentHipBack() => ChangePart(CharacterPartType.AttachmentHipsBack, false);
+    public void RemoveHipAttachmentBack()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentHipsBack))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentHipsBack);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentHipsBack);
+        }
+        UpdateModel();
+    }
+
+    public void ForwardAttachmentKnee() => ChangePairedParts(CharacterPartType.AttachmentKneeLeft, CharacterPartType.AttachmentKneeRight, true);
+    public void BackwardAttachmentKnee() => ChangePairedParts(CharacterPartType.AttachmentKneeLeft, CharacterPartType.AttachmentKneeRight, false);
+    public void RemoveKneeAttachment()
+    {
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentKneeLeft))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentKneeLeft);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentKneeLeft);
+        }
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentKneeRight))
+        {
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentKneeRight);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentKneeRight);
+        }
+        UpdateModel();
+    }
 }
