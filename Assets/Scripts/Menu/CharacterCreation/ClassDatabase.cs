@@ -6,6 +6,8 @@ public class ClassDatabase : MonoBehaviour
     public static ClassDatabase Instance;
     public List<Class> Classes = new List<Class>();
 
+    [SerializeField] private GameObject skillPanel;
+
     void Awake()
     {
         if (Instance == null)
@@ -16,6 +18,21 @@ public class ClassDatabase : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    void OnEnable()
+    {
+        if (skillPanel != null)
+        {
+            skillPanel.SetActive(true);
+        }
+    }
+    void OnDisable()
+    {
+        if (skillPanel != null)
+        {
+            skillPanel.SetActive(false);
         }
     }
 
