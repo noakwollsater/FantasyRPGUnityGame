@@ -18,6 +18,7 @@ namespace Unity.FantasyKingdom
         [Header("🧙 Character Info")]
         public string characterName;
         public int level;
+        public int levelPoints;
         public float experience;
         public float experienceToNextLevel;
 
@@ -95,6 +96,7 @@ namespace Unity.FantasyKingdom
 
             // Stats
             level = data.level;
+            levelPoints = data.levelPoints;
             experience = data.experience;
             experienceToNextLevel = data.experienceToNextLevel;
 
