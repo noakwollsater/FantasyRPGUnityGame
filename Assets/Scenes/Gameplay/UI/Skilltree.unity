@@ -112139,7 +112139,7 @@ MonoBehaviour:
   connections: []
   skillName: Last Skill
   skillDescription: WiroWaroWoro
-  isStartingSkill: 1
+  isStartingSkill: 0
   requiredConnectionsToUnlock: 2
   depthFromStart: 2
   costText: {fileID: 0}
