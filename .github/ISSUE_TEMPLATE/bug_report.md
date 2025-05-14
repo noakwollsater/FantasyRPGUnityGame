@@ -17,5 +17,3 @@ Hur återskapar man den?
 
 Skärmdump
 ...
-
-#### 🛠️ Granskning:
