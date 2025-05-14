@@ -451,14 +451,14 @@ public class CharacterCreation : MonoBehaviour
         UpdateModel();
     }
 
-    public void ForwardAttachmentHips() => ChangePart(CharacterPartType.AttachmentHipsLeft, true);
-    public void BackwardAttachmentHips() => ChangePart(CharacterPartType.AttachmentHipsLeft, false);
+    public void ForwardAttachmentHipRight() => ChangePart(CharacterPartType.AttachmentHipsRight, true);
+    public void BackwardAttachmentHipRight() => ChangePart(CharacterPartType.AttachmentHipsRight, false);
     public void RemoveHipAttachment()
     {
-        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentHipsLeft))
+        if (_dictionaryLibrary._availablePartDictionary.ContainsKey(CharacterPartType.AttachmentHipsRight))
         {
-            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentHipsLeft);
-            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentHipsLeft);
+            _dictionaryLibrary._availablePartDictionary.Remove(CharacterPartType.AttachmentHipsRight);
+            _dictionaryLibrary._partIndexDictionary.Remove(CharacterPartType.AttachmentHipsRight);
         }
         UpdateModel();
     }

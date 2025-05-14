@@ -401,6 +401,7 @@ namespace Synty.SidekickCharacters.API
             allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/ScifiSoldiers"));
             allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/ScifiCivilians"));
             allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/FantasyKnights"));
+            allParts.AddRange(Resources.LoadAll<GameObject>("Meshes/Outfits/SamuraiWarriors"));
             // Add more folders as needed
 
             foreach (CharacterPartType partType in Enum.GetValues(typeof(CharacterPartType)))
@@ -462,6 +463,7 @@ namespace Synty.SidekickCharacters.API
                 "Meshes/Outfits/ScifiSoldiers",
                 "Meshes/Outfits/ScifiCivilians",
                 "Meshes/Outfits/FantasyKnights",
+                "Meshes/Outfits/SamuraiWarriors",
                 // Add any other folders your game uses
             };
 
