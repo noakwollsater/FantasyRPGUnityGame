@@ -18,6 +18,7 @@ namespace Unity.FantasyKingdom
         [Header("🧙 Character Info")]
         public string characterName;
         public int level;
+        public int levelPoints;
         public float experience;
         public float experienceToNextLevel;
 
@@ -45,6 +46,9 @@ namespace Unity.FantasyKingdom
 
         [Header("📘 Background Skills")]
         public List<string> backgroundSkills = new();
+
+        [Header("🛡️ Class Skills")]
+        public List<string> classSkills = new();
 
         [Header("🎯 Final Attributes")]
         public AttributeSet finalAttributes;
@@ -87,10 +91,12 @@ namespace Unity.FantasyKingdom
             characterName = $"{data.firstName} {data.lastName}";
             race = data.race;
             className = data.className;
+            classSkills = new List<string>(data.classSkills);
             background = data.background;
 
             // Stats
             level = data.level;
+            levelPoints = data.levelPoints;
             experience = data.experience;
             experienceToNextLevel = data.experienceToNextLevel;
 

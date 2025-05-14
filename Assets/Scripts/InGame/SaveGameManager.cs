@@ -48,6 +48,7 @@ namespace Unity.FantasyKingdom
                 background = characterData.background,
 
                 level = characterData.level,
+                levelPoints = characterData.levelPoints,
                 experience = characterData.experience,
                 experienceToNextLevel = characterData.experienceToNextLevel,
 

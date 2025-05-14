@@ -8,8 +8,10 @@ public class CharacterSaveData
     public string age;
     public string race;
     public string className;
+    public List<string> classSkills = new();
 
     public int level = 1;
+    public int levelPoints = 0;
     public float experience = 0;
     public float experienceToNextLevel = 100;
 

@@ -162,6 +162,8 @@ namespace Unity.FantasyKingdom
                 race = _dictionaryLibrary.selectedSpecies,
                 className = _dictionaryLibrary.selectedClass,
 
+                classSkills = new List<string>(_dictionaryLibrary.classSkills),
+
                 muscle = _dictionaryLibrary.MusclesBlendValue,
                 skinny = _dictionaryLibrary.BodySizeSkinnyBlendValue,
                 fat = _dictionaryLibrary.BodySizeHeavyBlendValue,

@@ -75,6 +75,7 @@ namespace Unity.FantasyKingdom
         private void OnLevelUp()
         {
             _lastLevel = _loadCharacterData.level;
+            _loadCharacterData.levelPoints++;
             levelText.text = _lastLevel.ToString();
             popUpLevelText.text = _lastLevel.ToString();
 

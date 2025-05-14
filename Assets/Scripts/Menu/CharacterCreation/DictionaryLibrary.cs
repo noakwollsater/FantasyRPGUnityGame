@@ -179,6 +179,7 @@ public class DictionaryLibrary : ScriptableObject
     { "the warrior academy in the stone fortress", new List<string> { "Athletics", "History" } },
 };
     public List<string> backgroundSkills = new List<string>();
+    public List<string> classSkills = new List<string>();
     public List<RaceAgeData> raceAgeDataList = new List<RaceAgeData>
     {
         new RaceAgeData { race = "Human", minAge = 16, maxAge = 80, defaultAge = 25 },
