@@ -8,7 +8,7 @@ public class SkillManager : MonoBehaviour
     public int levelPoints = 15;
     public TMP_Text levelPointsText;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);

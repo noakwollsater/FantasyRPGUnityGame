@@ -76,6 +76,8 @@ namespace Unity.FantasyKingdom
 
                 selectedColors = new Dictionary<string, string>(getActiveColors.selectedColors),
 
+                unlockedSkillTrees = characterData.unlockedSkillTrees,
+
                 isDead = characterData.isDead
         };
 

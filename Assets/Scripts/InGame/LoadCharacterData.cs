@@ -50,6 +50,9 @@ namespace Unity.FantasyKingdom
         [Header("🛡️ Class Skills")]
         public List<string> classSkills = new();
 
+        [Header("🔑 Unlocked Skills")]
+        public Dictionary<string, List<string>> unlockedSkillTrees = new();
+
         [Header("🎯 Final Attributes")]
         public AttributeSet finalAttributes;
         public ExtendedStats finalStats;
@@ -115,6 +118,8 @@ namespace Unity.FantasyKingdom
             skinny = data.skinny;
             fat = data.fat;
             genderBlend = data.genderBlend;
+
+            unlockedSkillTrees = data.unlockedSkillTrees ?? new Dictionary<string, List<string>>();
 
             // Quests and skills
             completedQuests = new List<string>(data.completedQuests);

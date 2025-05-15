@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.EventSystems;
+using Unity.FantasyKingdom;
 
 public class SkillNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -39,6 +40,13 @@ public class SkillNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         return 1 + (depthFromStart * 2);
     }
 
+    private void OnEnable()
+    {
+        if (IsUnlocked)
+        {
+            ForceSelectedVisualState();
+        }
+    }
 
     private void Start()
     {
@@ -63,6 +71,22 @@ public class SkillNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
             Debug.Log($"{name} connection to → {conn.nextSkill?.name ?? "NULL"}");
         }
+
+        var loader = FindObjectOfType<LoadCharacterData>();
+        if (loader != null)
+        {
+            string currentTree = GetComponentInParent<SkillTree>().name;
+
+            if (loader.unlockedSkillTrees.TryGetValue(currentTree, out var unlockedSkills))
+            {
+                if (unlockedSkills.Contains(skillName))
+                {
+                    IsUnlocked = true;
+                    ForceSelectedVisualState();
+                    return;
+                }
+            }
+        }
     }
 
     private void Update()
@@ -73,6 +97,23 @@ public class SkillNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             costText.text = $"Kostar: {GetSkillCost()}";
         }
     }
+
+    private void ForceSelectedVisualState()
+    {
+        var btn = skillButton;
+        var animator = btn.animator;
+        if (animator != null)
+        {
+            animator.ResetTrigger(btn.animationTriggers.normalTrigger);
+            animator.ResetTrigger(btn.animationTriggers.highlightedTrigger);
+            animator.ResetTrigger(btn.animationTriggers.disabledTrigger);
+            animator.SetTrigger(btn.animationTriggers.selectedTrigger);
+        }
+
+        btn.transition = Selectable.Transition.None;
+        btn.interactable = false;
+    }
+
 
     public void ReceiveConnection()
     {
@@ -104,6 +145,17 @@ public class SkillNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         SkillManager.Instance.SpendPoints(cost);
 
         IsUnlocked = true;
+        var loader = FindObjectOfType<LoadCharacterData>();
+        if (loader != null)
+        {
+            string currentTree = GetComponentInParent<SkillTree>().skillTreeName;
+
+            if (!loader.unlockedSkillTrees.ContainsKey(currentTree))
+                loader.unlockedSkillTrees[currentTree] = new List<string>();
+
+            if (!loader.unlockedSkillTrees[currentTree].Contains(skillName))
+                loader.unlockedSkillTrees[currentTree].Add(skillName);
+        }
 
         var btn = skillButton;
         var animator = btn.animator;

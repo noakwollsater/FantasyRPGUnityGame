@@ -3,6 +3,9 @@ using TMPro;
 
 public class SkillTree : MonoBehaviour
 {
+    [Header("Identifier")]
+    public string skillTreeName; // t.ex. "Combat", "Athletics", "Attributes"
+
     public SkillNode[] skillNodes;
     public UnityEngine.UI.Button treeIcon;
 
@@ -19,6 +22,11 @@ public class SkillTree : MonoBehaviour
             Debug.Log($"- {node.name}");
         }
 
+        CheckTreeCompletion();
+    }
+
+    private void OnEnable()
+    {
         CheckTreeCompletion();
     }
 

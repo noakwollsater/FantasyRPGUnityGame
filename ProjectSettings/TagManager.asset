@@ -13,6 +13,7 @@ TagManager:
   - IngameUI
   - InventoryPanel
   - HUD
+  - SkilltreePanel
   layers:
   - Default
   - TransparentFX
