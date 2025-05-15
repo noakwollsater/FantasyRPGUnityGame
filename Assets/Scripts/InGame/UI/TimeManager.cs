@@ -93,10 +93,10 @@ public class TimeManager : MonoBehaviour
     public void SetRandomTime()
     {
         // Slumpar en tid mellan 0 och 1440 minuter (24 timmar)
-        currentTime = UnityEngine.Random.Range(0, minutesPerDay);
-        dayCount = UnityEngine.Random.Range(1, 31); // Slumpar en dag mellan 1 och 30
-        month = UnityEngine.Random.Range(1, 13); // Slumpar en månad mellan 1 och 12
-
+        currentTime = Random.Range(0, minutesPerDay);
+        dayCount = Random.Range(1, 31); // Slumpar en dag mellan 1 och 30
+        month = Random.Range(1, 13); // Slumpar en månad mellan 1 och 12
+        year = Random.Range(500, 1000); // t.ex. år 342, 582 osv
         setTime();
     }
 }

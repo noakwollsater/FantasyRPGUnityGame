@@ -41,6 +41,8 @@ namespace Unity.FantasyKingdom
         public int copper;
         public int bank;
 
+        public Dictionary<string, List<string>> unlockedSkillTrees = new();
+
         [Header("✅ Quests")]
         public List<string> completedQuests = new();
 
@@ -49,9 +51,6 @@ namespace Unity.FantasyKingdom
 
         [Header("🛡️ Class Skills")]
         public List<string> classSkills = new();
-
-        [Header("🔑 Unlocked Skills")]
-        public Dictionary<string, List<string>> unlockedSkillTrees = new();
 
         [Header("🎯 Final Attributes")]
         public AttributeSet finalAttributes;
@@ -77,8 +76,8 @@ namespace Unity.FantasyKingdom
 
             var settings = new ES3Settings(fileName)
             {
-                encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = "K00a03j23s50a25" // ❗ Ensure this matches your save method
+                //encryptionType = ES3.EncryptionType.AES,
+                //encryptionPassword = "K00a03j23s50a25" // ❗ Ensure this matches your save method
             };
 
             if (!ES3.FileExists(fileName) || !ES3.KeyExists(saveKey, settings))
@@ -119,7 +118,7 @@ namespace Unity.FantasyKingdom
             fat = data.fat;
             genderBlend = data.genderBlend;
 
-            unlockedSkillTrees = data.unlockedSkillTrees ?? new Dictionary<string, List<string>>();
+            unlockedSkillTrees = data.unlockedSkillTrees;
 
             // Quests and skills
             completedQuests = new List<string>(data.completedQuests);

@@ -87,8 +87,8 @@ namespace Unity.FantasyKingdom
 
             var settings = new ES3Settings(fileName)
             {
-                encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = encryptionPassword
+                //encryptionType = ES3.EncryptionType.AES,
+                //encryptionPassword = encryptionPassword
             };
 
             PlayerPrefs.SetString("SavedCharacterName", characterName);
@@ -134,13 +134,15 @@ namespace Unity.FantasyKingdom
 
             var settings = new ES3Settings(fileName)
             {
-                encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = encryptionPassword
+                //encryptionType = ES3.EncryptionType.AES,
+                //encryptionPassword = encryptionPassword
             };
 
             ES3.Save("GameSave", saveData, settings);
-            PlayerPrefs.SetString("LastSavedGame", fileName);
+            PlayerPrefs.SetString("SavedCharacterName", characterName);
+            PlayerPrefs.SetString("LastSavedGame", fileName); // ← extra säkerhet om du vill
             PlayerPrefs.Save();
+
 
             Debug.Log($"✅ Game data saved to: {fileName}");
         }

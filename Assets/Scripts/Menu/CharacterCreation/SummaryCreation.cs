@@ -150,8 +150,8 @@ namespace Unity.FantasyKingdom
             // 🔐 Set up encryption
             var settings = new ES3Settings(fileName)
             {
-                encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = "K00a03j23s50a25"
+                //encryptionType = ES3.EncryptionType.AES,
+                //encryptionPassword = "K00a03j23s50a25"
             };
 
             CharacterSaveData data = new CharacterSaveData

@@ -63,8 +63,8 @@ namespace Unity.FantasyKingdom
 
             var settings = new ES3Settings(fileName)
             {
-                encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = encryptionPassword
+                //encryptionType = ES3.EncryptionType.AES,
+                //encryptionPassword = encryptionPassword
             };
 
             if (!ES3.FileExists(fileName) || !ES3.KeyExists(saveKey, settings))
@@ -332,14 +332,14 @@ namespace Unity.FantasyKingdom
             if (!ES3.FileExists(fileName))
             {
                 Debug.LogWarning("⚠️ Inget sparat spel hittades.");
-                TimeManager.Instance?.SetRandomTime();
+                StartCoroutine(WaitForTimeManagerAndSetRandomTime());
                 return;
             }
 
             var settings = new ES3Settings(fileName)
             {
-                encryptionType = ES3.EncryptionType.AES,
-                encryptionPassword = encryptionPassword
+                //encryptionType = ES3.EncryptionType.AES,
+                //encryptionPassword = encryptionPassword
             };
 
             if (!ES3.KeyExists("GameSave", settings))
@@ -350,12 +350,56 @@ namespace Unity.FantasyKingdom
 
             _cachedGameSaveData = ES3.Load<GameSaveData>("GameSave", settings);
 
+            if (TimeManager.Instance == null)
+            {
+                StartCoroutine(WaitForTimeManagerAndLoadTime());
+            }
+
+
+            Debug.Log($"✅ Game loaded! Kapitel: {_cachedGameSaveData.chapterName}, Tid: {_cachedGameSaveData.inGameTimeMinutes}");
+        }
+
+        private IEnumerator WaitForTimeManagerAndSetRandomTime()
+        {
+            float timeout = 2f;
+            float elapsed = 0f;
+
+            while (TimeManager.Instance == null && elapsed < timeout)
+            {
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
             if (TimeManager.Instance != null)
             {
                 TimeManager.Instance.LoadTimeFromData(_cachedGameSaveData);
+                Debug.Log("🕒 Satte slumpmässig tid via TimeManager");
+            }
+            else
+            {
+                Debug.LogWarning("❌ TimeManager hittades inte efter väntan.");
+            }
+        }
+        private IEnumerator WaitForTimeManagerAndLoadTime()
+        {
+            float timeout = 2f;
+            float elapsed = 0f;
+
+            while (TimeManager.Instance == null && elapsed < timeout)
+            {
+                elapsed += Time.deltaTime;
+                yield return null;
             }
 
-            Debug.Log($"✅ Game loaded! Kapitel: {_cachedGameSaveData.chapterName}, Tid: {_cachedGameSaveData.inGameTimeMinutes}");
+            if (TimeManager.Instance != null)
+            {
+                TimeManager.Instance.LoadTimeFromData(_cachedGameSaveData);
+                Debug.Log($"✅ Tid laddad: År {_cachedGameSaveData.inGameYear}, Månad {_cachedGameSaveData.inGameMonth}, Dag {_cachedGameSaveData.inGameDay}, Tid {_cachedGameSaveData.inGameTimeMinutes}");
+            }
+            else
+            {
+                Debug.LogWarning("❌ TimeManager hittades inte efter väntan. Tid ej laddad.");
+            }
         }
         private IEnumerator MoveCharacterAfterEverything()
         {
