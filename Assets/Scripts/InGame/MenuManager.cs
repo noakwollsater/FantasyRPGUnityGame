@@ -138,6 +138,7 @@ namespace Unity.FantasyKingdom
             mainMenuPanel.SetActive(false);
             radialPanel.SetActive(true);
             settingsPanel.SetActive(false);
+            skilltreePanel.SetActive(false);
             ingameUI.SetActive(true);
             camera.YMultiplier = 1;
             camera.XMultiplier = 1;
@@ -189,6 +190,7 @@ namespace Unity.FantasyKingdom
         {
             skilltreePanel.SetActive(false);
             radialPanel.SetActive(true);
+            isSkilltreeOpen = false; // <-- fixen
             UpdateCursorState();
         }
         public void OpenInventory()

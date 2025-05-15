@@ -25,27 +25,13 @@ public class SkillNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private int fulfilledConnections = 0;
 
     [Header("Skill Tree Cost")]
-    [Header("Skill Tree Cost")]
-    public int depthFromStart = 0; // Sätt manuellt i Editorn
-    public TMP_Text costText; // (valfri UI-display)
-
-    public int GetSkillCost()
-    {
-        if (depthFromStart == int.MaxValue)
-        {
-            Debug.LogWarning($"{name} has unset depthFromStart! Defaulting cost to 999.");
-            return 999; // placeholder för ogiltig nod
-        }
-
-        return 1 + (depthFromStart * 2);
-    }
+    public int depthFromStart = 0;
+    public TMP_Text costText;
 
     private void OnEnable()
     {
         if (IsUnlocked)
-        {
             ForceSelectedVisualState();
-        }
     }
 
     private void Start()
@@ -53,14 +39,11 @@ public class SkillNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         skillButton.onClick.AddListener(ActivateSkill);
 
         if (isStartingSkill)
-        {
             SetInteractable(true);
-        }
         else
-        {
             SetInteractable(false);
-        }
 
+        // Återställ sliders och lås nästa skills
         foreach (var conn in connections)
         {
             if (conn.sliderToNext != null)
@@ -68,50 +51,28 @@ public class SkillNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
             if (conn.nextSkill != null)
                 conn.nextSkill.SetInteractable(false);
-
-            Debug.Log($"{name} connection to → {conn.nextSkill?.name ?? "NULL"}");
         }
 
-        var loader = FindObjectOfType<LoadCharacterData>();
-        if (loader != null)
-        {
-            string currentTree = GetComponentInParent<SkillTree>().name;
-
-            if (loader.unlockedSkillTrees.TryGetValue(currentTree, out var unlockedSkills))
-            {
-                if (unlockedSkills.Contains(skillName))
-                {
-                    IsUnlocked = true;
-                    ForceSelectedVisualState();
-                    return;
-                }
-            }
-        }
+        LoadSavedUnlockState();
     }
 
     private void Update()
     {
-        // Valfritt: visa poängkostnad
         if (!IsUnlocked && costText != null)
         {
             costText.text = $"Kostar: {GetSkillCost()}";
         }
     }
 
-    private void ForceSelectedVisualState()
+    public int GetSkillCost()
     {
-        var btn = skillButton;
-        var animator = btn.animator;
-        if (animator != null)
-        {
-            animator.ResetTrigger(btn.animationTriggers.normalTrigger);
-            animator.ResetTrigger(btn.animationTriggers.highlightedTrigger);
-            animator.ResetTrigger(btn.animationTriggers.disabledTrigger);
-            animator.SetTrigger(btn.animationTriggers.selectedTrigger);
-        }
+        return 1 + (depthFromStart * 2);
+    }
 
-        btn.transition = Selectable.Transition.None;
-        btn.interactable = false;
+    public void SetInteractable(bool state)
+    {
+        if (IsUnlocked) return;
+        skillButton.interactable = state;
     }
 
 
@@ -123,12 +84,6 @@ public class SkillNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             SetInteractable(true);
         }
-    }
-
-    public void SetInteractable(bool state)
-    {
-        if (IsUnlocked) return;
-        skillButton.interactable = state;
     }
 
     public void ActivateSkill()
@@ -143,33 +98,11 @@ public class SkillNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         }
 
         SkillManager.Instance.SpendPoints(cost);
-
         IsUnlocked = true;
-        var loader = FindObjectOfType<LoadCharacterData>();
-        if (loader != null)
-        {
-            string currentTree = GetComponentInParent<SkillTree>().skillTreeName;
 
-            if (!loader.unlockedSkillTrees.ContainsKey(currentTree))
-                loader.unlockedSkillTrees[currentTree] = new List<string>();
+        SaveSkillToCharacter();
 
-            if (!loader.unlockedSkillTrees[currentTree].Contains(skillName))
-                loader.unlockedSkillTrees[currentTree].Add(skillName);
-        }
-
-        var btn = skillButton;
-        var animator = btn.animator;
-        if (animator != null)
-        {
-            animator.ResetTrigger(btn.animationTriggers.normalTrigger);
-            animator.ResetTrigger(btn.animationTriggers.highlightedTrigger);
-            animator.ResetTrigger(btn.animationTriggers.pressedTrigger);
-            animator.ResetTrigger(btn.animationTriggers.disabledTrigger);
-            animator.SetTrigger(btn.animationTriggers.selectedTrigger);
-        }
-
-        btn.transition = Selectable.Transition.None;
-        btn.interactable = false;
+        ForceSelectedVisualState();
 
         foreach (var conn in connections)
         {
@@ -197,6 +130,116 @@ public class SkillNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
         conn.sliderToNext.value = 1f;
         conn.nextSkill.ReceiveConnection();
+    }
+
+    private void ForceSelectedVisualState()
+    {
+        var btn = skillButton;
+        var animator = btn.animator;
+        if (animator != null)
+        {
+            animator.ResetTrigger(btn.animationTriggers.normalTrigger);
+            animator.ResetTrigger(btn.animationTriggers.highlightedTrigger);
+            animator.ResetTrigger(btn.animationTriggers.disabledTrigger);
+            animator.SetTrigger(btn.animationTriggers.selectedTrigger);
+        }
+
+        btn.transition = Selectable.Transition.None;
+        btn.interactable = false;
+    }
+
+    private void LoadSavedUnlockState()
+    {
+        var loader = FindObjectOfType<LoadCharacterData>();
+        if (loader == null)
+        {
+            Debug.LogWarning("⚠️ LoadCharacterData not found in scene.");
+            return;
+        }
+
+        string currentTree = GetComponentInParent<SkillTree>().skillTreeName;
+
+        if (!loader.unlockedSkillTrees.TryGetValue(currentTree, out var unlockedSkills))
+            return;
+
+        // ✅ Exakt match
+        if (unlockedSkills.Contains(skillName))
+        {
+            ApplyUnlockedVisuals();
+            return;
+        }
+
+        // 🔍 Kolla om någon högre nivå av denna skill är upplåst (t.ex. "Jump 2" → "Jump 1" ska highlightas)
+        string prefix = skillName.Contains(" ") ? skillName.Split(' ')[0] : skillName;
+        int thisLevel = TryGetSkillLevel(skillName);
+
+        foreach (var unlocked in unlockedSkills)
+        {
+            if (unlocked.StartsWith(prefix + " "))
+            {
+                int unlockedLevel = TryGetSkillLevel(unlocked);
+
+                if (unlockedLevel > thisLevel)
+                {
+                    ApplyUnlockedVisuals();
+                    return;
+                }
+            }
+        }
+    }
+    private int TryGetSkillLevel(string name)
+    {
+        string[] parts = name.Split(' ');
+        if (parts.Length < 2) return 0;
+
+        return int.TryParse(parts[1], out int level) ? level : 0;
+    }
+    private void ApplyUnlockedVisuals()
+    {
+        IsUnlocked = true;
+        ForceSelectedVisualState();
+
+        foreach (var conn in connections)
+        {
+            if (conn.sliderToNext != null)
+                conn.sliderToNext.value = 1f;
+        }
+
+        StartCoroutine(DelayedSendConnections());
+    }
+
+
+    private IEnumerator DelayedSendConnections()
+    {
+        yield return null; // Vänta ett frame så att alla skillnodes har kört Start()
+
+        foreach (var conn in connections)
+        {
+            if (conn.nextSkill != null)
+            {
+                conn.nextSkill.ReceiveConnection();
+            }
+        }
+    }
+
+
+    private void SaveSkillToCharacter()
+    {
+        var loader = FindObjectOfType<LoadCharacterData>();
+        if (loader == null) return;
+
+        string currentTree = GetComponentInParent<SkillTree>().skillTreeName;
+
+        if (!loader.unlockedSkillTrees.ContainsKey(currentTree))
+            loader.unlockedSkillTrees[currentTree] = new List<string>();
+
+        var list = loader.unlockedSkillTrees[currentTree];
+
+        string prefix = skillName.Contains(" ") ? skillName.Split(' ')[0] : skillName;
+        list.RemoveAll(skill => skill.StartsWith(prefix + " ") && skill != skillName);
+
+        if (!list.Contains(skillName))
+            list.Add(skillName);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

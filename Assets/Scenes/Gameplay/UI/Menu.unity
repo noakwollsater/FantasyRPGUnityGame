@@ -224,9 +224,9 @@ MonoBehaviour:
   connections:
   - nextSkill: {fileID: 1765635677}
     sliderToNext: {fileID: 1561253006}
-  skillName: Second Skill
+  skillName: Jump 1
   skillDescription: Second
-  isStartingSkill: 1
+  isStartingSkill: 0
   requiredConnectionsToUnlock: 1
   depthFromStart: 1
   costText: {fileID: 0}
@@ -70775,9 +70775,9 @@ MonoBehaviour:
   connections:
   - nextSkill: {fileID: 1765635677}
     sliderToNext: {fileID: 460830686}
-  skillName: Third Skill
+  skillName: Running 2
   skillDescription: WiroWaroWoro
-  isStartingSkill: 1
+  isStartingSkill: 0
   requiredConnectionsToUnlock: 1
   depthFromStart: 1
   costText: {fileID: 0}
@@ -71237,6 +71237,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: QuitGame
       objectReference: {fileID: 0}
+    - target: {fileID: 2390388272513465188, guid: 3d59f095491e641498d37374e611a845, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2508996172150523564, guid: 3d59f095491e641498d37374e611a845, type: 3}
       propertyPath: m_text
       value: Save your game
@@ -71503,7 +71507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3673194603769140591, guid: 3d59f095491e641498d37374e611a845, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3718401996310958756, guid: 3d59f095491e641498d37374e611a845, type: 3}
       propertyPath: m_AnchorMax.y
@@ -123118,7 +123122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillButton: {fileID: 11530981}
   connections: []
-  skillName: Last Skill
+  skillName: Jump 2
   skillDescription: WiroWaroWoro
   isStartingSkill: 0
   requiredConnectionsToUnlock: 2
@@ -134639,7 +134643,7 @@ MonoBehaviour:
     m_PressedTrigger: 
     m_SelectedTrigger: Selected
     m_DisabledTrigger: 
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1981008218}
   m_OnClick:
     m_PersistentCalls:
@@ -140039,7 +140043,7 @@ MonoBehaviour:
     sliderToNext: {fileID: 889512425}
   - nextSkill: {fileID: 1102735735}
     sliderToNext: {fileID: 504738456}
-  skillName: First Skill
+  skillName: Running 1
   skillDescription: WiroWaroWoro
   isStartingSkill: 1
   requiredConnectionsToUnlock: 1

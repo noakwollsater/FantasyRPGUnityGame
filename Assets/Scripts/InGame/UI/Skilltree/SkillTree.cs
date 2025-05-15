@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class SkillTree : MonoBehaviour
 {
@@ -9,25 +10,16 @@ public class SkillTree : MonoBehaviour
     public SkillNode[] skillNodes;
     public UnityEngine.UI.Button treeIcon;
 
-    private void Start()
-    {
-        foreach (var node in skillNodes)
-        {
-            Debug.Log($"{node.name} depthFromStart = {node.depthFromStart} (isStartingSkill = {node.isStartingSkill})");
-        }
-
-        Debug.Log($"SkillTree contains {skillNodes.Length} nodes.");
-        foreach (var node in skillNodes)
-        {
-            Debug.Log($"- {node.name}");
-        }
-
-        CheckTreeCompletion();
-    }
-
     private void OnEnable()
     {
-        CheckTreeCompletion();
+        StartCoroutine(InitializeSkillNodes());
+    }
+
+    private IEnumerator InitializeSkillNodes()
+    {
+        yield return new WaitForEndOfFrame(); // Vänta tills allt är spawna/initierat
+
+        CheckTreeCompletion(); // Kan också köras här
     }
 
 

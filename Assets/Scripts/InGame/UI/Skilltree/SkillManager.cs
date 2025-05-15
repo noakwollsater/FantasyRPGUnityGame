@@ -11,7 +11,6 @@ public class SkillManager : MonoBehaviour
     private void OnEnable()
     {
         if (Instance == null) Instance = this;
-        else Destroy(gameObject);
 
         levelPointsText.text = levelPoints.ToString();
     }
