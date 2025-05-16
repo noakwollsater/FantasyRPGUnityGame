@@ -1,17 +1,22 @@
 using UnityEngine;
 using TMPro;
+using Unity.FantasyKingdom;
 
 public class SkillManager : MonoBehaviour
 {
     public static SkillManager Instance;
 
-    public int levelPoints = 15;
+    LoadCharacterData loadCharacterData;
+    public int levelPoints;
     public TMP_Text levelPointsText;
 
     private void OnEnable()
     {
+        if (loadCharacterData == null)
+            loadCharacterData = GameObject.FindGameObjectWithTag("HUD").GetComponent<LoadCharacterData>();
         if (Instance == null) Instance = this;
 
+        levelPoints = loadCharacterData.levelPoints;
         levelPointsText.text = levelPoints.ToString();
     }
 
