@@ -7,7 +7,7 @@ namespace Unity.FantasyKingdom
     {
         [SerializeField] private GameObject TesterPanel;
         [SerializeField] private Button Adventure;
-        [SerializeField] private Button AnmälProblem;
+        [SerializeField] private Button ReportProblem;
         [SerializeField] private Button News;
         [SerializeField] private Button Multiplayer;
         [SerializeField] private Button CloseButton;
@@ -17,18 +17,18 @@ namespace Unity.FantasyKingdom
         void Start()
         {
             Adventure.interactable = false;
-            AnmälProblem.interactable = false;
+            ReportProblem.interactable = false;
             News.interactable = false;
             Multiplayer.interactable = false;
 
             CloseButton.onClick.AddListener(() => CloseMeny());
-            AnmälProblem.onClick.AddListener(() => SendSendToForm());
+            ReportProblem.onClick.AddListener(() => SendSendToForm());
         }
 
         private void CloseMeny()
         {
             Adventure.interactable = true;
-            AnmälProblem.interactable = true;
+            ReportProblem.interactable = true;
             News.interactable = true;
             Multiplayer.interactable = true;
             TesterPanel.SetActive(false);
