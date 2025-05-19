@@ -16,6 +16,7 @@ namespace Unity.FantasyKingdom
         [SerializeField] private GameObject ingameUI;
         [SerializeField] private GameObject radialPanel;
         [SerializeField] private GameObject settingsPanel;
+        [SerializeField] private GameObject skilltreePanel;
 
         private ThirdPersonFollowTarget camera;
         private MAnimal playerInput;
@@ -27,6 +28,8 @@ namespace Unity.FantasyKingdom
 
         private bool isMainMenuOpen;
         private bool isInventoryOpen;
+        private bool isSettingsOpen;
+        private bool isSkilltreeOpen;
 
         private void Update()
         {
@@ -35,6 +38,7 @@ namespace Unity.FantasyKingdom
             HandleEscapeKey();
             HandleInventoryToggle();
             HandleSettingsToggle();
+            HandleSkilltreeToggle();
 
             if (camera == null)
             {
@@ -60,10 +64,6 @@ namespace Unity.FantasyKingdom
             {
                 ingameUI = GameObject.FindGameObjectWithTag("IngameUI");
             }
-            if (inventoryPanel == null)
-            {
-                inventoryPanel = GameObject.FindGameObjectWithTag("InventoryPanel");
-            }
         }
 
         private void HandleEscapeKey()
@@ -79,31 +79,6 @@ namespace Unity.FantasyKingdom
             }
         }
 
-        private void HandleInventoryToggle()
-        {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                ToggleInventory();
-            }
-        }
-
-        private void ToggleInventory()
-        {
-            isInventoryOpen = !isInventoryOpen;
-            inventoryPanel.SetActive(isInventoryOpen);
-
-            SetCharacterControlActive(!isInventoryOpen);
-            UpdateCursorState();
-
-            // Close main menu if inventory opened
-            if (isInventoryOpen && isMainMenuOpen)
-            {
-                isMainMenuOpen = false;
-                mainMenuPanel.SetActive(false);
-                ingameUI.SetActive(false);
-            }
-        }
-
         private void HandleSettingsToggle()
         {
             if (settingsPanel.activeSelf && Input.GetKeyDown(KeyCode.Tab))
@@ -113,14 +88,25 @@ namespace Unity.FantasyKingdom
                 UpdateCursorState();
             }
         }
-
-        private void SetCharacterControlActive(bool isActive)
+        private void HandleInventoryToggle()
         {
-            //if (characterLocomotion != null)
-            //    characterLocomotion.enabled = isActive;
-
-            //if (cameraController != null)
-            //    cameraController.enabled = isActive;
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                isInventoryOpen = !isInventoryOpen;
+                inventoryPanel.SetActive(isInventoryOpen);
+                radialPanel.SetActive(!isInventoryOpen);
+                UpdateCursorState();
+            }
+        }
+        private void HandleSkilltreeToggle()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                isSkilltreeOpen = !isSkilltreeOpen;
+                skilltreePanel.SetActive(isSkilltreeOpen);
+                radialPanel.SetActive(!isSkilltreeOpen);
+                UpdateCursorState();
+            }
         }
 
         private void UpdateCursorState()
@@ -130,13 +116,11 @@ namespace Unity.FantasyKingdom
             else
                 LockCursor();
         }
-
         private void LockCursor()
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
-
         private void UnlockCursor()
         {
             Cursor.lockState = CursorLockMode.None;
@@ -148,22 +132,20 @@ namespace Unity.FantasyKingdom
             saveGameManager.SaveCharacterData();
             saveGameManager.SaveGameData("Start of the Journey", "Heimdal", SaveType.Manual, "00:00", characterGameObject.transform);
         }
-
         public void ResumeGame()
         {
             isMainMenuOpen = false;
             mainMenuPanel.SetActive(false);
             radialPanel.SetActive(true);
             settingsPanel.SetActive(false);
+            skilltreePanel.SetActive(false);
             ingameUI.SetActive(true);
             camera.YMultiplier = 1;
             camera.XMultiplier = 1;
             playerInput.enabled = true;
 
-            SetCharacterControlActive(true);
             LockCursor();
         }
-
         private void OpenMainMenu()
         {
             isMainMenuOpen = true;
@@ -173,14 +155,12 @@ namespace Unity.FantasyKingdom
             camera.XMultiplier = 0;
             playerInput.enabled = false;
 
-            SetCharacterControlActive(false);
             if (isInventoryOpen)
             {
                 isInventoryOpen = false;
                 inventoryPanel.SetActive(false);
             }
         }
-
         public void QuitGame()
         {
             saveGameManager.SaveCharacterData();
@@ -188,17 +168,40 @@ namespace Unity.FantasyKingdom
             PlayerPrefs.SetInt("ReturnToMainMenu", 1);
             UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
         }
-
         public void OpenSettings()
         {
             settingsPanel.SetActive(true);
             radialPanel.SetActive(false);
             UpdateCursorState();
         }
-
         public void CloseSettings()
         {
             settingsPanel.SetActive(false);
+            radialPanel.SetActive(true);
+            UpdateCursorState();
+        }
+        public void OpenSkilltree()
+        {
+            skilltreePanel.SetActive(true);
+            radialPanel.SetActive(false);
+            UpdateCursorState();
+        }
+        public void CloseSkilltree()
+        {
+            skilltreePanel.SetActive(false);
+            radialPanel.SetActive(true);
+            isSkilltreeOpen = false; // <-- fixen
+            UpdateCursorState();
+        }
+        public void OpenInventory()
+        {
+            inventoryPanel.SetActive(true);
+            radialPanel.SetActive(false);
+            UpdateCursorState();
+        }
+        public void CloseInventory()
+        {
+            inventoryPanel.SetActive(false);
             radialPanel.SetActive(true);
             UpdateCursorState();
         }
