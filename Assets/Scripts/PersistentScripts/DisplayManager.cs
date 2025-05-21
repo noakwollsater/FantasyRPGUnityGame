@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.HighDefinition;
@@ -48,11 +48,14 @@ public class DisplayManager : MonoBehaviour
 
     private void LoadSettings()
     {
+        if (gameSettings != null) return; // ✅ Laddades redan
+
         if (ES3.KeyExists(settingsKey))
             gameSettings = ES3.Load<GameSettingsData>(settingsKey);
         else
             gameSettings = new GameSettingsData();
     }
+
 
     private void ApplyDisplaySettings()
     {
@@ -107,11 +110,36 @@ public class DisplayManager : MonoBehaviour
     {
         switch (gameSettings.graphicsQuality)
         {
-            case "Low": QualitySettings.SetQualityLevel(0); break;
-            case "Medium": QualitySettings.SetQualityLevel(1); break;
-            case "High": QualitySettings.SetQualityLevel(2); break;
+            case "High":
+                SetQualityByName("High Fidelity");
+                break;
+            case "Medium":
+                SetQualityByName("Balanced");
+                break;
+            case "Low":
+                SetQualityByName("Performant");
+                break;
+            default:
+                Debug.LogWarning($"Unknown graphics quality: {gameSettings.graphicsQuality}");
+                break;
         }
     }
+    private void SetQualityByName(string qualityName)
+    {
+        var names = QualitySettings.names;
+        for (int i = 0; i < names.Length; i++)
+        {
+            if (names[i].Equals(qualityName, System.StringComparison.OrdinalIgnoreCase))
+            {
+                QualitySettings.SetQualityLevel(i, true);
+                Debug.Log($"[Graphics] Set quality to: {names[i]} (index {i})");
+                return;
+            }
+        }
+
+        Debug.LogWarning($"[Graphics] Quality level '{qualityName}' not found in Project Settings > Quality");
+    }
+
 
     private void ApplyBrightness()
     {

@@ -199,6 +199,7 @@ namespace Unity.FantasyKingdom
                 {
                     ApplyDisplaySettings();
                     ApplyGraphicSettings();
+                    DisplayManager.Instance?.UpdateSettings(gameSettings); // ✅ NYTT
                     ES3.Save(settingsKey, gameSettings);
                     Debug.Log("[Apply] Display and graphic settings applied.");
                 });
@@ -224,6 +225,7 @@ namespace Unity.FantasyKingdom
                 case "Medium": QualitySettings.SetQualityLevel(1); break;
                 case "Low": QualitySettings.SetQualityLevel(2); break;
             }
+            Debug.Log($"[ApplyGraphicSettings] Quality Level: {gameSettings.graphicsQuality}");
         }
 
         private void UpdateDisplayMode()
