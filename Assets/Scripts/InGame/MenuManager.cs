@@ -5,6 +5,7 @@ using Opsive.UltimateCharacterController.Camera;
 using Opsive.UltimateCharacterController.Character;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace Unity.FantasyKingdom
 {
@@ -166,8 +167,14 @@ namespace Unity.FantasyKingdom
             saveGameManager.SaveCharacterData();
             saveGameManager.SaveGameData("Start of the Journey", "Heimdal", SaveType.Manual, "00:00", characterGameObject.transform);
             PlayerPrefs.SetInt("ReturnToMainMenu", 1);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+            LoadScene("MainMenu");
         }
+        public void LoadScene(string targetScene)
+        {
+            SceneLoader.sceneToLoad = targetScene;
+            SceneManager.LoadScene("LoadingScene");
+        }
+
         public void OpenSettings()
         {
             settingsPanel.SetActive(true);

@@ -23,31 +23,9 @@ public class SceneTransitionManager : MonoBehaviour
         }
     }
 
-    public void LoadScene(string sceneName)
+    public void LoadScene(string targetScene)
     {
-        StartCoroutine(LoadSceneAsync(sceneName));
-    }
-
-    private IEnumerator LoadSceneAsync(string sceneName)
-    {
-        if (loadingScreen != null)
-            loadingScreen.SetActive(true);
-
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-        operation.allowSceneActivation = false;
-
-        while (!operation.isDone)
-        {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            if (progressBar != null)
-                progressBar.value = progress;
-            if (operation.progress >= 0.9f)
-            {
-                yield return new WaitForSeconds(0.5f); // Optional delay
-                operation.allowSceneActivation = true;
-            }
-
-            yield return null;
-        }
+        SceneLoader.sceneToLoad = targetScene;
+        SceneManager.LoadScene("LoadingScene");
     }
 }

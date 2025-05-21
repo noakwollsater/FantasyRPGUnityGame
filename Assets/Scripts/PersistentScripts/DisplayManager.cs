@@ -2,6 +2,7 @@
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.HighDefinition;
+using System.Collections;
 
 public class DisplayManager : MonoBehaviour
 {
@@ -33,17 +34,6 @@ public class DisplayManager : MonoBehaviour
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // Refresh volume reference if needed
-        if (postProcessingVolume == null)
-        {
-            postProcessingVolume = FindObjectOfType<Volume>();
-        }
-
-        ApplyDisplaySettings();
     }
 
     private void LoadSettings()
@@ -190,6 +180,38 @@ public class DisplayManager : MonoBehaviour
 
         ES3.Save(settingsKey, gameSettings);
         Debug.Log($"[DisplayManager] Brightness updated to {mappedValue}");
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StartCoroutine(RefreshPostProcessing());
+    }
+
+    private IEnumerator RefreshPostProcessing()
+    {
+        yield return null; // vänta 1 frame för att vara säker på att allt laddats
+
+        postProcessingVolume = FindObjectOfType<UnityEngine.Rendering.Volume>();
+
+        if (postProcessingVolume != null)
+        {
+            Debug.Log($"[DisplayManager] Found volume in {SceneManager.GetActiveScene().name}");
+            ApplyBrightness(); // eller andra post-effekter
+        }
+        else
+        {
+            Debug.LogWarning("[DisplayManager] Global Volume not found!");
+        }
     }
 
 }
