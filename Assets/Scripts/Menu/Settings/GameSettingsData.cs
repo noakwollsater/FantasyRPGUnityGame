@@ -26,7 +26,7 @@ public class GameSettingsData
     public string aimassist = "Option B";
     public bool wallhackz = false;
 
-    public string graphicsQuality = "Performance";
+    public string graphicsQuality = "High";
     public string displaymode = "Fullscreen";
 
     public float contrast = 1.0f;

@@ -225,6 +225,7 @@ namespace Unity.FantasyKingdom
                 case "Medium": QualitySettings.SetQualityLevel(1); break;
                 case "Low": QualitySettings.SetQualityLevel(2); break;
             }
+            Debug.Log($"[ApplyGraphicSettings] Quality Level: {gameSettings.graphicsQuality}");
         }
 
         private void UpdateDisplayMode()
