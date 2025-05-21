@@ -5,6 +5,7 @@ using System.Text;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static DictionaryLibrary;
 
@@ -199,7 +200,13 @@ namespace Unity.FantasyKingdom
         public void BackToGame()
         {
             PlayerPrefs.SetInt("ToGameMode", 1);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GamePlay");
+            LoadScene("GamePlay");
+        }
+
+        public void LoadScene(string targetScene)
+        {
+            SceneLoader.sceneToLoad = targetScene;
+            SceneManager.LoadScene("LoadingScene");
         }
     }
 }
