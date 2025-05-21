@@ -44,6 +44,7 @@ namespace Unity.FantasyKingdom
         [SerializeField] private Slider initialBrightnessSlider;
 
         [SerializeField] private Toggle vSyncToggle;
+        [SerializeField] private Button applyButton; // 🔧 New Apply Button
 
         private ColorAdjustments colorAdjustments;
 
@@ -171,7 +172,6 @@ namespace Unity.FantasyKingdom
                 if (postProcessingVolume.profile.TryGet<ColorAdjustments>(out var ca))
                 {
                     colorAdjustments = ca;
-                    // Optionally set the slider's value to match saved brightness
                     float normalized = Mathf.InverseLerp(-5f, 5f, gameSettings.screenBrightness);
                     brightnessSlider.value = normalized * 100f;
                     colorAdjustments.postExposure.value = gameSettings.screenBrightness;
@@ -182,7 +182,6 @@ namespace Unity.FantasyKingdom
                 }
             }
 
-
             if (vSyncToggle != null)
             {
                 vSyncToggle.isOn = gameSettings.vsync;
@@ -191,6 +190,17 @@ namespace Unity.FantasyKingdom
                     gameSettings.vsync = value;
                     ES3.Save(settingsKey, gameSettings);
                     ApplyVSync();
+                });
+            }
+
+            if (applyButton != null) // ✅ Apply-button listener
+            {
+                applyButton.onClick.AddListener(() =>
+                {
+                    ApplyDisplaySettings();
+                    ApplyGraphicSettings();
+                    ES3.Save(settingsKey, gameSettings);
+                    Debug.Log("[Apply] Display and graphic settings applied.");
                 });
             }
 
@@ -204,23 +214,15 @@ namespace Unity.FantasyKingdom
         {
             gameSettings.graphicsQuality = graphicModes[currentGraphicModeIndex];
             graphicModeText.text = gameSettings.graphicsQuality;
-            ES3.Save(settingsKey, gameSettings);
-            ApplyGraphicSettings();
         }
 
         private void ApplyGraphicSettings()
         {
             switch (gameSettings.graphicsQuality)
             {
-                case "High":
-                    QualitySettings.SetQualityLevel(0);
-                    break;
-                case "Medium":
-                    QualitySettings.SetQualityLevel(1);
-                    break;
-                case "Low":
-                    QualitySettings.SetQualityLevel(2);
-                    break;
+                case "High": QualitySettings.SetQualityLevel(0); break;
+                case "Medium": QualitySettings.SetQualityLevel(1); break;
+                case "Low": QualitySettings.SetQualityLevel(2); break;
             }
         }
 
@@ -228,24 +230,18 @@ namespace Unity.FantasyKingdom
         {
             gameSettings.displaymode = displayModes[currentDisplayModeIndex];
             displayModeText.text = gameSettings.displaymode;
-            ES3.Save(settingsKey, gameSettings);
-            ApplyDisplaySettings();
         }
 
         private void UpdateResolution()
         {
             gameSettings.resolution = resolutions[currentResolutionIndex];
             resolutionText.text = gameSettings.resolution;
-            ES3.Save(settingsKey, gameSettings);
-            ApplyDisplaySettings();
         }
 
         private void UpdateRefreshRate()
         {
             gameSettings.refreshRate = refreshRates[currentRefreshRateIndex];
             refreshRateText.text = gameSettings.refreshRate;
-            ES3.Save(settingsKey, gameSettings);
-            ApplyDisplaySettings();
         }
 
         private void ApplyDisplaySettings()
@@ -297,47 +293,36 @@ namespace Unity.FantasyKingdom
             QualitySettings.vSyncCount = gameSettings.vsync ? 1 : 0;
             Debug.Log($"[ApplyVSync] VSync: {(gameSettings.vsync ? "On" : "Off")}");
         }
+
         public void SetBrightness(float uiValue)
         {
-            // Step 1: Validate the Volume
-            if (postProcessingVolume == null)
+            if (postProcessingVolume == null || postProcessingVolume.profile == null)
             {
-                Debug.LogWarning("PostProcessingVolume is not assigned.");
+                Debug.LogWarning("PostProcessingVolume or profile not assigned.");
                 return;
             }
 
-            // Step 2: Validate the Volume Profile
-            if (postProcessingVolume.profile == null)
-            {
-                Debug.LogWarning("PostProcessingVolume.profile is null.");
-                return;
-            }
-
-            // Step 3: Try to get ColorAdjustments if not cached
             if (colorAdjustments == null)
             {
                 if (!postProcessingVolume.profile.TryGet(out colorAdjustments))
                 {
-                    Debug.LogWarning("ColorAdjustments not found in the Volume Profile.");
+                    Debug.LogWarning("ColorAdjustments not found.");
                     return;
                 }
             }
 
-            // Step 4: Safely set exposure
             float mappedValue = Mathf.Lerp(-5f, 5f, uiValue / 100f);
             colorAdjustments.postExposure.value = mappedValue;
             gameSettings.screenBrightness = mappedValue;
             ES3.Save(settingsKey, gameSettings);
 
-            OnBrightnessSliderChanged(uiValue); // <-- detta uppdaterar direkt
-
+            OnBrightnessSliderChanged(uiValue);
             Debug.Log($"[Brightness] UI Value: {uiValue} → Exposure: {mappedValue}");
         }
-        // In DisplaySettingsManager.cs
+
         public void OnBrightnessSliderChanged(float uiValue)
         {
-            DisplayManager.Instance?.SetBrightness(uiValue); // <-- detta uppdaterar direkt
+            DisplayManager.Instance?.SetBrightness(uiValue);
         }
-
     }
 }
