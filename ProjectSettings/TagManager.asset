@@ -14,6 +14,9 @@ TagManager:
   - InventoryPanel
   - HUD
   - SkilltreePanel
+  - Sun
+  - Moon
+  - MoonHolder
   layers:
   - Default
   - TransparentFX

@@ -1414,6 +1414,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time_text: {fileID: 1462526024}
+  sun2: {fileID: 0}
+  sun: {fileID: 0}
+  moon2: {fileID: 0}
+  moon: {fileID: 0}
   timeMultiplier: 1
   currentTime: 0
   dayCount: 0

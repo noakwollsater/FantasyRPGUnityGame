@@ -4,6 +4,8 @@ using TMPro;
 public class TimeManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text time_text;
+    public GameObject sun2;
+    public Light sun; // Directional Light
 
     public static TimeManager Instance;
 
@@ -23,6 +25,19 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
+        if (sun == null)
+        {
+            sun2 = GameObject.FindGameObjectWithTag("Sun");
+            if (sun2 != null)
+            {
+                sun = sun2.GetComponent<Light>();
+            }
+            else
+            {
+                Debug.LogWarning("Solen hittades inte. Se till att den har taggen 'Sun'.");
+                return;
+            }
+        }
         currentTime += Time.deltaTime * timeMultiplier;
 
         if (currentTime >= minutesPerDay)
@@ -31,7 +46,9 @@ public class TimeManager : MonoBehaviour
             dayCount++;
             HandleNewDay();
         }
+
         setTime();
+        UpdateSunRotation();
     }
 
     public void LoadTimeFromData(GameSaveData data)
@@ -71,7 +88,6 @@ public class TimeManager : MonoBehaviour
             }
         }
 
-        // Ex: Här kan du kalla events, spara spel, osv
         Debug.Log($"Ny dag! {GetCurrentDateString()}");
     }
 
@@ -92,11 +108,21 @@ public class TimeManager : MonoBehaviour
 
     public void SetRandomTime()
     {
-        // Slumpar en tid mellan 0 och 1440 minuter (24 timmar)
         currentTime = Random.Range(0, minutesPerDay);
-        dayCount = Random.Range(1, 31); // Slumpar en dag mellan 1 och 30
-        month = Random.Range(1, 13); // Slumpar en månad mellan 1 och 12
-        year = Random.Range(500, 1000); // t.ex. år 342, 582 osv
+        dayCount = Random.Range(1, 31);
+        month = Random.Range(1, 13);
+        year = Random.Range(500, 1000);
         setTime();
+        UpdateSunRotation(); // så att solen matchar slumpad tid
+    }
+
+    private void UpdateSunRotation()
+    {
+        if (sun == null) return;
+
+        float timePercent = currentTime / minutesPerDay; // 0–1
+        float sunAngle = Mathf.Lerp(-15f, 195f, timePercent);
+
+        sun.transform.rotation = Quaternion.Euler(new Vector3(sunAngle, 170f, 0f));
     }
 }
