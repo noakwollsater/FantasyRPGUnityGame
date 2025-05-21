@@ -199,6 +199,7 @@ namespace Unity.FantasyKingdom
                 {
                     ApplyDisplaySettings();
                     ApplyGraphicSettings();
+                    DisplayManager.Instance?.UpdateSettings(gameSettings); // ✅ NYTT
                     ES3.Save(settingsKey, gameSettings);
                     Debug.Log("[Apply] Display and graphic settings applied.");
                 });

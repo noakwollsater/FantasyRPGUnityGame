@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.HighDefinition;
@@ -48,11 +48,14 @@ public class DisplayManager : MonoBehaviour
 
     private void LoadSettings()
     {
+        if (gameSettings != null) return; // ✅ Laddades redan
+
         if (ES3.KeyExists(settingsKey))
             gameSettings = ES3.Load<GameSettingsData>(settingsKey);
         else
             gameSettings = new GameSettingsData();
     }
+
 
     private void ApplyDisplaySettings()
     {
