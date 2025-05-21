@@ -11,6 +11,7 @@
 // Sample scripts are included only as examples and are not intended as production-ready.
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Synty.Interface.FantasyMenus.Samples
@@ -66,8 +67,14 @@ namespace Synty.Interface.FantasyMenus.Samples
 
         public void OnAccept()
         {
-            SceneTransitionManager.Instance.LoadScene("Gameplay");
+            LoadScene("GamePlay");
             DismissMe();
+        }
+
+        public void LoadScene(string targetScene)
+        {
+            SceneLoader.sceneToLoad = targetScene;
+            SceneManager.LoadScene("LoadingScene");
         }
 
         public void ShowMe()

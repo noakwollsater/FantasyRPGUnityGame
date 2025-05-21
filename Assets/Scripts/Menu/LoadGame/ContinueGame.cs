@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Unity.FantasyKingdom
@@ -29,7 +30,13 @@ namespace Unity.FantasyKingdom
 
         private void OnClick()
         {
-            SceneTransitionManager.Instance.LoadScene("Gameplay");
+            LoadScene("GamePlay");
+        }
+
+        public void LoadScene(string targetScene)
+        {
+            SceneLoader.sceneToLoad = targetScene;
+            SceneManager.LoadScene("LoadingScene");
         }
     }
 }

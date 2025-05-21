@@ -43,12 +43,17 @@ namespace Unity.FantasyKingdom
             if (currentStage == 0)
             {
                 PlayerPrefs.SetInt("ReturnToMainMenu", 1);
-                SceneManager.LoadScene("MainMenu");
+                LoadScene("MainMenu");
                 return;
             }
 
             currentStage--;
             UpdateStage();
+        }
+        public void LoadScene(string targetScene)
+        {
+            SceneLoader.sceneToLoad = targetScene;
+            SceneManager.LoadScene("LoadingScene");
         }
 
 
