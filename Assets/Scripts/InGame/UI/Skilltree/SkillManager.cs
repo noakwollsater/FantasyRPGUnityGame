@@ -26,11 +26,17 @@ public class SkillManager : MonoBehaviour
     {
         levelPoints -= amount;
         UpdateUI();
+        RemovePoints(amount);
     }
 
     public void UpdateUI()
     {
         if (levelPointsText != null)
             levelPointsText.text = levelPoints.ToString();
+    }
+
+    public void RemovePoints(int amount)
+    {
+        loadCharacterData.levelPoints -= amount;
     }
 }
